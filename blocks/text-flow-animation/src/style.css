@@ -1,0 +1,36 @@
+.integlight-text-flow-animation {
+    overflow: hidden;
+    width: 100%;
+}
+
+.integlight-text-flow-animation .loop_wrap {
+    display: flex;
+}
+
+.integlight-text-flow-animation .loop_wrap div {
+    flex: 0 0 auto;
+    overflow: hidden;
+    white-space: wrap;
+    animation: loop_animation_right_double 10s linear infinite;
+}
+
+
+
+
+@keyframes loop_animation_right_double {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .integlight-text-flow-animation .loop_wrap div {
+        font-size: 2em;
+    }
+}

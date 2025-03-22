@@ -1,0 +1,51 @@
+{
+    "apiVersion": 2,
+    "name": "integlight/speech-bubble",
+    "title": "[integlight]speech bubble",
+    "category": "design",
+    "icon": "format-chat",
+    "description": "A speech bubble block where you can set images and text, and customize the background and text colors.",
+    "textdomain": "integlight",
+    "attributes": {
+        "content": {
+            "type": "string",
+            "source": "html",
+            "selector": ".speech-bubble__content p"
+        },
+        "imageUrl": {
+            "type": "string",
+            "default": "/wp-content/themes/aurora-design-blocks/blocks/speech-bubble/noname.webp"
+        },
+        "imageAlt": {
+            "type": "string",
+            "default": ""
+        },
+        "imageCaption": {
+            "type": "string",
+            "default": ""
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#00aabb"
+        },
+        "textColor": {
+            "type": "string",
+            "default": "#ffffff"
+        },
+        "reverse": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "supports": {
+        "html": false,
+        "color": {
+            "background": true,
+            "text": true
+        },
+        "gradients": true
+    },
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./build/style-index.css"
+}

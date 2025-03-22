@@ -1,0 +1,84 @@
+/***********ブロックエディタのセクション********/
+/*********************************/
+/*********************************/
+/*-------------タブブロック----------*/
+.wp-block-integlight-tab-block .tabs-navigation {
+  border-radius: 50px; /* 角丸の半径 */
+  background: #eee;
+  margin-top: var(--ly-elementTopMarginSmall);
+}
+
+/* 現在指している所のスタイル */
+.wp-block-integlight-tab-block .tabs-navigation li.active {
+  background: #000;
+  border-radius: 50px; /* 角丸の半径 */
+  color: #fff;
+  border: none;
+}
+
+/* タブ全体を囲む線を消している */
+.wp-block-integlight-tab-block.tabs {
+  border: none;
+}
+
+/* タブナビの縦幅を狭くしている */
+.wp-block-integlight-tab-block ul.tabs-navigation {
+  line-height: 1;
+}
+
+/* タブナビの上にマージンをつけている */
+.wp-block-integlight-tab-block .integlight-tabs .tabs-navigation {
+  margin-top: 30px;
+}
+
+.wp-block-integlight-tab-block
+  .integlight-tabs-block
+  .block-editor-default-block-appender
+  .block-editor-inserter {
+  margin-top: 25px;
+  /* デフォルトの追加ボタンの位置を下げている */
+}
+
+.wp-block-integlight-tab-block.integlight-tabs {
+  border: none;
+  /* タブのボーダーを消している */
+}
+
+
+
+/*********************************/
+/*********************************/
+/******コンテンツ内スライダー********/
+.wp-block-integlight-slider-block .wp-block-columns {
+  padding: 0px 20px;
+  /* コンテンツ内スライダーのパディング */
+}
+
+.wp-block-integlight-slider-block.blockSliders .wp-block-columns {
+  border-radius: 20px;
+  /* コンテンツ内スライダーの角を丸く */
+}
+
+/* .integlight-tabs-block .block-editor-button-block-appender {
+  width: 800px;
+  
+  position: relative;
+  margin-top: 100px;
+  z-index: -1;
+} */
+
+/*********************************/
+/*********************************/
+/******吹き出し画像********/
+.integlight-speech-bubble figure.speech-bubble__image {
+  flex-basis: 10%;
+  min-width: 80px; /* これ以下にならない */
+}
+
+@media (max-width: 768px) {
+  /******吹き出し画像********/
+  .integlight-speech-bubble figure.speech-bubble__image {
+    flex-basis: 10%;
+    min-width: 55px;
+  }
+}

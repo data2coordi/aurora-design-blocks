@@ -1,0 +1,19 @@
+/* エディタ用はフロントエンドと同様のスタイル */
+.integlight-speech-bubble {}
+
+.integlight-speech-bubble .speech-bubble__image {}
+
+.integlight-speech-bubble .speech-bubble__image img {}
+
+.integlight-speech-bubble .speech-bubble__content {
+
+    margin: 0 !important;
+}
+
+.integlight-speech-bubble .speech-bubble__content::before {}
+
+.integlight-speech-bubble--reverse {}
+
+.integlight-speech-bubble--reverse .speech-bubble__image {}
+
+.integlight-speech-bubble--reverse .speech-bubble__content::before {}

@@ -1,0 +1,16 @@
+{
+    "apiVersion": 2,
+    "name": "integlight/slider-block",
+    "title": "[integlight]slider block",
+    "category": "layout",
+    "icon": "slides",
+    "description": "A block that slides multiple contents.",
+    "supports": {
+        "html": false
+    },
+    "textdomain": "integlight",
+    "editorScript": "file:./build/index.js",
+    "script": "file:./src/frontend.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./build/style-index.css"
+}
