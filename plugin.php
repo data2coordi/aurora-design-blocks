@@ -33,11 +33,10 @@ add_action('init', 'register_custom_blocks');
 
 function aurora_design_blocks_enqueue_styles()
 {
-    // プラグインの URL から CSS のパスを取得
-    $css_url = plugin_dir_url(__FILE__) . 'css/block-module.css';
 
     // CSS を登録して読み込む
-    wp_enqueue_style('aurora-design-blocks-style', $css_url, array(), '1.0.0', 'all');
+    wp_enqueue_style('aurora-design-blocks-style-block-module', plugin_dir_url(__FILE__) . 'css/block-module.css', array(), _S_VERSION, 'all');
+    wp_enqueue_style('aurora-design-blocks-style-awesome-all', plugin_dir_url(__FILE__) . 'css/awesome-all.min.css', array(), _S_VERSION, 'all');
 }
 add_action('wp_enqueue_scripts', 'aurora_design_blocks_enqueue_styles');
 
