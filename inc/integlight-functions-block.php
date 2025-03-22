@@ -4,8 +4,6 @@
 /*ブロックアイテムの読み込みs*/
 /********************************************************************/
 
-
-
 function register_theme_blocks()
 {
 	$blocks = glob(get_template_directory() . '/blocks/*', GLOB_ONLYDIR);
