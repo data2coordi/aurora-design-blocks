@@ -1,11 +1,11 @@
 {
     "apiVersion": 2,
-    "name": "integlight/speech-bubble",
-    "title": "[integlight]speech bubble",
+    "name": "aurora-design-blocks/speech-bubble",
+    "title": "[aurora-design-blocks]speech bubble",
     "category": "design",
     "icon": "format-chat",
     "description": "A speech bubble block where you can set images and text, and customize the background and text colors.",
-    "textdomain": "integlight",
+    "textdomain": "aurora-design-blocks",
     "attributes": {
         "content": {
             "type": "string",

@@ -2,44 +2,43 @@
 /*********************************/
 /*********************************/
 /*-------------タブブロック----------*/
-.wp-block-integlight-tab-block .tabs-navigation {
-  border-radius: 50px; /* 角丸の半径 */
+.wp-block-aurora-design-blocks-tab-block .tabs-navigation {
+  border-radius: 50px;
+  /* 角丸の半径 */
   background: #eee;
   margin-top: var(--ly-elementTopMarginSmall);
 }
 
 /* 現在指している所のスタイル */
-.wp-block-integlight-tab-block .tabs-navigation li.active {
+.wp-block-aurora-design-blocks-tab-block .tabs-navigation li.active {
   background: #000;
-  border-radius: 50px; /* 角丸の半径 */
+  border-radius: 50px;
+  /* 角丸の半径 */
   color: #fff;
   border: none;
 }
 
 /* タブ全体を囲む線を消している */
-.wp-block-integlight-tab-block.tabs {
+.wp-block-aurora-design-blocks-tab-block.tabs {
   border: none;
 }
 
 /* タブナビの縦幅を狭くしている */
-.wp-block-integlight-tab-block ul.tabs-navigation {
+.wp-block-aurora-design-blocks-tab-block ul.tabs-navigation {
   line-height: 1;
 }
 
 /* タブナビの上にマージンをつけている */
-.wp-block-integlight-tab-block .integlight-tabs .tabs-navigation {
+.wp-block-aurora-design-blocks-tab-block .aurora-design-blocks-tabs .tabs-navigation {
   margin-top: 30px;
 }
 
-.wp-block-integlight-tab-block
-  .integlight-tabs-block
-  .block-editor-default-block-appender
-  .block-editor-inserter {
+.wp-block-aurora-design-blocks-tab-block .aurora-design-blocks-tabs-block .block-editor-default-block-appender .block-editor-inserter {
   margin-top: 25px;
   /* デフォルトの追加ボタンの位置を下げている */
 }
 
-.wp-block-integlight-tab-block.integlight-tabs {
+.wp-block-aurora-design-blocks-tab-block.aurora-design-blocks-tabs {
   border: none;
   /* タブのボーダーを消している */
 }
@@ -49,17 +48,17 @@
 /*********************************/
 /*********************************/
 /******コンテンツ内スライダー********/
-.wp-block-integlight-slider-block .wp-block-columns {
+.wp-block-aurora-design-blocks-slider-block .wp-block-columns {
   padding: 0px 20px;
   /* コンテンツ内スライダーのパディング */
 }
 
-.wp-block-integlight-slider-block.blockSliders .wp-block-columns {
+.wp-block-aurora-design-blocks-slider-block.blockSliders .wp-block-columns {
   border-radius: 20px;
   /* コンテンツ内スライダーの角を丸く */
 }
 
-/* .integlight-tabs-block .block-editor-button-block-appender {
+/* .aurora-design-blocks-tabs-block .block-editor-button-block-appender {
   width: 800px;
   
   position: relative;
@@ -70,14 +69,16 @@
 /*********************************/
 /*********************************/
 /******吹き出し画像********/
-.integlight-speech-bubble figure.speech-bubble__image {
+.aurora-design-blocks-speech-bubble figure.speech-bubble__image {
   flex-basis: 10%;
-  min-width: 80px; /* これ以下にならない */
+  min-width: 80px;
+  /* これ以下にならない */
 }
 
 @media (max-width: 768px) {
+
   /******吹き出し画像********/
-  .integlight-speech-bubble figure.speech-bubble__image {
+  .aurora-design-blocks-speech-bubble figure.speech-bubble__image {
     flex-basis: 10%;
     min-width: 55px;
   }

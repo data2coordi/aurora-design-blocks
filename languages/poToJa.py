@@ -1,8 +1,8 @@
 import re
 
-# 翻訳テーブル（/mnt/data/integlight.pot 内の 99 ユニークな msgid をカバー）
+# 翻訳テーブル（/mnt/data/aurora-design-blocks.pot 内の 99 ユニークな msgid をカバー）
 translation_table = {
-"Integlight": "Integlight",
+"aurora-design-blocks": "aurora-design-blocks",
 "http://color.toshidayurika.com/": "http://color.toshidayurika.com/",
 "Description": "説明",
 "Underscores.me": "Underscores.me",
@@ -88,20 +88,20 @@ translation_table = {
 "Background Color": "背景色。",
 "Text Color": "テキストの色。",
 "Overlay Color": "オーバーレイの色。",
-"【integlight】Custom Cover": "【integlight】カスタムカバー。",
+"【aurora-design-blocks】Custom Cover": "【aurora-design-blocks】カスタムカバー。",
 "A custom cover block with fixed full-width outer container and inner content width selectable as article width or full width.": "固定のフル幅外部コンテナを持ち、内部コンテンツの幅を記事幅またはフル幅として選択できるカスタムカバーブロック。",
-"[Integlight]slider block": "[Integlight]スライダーブロック。",
+"[aurora-design-blocks]slider block": "[aurora-design-blocks]スライダーブロック。",
 "A block that slides multiple contents.": "複数のコンテンツをスライドさせるブロック。",
-"[integlight]speech bubble": "[integlight]吹き出し。",
+"[aurora-design-blocks]speech bubble": "[aurora-design-blocks]吹き出し。",
 "A speech bubble block where you can set images and text, and customize the background and text colors.": "画像とテキストを設定し、背景色やテキスト色をカスタマイズできる吹き出しブロック。",
-"[Integlight]Tab switching feature.": "[Integlight]タブ切り替え機能。",
+"[aurora-design-blocks]Tab switching feature.": "[aurora-design-blocks]タブ切り替え機能。",
 "A feature that allows switching between multiple contents using tabs.": "タブを使用して複数のコンテンツを切り替える機能。",
-"【Integlight】text flow animation": "【Integlight】テキストフローアニメーション。",
+"【aurora-design-blocks】text flow animation": "【aurora-design-blocks】テキストフローアニメーション。",
 "Hello World Block": "Hello World ブロック。",
 }
 
 # .pot ファイル全体を行単位で読み込み（約430行以上ある前提）
-with open("./integlight.pot", "r", encoding="utf-8") as f:
+with open("./aurora-design-blocks.pot", "r", encoding="utf-8") as f:
     lines = f.readlines()
 
 result_lines = []

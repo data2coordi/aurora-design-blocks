@@ -22,13 +22,13 @@ const getOverlayColor = (dimRatio) => {
     }
 };
 
-registerBlockType('integlight/custom-cover', {
+registerBlockType('aurora-design-blocks/custom-cover', {
     edit: ({ attributes, setAttributes }) => {
         const { innerWidthArticle, url, id, alt, focalPoint, dimRatio } = attributes;
 
         // ブロック本体には背景画像のみを設定（背景色／グラデーションは、supports によりクラスとして出力される）
         const blockProps = useBlockProps({
-            className: 'wp-block-integlight-custom-cover alignfull',
+            className: 'wp-block-aurora-design-blocks-custom-cover alignfull',
             style: {
                 backgroundImage: url ? `url(${url})` : undefined,
                 backgroundPosition: url ? `${focalPoint.x * 100}% ${focalPoint.y * 100}%` : undefined,
@@ -42,14 +42,14 @@ registerBlockType('integlight/custom-cover', {
         return (
             <>
                 <InspectorControls>
-                    <PanelBody title={__('Cover Settings', 'integlight')}>
+                    <PanelBody title={__('Cover Settings', 'aurora-design-blocks')}>
                         <ToggleControl
-                            label={__('Use Article Width for Inner Content', 'integlight')}
+                            label={__('Use Article Width for Inner Content', 'aurora-design-blocks')}
                             checked={innerWidthArticle}
                             onChange={() => setAttributes({ innerWidthArticle: !innerWidthArticle })}
                         />
                         <RangeControl
-                            label={__('Overlay Opacity (-100 for bright, 100 for dark)', 'integlight')}
+                            label={__('Overlay Opacity (-100 for bright, 100 for dark)', 'aurora-design-blocks')}
                             value={dimRatio}
                             onChange={(newDimRatio) => setAttributes({ dimRatio: newDimRatio })}
                             min={-100}
@@ -69,8 +69,8 @@ registerBlockType('integlight/custom-cover', {
                                 render={({ open }) => (
                                     <Button onClick={open} isPrimary>
                                         {!url
-                                            ? __('Upload Background Image', 'integlight')
-                                            : __('Change Background Image', 'integlight')}
+                                            ? __('Upload Background Image', 'aurora-design-blocks')
+                                            : __('Change Background Image', 'aurora-design-blocks')}
                                     </Button>
                                 )}
                             />
@@ -81,7 +81,7 @@ registerBlockType('integlight/custom-cover', {
                                 isSecondary
                                 style={{ marginTop: '10px' }}
                             >
-                                {__('Remove Background Image', 'integlight')}
+                                {__('Remove Background Image', 'aurora-design-blocks')}
                             </Button>
                         )}
                     </PanelBody>
@@ -112,7 +112,7 @@ registerBlockType('integlight/custom-cover', {
         const { innerWidthArticle, url, focalPoint, dimRatio } = attributes;
 
         const blockProps = useBlockProps.save({
-            className: 'wp-block-integlight-custom-cover alignfull',
+            className: 'wp-block-aurora-design-blocks-custom-cover alignfull',
             style: {
                 backgroundImage: url ? `url(${url})` : undefined,
                 backgroundPosition: url ? `${focalPoint.x * 100}% ${focalPoint.y * 100}%` : undefined,

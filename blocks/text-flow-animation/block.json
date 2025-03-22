@@ -1,10 +1,10 @@
 {
   "apiVersion": 2,
-  "name": "integlight/text-flow-animation",
-  "title": "[integlight]text flow animation",
+  "name": "aurora-design-blocks/text-flow-animation",
+  "title": "[aurora-design-blocks]text flow animation",
   "category": "design",
   "icon": "editor-alignleft",
-  "textdomain": "integlight",
+  "textdomain": "aurora-design-blocks",
   "supports": {
     "align": [
       "wide",

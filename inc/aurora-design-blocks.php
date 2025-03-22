@@ -56,47 +56,47 @@ function auroraDesignBlocks_enqueue_block_assets()
 {
 
 	wp_set_script_translations(
-		'integlight-custom-cover-block-editor-script',
-		'integlight',
+		'aurora-design-blocks-custom-cover-block-editor-script',
+		'aurora-design-blocks',
 		get_template_directory() . '/languages'
 	);
 	wp_set_script_translations(
-		'integlight-gfontawesome-block-editor-script',
-		'integlight',
+		'aurora-design-blocks-gfontawesome-block-editor-script',
+		'aurora-design-blocks',
 		get_template_directory() . '/languages'
 	);
 
 	/*
 	wp_set_script_translations(
-		'integlight-hello-world-block-editor-script',
-		'integlight',
+		'aurora-design-blocks-hello-world-block-editor-script',
+		'aurora-design-blocks',
 		get_template_directory() . '/languages'
 	);
 	*/
 
 	wp_set_script_translations(
-		'integlight-slider-block-block-editor-script',
-		'integlight',
+		'aurora-design-blocks-slider-block-block-editor-script',
+		'aurora-design-blocks',
 		get_template_directory() . '/languages'
 	);
 
 
 	wp_set_script_translations(
-		'integlight-speech-bubble-editor-script', // ハンドル名を適切に設定
-		'integlight',
+		'aurora-design-blocks-speech-bubble-editor-script', // ハンドル名を適切に設定
+		'aurora-design-blocks',
 		get_template_directory() . '/languages'
 	);
 
 	wp_set_script_translations(
-		'integlight-tab-block-editor-script', // ハンドル名を適切に設定
-		'integlight',
+		'aurora-design-blocks-tab-block-editor-script', // ハンドル名を適切に設定
+		'aurora-design-blocks',
 		get_template_directory() . '/languages'
 	);
 
 
 	wp_set_script_translations(
-		'integlight-text-flow-animation-editor-script',
-		'integlight',
+		'aurora-design-blocks-text-flow-animation-editor-script',
+		'aurora-design-blocks',
 		get_template_directory() . '/languages'
 	);
 }
@@ -117,16 +117,16 @@ add_action('enqueue_block_editor_assets', 'auroraDesignBlocks_enqueue_block_asse
 
 
 $footerScripts = [
-	'integlight-tab-block-script'   => get_template_directory_uri() . '/blocks/tab-block/src/frontend.js',
-	'integlight-slider-block-script'   => get_template_directory_uri() . '/blocks/slider-block/src/frontend.js',
+	'aurora-design-blocks-tab-block-script'   => get_template_directory_uri() . '/blocks/tab-block/src/frontend.js',
+	'aurora-design-blocks-slider-block-script'   => get_template_directory_uri() . '/blocks/slider-block/src/frontend.js',
 
 ];
 //AuroraDesignBlocksMoveScripts::add_scripts($footerScripts);
 
 
 $deferredScripts = [
-	'integlight-tab-block-script',
-	'integlight-slider-block-script'
+	'aurora-design-blocks-tab-block-script',
+	'aurora-design-blocks-slider-block-script'
 
 ];
 //AuroraDesignBlocksDeferJs::add_deferred_scripts($deferredScripts);

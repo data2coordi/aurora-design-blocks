@@ -1,17 +1,17 @@
 /* カスタムカバー自体のスタイル：エディター上で全幅表示 */
-.wp-block-integlight-custom-cover {
+.wp-block-aurora-design-blocks-custom-cover {
     border: 1px dashed #ccc;
     padding: 20px 0;
     max-width: none !important;
 }
 
 /* カスタムカバー内のすべての要素に対して max‑width と width を上書き */
-.wp-block-integlight-custom-cover * {
+.wp-block-aurora-design-blocks-custom-cover * {
     max-width: none !important;
 }
 
 /* 内側コンテンツコンテナのスタイル（任意） */
-.wp-block-integlight-custom-cover .inner-container {
+.wp-block-aurora-design-blocks-custom-cover .inner-container {
     border: 1px solid #eee;
     margin: 0 auto;
     /* 本来の幅設定はここで行うが、エディター上は全幅に解除 */
@@ -19,10 +19,10 @@
 
 
 /* エディター上で、内側コンテンツの状態に応じたオプション（任意） */
-.wp-block-integlight-custom-cover .inner-container.inner-article {
+.wp-block-aurora-design-blocks-custom-cover .inner-container.inner-article {
     border: 2px solid #009933;
 }
 
-.wp-block-integlight-custom-cover .inner-container.inner-full {
+.wp-block-aurora-design-blocks-custom-cover .inner-container.inner-full {
     border: 2px solid #0066cc;
 }

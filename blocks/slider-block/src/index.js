@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
 import './editor.css';
 import './style.css';
 
-registerBlockType('integlight/slider-block', {
+registerBlockType('aurora-design-blocks/slider-block', {
     edit: (props) => {
         const blockProps = useBlockProps({
             className: 'editorBlockSliders'
@@ -28,7 +28,7 @@ registerBlockType('integlight/slider-block', {
                 */}
                 <div {...blockProps}>
                     <div className="blockSliders-navigation-editor">
-                        <p>{__("Please create multiple pieces of content. They will be displayed in a slide format when viewed as a website.", "integlight")}</p>
+                        <p>{__("Please create multiple pieces of content. They will be displayed in a slide format when viewed as a website.", "aurora-design-blocks")}</p>
                     </div>
                     <div className="blockSliders-content-editor">
                         <InnerBlocks

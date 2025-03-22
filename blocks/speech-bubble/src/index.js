@@ -16,7 +16,7 @@ import { __ } from '@wordpress/i18n';
 
 
 
-registerBlockType('integlight/speech-bubble', {
+registerBlockType('aurora-design-blocks/speech-bubble', {
     edit: (props) => {
         const {
             attributes: { content, imageUrl, imageAlt, imageCaption, backgroundColor, textColor, reverse },
@@ -27,7 +27,7 @@ registerBlockType('integlight/speech-bubble', {
         const onSelectImage = (media) => {
             setAttributes({
                 imageUrl: media.url,
-                imageAlt: media.alt || __('faceimage', 'integlight')
+                imageAlt: media.alt || __('faceimage', 'aurora-design-blocks')
             });
         };
 
@@ -50,7 +50,7 @@ registerBlockType('integlight/speech-bubble', {
         return (
             <>
                 <InspectorControls>
-                    <PanelBody title={__("Image setting", "integlight")} initialOpen={true}>
+                    <PanelBody title={__("Image setting", "aurora-design-blocks")} initialOpen={true}>
                         {imageUrl ? (
                             <div>
                                 <img src={imageUrl} alt={imageAlt} style={{ width: '100%' }} />
@@ -60,7 +60,7 @@ registerBlockType('integlight/speech-bubble', {
                                     isDestructive
                                 >
 
-                                    {__("Change image", "integlight")}
+                                    {__("Change image", "aurora-design-blocks")}
                                 </Button>
                             </div>
                         ) : (
@@ -70,22 +70,22 @@ registerBlockType('integlight/speech-bubble', {
                                     allowedTypes={['image']}
                                     render={({ open }) => (
                                         <Button onClick={open} isPrimary>
-                                            {__("Select image", "integlight")}
+                                            {__("Select image", "aurora-design-blocks")}
                                         </Button>
                                     )}
                                 />
                             </MediaUploadCheck>
                         )}
                     </PanelBody>
-                    <PanelBody title={__("layout setting", "integlight")} initialOpen={false}>
+                    <PanelBody title={__("layout setting", "aurora-design-blocks")} initialOpen={false}>
                         <ToggleControl
-                            label={__("Reverse the positions of the image and speech bubble.", "integlight")}
+                            label={__("Reverse the positions of the image and speech bubble.", "aurora-design-blocks")}
                             checked={reverse}
                             onChange={(newVal) => setAttributes({ reverse: newVal })}
                         />
                     </PanelBody>
                 </InspectorControls>
-                <div className={`${className} wp-block integlight-speech-bubble ${reverse ? "integlight-speech-bubble--reverse" : "integlight-speech-bubble--normal"}`}>
+                <div className={`${className} wp-block aurora-design-blocks-speech-bubble ${reverse ? "aurora-design-blocks-speech-bubble--reverse" : "aurora-design-blocks-speech-bubble--normal"}`}>
 
 
                     {imageUrl && (
@@ -96,7 +96,7 @@ registerBlockType('integlight/speech-bubble', {
                                 className="speech-bubble__image-caption"
                                 onChange={(newCaption) => setAttributes({ imageCaption: newCaption })}
                                 value={imageCaption}
-                                placeholder={__("Enter caption here.", "integlight")}
+                                placeholder={__("Enter caption here.", "aurora-design-blocks")}
                             />
                         </figure>
                     )}
@@ -105,7 +105,7 @@ registerBlockType('integlight/speech-bubble', {
                             tagName="p"
                             onChange={(newContent) => setAttributes({ content: newContent })}
                             value={content}
-                            placeholder={__("Enter message here.", "integlight")}
+                            placeholder={__("Enter message here.", "aurora-design-blocks")}
                         />
                     </div>
                 </div>
@@ -137,7 +137,7 @@ registerBlockType('integlight/speech-bubble', {
 
         return (
 
-            <div className={`integlight-speech-bubble ${reverse ? "integlight-speech-bubble--reverse" : "integlight-speech-bubble--normal"}`}>
+            <div className={`aurora-design-blocks-speech-bubble ${reverse ? "aurora-design-blocks-speech-bubble--reverse" : "aurora-design-blocks-speech-bubble--normal"}`}>
 
 
                 {imageUrl && (

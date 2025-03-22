@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const blockSliderContainers = document.querySelectorAll(
-        '.wp-block-integlight-slider-block.blockSliders > .blockSliders-content'
+        '.wp-block-aurora-design-blocks-slider-block.blockSliders > .blockSliders-content'
     );
 
     blockSliderContainers.forEach(container => {
@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
         nextButton.className = 'slide-button next';
         nextButton.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
 
-        // `.wp-block-integlight-slider-block` にボタンを追加
-        const sliderBlock = container.closest('.wp-block-integlight-slider-block');
+        // `.wp-block-aurora-design-blocks-slider-block` にボタンを追加
+        const sliderBlock = container.closest('.wp-block-aurora-design-blocks-slider-block');
         sliderBlock.appendChild(prevButton);
         sliderBlock.appendChild(nextButton);
 

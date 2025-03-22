@@ -15,9 +15,9 @@ import { __ } from '@wordpress/i18n';
 /**
  * 子ブロック「タブ」の登録
  */
-registerBlockType('integlight/tab', {
-    title: __("Tab", "integlight"),
-    parent: ['integlight/tab-block'],
+registerBlockType('aurora-design-blocks/tab', {
+    title: __("Tab", "aurora-design-blocks"),
+    parent: ['aurora-design-blocks/tab-block'],
     icon: 'screenoptions',
     category: 'layout',
     attributes: {
@@ -36,7 +36,7 @@ registerBlockType('integlight/tab', {
                 <div className="tab-title">
                     <RichText
                         tagName="h4"
-                        placeholder={__("Tab title...", "integlight")}
+                        placeholder={__("Tab title...", "aurora-design-blocks")}
                         value={tabTitle}
                         onChange={(value) => setAttributes({ tabTitle: value })}
                     />
@@ -49,7 +49,7 @@ registerBlockType('integlight/tab', {
     },
     save: (props) => {
         const { attributes: { tabTitle } } = props;
-        const blockProps = useBlockProps.save({ className: 'wp-block-integlight-tab tab' });
+        const blockProps = useBlockProps.save({ className: 'wp-block-aurora-design-blocks-tab tab' });
 
         return (
             <div {...blockProps}>
@@ -72,30 +72,30 @@ registerBlockType('integlight/tab', {
 /**
  * 親ブロック「タブブロック」の登録
  */
-registerBlockType('integlight/tab-block', {
+registerBlockType('aurora-design-blocks/tab-block', {
     edit: (props) => {
 
 
         const contentBlockProps = useBlockProps({
-            className: 'integlight-tabs-block'
+            className: 'aurora-design-blocks-tabs-block'
         });
 
 
         return (
             <Fragment>
                 <InspectorControls>
-                    <PanelBody title={__("Tab setting", "integlight")} initialOpen={true}>
+                    <PanelBody title={__("Tab setting", "aurora-design-blocks")} initialOpen={true}>
                         {/* ここにインスペクター用の設定項目を追加可能 */}
                     </PanelBody>
                 </InspectorControls>
                 <div {...contentBlockProps}>
                     <div className="tabs-navigation-editor">
-                        <p>{__("Tab switching is reflected when the website is displayed.", "integlight")}</p>
+                        <p>{__("Tab switching is reflected when the website is displayed.", "aurora-design-blocks")}</p>
                     </div>
                     <div>
                         <InnerBlocks
-                            allowedBlocks={['integlight/tab']}
-                            template={[['integlight/tab', {}]]}
+                            allowedBlocks={['aurora-design-blocks/tab']}
+                            template={[['aurora-design-blocks/tab', {}]]}
                             templateLock={false}
                             renderAppender={InnerBlocks.ButtonBlockAppender}
                         />
@@ -105,7 +105,7 @@ registerBlockType('integlight/tab-block', {
         );
     },
     save: () => {
-        const blockProps = useBlockProps.save({ className: 'integlight-tabs' }); // 修正
+        const blockProps = useBlockProps.save({ className: 'aurora-design-blocks-tabs' }); // 修正
 
         return (
             <div {...blockProps}>

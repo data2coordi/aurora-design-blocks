@@ -1,11 +1,11 @@
 {
     "apiVersion": 2,
-    "name": "integlight/tab-block",
-    "title": "[Integlight]Tab switching feature.",
+    "name": "aurora-design-blocks/tab-block",
+    "title": "[aurora-design-blocks]Tab switching feature.",
     "category": "design",
     "icon": "index-card",
     "description": "A feature that allows switching between multiple contents using tabs.",
-    "textdomain": "integlight",
+    "textdomain": "aurora-design-blocks",
     "supports": {
         "html": false
     },

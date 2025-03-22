@@ -1,24 +1,24 @@
 /* カスタムカバー全体：エディター上で全幅表示（グローバルな max-width を上書き） */
-.wp-block-integlight-custom-cover {
+.wp-block-aurora-design-blocks-custom-cover {
     padding: 20px 0;
 }
 
 /* カスタムカバーの直下の要素は全幅にする */
 /*
-.wp-block-integlight-custom-cover>* {}
+.wp-block-aurora-design-blocks-custom-cover>* {}
 */
 
 /* 内側コンテンツコンテナの基本スタイル */
-.wp-block-integlight-custom-cover .inner-container {
+.wp-block-aurora-design-blocks-custom-cover .inner-container {
     margin: 0 auto;
 }
 
 /* 内側コンテンツが全幅の場合 */
 /*
-.wp-block-integlight-custom-cover .inner-container.inner-full {}
+.wp-block-aurora-design-blocks-custom-cover .inner-container.inner-full {}
 */
 
 /* 内側コンテンツが記事幅の場合（コンテンツ最大幅に制限） */
-.wp-block-integlight-custom-cover .inner-container.inner-article {
+.wp-block-aurora-design-blocks-custom-cover .inner-container.inner-article {
     max-width: var(--ly-content-max-width) !important;
 }

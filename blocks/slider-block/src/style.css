@@ -1,4 +1,4 @@
-.wp-block-integlight-slider-block {
+.wp-block-aurora-design-blocks-slider-block {
     position: relative;
     width: 100%;
     overflow: hidden;
@@ -7,7 +7,7 @@
 
 }
 
-.wp-block-integlight-slider-block .blockSliders-content {
+.wp-block-aurora-design-blocks-slider-block .blockSliders-content {
     display: grid;
     grid-template-columns: 1fr;
     /* 1列 */
@@ -17,7 +17,7 @@
     /* relative は不要になるが、保険として残す */
 }
 
-.wp-block-integlight-slider-block.blockSliders .blockSliders-content>* {
+.wp-block-aurora-design-blocks-slider-block.blockSliders .blockSliders-content>* {
     grid-column: 1 / -1;
     /* すべての要素を1列目に配置 */
     grid-row: 1 / -1;
@@ -26,18 +26,18 @@
     transition: opacity 0.5s ease-in-out;
 }
 
-.wp-block-integlight-slider-block.blockSliders .blockSliders-content>*:first-child {
+.wp-block-aurora-design-blocks-slider-block.blockSliders .blockSliders-content>*:first-child {
     position: relative;
     opacity: 1;
 }
 
 
-.wp-block-integlight-slider-block.blockSliders .blockSliders-content>*.active {
+.wp-block-aurora-design-blocks-slider-block.blockSliders .blockSliders-content>*.active {
     opacity: 1;
 }
 
 
-.wp-block-integlight-slider-block .slide-button {
+.wp-block-aurora-design-blocks-slider-block .slide-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -51,14 +51,14 @@
     border-radius: 5px;
 }
 
-.wp-block-integlight-slider-block .slide-button:hover {
+.wp-block-aurora-design-blocks-slider-block .slide-button:hover {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.wp-block-integlight-slider-block .slide-button.prev {
+.wp-block-aurora-design-blocks-slider-block .slide-button.prev {
     left: 10px;
 }
 
-.wp-block-integlight-slider-block .slide-button.next {
+.wp-block-aurora-design-blocks-slider-block .slide-button.next {
     right: 10px;
 }

@@ -2,8 +2,8 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Integlight 2.0.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/integlight\n"
+"Project-Id-Version: aurora-design-blocks 2.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/aurora-design-blocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -12,11 +12,11 @@ msgstr ""
 "POT-Creation-Date: 2025-02-26T07:46:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
-"X-Domain: integlight\n"
+"X-Domain: aurora-design-blocks\n"
 
 #. Theme Name of the theme
 #: style.css
-msgid "Integlight"
+msgid "aurora-design-blocks"
 msgstr "インテグライト"
 
 
@@ -119,94 +119,94 @@ msgid "Skip to content"
 msgstr "コンテンツへスキップ"
 
 
-#: inc/integlight-customizer.php:18
+#: inc/aurora-design-blocks-customizer.php:18
 msgid "Select - Slider or Image"
 msgstr "スライダーまたは画像を選択"
 
-#: inc/integlight-customizer.php:29
+#: inc/aurora-design-blocks-customizer.php:29
 msgid "Display Slider or Image"
 msgstr "スライダーまたは画像を表示"
 
-#: inc/integlight-customizer.php:34
+#: inc/aurora-design-blocks-customizer.php:34
 msgid "Slider"
 msgstr "スライダー"
 
-#: inc/integlight-customizer.php:35
+#: inc/aurora-design-blocks-customizer.php:35
 msgid "Image"
 msgstr "画像"
 
-#: inc/integlight-customizer.php:190
+#: inc/aurora-design-blocks-customizer.php:190
 msgid "Effect"
 msgstr "エフェクト"
 
-#: inc/integlight-customizer.php:194
+#: inc/aurora-design-blocks-customizer.php:194
 msgid "Fade"
 msgstr "フェード"
 
-#: inc/integlight-customizer.php:195
+#: inc/aurora-design-blocks-customizer.php:195
 msgid "Slide"
 msgstr "スライド"
 
-#: inc/integlight-customizer.php:196
-#: inc/integlight-customizer.php:399
+#: inc/aurora-design-blocks-customizer.php:196
+#: inc/aurora-design-blocks-customizer.php:399
 msgid "None"
 msgstr "なし"
 
-#: inc/integlight-customizer.php:260
+#: inc/aurora-design-blocks-customizer.php:260
 msgid "Slider Fade Duration (seconds)"
 msgstr "スライダーフェード時間（秒）"
 
-#: inc/integlight-customizer.php:299
+#: inc/aurora-design-blocks-customizer.php:299
 msgid "Slider Text Font"
 msgstr "スライダーテキストフォント"
 
-#: inc/integlight-customizer.php:303
+#: inc/aurora-design-blocks-customizer.php:303
 msgid "yu gothic"
 msgstr "游ゴシック"
 
-#: inc/integlight-customizer.php:304
+#: inc/aurora-design-blocks-customizer.php:304
 msgid "yu mincho"
 msgstr "游明朝"
 
-#: inc/integlight-customizer.php:336
+#: inc/aurora-design-blocks-customizer.php:336
 msgid "Top Header Setting"
 msgstr "トップヘッダー設定"
 
-#: inc/integlight-customizer.php:336
+#: inc/aurora-design-blocks-customizer.php:336
 msgid "Please select whether to display a slider or an image in the top header. The settings button for the selected option will be displayed."
 msgstr "トップヘッダーにスライダーまたは画像のどちらを表示するか選択してください。選択された方の設定ボタンが表示されます。"
 
 
-#: inc/integlight-customizer.php:336
+#: inc/aurora-design-blocks-customizer.php:336
 msgid "Slider Settings"
 msgstr "スライダー設定"
 
 
-#: inc/integlight-customizer.php:348
+#: inc/aurora-design-blocks-customizer.php:348
 msgid "Slider Text"
 msgstr "スライダーテキスト"
 
-#: inc/integlight-customizer.php:349
+#: inc/aurora-design-blocks-customizer.php:349
 msgid "Slider Text Main"
 msgstr "スライダーテキスト（メイン）"
 
-#: inc/integlight-customizer.php:350
+#: inc/aurora-design-blocks-customizer.php:350
 msgid "Slider Text Sub"
 msgstr "スライダーテキスト（サブ）"
 
-#: inc/integlight-customizer.php:351
+#: inc/aurora-design-blocks-customizer.php:351
 msgid "Slider Text color"
 msgstr "スライダーテキストカラー"
 
-#: inc/integlight-customizer.php:353
+#: inc/aurora-design-blocks-customizer.php:353
 msgid "Slider Text Position"
 msgstr "スライダーテキスト位置"
 
-#: inc/integlight-customizer.php:354
+#: inc/aurora-design-blocks-customizer.php:354
 msgid "Slider Text Position Top (px)"
 msgstr "スライダーテキスト位置（上）（px）"
 
-#: inc/integlight-customizer.php:355
+#: inc/aurora-design-blocks-customizer.php:355
 msgid "Slider Text Position Left (px)"
 msgstr "スライダーテキスト位置（左）（px）"
 
@@ -215,29 +215,29 @@ msgstr "スライダーテキスト位置（左）（px）"
 msgid "Recommended: 1920px (width) × 1080px (height)."
 msgstr "横1920px ×縦1080pxを推奨"
 
-#: inc/integlight-customizer.php:342
+#: inc/aurora-design-blocks-customizer.php:342
 msgid "Slider Image 1"
 msgstr "スライダー画像1"
 
-#: inc/integlight-customizer.php:343
+#: inc/aurora-design-blocks-customizer.php:343
 msgid "Slider Image 2"
 msgstr "スライダー画像2"
 
-#: inc/integlight-customizer.php:344
+#: inc/aurora-design-blocks-customizer.php:344
 msgid "Slider Image 3"
 msgstr "スライダー画像3"
 
 
 
-#: inc/integlight-customizer.php:356
+#: inc/aurora-design-blocks-customizer.php:356
 msgid "Slider Text Position Mobile"
 msgstr "スライダーテキスト位置（モバイル）"
 
-#: inc/integlight-customizer.php:357
+#: inc/aurora-design-blocks-customizer.php:357
 msgid "Slider Text Position Top Mobile (px)"
 msgstr "スライダーテキスト位置（モバイル、上）（px）"
 
-#: inc/integlight-customizer.php:358
+#: inc/aurora-design-blocks-customizer.php:358
 msgid "Slider Text Position Left Mobile (px)"
 msgstr "スライダーテキスト位置（モバイル、左）（px）"
 
@@ -267,57 +267,57 @@ msgstr "スライダー画像3（モバイル）"
 
 
 
-#: inc/integlight-customizer.php:391
+#: inc/aurora-design-blocks-customizer.php:391
 msgid "Sidebar"
 msgstr "サイドバー"
 
 
-#: inc/integlight-customizer.php:391
+#: inc/aurora-design-blocks-customizer.php:391
 msgid "Position"
 msgstr "位置"
 
 
-#: inc/integlight-customizer.php:396
+#: inc/aurora-design-blocks-customizer.php:396
 msgid "Right"
 msgstr "右"
 
-#: inc/integlight-customizer.php:397
+#: inc/aurora-design-blocks-customizer.php:397
 msgid "Left"
 msgstr "左"
 
-#: inc/integlight-customizer.php:398
+#: inc/aurora-design-blocks-customizer.php:398
 msgid "Bottom"
 msgstr "下"
 
-#: inc/integlight-customizer.php:411
+#: inc/aurora-design-blocks-customizer.php:411
 msgid "Sidebar Settings"
 msgstr "サイドバー設定"
 
-#: inc/integlight-customizer.php:446
+#: inc/aurora-design-blocks-customizer.php:446
 msgid "Accent color setting"
 msgstr "アクセントカラー設定"
 
-#: inc/integlight-customizer.php:448
+#: inc/aurora-design-blocks-customizer.php:448
 msgid "Select favorite accent color"
 msgstr "サイト全体のアクセントカラーとして使用される色を変更できます"
 
-#: inc/integlight-customizer.php:448
+#: inc/aurora-design-blocks-customizer.php:448
 msgid "Blue"
 msgstr "青"
 
-#: inc/integlight-customizer.php:448
+#: inc/aurora-design-blocks-customizer.php:448
 msgid "Green"
 msgstr "緑"
 
-#: inc/integlight-customizer.php:448
+#: inc/aurora-design-blocks-customizer.php:448
 msgid "Orange"
 msgstr "オレンジ"
 
-#: inc/integlight-customizer.php:448
+#: inc/aurora-design-blocks-customizer.php:448
 msgid "Red"
 msgstr "赤"
 
-#: inc/integlight-customizer.php:448
+#: inc/aurora-design-blocks-customizer.php:448
 msgid "Pink"
 msgstr "ピンク"
 
@@ -335,19 +335,19 @@ msgstr "ピンク"
 
 
 
-#: inc/integlight-functions.php:203
+#: inc/aurora-design-blocks-functions.php:203
 msgid "Footer Settings"
 msgstr "フッター設定"
 
-#: inc/integlight-functions.php:204
+#: inc/aurora-design-blocks-functions.php:204
 msgid "Footer"
 msgstr "フッター"
 
-#: inc/integlight-functions.php:316
+#: inc/aurora-design-blocks-functions.php:316
 msgid "TOC Visibility"
 msgstr "目次表示"
 
-#: inc/integlight-functions.php:331
+#: inc/aurora-design-blocks-functions.php:331
 msgid "Hide TOC"
 msgstr "目次を隠す"
 
@@ -562,8 +562,8 @@ msgstr "スクロールさせるテキストを入力していください。"
 
 #: blocks/custom-cover/block.json
 msgctxt "block title"
-msgid "[integlight]Custom Cover"
-msgstr "【integlight】全幅カバー"
+msgid "[aurora-design-blocks]Custom Cover"
+msgstr "【aurora-design-blocks】全幅カバー"
 
 #: blocks/custom-cover/block.json
 msgctxt "block description"
@@ -572,8 +572,8 @@ msgstr "固定された全幅の外側コンテナーと、記事幅または全
 
 #: blocks/slider-block/block.json
 msgctxt "block title"
-msgid "[integlight]slider block"
-msgstr "【integlight】スライダーブロック"
+msgid "[aurora-design-blocks]slider block"
+msgstr "【aurora-design-blocks】スライダーブロック"
 
 #: blocks/slider-block/block.json
 msgctxt "block description"
@@ -582,8 +582,8 @@ msgstr "複数のコンテンツをスライドさせるブロック。"
 
 #: blocks/speech-bubble/block.json
 msgctxt "block title"
-msgid "[integlight]speech bubble"
-msgstr "【integlight】吹き出し"
+msgid "[aurora-design-blocks]speech bubble"
+msgstr "【aurora-design-blocks】吹き出し"
 
 #: blocks/speech-bubble/block.json
 msgctxt "block description"
@@ -592,8 +592,8 @@ msgstr "画像とテキストを設定でき、背景色と文字色をカスタ
 
 #: blocks/tab-block/block.json
 msgctxt "block title"
-msgid "[Integlight]Tab switching feature."
-msgstr "【integlight】タブ切り替え機能"
+msgid "[aurora-design-blocks]Tab switching feature."
+msgstr "【aurora-design-blocks】タブ切り替え機能"
 
 #: blocks/tab-block/block.json
 msgctxt "block description"
@@ -602,8 +602,8 @@ msgstr "タブを使用して複数のコンテンツを切り替えることが
 
 #: blocks/text-flow-animation/block.json
 msgctxt "block title"
-msgid "[integlight]text flow animation"
-msgstr "【integlight】テキストフローアニメーション"
+msgid "[aurora-design-blocks]text flow animation"
+msgstr "【aurora-design-blocks】テキストフローアニメーション"
 
 
 
@@ -671,8 +671,8 @@ msgstr "Google Tag Manager から提供されたコードを貼り付けてく�
 msgid "Code to output immediately after the opening <body> tag"
 msgstr "bodyタグ開始直後に出力するコード"
 
-msgid "Turn Your Experience and Knowledge into Digital Assets with Integlight"
-msgstr "Integlightであなたの経験・知識をデジタル資産に"
+msgid "Turn Your Experience and Knowledge into Digital Assets with aurora-design-blocks"
+msgstr "aurora-design-blocksであなたの経験・知識をデジタル資産に"
 
 
 msgid "The things you casually talk about every day, as well as the knowledge and experience you gain from work or hobbies, can be valuable information for someone. By documenting them in a blog, they accumulate over time and become your digital asset. Keep sharing, and you may create value that reaches many people."

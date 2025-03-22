@@ -1,9 +1,9 @@
-.integlight-tabs {
+.aurora-design-blocks-tabs {
     border: 1px solid #ddd;
     padding: 10px;
 }
 
-.integlight-tabs .tabs-navigation {
+.aurora-design-blocks-tabs .tabs-navigation {
     list-style: none;
     display: flex;
     background: #f1f1f1;
@@ -11,26 +11,26 @@
     margin: 0 0 10px;
 }
 
-.integlight-tabs .tabs-navigation li {
+.aurora-design-blocks-tabs .tabs-navigation li {
     padding: 10px 15px;
     cursor: pointer;
     border-bottom: 2px solid transparent;
 }
 
-.integlight-tabs .tabs-navigation li.active {
+.aurora-design-blocks-tabs .tabs-navigation li.active {
     border-bottom: 2px solid #007cba;
     font-weight: bold;
 }
 
-.integlight-tabs .tab {
+.aurora-design-blocks-tabs .tab {
     display: none;
 }
 
-.integlight-tabs .tab:first-child {
+.aurora-design-blocks-tabs .tab:first-child {
     display: block;
 }
 
 
-.integlight-tabs .tab.active {
+.aurora-design-blocks-tabs .tab.active {
     display: block;
 }

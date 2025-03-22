@@ -12,28 +12,28 @@ const calculateFontSize = (fontSize) => {
     return `${baseSize}vw`;
 };
 
-registerBlockType('integlight/text-flow-animation', {
+registerBlockType('aurora-design-blocks/text-flow-animation', {
     edit: ({ attributes, setAttributes }) => {
-        const blockProps = useBlockProps({ className: "integlight-text-flow-editor" });
+        const blockProps = useBlockProps({ className: "aurora-design-blocks-text-flow-editor" });
 
         return (
             <>
                 <InspectorControls>
-                    <PanelBody title={__("Text setting", "integlight")}>
+                    <PanelBody title={__("Text setting", "aurora-design-blocks")}>
                         <RangeControl
-                            label={__("Font size", "integlight")}
+                            label={__("Font size", "aurora-design-blocks")}
                             value={attributes.fontSize}
                             onChange={(value) => setAttributes({ fontSize: value })}
                             min={10}
                             max={100}
                         />
                         <ColorPicker
-                            label={__("Color", "integlight")}
+                            label={__("Color", "aurora-design-blocks")}
                             color={attributes.color}
                             onChangeComplete={(value) => setAttributes({ color: value.hex })}
                         />
                         <SelectControl
-                            label={__("Font family", "integlight")}
+                            label={__("Font family", "aurora-design-blocks")}
                             value={attributes.fontFamily}
                             options={[
                                 { label: 'Impact', value: "Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif" },
@@ -50,13 +50,13 @@ registerBlockType('integlight/text-flow-animation', {
                 </InspectorControls>
 
                 <div {...blockProps}>
-                    <span className="guide-text">{__("Please enter the scrolling text.", "integlight")}</span>
+                    <span className="guide-text">{__("Please enter the scrolling text.", "aurora-design-blocks")}</span>
 
                     <RichText
                         tagName="p"
                         value={attributes.content}
                         onChange={(content) => setAttributes({ content })}
-                        placeholder={__("Enter text...", "integlight")}
+                        placeholder={__("Enter text...", "aurora-design-blocks")}
                         style={{
                             fontSize: calculateFontSize(attributes.fontSize),
                             color: attributes.color,
@@ -70,7 +70,7 @@ registerBlockType('integlight/text-flow-animation', {
     },
 
     save: ({ attributes }) => {
-        const blockProps = useBlockProps.save({ className: "integlight-text-flow-animation" });
+        const blockProps = useBlockProps.save({ className: "aurora-design-blocks-text-flow-animation" });
 
         return (
             <div {...blockProps} style={{ fontSize: calculateFontSize(attributes.fontSize), color: attributes.color, fontFamily: attributes.fontFamily }}>
