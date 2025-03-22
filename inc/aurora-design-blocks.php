@@ -121,7 +121,7 @@ $footerScripts = [
 	'integlight-slider-block-script'   => get_template_directory_uri() . '/blocks/slider-block/src/frontend.js',
 
 ];
-AuroraDesignBlocksMoveScripts::add_scripts($footerScripts);
+//AuroraDesignBlocksMoveScripts::add_scripts($footerScripts);
 
 
 $deferredScripts = [
@@ -129,7 +129,7 @@ $deferredScripts = [
 	'integlight-slider-block-script'
 
 ];
-AuroraDesignBlocksDeferJs::add_deferred_scripts($deferredScripts);
+//AuroraDesignBlocksDeferJs::add_deferred_scripts($deferredScripts);
 
 /* レンダリングブロック、layout計算増加の防止のためのチューニング e*/
 
