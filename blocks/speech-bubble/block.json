@@ -14,7 +14,7 @@
         },
         "imageUrl": {
             "type": "string",
-            "default": "/wp-content/themes/aurora-design-blocks/blocks/speech-bubble/noname.webp"
+            "default": "/wp-content/plugins/aurora-design-blocks/blocks/speech-bubble/noname.webp"
         },
         "imageAlt": {
             "type": "string",
