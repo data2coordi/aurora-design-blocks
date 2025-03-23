@@ -432,37 +432,30 @@ msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr "続きを読む<span class=\"screen-reader-text\">「%s」</span>"
 
 #: blocks/custom-cover/build/index.js:1
-#: blocks/custom-cover/src/index.js:45
 msgid "Cover Settings"
 msgstr "カバー設定"
 
 #: blocks/custom-cover/build/index.js:1
-#: blocks/custom-cover/src/index.js:47
 msgid "Use Article Width for Inner Content"
 msgstr "内側のコンテンツに記事幅を使用"
 
 #: blocks/custom-cover/build/index.js:1
-#: blocks/custom-cover/src/index.js:52
 msgid "Overlay Opacity (-100 for bright, 100 for dark)"
 msgstr "オーバーレイ不透明度（-100で明るく、100で暗く）"
 
 #: blocks/custom-cover/build/index.js:1
-#: blocks/custom-cover/src/index.js:73
 msgid "Change Background Image"
 msgstr "背景画像を変更"
 
 #: blocks/custom-cover/build/index.js:1
-#: blocks/custom-cover/src/index.js:72
 msgid "Upload Background Image"
 msgstr "背景画像をアップロード"
 
 #: blocks/custom-cover/build/index.js:1
-#: blocks/custom-cover/src/index.js:84
 msgid "Remove Background Image"
 msgstr "背景画像を削除"
 
 #: blocks/slider-block/build/index.js:1
-#: blocks/slider-block/src/index.js:31
 msgid "Please create multiple pieces of content. They will be displayed in a slide format when viewed as a website."
 msgstr "*複数のコンテンツを作成してください。ウェブサイトとして表示される場合、スライド形式で表示されます。"
 
@@ -470,92 +463,74 @@ msgstr "*複数のコンテンツを作成してください。ウェブサイ�
 
 
 #: blocks/speech-bubble/build/index.js:1
-#: blocks/speech-bubble/src/index.js:49
 msgid "Image setting"
 msgstr "画像設定"
 
 #: blocks/speech-bubble/build/index.js:1
-#: blocks/speech-bubble/src/index.js:59
 msgid "Change image"
 msgstr "画像を変更"
 
 #: blocks/speech-bubble/build/index.js:1
-#: blocks/speech-bubble/src/index.js:26
 msgid "faceimage"
 msgstr "顔画像"
 
 #: blocks/speech-bubble/build/index.js:1
-#: blocks/speech-bubble/src/index.js:69
 msgid "Select image"
 msgstr "画像を選択"
 
 #: blocks/speech-bubble/build/index.js:1
-#: blocks/speech-bubble/src/index.js:76
 msgid "layout setting"
 msgstr "レイアウト設定"
 
 #: blocks/speech-bubble/build/index.js:1
-#: blocks/speech-bubble/src/index.js:78
 msgid "Reverse the positions of the image and speech bubble."
 msgstr "画像と吹き出しの位置を反転する。"
 
 #: blocks/speech-bubble/build/index.js:1
-#: blocks/speech-bubble/src/index.js:95
 msgid "Enter caption here."
 msgstr "キャプションを入力"
 
 #: blocks/speech-bubble/build/index.js:1
-#: blocks/speech-bubble/src/index.js:104
 msgid "Enter message here."
 msgstr "メッセージを入力"
 
 #: blocks/tab-block/build/index.js:1
-#: blocks/tab-block/src/index.js:18
 msgid "Tab"
 msgstr "タブ"
 
 #: blocks/tab-block/build/index.js:1
-#: blocks/tab-block/src/index.js:38
 msgid "Tab title..."
 msgstr "タブのタイトル..."
 
 #: blocks/tab-block/build/index.js:1
-#: blocks/tab-block/src/index.js:86
 msgid "Tab setting"
 msgstr "タブ設定"
 
 #: blocks/tab-block/build/index.js:1
-#: blocks/tab-block/src/index.js:92
 msgid "Tab switching is reflected when the website is displayed."
 msgstr "タブの切り替えは、ウェブサイトの表示時に反映されます。"
 
 #: blocks/text-flow-animation/build/index.js:1
-#: blocks/text-flow-animation/src/index.js:14
 msgid "Text setting"
 msgstr "テキスト設定"
 
 #: blocks/text-flow-animation/build/index.js:1
-#: blocks/text-flow-animation/src/index.js:16
 msgid "Font size"
 msgstr "フォントサイズ"
 
 #: blocks/text-flow-animation/build/index.js:1
-#: blocks/text-flow-animation/src/index.js:23
 msgid "Color"
 msgstr "色"
 
 #: blocks/text-flow-animation/build/index.js:1
-#: blocks/text-flow-animation/src/index.js:28
 msgid "Font family"
 msgstr "フォントファミリー"
 
 #: blocks/text-flow-animation/build/index.js:1
-#: blocks/text-flow-animation/src/index.js:49
 msgid "Enter text..."
 msgstr "テキストを入力..."
 
 #: blocks/text-flow-animation/build/index.js:1
-#: blocks/text-flow-animation/src/index.js:49
 msgid "Please enter the scrolling text."
 msgstr "スクロールさせるテキストを入力していください。"
 
