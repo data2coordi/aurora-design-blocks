@@ -5,6 +5,7 @@
  * Description: カスタムブロックを追加するプラグイン。
  * Version: 1.0
  * Author: Yurika Toshida at Aurora Lab
+ * Text Domain: aurora-design-blocks
  */
 
 if (!defined('_S_VERSION')) {
@@ -18,17 +19,7 @@ if (!defined('ABSPATH')) {
     exit; // 直接アクセスを防ぐ
 }
 
-// ブロック登録処理を追加
-function register_custom_blocks()
-{
-    $blocks = glob(plugin_dir_path(__FILE__) . 'blocks/*', GLOB_ONLYDIR);
-    foreach ($blocks as $block) {
-        if (file_exists($block . '/block.json')) {
-            register_block_type($block);
-        }
-    }
-}
-add_action('init', 'register_custom_blocks');
+
 
 
 function aurora_design_blocks_enqueue_styles()
@@ -41,5 +32,53 @@ function aurora_design_blocks_enqueue_styles()
 add_action('wp_enqueue_scripts', 'aurora_design_blocks_enqueue_styles');
 
 
+function aurora_design_blocks_load_textdomain()
+{
+    $loaded = load_plugin_textdomain(
+        'aurora-design-blocks', // テキストドメイン
+        false,
+        dirname(plugin_basename(__FILE__)) . '/languages'
+    );
+}
+add_action('init', 'aurora_design_blocks_load_textdomain');
+
+function aurora_design_blocks_debug_textdomain_var_dump()
+{
+    echo '<pre>';
+
+    // 現在のロケールを取得して出力
+    $locale = get_locale();
+    var_dump('Current locale: ' . $locale);
+
+    // MOファイルの絶対パスを生成して存在チェック
+    $mo_file = dirname(plugin_basename(__FILE__)) . '/languages/aurora-design-blocks-' . $locale . '.mo';
+    if (file_exists($mo_file)) {
+        var_dump("MOファイルが見つかりました: $mo_file");
+    } else {
+        var_dump("MOファイルが見つかりません: $mo_file");
+    }
+
+    // 翻訳対象の文字列の翻訳結果を出力
+    $translated = __('Hello World Block', 'aurora-design-blocks');
+    var_dump("Translated 'Hello World Block': " . $translated);
+
+    echo '</pre>';
+}
+// 優先度を 20 など、load_plugin_textdomain() より後に実行する
+add_action('init', 'aurora_design_blocks_debug_textdomain_var_dump', 20);
+
+function aurora_design_blocks_debug_get_translations()
+{
+    $translations = get_translations_for_domain('aurora-design-blocks');
+    echo '<pre>';
+    //var_dump($translations);
+    echo '</pre>';
+}
+add_action('init', 'aurora_design_blocks_debug_get_translations', 30);
+
+
+
+
+
 require plugin_dir_path(__FILE__) . '/inc/aurora-design-blocks-outerAssets.php';
-require plugin_dir_path(__FILE__) . 'inc/aurora-design-blocks.php';
+require plugin_dir_path(__FILE__) . '/inc/aurora-design-blocks.php';

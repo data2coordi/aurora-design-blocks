@@ -1,49 +1,27 @@
 <?php
 
+
+
 /********************************************************************/
 /*ブロックアイテムの読み込みs*/
 /********************************************************************/
 
-function register_theme_blocks()
+// ブロック登録処理を追加
+function register_custom_blocks()
 {
-	$blocks = glob(get_template_directory() . '/blocks/*', GLOB_ONLYDIR);
+	$blocks = glob(plugin_dir_path(dirname(__FILE__)) . 'blocks/*', GLOB_ONLYDIR);
+
 	foreach ($blocks as $block) {
 		if (file_exists($block . '/block.json')) {
 			register_block_type($block);
 		}
 	}
 }
-add_action('init', 'register_theme_blocks');
-
-
-
+add_action('init', 'register_custom_blocks');
 /********************************************************************/
 /*ブロックアイテムの読み込みe*/
 /********************************************************************/
 
-/********************************************************************/
-/*font awesome 用フィルター置換*/
-/********************************************************************/
-
-function auroraDesignBlocks_replace_fontawesome_icons($content)
-{
-	return preg_replace_callback(
-		'/\[fontawesome icon=([a-z0-9-]+)\]/i',
-		function ($matches) {
-			$icon = $matches[1];
-			if (empty($icon)) {
-				return '';
-			}
-			return '<i class="fas ' . esc_attr($icon) . '"></i>';
-		},
-		$content
-	);
-}
-add_filter('the_content', 'auroraDesignBlocks_replace_fontawesome_icons', 10);
-
-/********************************************************************/
-/*font awesome 用のショートコードe*/
-/********************************************************************/
 
 
 
@@ -58,46 +36,40 @@ function auroraDesignBlocks_enqueue_block_assets()
 	wp_set_script_translations(
 		'aurora-design-blocks-custom-cover-block-editor-script',
 		'aurora-design-blocks',
-		get_template_directory() . '/languages'
+		plugin_dir_path(dirname(__FILE__)) . '/languages'
 	);
 	wp_set_script_translations(
 		'aurora-design-blocks-gfontawesome-block-editor-script',
 		'aurora-design-blocks',
-		get_template_directory() . '/languages'
+		plugin_dir_path(dirname(__FILE__)) . '/languages'
 	);
 
-	/*
-	wp_set_script_translations(
-		'aurora-design-blocks-hello-world-block-editor-script',
-		'aurora-design-blocks',
-		get_template_directory() . '/languages'
-	);
-	*/
+
 
 	wp_set_script_translations(
 		'aurora-design-blocks-slider-block-block-editor-script',
 		'aurora-design-blocks',
-		get_template_directory() . '/languages'
+		plugin_dir_path(dirname(__FILE__)) . '/languages'
 	);
 
 
 	wp_set_script_translations(
 		'aurora-design-blocks-speech-bubble-editor-script', // ハンドル名を適切に設定
 		'aurora-design-blocks',
-		get_template_directory() . '/languages'
+		plugin_dir_path(dirname(__FILE__)) . '/languages'
 	);
 
 	wp_set_script_translations(
 		'aurora-design-blocks-tab-block-editor-script', // ハンドル名を適切に設定
 		'aurora-design-blocks',
-		get_template_directory() . '/languages'
+		plugin_dir_path(dirname(__FILE__)) . '/languages'
 	);
 
 
 	wp_set_script_translations(
 		'aurora-design-blocks-text-flow-animation-editor-script',
 		'aurora-design-blocks',
-		get_template_directory() . '/languages'
+		plugin_dir_path(dirname(__FILE__)) . '/languages'
 	);
 }
 add_action('enqueue_block_editor_assets', 'auroraDesignBlocks_enqueue_block_assets');
@@ -117,8 +89,8 @@ add_action('enqueue_block_editor_assets', 'auroraDesignBlocks_enqueue_block_asse
 
 
 $footerScripts = [
-	'aurora-design-blocks-tab-block-script'   => get_template_directory_uri() . '/blocks/tab-block/src/frontend.js',
-	'aurora-design-blocks-slider-block-script'   => get_template_directory_uri() . '/blocks/slider-block/src/frontend.js',
+	'aurora-design-blocks-tab-block-script'   => plugin_dir_path(dirname(__FILE__)) . '/blocks/tab-block/src/frontend.js',
+	'aurora-design-blocks-slider-block-script'   => plugin_dir_path(dirname(__FILE__))   . '/blocks/slider-block/src/frontend.js',
 
 ];
 //AuroraDesignBlocksMoveScripts::add_scripts($footerScripts);

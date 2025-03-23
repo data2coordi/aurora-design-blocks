@@ -25,8 +25,8 @@ msgstr "インテグライト"
 #msgid "Hello"
 #msgstr "こんにちわ"
 
-#msgid "Hello World Block"
-#msgstr "こんにちわブロック"
+msgid "Hello World Block"
+msgstr "こんにちわブロック"
 
 
 
