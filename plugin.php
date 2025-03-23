@@ -20,6 +20,7 @@ if (!defined('ABSPATH')) {
 }
 
 define('AURORA_DESIGN_BLOCKS_PATH', plugin_dir_path(__FILE__));
+define('AURORA_DESIGN_BLOCKS_URL', plugin_dir_url(__FILE__));
 
 
 
