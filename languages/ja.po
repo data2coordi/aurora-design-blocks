@@ -461,6 +461,7 @@ msgstr "背景画像をアップロード"
 msgid "Remove Background Image"
 msgstr "背景画像を削除"
 
+#: blocks/slider-block/build/index.js:1
 #: blocks/slider-block/src/index.js:31
 msgid "Please create multiple pieces of content. They will be displayed in a slide format when viewed as a website."
 msgstr "*複数のコンテンツを作成してください。ウェブサイトとして表示される場合、スライド形式で表示されます。"

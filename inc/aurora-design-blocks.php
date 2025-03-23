@@ -47,7 +47,7 @@ function auroraDesignBlocks_enqueue_block_assets()
 
 
 	wp_set_script_translations(
-		'aurora-design-blocks-slider-block-block-editor-script',
+		'aurora-design-blocks-slider-block-editor-script',
 		'aurora-design-blocks',
 		AURORA_DESIGN_BLOCKS_PATH . 'languages'
 	);
