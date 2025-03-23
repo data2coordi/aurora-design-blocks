@@ -101,7 +101,7 @@ $deferredScripts = [
 	'aurora-design-blocks-slider-block-script'
 
 ];
-//AuroraDesignBlocksDeferJs::add_deferred_scripts($deferredScripts);
+AuroraDesignBlocksDeferJs::add_deferred_scripts($deferredScripts);
 
 /* レンダリングブロック、layout計算増加の防止のためのチューニング e*/
 
