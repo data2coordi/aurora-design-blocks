@@ -19,6 +19,8 @@ if (!defined('ABSPATH')) {
     exit; // 直接アクセスを防ぐ
 }
 
+define('AURORA_DESIGN_BLOCKS_PATH', plugin_dir_path(__FILE__));
+
 
 
 
@@ -42,6 +44,8 @@ function aurora_design_blocks_load_textdomain()
 }
 add_action('init', 'aurora_design_blocks_load_textdomain');
 
+
+/*
 function aurora_design_blocks_debug_textdomain_var_dump()
 {
     echo '<pre>';
@@ -67,6 +71,7 @@ function aurora_design_blocks_debug_textdomain_var_dump()
 // 優先度を 20 など、load_plugin_textdomain() より後に実行する
 add_action('init', 'aurora_design_blocks_debug_textdomain_var_dump', 20);
 
+
 function aurora_design_blocks_debug_get_translations()
 {
     $translations = get_translations_for_domain('aurora-design-blocks');
@@ -75,7 +80,7 @@ function aurora_design_blocks_debug_get_translations()
     echo '</pre>';
 }
 add_action('init', 'aurora_design_blocks_debug_get_translations', 30);
-
+*/
 
 
 

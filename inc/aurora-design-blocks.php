@@ -9,7 +9,7 @@
 // ブロック登録処理を追加
 function register_custom_blocks()
 {
-	$blocks = glob(plugin_dir_path(dirname(__FILE__)) . 'blocks/*', GLOB_ONLYDIR);
+	$blocks = glob(AURORA_DESIGN_BLOCKS_PATH . 'blocks/*', GLOB_ONLYDIR);
 
 	foreach ($blocks as $block) {
 		if (file_exists($block . '/block.json')) {
@@ -36,12 +36,12 @@ function auroraDesignBlocks_enqueue_block_assets()
 	wp_set_script_translations(
 		'aurora-design-blocks-custom-cover-block-editor-script',
 		'aurora-design-blocks',
-		plugin_dir_path(dirname(__FILE__)) . '/languages'
+		AURORA_DESIGN_BLOCKS_PATH . 'languages'
 	);
 	wp_set_script_translations(
 		'aurora-design-blocks-gfontawesome-block-editor-script',
 		'aurora-design-blocks',
-		plugin_dir_path(dirname(__FILE__)) . '/languages'
+		AURORA_DESIGN_BLOCKS_PATH . 'languages'
 	);
 
 
@@ -49,27 +49,27 @@ function auroraDesignBlocks_enqueue_block_assets()
 	wp_set_script_translations(
 		'aurora-design-blocks-slider-block-block-editor-script',
 		'aurora-design-blocks',
-		plugin_dir_path(dirname(__FILE__)) . '/languages'
+		AURORA_DESIGN_BLOCKS_PATH . 'languages'
 	);
 
 
 	wp_set_script_translations(
 		'aurora-design-blocks-speech-bubble-editor-script', // ハンドル名を適切に設定
 		'aurora-design-blocks',
-		plugin_dir_path(dirname(__FILE__)) . '/languages'
+		AURORA_DESIGN_BLOCKS_PATH . 'languages'
 	);
 
 	wp_set_script_translations(
 		'aurora-design-blocks-tab-block-editor-script', // ハンドル名を適切に設定
 		'aurora-design-blocks',
-		plugin_dir_path(dirname(__FILE__)) . '/languages'
+		AURORA_DESIGN_BLOCKS_PATH . 'languages'
 	);
 
 
 	wp_set_script_translations(
 		'aurora-design-blocks-text-flow-animation-editor-script',
 		'aurora-design-blocks',
-		plugin_dir_path(dirname(__FILE__)) . '/languages'
+		AURORA_DESIGN_BLOCKS_PATH . 'languages'
 	);
 }
 add_action('enqueue_block_editor_assets', 'auroraDesignBlocks_enqueue_block_assets');
@@ -89,8 +89,8 @@ add_action('enqueue_block_editor_assets', 'auroraDesignBlocks_enqueue_block_asse
 
 
 $footerScripts = [
-	'aurora-design-blocks-tab-block-script'   => plugin_dir_path(dirname(__FILE__)) . '/blocks/tab-block/src/frontend.js',
-	'aurora-design-blocks-slider-block-script'   => plugin_dir_path(dirname(__FILE__))   . '/blocks/slider-block/src/frontend.js',
+	'aurora-design-blocks-tab-block-script'   => AURORA_DESIGN_BLOCKS_PATH . 'blocks/tab-block/src/frontend.js',
+	'aurora-design-blocks-slider-block-script'   => AURORA_DESIGN_BLOCKS_PATH   . 'blocks/slider-block/src/frontend.js',
 
 ];
 //AuroraDesignBlocksMoveScripts::add_scripts($footerScripts);
