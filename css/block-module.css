@@ -14,6 +14,9 @@
   background: #000;
   border-radius: 50px;
   /* 角丸の半径 */
+  padding-left: 2em;
+  padding-right: 2em;
+  /* 左右にパディングを追加している */
   color: #fff;
   border: none;
 }
@@ -29,11 +32,16 @@
 }
 
 /* タブナビの上にマージンをつけている */
-.wp-block-aurora-design-blocks-tab-block .aurora-design-blocks-tabs .tabs-navigation {
+.wp-block-aurora-design-blocks-tab-block
+  .aurora-design-blocks-tabs
+  .tabs-navigation {
   margin-top: 30px;
 }
 
-.wp-block-aurora-design-blocks-tab-block .aurora-design-blocks-tabs-block .block-editor-default-block-appender .block-editor-inserter {
+.wp-block-aurora-design-blocks-tab-block
+  .aurora-design-blocks-tabs-block
+  .block-editor-default-block-appender
+  .block-editor-inserter {
   margin-top: 25px;
   /* デフォルトの追加ボタンの位置を下げている */
 }
@@ -43,7 +51,11 @@
   /* タブのボーダーを消している */
 }
 
-
+.wp-block-aurora-design-blocks-tab-block .wp-block-column {
+  padding-left: 2em;
+  padding-right: 2em;
+  /* カラムレイアウトにパディングを追加している */
+}
 
 /*********************************/
 /*********************************/
@@ -76,7 +88,6 @@
 }
 
 @media (max-width: 768px) {
-
   /******吹き出し画像********/
   .aurora-design-blocks-speech-bubble figure.speech-bubble__image {
     flex-basis: 10%;
