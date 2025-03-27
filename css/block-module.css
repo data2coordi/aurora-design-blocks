@@ -54,8 +54,15 @@
 }
 
 .wp-block-aurora-design-blocks-tab-block.aurora-design-blocks-tabs {
-  border: none;
-  /* タブのボーダーを消している */
+  border: 1px solid #eee;
+  padding: 0 2em;
+  /* タブを線で囲んでいる */
+}
+
+.wp-block-aurora-design-blocks-tab.tab a {
+  word-break: break-all;
+  overflow-wrap: break-word;
+  /* urlをコンテンツに応じて折り曲げている */
 }
 
 .wp-block-aurora-design-blocks-tab-block .wp-block-column {
