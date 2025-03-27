@@ -26,6 +26,7 @@
   border-radius: 10px 10px 0 0;
   cursor: pointer;
   padding: 0.5em 2em;
+  margin-left: 5px;
 }
 
 /* タブ全体を囲む線を消している */
