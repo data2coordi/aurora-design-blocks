@@ -3,22 +3,29 @@
 /*********************************/
 /*-------------タブブロック----------*/
 .wp-block-aurora-design-blocks-tab-block .tabs-navigation {
-  border-radius: 50px;
-  /* 角丸の半径 */
-  background: #eee;
+  border-bottom: 2px solid #000;
+  background: #fff;
   margin-top: var(--ly-elementTopMarginSmall);
 }
 
 /* 現在指している所のスタイル */
 .wp-block-aurora-design-blocks-tab-block .tabs-navigation li.active {
   background: #000;
-  border-radius: 50px;
+  border-radius: 10px 10px 0 0;
   /* 角丸の半径 */
   padding-left: 2em;
   padding-right: 2em;
   /* 左右にパディングを追加している */
   color: #fff;
   border: none;
+}
+
+/* 現在指していない所のスタイル */
+.wp-block-aurora-design-blocks-tab-block .tabs-navigation li {
+  background: #eee;
+  border-radius: 10px 10px 0 0;
+  cursor: pointer;
+  padding: 0.5em 2em;
 }
 
 /* タブ全体を囲む線を消している */
