@@ -4,7 +4,7 @@
     border: 1px solid #ddd;
 }
 
-.wp-block-aurora-design-blocks-cta-block .fixed {
+.wp-block-aurora-design-blocks-cta-block.fixed {
     position: fixed;
     background: rgba(0, 0, 0, 0.8);
     color: white;
@@ -13,12 +13,12 @@
 }
 
 /* 各位置の設定 */
-.wp-block-aurora-design-blocks-cta-block .position-top-left {
+.wp-block-aurora-design-blocks-cta-block.position-top-left {
     top: 20px;
     left: 20px;
 }
 
-.wp-block-aurora-design-blocks-cta-block .position-top-center {
+.wp-block-aurora-design-blocks-cta-block.position-top-center {
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
@@ -26,29 +26,29 @@
 
 
 
-.wp-block-aurora-design-blocks-cta-block .position-top-right {
+.wp-block-aurora-design-blocks-cta-block.position-top-right {
     top: 20px;
     right: 20px;
 }
 
-.wp-block-aurora-design-blocks-cta-block .position-bottom-left {
+.wp-block-aurora-design-blocks-cta-block.position-bottom-left {
     bottom: 20px;
     left: 20px;
 }
 
-.wp-block-aurora-design-blocks-cta-block .position-bottom-center {
+.wp-block-aurora-design-blocks-cta-block.position-bottom-center {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.wp-block-aurora-design-blocks-cta-block .position-bottom-right {
+.wp-block-aurora-design-blocks-cta-block.position-bottom-right {
     bottom: 20px;
     right: 20px;
 }
 
 /* エディタ内でのfixedスタイルの無効化 */
-.wp-block-aurora-design-blocks-cta-block .editor-styles-wrapper .fixed {
+.wp-block-aurora-design-blocks-cta-block.block-editor-block-list__block.fixed {
     position: relative;
     /* エディタ内では通常の配置 */
     background: #f8f8f8;
