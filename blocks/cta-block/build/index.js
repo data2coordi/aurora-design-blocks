@@ -28,29 +28,53 @@ __webpack_require__.r(__webpack_exports__);
     isFixed: {
       type: 'boolean',
       default: false
-    }
+    },
+    position: {
+      type: 'string',
+      default: 'top-right'
+    } // 初期位置を 'top-right' に設定
   },
   edit: ({
     attributes,
     setAttributes
   }) => {
     const {
-      isFixed
+      isFixed,
+      position
     } = attributes;
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
           title: "CTA\u914D\u7F6E\u8A2D\u5B9A",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
             label: "\u56FA\u5B9A\u30D5\u30ED\u30FC\u30C8\u306B\u3059\u308B",
             checked: isFixed,
             onChange: value => setAttributes({
               isFixed: value
             })
-          })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+            label: "\u914D\u7F6E\u4F4D\u7F6E",
+            value: position,
+            options: [{
+              label: '右上',
+              value: 'top-right'
+            }, {
+              label: '左上',
+              value: 'top-left'
+            }, {
+              label: '右下',
+              value: 'bottom-right'
+            }, {
+              label: '左下',
+              value: 'bottom-left'
+            }],
+            onChange: value => setAttributes({
+              position: value
+            })
+          })]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-        className: `cta-block ${isFixed ? 'fixed' : ''}`,
+        className: `cta-block ${isFixed ? 'fixed' : ''} position-${position}`,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {
           allowedBlocks: ['core/heading', 'core/paragraph', 'core/button']
         })
@@ -61,10 +85,12 @@ __webpack_require__.r(__webpack_exports__);
     attributes
   }) => {
     const {
-      isFixed
+      isFixed,
+      position
     } = attributes;
     const blockClasses = ['cta-block'];
     if (isFixed) blockClasses.push('fixed');
+    blockClasses.push(`position-${position}`);
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: blockClasses.join(' '),
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, {})
