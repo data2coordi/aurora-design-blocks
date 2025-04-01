@@ -1,16 +1,19 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks, InspectorControls } from '@wordpress/block-editor';
+import { InnerBlocks, InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, ToggleControl, SelectControl } from '@wordpress/components';
 import './style.css';
 
 registerBlockType('aurora-design-blocks/cta-block', {
     attributes: {
         isFixed: { type: 'boolean', default: false },
-        position: { type: 'string', default: 'top-right' }, // 初期位置を 'top-right' に設定
+        position: { type: 'string', default: 'top-right' },
     },
 
     edit: ({ attributes, setAttributes }) => {
         const { isFixed, position } = attributes;
+        const blockProps = useBlockProps({
+            className: `cta-block ${isFixed ? 'fixed' : ''} position-${position}`
+        });
 
         return (
             <>
@@ -34,8 +37,13 @@ registerBlockType('aurora-design-blocks/cta-block', {
                         />
                     </PanelBody>
                 </InspectorControls>
-                <div className={`cta-block ${isFixed ? 'fixed' : ''} position-${position}`}>
-                    <InnerBlocks allowedBlocks={['core/heading', 'core/paragraph', 'core/button']} />
+                <div {...blockProps}>
+                    <div className="cta-inner">
+                        <InnerBlocks
+                            allowedBlocks={['core/heading', 'core/paragraph', 'core/button', 'core/columns']}
+                            renderAppender={InnerBlocks.ButtonBlockAppender}
+                        />
+                    </div>
                 </div>
             </>
         );
@@ -43,13 +51,15 @@ registerBlockType('aurora-design-blocks/cta-block', {
 
     save: ({ attributes }) => {
         const { isFixed, position } = attributes;
-        const blockClasses = ['cta-block'];
-        if (isFixed) blockClasses.push('fixed');
-        blockClasses.push(`position-${position}`);
+        const blockProps = useBlockProps.save({
+            className: `cta-block ${isFixed ? 'fixed' : ''} position-${position}`
+        });
 
         return (
-            <div className={blockClasses.join(' ')}>
-                <InnerBlocks.Content />
+            <div {...blockProps}>
+                <div className="cta-inner">
+                    <InnerBlocks.Content />
+                </div>
             </div>
         );
     }
