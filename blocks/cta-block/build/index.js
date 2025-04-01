@@ -62,11 +62,17 @@ __webpack_require__.r(__webpack_exports__);
               label: '右上',
               value: 'top-right'
             }, {
+              label: '中央上',
+              value: 'top-center'
+            }, {
               label: '左上',
               value: 'top-left'
             }, {
               label: '右下',
               value: 'bottom-right'
+            }, {
+              label: '中央下',
+              value: 'bottom-center'
             }, {
               label: '左下',
               value: 'bottom-left'

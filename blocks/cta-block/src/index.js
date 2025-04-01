@@ -29,8 +29,10 @@ registerBlockType('aurora-design-blocks/cta-block', {
                             value={position}
                             options={[
                                 { label: '右上', value: 'top-right' },
+                                { label: '中央上', value: 'top-center' },
                                 { label: '左上', value: 'top-left' },
                                 { label: '右下', value: 'bottom-right' },
+                                { label: '中央下', value: 'bottom-center' },
                                 { label: '左下', value: 'bottom-left' },
                             ]}
                             onChange={(value) => setAttributes({ position: value })}

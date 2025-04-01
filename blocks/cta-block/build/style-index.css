@@ -22,6 +22,14 @@
     left: 20px;
 }
 
+.cta-block.position-top-center {
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+
 .cta-block.position-top-right {
     top: 20px;
     right: 20px;
@@ -30,6 +38,12 @@
 .cta-block.position-bottom-left {
     bottom: 20px;
     left: 20px;
+}
+
+.cta-block.position-bottom-center {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .cta-block.position-bottom-right {
