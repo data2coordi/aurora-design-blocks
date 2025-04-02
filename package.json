@@ -819,6 +819,7 @@
     "yocto-queue": "^0.1.0"
   },
   "devDependencies": {
+    "@wordpress/block-editor": "^14.16.0",
     "@wordpress/scripts": "^30.13.0"
   },
   "description": ""

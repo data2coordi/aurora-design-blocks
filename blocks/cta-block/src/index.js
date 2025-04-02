@@ -28,12 +28,15 @@ registerBlockType('aurora-design-blocks/cta-block', {
                             label="配置位置"
                             value={position}
                             options={[
-                                { label: '右上', value: 'top-right' },
-                                { label: '中央上', value: 'top-center' },
                                 { label: '左上', value: 'top-left' },
-                                { label: '右下', value: 'bottom-right' },
-                                { label: '中央下', value: 'bottom-center' },
+                                { label: '中央上', value: 'top-center' },
+                                { label: '右上', value: 'top-right' },
                                 { label: '左下', value: 'bottom-left' },
+                                { label: '中央下', value: 'bottom-center' },
+                                { label: '右下', value: 'bottom-right' },
+                                { label: '左中央', value: 'left-center' },
+                                { label: '右中央', value: 'right-center' },
+
                             ]}
                             onChange={(value) => setAttributes({ position: value })}
                         />
@@ -42,7 +45,7 @@ registerBlockType('aurora-design-blocks/cta-block', {
                 <div {...blockProps}>
                     <div className="cta-inner">
                         <InnerBlocks
-                            allowedBlocks={['core/heading', 'core/paragraph', 'core/button', 'core/columns']}
+                            //allowedBlocks={['core/heading', 'core/paragraph', 'core/button', 'core/columns']}
                             renderAppender={InnerBlocks.ButtonBlockAppender}
                         />
                     </div>

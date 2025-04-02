@@ -7,7 +7,7 @@
     border: 1px solid #ddd;
 }
 
-.wp-block-aurora-design-blocks-cta-block.fixed {
+.wp-block-aurora-design-blocks-cta-block.fixed:not(.editor-styles-wrapper *) {
     position: fixed;
     background: rgba(0, 0, 0, 0.8);
     color: white;
@@ -16,12 +16,12 @@
 }
 
 /* 各位置の設定 */
-.wp-block-aurora-design-blocks-cta-block.position-top-left {
+.wp-block-aurora-design-blocks-cta-block.position-top-left:not(.editor-styles-wrapper *) {
     top: 20px;
-    right: 20px;
+    right: 0px;
 }
 
-.wp-block-aurora-design-blocks-cta-block.position-top-center {
+.wp-block-aurora-design-blocks-cta-block.position-top-center:not(.editor-styles-wrapper *) {
     top: 20px;
     right: 50%;
     transform: translateX(50%);
@@ -29,33 +29,35 @@
 
 
 
-.wp-block-aurora-design-blocks-cta-block.position-top-right {
+.wp-block-aurora-design-blocks-cta-block.position-top-right:not(.editor-styles-wrapper *) {
     top: 20px;
-    left: 20px;
+    left: 0px;
 }
 
-.wp-block-aurora-design-blocks-cta-block.position-bottom-left {
+.wp-block-aurora-design-blocks-cta-block.position-bottom-left:not(.editor-styles-wrapper *) {
     bottom: 20px;
-    right: 20px;
+    right: 0px;
 }
 
-.wp-block-aurora-design-blocks-cta-block.position-bottom-center {
+.wp-block-aurora-design-blocks-cta-block.position-bottom-center:not(.editor-styles-wrapper *) {
     bottom: 20px;
     right: 50%;
     transform: translateX(50%);
 }
 
-.wp-block-aurora-design-blocks-cta-block.position-bottom-right {
+.wp-block-aurora-design-blocks-cta-block.position-bottom-right:not(.editor-styles-wrapper *) {
     bottom: 20px;
-    left: 20px;
+    left: 0px;
 }
 
-/* エディタ内でのfixedスタイルの無効化 */
-.wp-block-aurora-design-blocks-cta-block.block-editor-block-list__block.fixed {
-    position: relative;
-    /* エディタ内では通常の配置 */
-    background: #f8f8f8;
-    color: black;
-    padding: 15px;
-    border-radius: 10px;
+.wp-block-aurora-design-blocks-cta-block.position-left-center:not(.editor-styles-wrapper *) {
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+.wp-block-aurora-design-blocks-cta-block.position-right-center:not(.editor-styles-wrapper *) {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
 }

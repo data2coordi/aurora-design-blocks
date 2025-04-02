@@ -59,23 +59,29 @@ __webpack_require__.r(__webpack_exports__);
             label: "\u914D\u7F6E\u4F4D\u7F6E",
             value: position,
             options: [{
-              label: '右上',
-              value: 'top-right'
+              label: '左上',
+              value: 'top-left'
             }, {
               label: '中央上',
               value: 'top-center'
             }, {
-              label: '左上',
-              value: 'top-left'
+              label: '右上',
+              value: 'top-right'
             }, {
-              label: '右下',
-              value: 'bottom-right'
+              label: '左下',
+              value: 'bottom-left'
             }, {
               label: '中央下',
               value: 'bottom-center'
             }, {
-              label: '左下',
-              value: 'bottom-left'
+              label: '右下',
+              value: 'bottom-right'
+            }, {
+              label: '左中央',
+              value: 'left-center'
+            }, {
+              label: '右中央',
+              value: 'right-center'
             }],
             onChange: value => setAttributes({
               position: value
@@ -86,8 +92,9 @@ __webpack_require__.r(__webpack_exports__);
         ...blockProps,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "cta-inner",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {
-            allowedBlocks: ['core/heading', 'core/paragraph', 'core/button', 'core/columns'],
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks
+          //allowedBlocks={['core/heading', 'core/paragraph', 'core/button', 'core/columns']}
+          , {
             renderAppender: _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.ButtonBlockAppender
           })
         })

@@ -1,18 +1,14 @@
 {
     "apiVersion": 2,
     "name": "aurora-design-blocks/cta-block",
-    "title": "[aurora-design-blocks]CTA Block1",
+    "title": "[aurora-design-blocks]CTA Block",
     "category": "design",
     "icon": "megaphone",
     "supports": {
         "html": false,
         "color": {
-            "background": true
-        },
-        "border": {
-            "radius": true,
-            "width": true,
-            "color": true
+            "background": true,
+            "text": false
         }
     },
     "editorScript": "file:./build/index.js",
