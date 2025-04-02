@@ -5,8 +5,8 @@ import './style.css';
 
 registerBlockType('aurora-design-blocks/cta-block', {
     attributes: {
-        isFixed: { type: 'boolean', default: false },
-        position: { type: 'string', default: 'top-right' },
+        isFixed: { type: 'boolean', default: true },
+        position: { type: 'string', default: 'bottom-center' },
     },
 
     edit: ({ attributes, setAttributes }) => {
@@ -34,8 +34,8 @@ registerBlockType('aurora-design-blocks/cta-block', {
                                 { label: '左下', value: 'bottom-left' },
                                 { label: '中央下', value: 'bottom-center' },
                                 { label: '右下', value: 'bottom-right' },
-                                { label: '左中央', value: 'left-center' },
-                                { label: '右中央', value: 'right-center' },
+                                { label: '左中央', value: 'center-left' },
+                                { label: '右中央', value: 'center-right' },
 
                             ]}
                             onChange={(value) => setAttributes({ position: value })}
@@ -45,7 +45,6 @@ registerBlockType('aurora-design-blocks/cta-block', {
                 <div {...blockProps}>
                     <div className="cta-inner">
                         <InnerBlocks
-                            //allowedBlocks={['core/heading', 'core/paragraph', 'core/button', 'core/columns']}
                             renderAppender={InnerBlocks.ButtonBlockAppender}
                         />
                     </div>

@@ -27,11 +27,11 @@ __webpack_require__.r(__webpack_exports__);
   attributes: {
     isFixed: {
       type: 'boolean',
-      default: false
+      default: true
     },
     position: {
       type: 'string',
-      default: 'top-right'
+      default: 'bottom-center'
     }
   },
   edit: ({
@@ -78,10 +78,10 @@ __webpack_require__.r(__webpack_exports__);
               value: 'bottom-right'
             }, {
               label: '左中央',
-              value: 'left-center'
+              value: 'center-left'
             }, {
               label: '右中央',
-              value: 'right-center'
+              value: 'center-right'
             }],
             onChange: value => setAttributes({
               position: value
@@ -92,9 +92,7 @@ __webpack_require__.r(__webpack_exports__);
         ...blockProps,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "cta-inner",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks
-          //allowedBlocks={['core/heading', 'core/paragraph', 'core/button', 'core/columns']}
-          , {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {
             renderAppender: _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.ButtonBlockAppender
           })
         })

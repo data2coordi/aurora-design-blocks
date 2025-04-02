@@ -50,13 +50,13 @@
     right: 0px;
 }
 
-.wp-block-aurora-design-blocks-cta-block.position-left-center:not(.editor-styles-wrapper *) {
+.wp-block-aurora-design-blocks-cta-block.position-center-left:not(.editor-styles-wrapper *) {
     top: 50%;
     left: 0;
     transform: translateY(-50%);
 }
 
-.wp-block-aurora-design-blocks-cta-block.position-right-center:not(.editor-styles-wrapper *) {
+.wp-block-aurora-design-blocks-cta-block.position-center-right:not(.editor-styles-wrapper *) {
     top: 50%;
     right: 0;
     transform: translateY(-50%);
