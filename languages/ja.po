@@ -659,3 +659,48 @@ msgstr "Copy Rightの設定"
 
 msgid "Please enter the Copyright information."
 msgstr "Copy Rightを入力してください。"
+
+
+#: blocks/cta-block/build/index.js:1
+msgid "CTA Position Setteing"
+msgstr "CTA配置設定"
+
+#: blocks/cta-block/build/index.js:1
+msgid "Make it a fixed float"
+msgstr "固定フロートにする"
+
+#: blocks/cta-block/build/index.js:1
+msgid "CTA Position"
+msgstr "配置位置"
+
+#: blocks/cta-block/build/index.js:1
+msgid "Left Top"
+msgstr "左上"
+
+#: blocks/cta-block/build/index.js:1
+msgid "Center Top"
+msgstr "中央上"
+
+#: blocks/cta-block/build/index.js:1
+msgid "Right Top"
+msgstr "右上"
+
+#: blocks/cta-block/build/index.js:1
+msgid "Left Bottom"
+msgstr "左下"
+
+#: blocks/cta-block/build/index.js:1
+msgid "Center Bottom"
+msgstr "中央下"
+
+#: blocks/cta-block/build/index.js:1
+msgid "Right Bottom"
+msgstr "右下"
+
+#: blocks/cta-block/build/index.js:1
+msgid "Left Center"
+msgstr "左中央"
+
+#: blocks/cta-block/build/index.js:1
+msgid "Right Center"
+msgstr "右中央"

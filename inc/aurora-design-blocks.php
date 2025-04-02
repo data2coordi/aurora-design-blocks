@@ -65,6 +65,12 @@ function auroraDesignBlocks_enqueue_block_assets()
 		'aurora-design-blocks',
 		AURORA_DESIGN_BLOCKS_PATH . 'languages'
 	);
+
+	wp_set_script_translations(
+		'aurora-design-blocks-cta-block-editor-script',
+		'aurora-design-blocks',
+		AURORA_DESIGN_BLOCKS_PATH . 'languages'
+	);
 }
 add_action('enqueue_block_editor_assets', 'auroraDesignBlocks_enqueue_block_assets');
 

@@ -1,6 +1,7 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { InnerBlocks, InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, ToggleControl, SelectControl } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 import './style.css';
 
 registerBlockType('aurora-design-blocks/cta-block', {
@@ -18,24 +19,24 @@ registerBlockType('aurora-design-blocks/cta-block', {
         return (
             <>
                 <InspectorControls>
-                    <PanelBody title="CTA配置設定">
+                    <PanelBody title={__("CTA Position Setteing", 'aurora-design-blocks')}>
                         <ToggleControl
-                            label="固定フロートにする"
+                            label={__("Make it a fixed float", 'aurora-design-blocks')}
                             checked={isFixed}
                             onChange={(value) => setAttributes({ isFixed: value })}
                         />
                         <SelectControl
-                            label="配置位置"
+                            label={__("CTA Position", 'aurora-design-blocks')}
                             value={position}
                             options={[
-                                { label: '左上', value: 'top-left' },
-                                { label: '中央上', value: 'top-center' },
-                                { label: '右上', value: 'top-right' },
-                                { label: '左下', value: 'bottom-left' },
-                                { label: '中央下', value: 'bottom-center' },
-                                { label: '右下', value: 'bottom-right' },
-                                { label: '左中央', value: 'center-left' },
-                                { label: '右中央', value: 'center-right' },
+                                { label: __('Left Top', 'aurora-design-blocks'), value: 'top-left' },
+                                { label: __('Center Top', 'aurora-design-blocks'), value: 'top-center' },
+                                { label: __('Right Top', 'aurora-design-blocks'), value: 'top-right' },
+                                { label: __('Left Bottom', 'aurora-design-blocks'), value: 'bottom-left' },
+                                { label: __('Center Bottom', 'aurora-design-blocks'), value: 'bottom-center' },
+                                { label: __('Right Bottom', 'aurora-design-blocks'), value: 'bottom-right' },
+                                { label: __('Left Center', 'aurora-design-blocks'), value: 'center-left' },
+                                { label: __('Right Center', 'aurora-design-blocks'), value: 'center-right' },
 
                             ]}
                             onChange={(value) => setAttributes({ position: value })}
