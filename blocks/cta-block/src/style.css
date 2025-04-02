@@ -14,12 +14,12 @@
 
 /* 各位置の設定 */
 .wp-block-aurora-design-blocks-cta-block.position-top-left:not(.editor-styles-wrapper *) {
-    top: 20px;
+    top: 0px;
     left: 0px;
 }
 
 .wp-block-aurora-design-blocks-cta-block.position-top-center:not(.editor-styles-wrapper *) {
-    top: 20px;
+    top: 0px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -27,23 +27,23 @@
 
 
 .wp-block-aurora-design-blocks-cta-block.position-top-right:not(.editor-styles-wrapper *) {
-    top: 20px;
+    top: 0px;
     right: 0px;
 }
 
 .wp-block-aurora-design-blocks-cta-block.position-bottom-left:not(.editor-styles-wrapper *) {
-    bottom: 20px;
+    bottom: 0px;
     left: 0px;
 }
 
 .wp-block-aurora-design-blocks-cta-block.position-bottom-center:not(.editor-styles-wrapper *) {
-    bottom: 20px;
+    bottom: 0px;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .wp-block-aurora-design-blocks-cta-block.position-bottom-right:not(.editor-styles-wrapper *) {
-    bottom: 20px;
+    bottom: 0px;
     right: 0px;
 }
 
