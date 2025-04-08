@@ -51,3 +51,4 @@ add_action('init', 'aurora_design_blocks_load_textdomain');
 
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-outerAssets.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks.php';
+require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-customizer.php';
