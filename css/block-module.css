@@ -111,7 +111,7 @@
 /******全幅ブロック********/
 /* 背景色にパディング */
 .wp-block-aurora-design-blocks-custom-cover {
-  padding-top: 0;
+  padding-top: 2em;
   padding-bottom: 2em;
 }
 
