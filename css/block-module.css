@@ -102,6 +102,19 @@
   /* これ以下にならない */
 }
 
+/*********************************/
+/*********************************/
+/******全幅ブロック********/
+/* 背景色のついた全幅ブロックコンテンツにパディングを付与 */
+.wp-block-aurora-design-blocks-custom-cover.alignfull.has-background .wp-block-columns{
+  padding: 1.2em;
+}
+
+/* 背景色のついた全幅ブロックからパディングを消す */
+.wp-block-aurora-design-blocks-custom-cover.alignfull.has-background .ly_site_content_main{
+  padding: 0;
+}
+
 @media (max-width: 768px) {
   /******吹き出し画像********/
   .aurora-design-blocks-speech-bubble figure.speech-bubble__image {
