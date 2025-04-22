@@ -127,7 +127,7 @@
   }
 
   /* 背景色のついた全幅ブロックコンテンツにマージンを付与 */
-  .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background .wp-block-column {
+  .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background .wp-block-columns .wp-block-column {
     margin: 0 1.2em;
   }
 
@@ -136,6 +136,6 @@
   .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background h3,
   .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background h4,
   .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background h5 {
-    padding: 0 1.2em;
+    padding: 0 1.2em !important;
   }
 }
