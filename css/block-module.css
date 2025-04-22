@@ -72,6 +72,10 @@
   /* カラムレイアウトにパディングを追加している */
 }
 
+.aurora-design-blocks-tabs .ly_site_content_main .wp-block-columns {
+  padding: 0;
+}
+
 /*********************************/
 /*********************************/
 /******コンテンツ内スライダー********/
@@ -120,5 +124,10 @@
   .aurora-design-blocks-speech-bubble figure.speech-bubble__image {
     flex-basis: 10%;
     min-width: 55px;
+  }
+
+  /* 背景色のついた全幅ブロックコンテンツにマージンを付与 */
+  .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background .wp-block-column {
+    margin: 0 1.2em;
   }
 }
