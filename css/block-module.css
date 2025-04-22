@@ -106,12 +106,12 @@
 /*********************************/
 /******全幅ブロック********/
 /* 背景色のついた全幅ブロックコンテンツにパディングを付与 */
-.wp-block-aurora-design-blocks-custom-cover.alignfull.has-background .wp-block-columns{
-  padding: 1.2em;
+.wp-block-aurora-design-blocks-custom-cover.alignfull.has-background .wp-block-column {
+  padding: 0 1.2em;
 }
 
 /* 背景色のついた全幅ブロックからパディングを消す */
-.wp-block-aurora-design-blocks-custom-cover.alignfull.has-background .ly_site_content_main{
+.wp-block-aurora-design-blocks-custom-cover.alignfull.has-background .wp-block-columns {
   padding: 0;
 }
 
