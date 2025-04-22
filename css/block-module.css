@@ -130,4 +130,12 @@
   .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background .wp-block-column {
     margin: 0 1.2em;
   }
+
+  /* 背景色のついた全幅ブロックタイトルにパディングを付与 */
+  .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background h2,
+  .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background h3,
+  .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background h4,
+  .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background h5 {
+    padding: 0 1.2em;
+  }
 }
