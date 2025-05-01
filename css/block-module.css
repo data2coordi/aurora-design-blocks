@@ -102,7 +102,7 @@
 /******吹き出し画像********/
 .aurora-design-blocks-speech-bubble figure.speech-bubble__image {
   flex-basis: 10%;
-  min-width: 80px;
+  min-width: 95px;
   /* これ以下にならない */
 }
 
