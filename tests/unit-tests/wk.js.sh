@@ -2,9 +2,12 @@ clear
 
 
 
+#npm run test:unit:js  tests/unit-tests/js/slider-block.frontend.test.js
 
-npm run test:unit:js  tests/unit-tests/js/tab-block.frontend.test.js
+npm run test:unit:js  tests/unit-tests/js/slider-block.test.js
 exit
+npm run test:unit:js  tests/unit-tests/js/tab-block.frontend.test.js
+
 npm run test:unit:js  tests/unit-tests/js/speech-bubble.test.js
 
 npm run test:unit:js  tests/unit-tests/js
