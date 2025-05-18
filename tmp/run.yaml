@@ -13,9 +13,7 @@ jobs:
 
 
       - name: build
-        run: zip -r aurora-design-blocks.zip . -x ".*" ".phpcs.xml.dist" ".phpunit.result.cache" "phpunit.xml.dist" "vendor/" "vendor/*"  "tests/" "tests/*"  "tmp/" "tmp/*" "bin/" "bin/*"
-        
-
+        run: zip -r integlight.zip . -x ".*" ".phpcs.xml.dist" ".phpunit.result.cache" "phpunit.xml.dist" "vendor/" "vendor/*"  "tests/" "tests/*"  "tmp/" "tmp/*" "bin/" "bin/*"
 
       - name: リリースを作成する
         uses: actions/create-release@v1
@@ -34,8 +32,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_name: aurora-design-blocks.zip
-          asset_path: ./aurora-design-blocks.zip
+          asset_name: integlight.zip
+          asset_path: ./integlight.zip
           asset_content_type: application/zip
 
 
