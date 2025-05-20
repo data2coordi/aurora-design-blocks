@@ -90,7 +90,7 @@ add_action('enqueue_block_editor_assets', 'auroraDesignBlocks_enqueue_block_asse
 
 $footerScripts = [
 	'aurora-design-blocks-tab-block-script'   => AURORA_DESIGN_BLOCKS_URL . 'blocks/tab-block/src/frontend.js',
-	'aurora-design-blocks-slider-block-script'   => AURORA_DESIGN_BLOCKS_URL   . 'blocks/slider-block/src/frontend.js',
+	'aurora-design-blocks-slider-block-script'   => AURORA_DESIGN_BLOCKS_URL   . 'blocks/slider-block/build/frontend.js',
 
 ];
 AuroraDesignBlocksMoveScripts::add_scripts($footerScripts);

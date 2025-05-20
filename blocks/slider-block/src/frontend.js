@@ -1,9 +1,6 @@
-document.addEventListener('DOMContentLoaded', function () {
+export function initializeSlider() {
     // ブロックエディター内では処理しない
-    if (window.wp && wp.blocks) {
-        console.log('Block editor detected, skipping frontend script.');
-        return;
-    }
+
 
     const blockSliderContainers = document.querySelectorAll(
         '.wp-block-aurora-design-blocks-slider-block.blockSliders > .blockSliders-content'
@@ -13,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const blockSliders = Array.from(container.children);
         if (blockSliders.length === 0) return;
 
-        console.log('Found block sliders:', blockSliders);
+        //console.log('Found block sliders:', blockSliders);
 
         // スライドボタンを作成
         const prevButton = document.createElement('button');
@@ -68,4 +65,10 @@ document.addEventListener('DOMContentLoaded', function () {
         setActiveBlockSlider(0);
         resetAutoSlide();
     });
+};
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // wp.blocks が存在しない場合にだけ実行（WordPress仕様にあわせる）
+    initializeSlider();
 });

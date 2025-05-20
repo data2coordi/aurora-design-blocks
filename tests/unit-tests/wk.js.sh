@@ -1,9 +1,8 @@
 clear
 
 
-#npm run test:unit:js  tests/unit-tests/js
+npm run test:unit:js  tests/unit-tests/js
 
-npm run test:unit:js  tests/unit-tests/js/slider-block.frontend.test.js
 
 exit
 npm run test:unit:js  tests/unit-tests/js
@@ -17,5 +16,6 @@ npm run test:unit:js  tests/unit-tests/js/tab-block.test.js
 npm run test:unit:js  tests/unit-tests/js/tab-block.frontend.test.js
 
 npm run test:unit:js  tests/unit-tests/js/slider-block.test.js
+npm run test:unit:js  tests/unit-tests/js/slider-block.frontend.test.js
 
 
