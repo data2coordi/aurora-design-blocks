@@ -21,16 +21,3 @@
     border-bottom: 2px solid #007cba;
     font-weight: bold;
 }
-
-.aurora-design-blocks-tabs .tab {
-    display: none;
-}
-
-.aurora-design-blocks-tabs .tab:first-child {
-    display: block;
-}
-
-
-.aurora-design-blocks-tabs .tab.active {
-    display: block;
-}
