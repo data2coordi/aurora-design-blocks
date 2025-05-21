@@ -3,52 +3,10 @@
  */
 
 import '@testing-library/jest-dom';
-import { fireEvent } from '@testing-library/dom';
 
 // フロントエンドスクリプト（document.addEventListener('DOMContentLoaded', ...)の中身）を
 // 直接関数化してimportまたは貼り付けてもOKですが、ここでは直接実装
-function initializeTabsNavigation() {
-    if (window.wp && wp.blocks) {
-        // ブロックエディター内なら処理しない
-        return;
-    }
 
-    const tabContainers = document.querySelectorAll('.aurora-design-blocks-tabs');
-
-    tabContainers.forEach(container => {
-        const tabs = container.querySelectorAll('.tab');
-        if (tabs.length === 0) return;
-
-        const nav = document.createElement('ul');
-        nav.className = 'tabs-navigation';
-
-        tabs.forEach((tab, index) => {
-            const titleElement = tab.querySelector('.tab-title h4');
-            const title = titleElement && titleElement.textContent.trim()
-                ? titleElement.textContent.trim()
-                : `Tab ${index + 1}`;
-
-            const li = document.createElement('li');
-            li.textContent = title;
-            li.addEventListener('click', () => {
-                tabs.forEach(t => t.style.display = 'none');
-                nav.querySelectorAll('li').forEach(item => item.classList.remove('active'));
-                tab.style.display = 'block';
-                li.classList.add('active');
-            });
-            nav.appendChild(li);
-
-            if (index === 0) {
-                li.classList.add('active');
-                tab.style.display = 'block';
-            } else {
-                tab.style.display = 'none';
-            }
-        });
-
-        container.insertBefore(nav, container.firstChild);
-    });
-}
 
 describe('aurora-design-blocks tabs frontend script', () => {
     beforeEach(() => {
@@ -69,8 +27,9 @@ describe('aurora-design-blocks tabs frontend script', () => {
             </div>
         `;
 
-        // window.wp.blocksがある場合は処理スキップなので念のため削除
-        delete window.wp;
+        ({ initializeTabsNavigation } = require('../../../blocks/tab-block/src/frontend.js'));
+
+
     });
 
     test('initializes tabs navigation and shows first tab', () => {
@@ -125,13 +84,5 @@ describe('aurora-design-blocks tabs frontend script', () => {
         expect(tabs[1]).not.toBeVisible();
     });
 
-    test('does nothing if window.wp.blocks exists', () => {
-        // window.wp.blocksを設定しておく
-        window.wp = { blocks: {} };
 
-        initializeTabsNavigation();
-
-        // navは生成されない
-        expect(document.querySelector('.tabs-navigation')).not.toBeInTheDocument();
-    });
 });

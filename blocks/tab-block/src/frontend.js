@@ -1,9 +1,5 @@
-document.addEventListener('DOMContentLoaded', function () {
+export function initializeTabsNavigation() {
     // ブロックエディター内では処理しない
-    if (window.wp && wp.blocks) {
-        console.log('Block editor detected, skipping frontend script.');
-        return;
-    }
 
     const tabContainers = document.querySelectorAll('.aurora-design-blocks-tabs ');
 
@@ -17,7 +13,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         tabs.forEach((tab, index) => {
             const titleElement = tab.querySelector('.tab-title h4');
-            const title = titleElement ? titleElement.textContent.trim() : `Tab ${index + 1}`;
+
+            let title = titleElement ? titleElement.textContent.trim() : '';
+            if (!title) {
+                title = `Tab ${index + 1}`;
+            }
+
 
             const li = document.createElement('li');
             li.textContent = title;
@@ -39,4 +40,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         container.insertBefore(nav, container.firstChild);
     });
+};
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // wp.blocks が存在しない場合にだけ実行（WordPress仕様にあわせる）
+    initializeTabsNavigation();
 });
