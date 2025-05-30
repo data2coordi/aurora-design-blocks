@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @group functions
  * @group toc
  */
-class aurora_design_functions_AuroraDesignBlocksTableOfContentsTest extends WP_UnitTestCase
+class aurora_design_AuroraDesignBlocksTableOfContentsTest extends WP_UnitTestCase
 {
     /**
      * Test target class instance.

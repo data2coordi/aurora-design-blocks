@@ -10,7 +10,7 @@
  * Minimal test case specifically for OGP meta tags functionality
  * from inc/aurora-design.php.
  */
-class aurora_designTest extends WP_UnitTestCase
+class aurora_design_AuroraDesignBlocks_add_ogp_meta_tagsTest extends WP_UnitTestCase
 {
     /**
      * 各テストの前にテスト環境をセットアップします。
@@ -34,8 +34,8 @@ class aurora_designTest extends WP_UnitTestCase
         // もしフックされていなければテスト内でフックします。
         // inc/aurora-design.php を直接ロードした場合、ファイル読み込み時に
         // add_action が実行されるはずですが、念のため。
-        if (!has_action('wp_head', 'add_ogp_meta_tags')) {
-            add_action('wp_head', 'add_ogp_meta_tags');
+        if (!has_action('wp_head', 'AuroraDesignBlocks_add_ogp_meta_tags')) {
+            add_action('wp_head', 'AuroraDesignBlocks_add_ogp_meta_tags');
         }
     }
 

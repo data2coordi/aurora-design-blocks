@@ -1,5 +1,5 @@
 <?php
-function add_ogp_meta_tags()
+function AuroraDesignBlocks_add_ogp_meta_tags()
 {
     if (is_singular()) { // 投稿・固定ページなどの単一ページでのみ出力
         global $post;
@@ -29,7 +29,7 @@ function add_ogp_meta_tags()
     HTML;
     }
 }
-add_action('wp_head', 'add_ogp_meta_tags');
+add_action('wp_head', 'AuroraDesignBlocks_add_ogp_meta_tags');
 
 
 // 目次_s ////////////////////////////////////////////////////////////////////////////////
