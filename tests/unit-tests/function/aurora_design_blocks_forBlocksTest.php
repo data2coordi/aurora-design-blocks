@@ -1,13 +1,12 @@
 <?php
 
-class aurora_design_blocksTest extends WP_UnitTestCase
+class aurora_design_blocks_forBlocksTest extends WP_UnitTestCase
 {
     protected $expectedIncorrectUsage = '';
 
     public function setUp(): void
     {
         parent::setUp();
-
 
         // フィルターでエラーを無視
         //add_filter('doing_it_wrong_run', '__return_false');
@@ -38,9 +37,16 @@ class aurora_design_blocksTest extends WP_UnitTestCase
         global $wp_scripts;
 
         $this->assertIsObject(
+            $wp_scripts->query('aurora-design-blocks-cta-block-editor-script', 'registered'),
+            '@@@@@@@@@@@@@@@@@@@@@@@@'
+        );
+
+        /*
+        $this->assertIsObject(
             $wp_scripts->query('aurora-design-blocks-custom-cover-editor-script', 'registered'),
             'custom-cover-block script should be registered'
         );
+        */
 
         $this->assertIsObject(
             $wp_scripts->query('aurora-design-blocks-tab-block-editor-script', 'registered'),

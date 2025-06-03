@@ -39,7 +39,7 @@ class aurora_design_blocks_awesomeTest extends WP_UnitTestCase
         $this->reset_static_property(InteglightDeferJs::class, 'deferred_scripts');
 
         // WordPress のスクリプト/スタイルシステムをリセット
-        $this->reset_wp_scripts_styles();
+        //$this->reset_wp_scripts_styles();
 
         // フィルターとアクションを削除 (テストメソッド内で必要に応じて再登録)
         remove_filter('the_content', 'AuroraDesignBlocks_replace_fontawesome_icons', 10);
@@ -56,7 +56,7 @@ class aurora_design_blocks_awesomeTest extends WP_UnitTestCase
         $this->reset_static_property(InteglightDeferJs::class, 'deferred_scripts');
 
         // WordPress のスクリプト/スタイルシステムを再度リセット
-        $this->reset_wp_scripts_styles();
+        //$this->reset_wp_scripts_styles();
 
         // フィルターとアクションを削除 (念のため)
         remove_filter('the_content', 'AuroraDesignBlocks_replace_fontawesome_icons', 10);
