@@ -25,34 +25,6 @@ define('AURORA_DESIGN_BLOCKS_URL', plugin_dir_url(__FILE__));
 
 
 
-function aurora_design_blocks_enqueue_styles()
-{
-
-    // CSS を登録して読み込む
-    wp_enqueue_style('aurora-design-blocks-style-block-module', AURORA_DESIGN_BLOCKS_URL . 'css/block-module.css', array(), _S_VERSION, 'all');
-}
-add_action('wp_enqueue_scripts', 'aurora_design_blocks_enqueue_styles');
-
-
-function aurora_design_enqueue_styles()
-{
-
-    // CSS を登録して読み込む
-    wp_enqueue_style('aurora-design-style-module', AURORA_DESIGN_BLOCKS_URL . 'css/aurora-design.css', array(), _S_VERSION, 'all');
-}
-add_action('wp_enqueue_scripts', 'aurora_design_enqueue_styles');
-
-
-function aurora_design_blocks_load_textdomain()
-{
-    $loaded = load_plugin_textdomain(
-        'aurora-design-blocks', // テキストドメイン
-        false,
-        dirname(plugin_basename(__FILE__)) . '/languages'
-    );
-}
-add_action('init', 'aurora_design_blocks_load_textdomain');
-
 
 
 

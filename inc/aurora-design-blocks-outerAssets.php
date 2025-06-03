@@ -71,7 +71,7 @@ class AuroraDesignBlocksRegStyles
 	public static function enqueue_styles()
 	{
 		foreach (static::$styles as $handle => $path) {
-			wp_enqueue_style($handle, get_template_directory_uri() . $path, [], _S_VERSION);
+			wp_enqueue_style($handle, plugin_dir_url(dirname(__FILE__))  . $path, [], _S_VERSION);
 		}
 	}
 }

@@ -1,4 +1,82 @@
 <?php
+
+/*
+
+function aurora_design_blocks_enqueue_styles()
+{
+
+    // CSS を登録して読み込む
+    wp_enqueue_style('aurora-design-blocks-style-block-module', AURORA_DESIGN_BLOCKS_URL . 'css/block-module.css', array(), _S_VERSION, 'all');
+}
+add_action('wp_enqueue_scripts', 'aurora_design_blocks_enqueue_styles');
+
+
+function aurora_design_enqueue_styles()
+{
+
+    // CSS を登録して読み込む
+    wp_enqueue_style('aurora-design-style-module', AURORA_DESIGN_BLOCKS_URL . 'css/aurora-design.css', array(), _S_VERSION, 'all');
+}
+add_action('wp_enqueue_scripts', 'aurora_design_enqueue_styles');
+*/
+
+
+$auroraDesignBlocks_FrontendStyles = [
+    'aurora-design-blocks-style-block-module' => 'css/block-module.css',
+    'aurora-design-style-aurora-design' => 'css/aurora-design.css',
+    'aurora-design-style-awesome' => 'css/awesome-all.min.css',
+];
+auroraDesignBlocksFrontendStyles::add_styles($auroraDesignBlocks_FrontendStyles);
+
+$auroraDesignBlocks_deferredStyles = [
+    'aurora-design-style-awesome',
+];
+
+
+// 遅延対象のスタイルを登録
+auroraDesignBlocksDeferCss::add_deferred_styles($auroraDesignBlocks_deferredStyles);
+
+
+
+
+
+
+
+function aurora_design_blocks_load_textdomain()
+{
+    $loaded = load_plugin_textdomain(
+        'aurora-design-blocks', // テキストドメイン
+        false,
+        dirname(plugin_basename(__FILE__)) . '/languages'
+    );
+}
+add_action('init', 'aurora_design_blocks_load_textdomain');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function AuroraDesignBlocks_add_ogp_meta_tags()
 {
     if (is_singular()) { // 投稿・固定ページなどの単一ページでのみ出力
