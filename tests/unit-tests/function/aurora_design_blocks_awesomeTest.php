@@ -6,10 +6,7 @@ declare(strict_types=1);
 // require_once dirname(__DIR__, 2) . '/inc/AuroraDesignBlocks-functions-outerAssets.php';
 // require_once dirname(__DIR__, 2) . '/inc/AuroraDesignBlocks-functions-block.php';
 
-// _INTEGLIGHT_S_VERSION 定数が定義されていない場合に定義 (テスト環境用)
-if (!defined('_INTEGLIGHT_S_VERSION')) {
-    define('_INTEGLIGHT_S_VERSION', '1.0.0');
-}
+
 
 /**
  * AuroraDesignBlocks-functions-block.php 内の関数のユニットテスト

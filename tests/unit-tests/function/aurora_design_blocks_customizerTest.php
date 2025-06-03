@@ -21,8 +21,8 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
         }
 
         // 本体クラスをインスタンス化（本来はファイル読み込みが必要）
-        $this->ga = new auroralab_customizer_ga();
-        $this->gtm = new auroralab_customizer_gtm();
+        $this->ga = new AuroraDesignBlocks_customizer_ga();
+        $this->gtm = new AuroraDesignBlocks_customizer_gtm();
     }
 
     public function tearDown(): void

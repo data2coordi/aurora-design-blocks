@@ -2,7 +2,7 @@
 
 // ## Google_Analytics _s /////////////////////////////////////////////
 
-class auroralab_customizer_ga
+class AuroraDesignBlocks_customizer_ga
 {
 
     // コンストラクタ：カスタマイザー設定の登録
@@ -55,12 +55,12 @@ class auroralab_customizer_ga
 }
 
 // クラスをインスタンス化して処理を開始
-new auroralab_customizer_ga();
+new AuroraDesignBlocks_customizer_ga();
 // ## Google_Analytics _e /////////////////////////////////////////////
 
 
 // ## Google_GTM _s /////////////////////////////////////////////
-class auroralab_customizer_gtm
+class AuroraDesignBlocks_customizer_gtm
 {
 
     // コンストラクタ：カスタマイザー設定の登録
@@ -140,5 +140,5 @@ class auroralab_customizer_gtm
 }
 
 // クラスをインスタンス化して処理を開始
-new auroralab_customizer_gtm();
+new AuroraDesignBlocks_customizer_gtm();
 // ## Google_GTM _e /////////////////////////////////////////////
