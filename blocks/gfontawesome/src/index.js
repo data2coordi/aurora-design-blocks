@@ -23,7 +23,7 @@ const FontAwesomeSearchButton = ({ value, onChange }) => {
                     setLoading(false);
                 })
                 .catch(error => {
-                    console.error('アイコン取得エラー:', error);
+                    console.error('icon get error:', error);
                     setLoading(false);
                 });
         }
@@ -98,7 +98,7 @@ const FontAwesomeSearchButton = ({ value, onChange }) => {
                                     );
                                 })
                             ) : (
-                                <p>アイコンデータがありません</p>
+                                <p>{__("Icon not found", "aurora-design-blocks")}</p>
                             )}
                         </div>
                     )}

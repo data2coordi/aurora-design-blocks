@@ -125,6 +125,14 @@
   padding: 0;
 }
 
+/*********************************/
+/*********************************/
+/******CTA********/
+.wp-block-aurora-design-blocks-cta-block {
+  background: none;
+  border: none;
+}
+
 @media (max-width: 768px) {
   /******吹き出し画像********/
   .aurora-design-blocks-speech-bubble figure.speech-bubble__image {
