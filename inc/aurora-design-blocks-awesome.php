@@ -56,11 +56,10 @@ add_filter('the_content', 'AuroraDesignBlocks_replace_fontawesome_icons', 10);
 function AuroraDesignBlocks_enqueue_block_assets2()
 {
 
-
 	wp_set_script_translations(
-		'AuroraDesignBlocks-gfontawesome-block-editor-script',
-		'AuroraDesignBlocks',
-		dirname(plugin_basename(__FILE__)) . '/languages'
+		'AuroraDesignBlocks-gfontawesome',
+		'aurora-design-blocks',
+		AURORA_DESIGN_BLOCKS_PATH . 'languages'
 	);
 }
 add_action('enqueue_block_editor_assets', 'AuroraDesignBlocks_enqueue_block_assets2');

@@ -77,13 +77,12 @@ function auroraDesignBlocks_enqueue_block_assets()
 		AURORA_DESIGN_BLOCKS_PATH . 'languages'
 	);
 
-	/*
+
 	wp_set_script_translations(
-		'aurora-design-blocks-gfontawesome-editor-script',
+		'AuroraDesignBlocks-gfontawesome',
 		'aurora-design-blocks',
 		AURORA_DESIGN_BLOCKS_PATH . 'languages'
 	);
-	*/
 }
 add_action('enqueue_block_editor_assets', 'auroraDesignBlocks_enqueue_block_assets');
 
