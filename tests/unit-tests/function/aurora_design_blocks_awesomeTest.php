@@ -136,7 +136,7 @@ class aurora_design_blocks_awesomeTest extends WP_UnitTestCase
         $editor_scripts = $this->get_static_property_value(AuroraDesignBlocksEditorScripts::class, 'scripts');
         $this->assertArrayHasKey('AuroraDesignBlocks-gfontawesome', $editor_scripts, 'EditorScripts should have "AuroraDesignBlocks-gfontawesome" key.');
         $expected_script_data = [
-            'path' => '/blocks/gfontawesome/build/index.js',
+            'path' => 'blocks/gfontawesome/build/index.js',
             'deps' => ['wp-blocks', 'wp-i18n', 'wp-element', 'wp-rich-text']
         ];
         $this->assertEquals($expected_script_data, $editor_scripts['AuroraDesignBlocks-gfontawesome'], 'Editor script data should be correct.');
