@@ -10,7 +10,6 @@
         "html": false
     },
     "editorScript": "file:./build/index.js",
-    "script": "file:./src/frontend.js",
     "editorStyle": "file:./build/index.css",
     "style": "file:./build/style-index.css"
 }
