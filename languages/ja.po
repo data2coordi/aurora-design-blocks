@@ -704,3 +704,7 @@ msgstr "左中央"
 #: blocks/cta-block/build/index.js:1
 msgid "Right Center"
 msgstr "右中央"
+
+#: blocks/gfontawesome/build/index.js:1
+msgid "Icon not found"
+msgstr "アイコンが見つかりません"

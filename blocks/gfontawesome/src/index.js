@@ -1,3 +1,6 @@
+import { __ } from '@wordpress/i18n';
+
+
 const { Fragment, useState, useEffect } = wp.element;
 const { registerFormatType, insert } = wp.richText;
 const { RichTextToolbarButton } = wp.blockEditor;
@@ -89,7 +92,7 @@ const FontAwesomeSearchButton = ({ value, onChange }) => {
                                                     ))}
                                                 </div>
                                             ) : (
-                                                <p style={{ marginLeft: '10px' }}>アイコンが見つかりません</p>
+                                                <p style={{ marginLeft: '10px' }}>{__("Icon not found", "aurora-design-blocks")}</p>
                                             )}
                                         </div>
                                     );

@@ -29,7 +29,12 @@ add_action('init', 'AuroraDesignBlocks_register_custom_blocks');
 /********************************************************************/
 /*ブロックの国際化対応s*/
 /********************************************************************/
+//ブロック用
 
+
+
+
+//js用
 function auroraDesignBlocks_enqueue_block_assets()
 {
 
@@ -71,6 +76,14 @@ function auroraDesignBlocks_enqueue_block_assets()
 		'aurora-design-blocks',
 		AURORA_DESIGN_BLOCKS_PATH . 'languages'
 	);
+
+	/*
+	wp_set_script_translations(
+		'aurora-design-blocks-gfontawesome-editor-script',
+		'aurora-design-blocks',
+		AURORA_DESIGN_BLOCKS_PATH . 'languages'
+	);
+	*/
 }
 add_action('enqueue_block_editor_assets', 'auroraDesignBlocks_enqueue_block_assets');
 

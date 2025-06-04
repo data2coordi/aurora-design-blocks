@@ -25,7 +25,7 @@ function aurora_design_blocks_load_textdomain()
     $loaded = load_plugin_textdomain(
         'aurora-design-blocks', // テキストドメイン
         false,
-        dirname(plugin_basename(__FILE__)) . '/languages'
+        AURORA_DESIGN_BLOCKS_PATH . '/languages'
     );
 }
 add_action('init', 'aurora_design_blocks_load_textdomain');
