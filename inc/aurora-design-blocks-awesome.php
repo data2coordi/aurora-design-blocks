@@ -9,7 +9,7 @@ function AuroraDesignBlocks_add_fontawesome_button_to_toolbar()
 {
 	//js 読み込み
 	$scripts = [
-		'AuroraDesignBlocks-gfontawesome' =>  ['path' => '/blocks/gfontawesome/build/index.js', 'deps' => ['wp-blocks', 'wp-i18n', 'wp-element',  'wp-rich-text']],
+		'AuroraDesignBlocks-gfontawesome' =>  ['path' => 'blocks/gfontawesome/build/index.js', 'deps' => ['wp-blocks', 'wp-i18n', 'wp-element',  'wp-rich-text']],
 	];
 	AuroraDesignBlocksEditorScripts::add_scripts($scripts);
 	$deferredScripts = ['AuroraDesignBlocks-gfontawesome'];
@@ -60,7 +60,7 @@ function AuroraDesignBlocks_enqueue_block_assets2()
 	wp_set_script_translations(
 		'AuroraDesignBlocks-gfontawesome-block-editor-script',
 		'AuroraDesignBlocks',
-		get_template_directory() . '/languages'
+		dirname(plugin_basename(__FILE__)) . '/languages'
 	);
 }
 add_action('enqueue_block_editor_assets', 'AuroraDesignBlocks_enqueue_block_assets2');

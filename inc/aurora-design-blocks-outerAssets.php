@@ -135,7 +135,7 @@ class AuroraDesignBlocksRegScripts
 			$path = $data['path'];
 			$deps = isset($data['deps']) ? $data['deps'] : [];
 
-			wp_enqueue_script($handle, get_template_directory_uri() . $path, $deps, _S_VERSION, true);
+			wp_enqueue_script($handle,  plugin_dir_url(dirname(__FILE__)) . $path, $deps, _S_VERSION, true);
 		}
 	}
 }

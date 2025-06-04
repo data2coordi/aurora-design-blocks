@@ -13,7 +13,7 @@ const FontAwesomeSearchButton = ({ value, onChange }) => {
     useEffect(() => {
         if (isModalOpen && !iconsData) {
             setLoading(true);
-            fetch('/wp-content/themes/integlight/blocks/gfontawesome/fontawesome-icons.json')
+            fetch('/wp-content/plugins/aurora-design-blocks/blocks/gfontawesome/fontawesome-icons.json')
                 .then(response => response.json())
                 .then(data => {
                     setIconsData(data);

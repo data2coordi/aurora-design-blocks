@@ -1,25 +1,5 @@
 <?php
 
-/*
-
-function aurora_design_blocks_enqueue_styles()
-{
-
-    // CSS を登録して読み込む
-    wp_enqueue_style('aurora-design-blocks-style-block-module', AURORA_DESIGN_BLOCKS_URL . 'css/block-module.css', array(), _S_VERSION, 'all');
-}
-add_action('wp_enqueue_scripts', 'aurora_design_blocks_enqueue_styles');
-
-
-function aurora_design_enqueue_styles()
-{
-
-    // CSS を登録して読み込む
-    wp_enqueue_style('aurora-design-style-module', AURORA_DESIGN_BLOCKS_URL . 'css/aurora-design.css', array(), _S_VERSION, 'all');
-}
-add_action('wp_enqueue_scripts', 'aurora_design_enqueue_styles');
-*/
-
 
 $auroraDesignBlocks_FrontendStyles = [
     'aurora-design-blocks-style-block-module' => 'css/block-module.css',
@@ -31,8 +11,6 @@ auroraDesignBlocksFrontendStyles::add_styles($auroraDesignBlocks_FrontendStyles)
 $auroraDesignBlocks_deferredStyles = [
     'aurora-design-style-awesome',
 ];
-
-
 // 遅延対象のスタイルを登録
 auroraDesignBlocksDeferCss::add_deferred_styles($auroraDesignBlocks_deferredStyles);
 
