@@ -173,7 +173,7 @@ class AuroraDesignBlocksTableOfContents
         $screens = ['post', 'page'];
         add_meta_box(
             'toc_visibility_meta_box', // ID
-            __('TOC Visibility', 'integlight'), // タイトル
+            __('TOC Visibility', 'aurora-design-blocks'), // タイトル
             array($this, 'render_toc_visibility_meta_box'), // コールバック関数
             $screens, // 投稿タイプ
             'side', // コンテキスト
@@ -188,7 +188,7 @@ class AuroraDesignBlocksTableOfContents
 ?>
         <label for="hide_toc">
             <input type="checkbox" name="hide_toc" id="hide_toc" value="1" <?php checked($value, '1'); ?> />
-            <?php echo __('Hide TOC', 'integlight'); ?>
+            <?php echo __('Hide TOC', 'aurora-design-blocks'); ?>
         </label>
 <?php
 
