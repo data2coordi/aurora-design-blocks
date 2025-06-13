@@ -28,9 +28,9 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
     public function tearDown(): void
     {
         // テーマモッドのクリア
-        remove_theme_mod('integlight_ga_trackingCode');
-        remove_theme_mod('integlight_gtm_trackingCode');
-        remove_theme_mod('integlight_gtm_noscriptCode');
+        remove_theme_mod('auroraDesignBlocks_ga_trackingCode');
+        remove_theme_mod('auroraDesignBlocks_gtm_trackingCode');
+        remove_theme_mod('auroraDesignBlocks_gtm_noscriptCode');
 
         parent::tearDown();
     }
@@ -42,13 +42,13 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
         $this->ga->regSettings($wp_customize);
 
         // セクションが登録されているか
-        $this->assertArrayHasKey('integlight_ga_section', $wp_customize->sections());
+        $this->assertArrayHasKey('auroraDesignBlocks_ga_section', $wp_customize->sections());
 
         // 設定が登録されているか
-        $this->assertArrayHasKey('integlight_ga_trackingCode', $wp_customize->settings());
+        $this->assertArrayHasKey('auroraDesignBlocks_ga_trackingCode', $wp_customize->settings());
 
         // コントロールが登録されているか
-        $this->assertArrayHasKey('integlight_ga_trackingCode', $wp_customize->controls());
+        $this->assertArrayHasKey('auroraDesignBlocks_ga_trackingCode', $wp_customize->controls());
     }
 
     public function test_gtm_customizer_registration()
@@ -58,21 +58,21 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
         $this->gtm->regSettings($wp_customize);
 
         // セクションが登録されているか
-        $this->assertArrayHasKey('integlight_gtm_section', $wp_customize->sections());
+        $this->assertArrayHasKey('auroraDesignBlocks_gtm_section', $wp_customize->sections());
 
         // 設定が登録されているか
-        $this->assertArrayHasKey('integlight_gtm_trackingCode', $wp_customize->settings());
-        $this->assertArrayHasKey('integlight_gtm_noscriptCode', $wp_customize->settings());
+        $this->assertArrayHasKey('auroraDesignBlocks_gtm_trackingCode', $wp_customize->settings());
+        $this->assertArrayHasKey('auroraDesignBlocks_gtm_noscriptCode', $wp_customize->settings());
 
         // コントロールが登録されているか
-        $this->assertArrayHasKey('integlight_gtm_trackingCode', $wp_customize->controls());
-        $this->assertArrayHasKey('integlight_gtm_noscriptCode', $wp_customize->controls());
+        $this->assertArrayHasKey('auroraDesignBlocks_gtm_trackingCode', $wp_customize->controls());
+        $this->assertArrayHasKey('auroraDesignBlocks_gtm_noscriptCode', $wp_customize->controls());
     }
 
     public function test_ga_outCode_outputs_tracking_code()
     {
         $tracking_code = '<script>GAコード</script>';
-        set_theme_mod('integlight_ga_trackingCode', $tracking_code);
+        set_theme_mod('auroraDesignBlocks_ga_trackingCode', $tracking_code);
 
         // 出力バッファリングで出力をキャプチャ
         ob_start();
@@ -84,7 +84,7 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
 
     public function test_ga_outCode_outputs_nothing_when_no_code()
     {
-        set_theme_mod('integlight_ga_trackingCode', '');
+        set_theme_mod('auroraDesignBlocks_ga_trackingCode', '');
 
         ob_start();
         $this->ga->outCode();
@@ -96,7 +96,7 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
     public function test_gtm_outCode_outputs_tracking_code()
     {
         $tracking_code = '<script>GTMコード</script>';
-        set_theme_mod('integlight_gtm_trackingCode', $tracking_code);
+        set_theme_mod('auroraDesignBlocks_gtm_trackingCode', $tracking_code);
 
         ob_start();
         $this->gtm->outCode();
@@ -107,7 +107,7 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
 
     public function test_gtm_outCode_outputs_nothing_when_no_code()
     {
-        set_theme_mod('integlight_gtm_trackingCode', '');
+        set_theme_mod('auroraDesignBlocks_gtm_trackingCode', '');
 
         ob_start();
         $this->gtm->outCode();
@@ -119,7 +119,7 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
     public function test_gtm_outNoscriptCode_outputs_noscript_code()
     {
         $noscript_code = '<noscript>バックアップコード</noscript>';
-        set_theme_mod('integlight_gtm_noscriptCode', $noscript_code);
+        set_theme_mod('auroraDesignBlocks_gtm_noscriptCode', $noscript_code);
 
         ob_start();
         $this->gtm->outNoscriptCode();
@@ -130,7 +130,7 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
 
     public function test_gtm_outNoscriptCode_outputs_nothing_when_no_code()
     {
-        set_theme_mod('integlight_gtm_noscriptCode', '');
+        set_theme_mod('auroraDesignBlocks_gtm_noscriptCode', '');
 
         ob_start();
         $this->gtm->outNoscriptCode();

@@ -16,29 +16,29 @@ class AuroraDesignBlocks_customizer_ga
     public function regSettings($wp_customize)
     {
         // Google Analytics 設定セクションを追加
-        $wp_customize->add_section('integlight_ga_section', array(
+        $wp_customize->add_section('auroraDesignBlocks_ga_section', array(
             'title' => __('Google Analytics Setting', 'aurora-design-blocks'),
             'priority' => 1000,
         ));
 
         // Google Analytics トラッキングコードを入力する設定を追加
-        $wp_customize->add_setting('integlight_ga_trackingCode', array(
+        $wp_customize->add_setting('auroraDesignBlocks_ga_trackingCode', array(
             'default' => '',
-            'sanitize_callback' =>  [$this, 'integlight_innocuousSanitize'], // 無害なサニタイズ関数を適用
+            'sanitize_callback' =>  [$this, 'auroraDesignBlocks_innocuousSanitize'], // 無害なサニタイズ関数を適用
 
         ));
 
         // トラッキングコード入力フィールドを追加
-        $wp_customize->add_control('integlight_ga_trackingCode', array(
+        $wp_customize->add_control('auroraDesignBlocks_ga_trackingCode', array(
             'label' => __('Google Analytics Tracking Code', 'aurora-design-blocks'),
-            'section' => 'integlight_ga_section',
+            'section' => 'auroraDesignBlocks_ga_section',
             'type' => 'textarea', // 複数行のテキストエリアを使用
             'description' => __('Please paste the entire tracking code provided by Google Analytics.', 'aurora-design-blocks'),
 
         ));
     }
 
-    public function integlight_innocuousSanitize($value)
+    public function auroraDesignBlocks_innocuousSanitize($value)
     {
 
         return $value;
@@ -47,7 +47,7 @@ class AuroraDesignBlocks_customizer_ga
     // Google アナリティクスコードをサイトの <head> に出力
     public function outCode()
     {
-        $tracking_code = get_theme_mod('integlight_ga_trackingCode');
+        $tracking_code = get_theme_mod('auroraDesignBlocks_ga_trackingCode');
         if ($tracking_code) {
             echo $tracking_code; // HTMLをそのまま出力
         }
@@ -75,38 +75,38 @@ class AuroraDesignBlocks_customizer_gtm
     public function regSettings($wp_customize)
     {
         // Google Tag Manager 設定セクションを追加
-        $wp_customize->add_section('integlight_gtm_section', array(
+        $wp_customize->add_section('auroraDesignBlocks_gtm_section', array(
             'title' => __('Google Tag Manager Setting', 'aurora-design-blocks'),
             'priority' => 1000,
         ));
 
         // Google Tag Manager トラッキングコードを入力する設定を追加
-        $wp_customize->add_setting('integlight_gtm_trackingCode', array(
+        $wp_customize->add_setting('auroraDesignBlocks_gtm_trackingCode', array(
             'default' => '',
-            'sanitize_callback' =>  [$this, 'integlight_innocuousSanitize'], // 無害なサニタイズ関数を適用
+            'sanitize_callback' =>  [$this, 'auroraDesignBlocks_innocuousSanitize'], // 無害なサニタイズ関数を適用
 
         ));
 
         // GTM トラッキングコード入力フィールドを追加
-        $wp_customize->add_control('integlight_gtm_trackingCode', array(
+        $wp_customize->add_control('auroraDesignBlocks_gtm_trackingCode', array(
             'label' => __('Code to output in the <head> tag', 'aurora-design-blocks'),
-            'section' => 'integlight_gtm_section',
+            'section' => 'auroraDesignBlocks_gtm_section',
             'type' => 'textarea', // 複数行のテキストエリアを使用
             'description' => __('Please paste the code provided by Google Tag Manager.', 'aurora-design-blocks'),
         ));
 
         // Google Tag Manager noscript バックアップコードを入力する設定を追加
-        $wp_customize->add_setting('integlight_gtm_noscriptCode', array(
+        $wp_customize->add_setting('auroraDesignBlocks_gtm_noscriptCode', array(
             'default' => '',
-            'sanitize_callback' => [$this, 'integlight_innocuousSanitize'], // 無害なサニタイズ関数を適用
+            'sanitize_callback' => [$this, 'auroraDesignBlocks_innocuousSanitize'], // 無害なサニタイズ関数を適用
 
         ));
 
 
         // noscript トラッキングコード入力フィールドを追加
-        $wp_customize->add_control('integlight_gtm_noscriptCode', array(
+        $wp_customize->add_control('auroraDesignBlocks_gtm_noscriptCode', array(
             'label' => __('Code to output immediately after the opening <body> tag', 'aurora-design-blocks'),
-            'section' => 'integlight_gtm_section',
+            'section' => 'auroraDesignBlocks_gtm_section',
             'type' => 'textarea',
             'description' => __('Please paste the code provided by Google Tag Manager.', 'aurora-design-blocks'),
         ));
@@ -114,7 +114,7 @@ class AuroraDesignBlocks_customizer_gtm
 
     // Google Tag Manager コードをサイトの <head> に出力
 
-    public function integlight_innocuousSanitize($value)
+    public function auroraDesignBlocks_innocuousSanitize($value)
     {
 
         return $value;
@@ -123,7 +123,7 @@ class AuroraDesignBlocks_customizer_gtm
     // Google Tag Manager コードをサイトの <head> に出力
     public function outCode()
     {
-        $tracking_code = get_theme_mod('integlight_gtm_trackingCode');
+        $tracking_code = get_theme_mod('auroraDesignBlocks_gtm_trackingCode');
         if ($tracking_code) {
             echo $tracking_code; // HTMLをそのまま出力
         }
@@ -132,7 +132,7 @@ class AuroraDesignBlocks_customizer_gtm
     // Google Tag Manager noscript バックアップコードを <body> タグ直後に出力
     public function outNoscriptCode()
     {
-        $noscript_code = get_theme_mod('integlight_gtm_noscriptCode');
+        $noscript_code = get_theme_mod('auroraDesignBlocks_gtm_noscriptCode');
         if ($noscript_code) {
             echo $noscript_code; // noscriptタグを出力
         }

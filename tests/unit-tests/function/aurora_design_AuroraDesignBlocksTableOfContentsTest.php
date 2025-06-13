@@ -202,7 +202,7 @@ HTML;
         $this->assertStringContainsString('name="hide_toc"', $output);
         $this->assertStringContainsString('value="1"', $output);
         $this->assertStringContainsString('id="hide_toc"', $output);
-        $this->assertStringContainsString(__('Hide TOC', 'integlight'), $output);
+        $this->assertStringContainsString(__('Hide TOC', 'auroraDesignBlocks'), $output);
         $this->assertStringContainsString('wp_nonce_field(\'toc_visibility_nonce_action\', \'toc_visibility_nonce\')', $this->get_reflected_method_body('render_toc_visibility_meta_box')); // Check nonce call via reflection
         $this->assertStringNotContainsString('checked=\'checked\'', $output); // Should not be checked
     }
@@ -227,7 +227,7 @@ HTML;
         $this->assertStringContainsString('name="hide_toc"', $output);
         $this->assertStringContainsString('value="1"', $output);
         $this->assertStringContainsString('id="hide_toc"', $output);
-        $this->assertStringContainsString(__('Hide TOC', 'integlight'), $output);
+        $this->assertStringContainsString(__('Hide TOC', 'auroraDesignBlocks'), $output);
         $this->assertStringContainsString('wp_nonce_field(\'toc_visibility_nonce_action\', \'toc_visibility_nonce\')', $this->get_reflected_method_body('render_toc_visibility_meta_box'));
         $this->assertStringContainsString('checked=\'checked\'', $output); // Should be checked
     }

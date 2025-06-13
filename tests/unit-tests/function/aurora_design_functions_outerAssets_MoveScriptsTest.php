@@ -1,9 +1,9 @@
-<?php // tests/unit-tests/integlight_functions_outerAssets_AuroraDesignBlocksMoveScriptsTest.php
+<?php // tests/unit-tests/auroraDesignBlocks_functions_outerAssets_AuroraDesignBlocksMoveScriptsTest.php
 
 declare(strict_types=1);
 
 // テスト対象クラスを含むファイルを読み込む (オートロードされていない場合)
-// require_once dirname(__DIR__, 2) . '/inc/integlight-functions-outerAssets.php';
+// require_once dirname(__DIR__, 2) . '/inc/auroraDesignBlocks-functions-outerAssets.php';
 
 // _INTEGLIGHT_S_VERSION 定数が定義されていない場合に定義 (テスト環境用)
 if (!defined('_S_VERSION')) {
@@ -220,7 +220,7 @@ class aurora_design_functions_outerAssets_MoveScriptsTest extends WP_UnitTestCas
         $handle = 'my-movable-script';
         $path = '/js/movable.js';
         $full_path = includes_url($path); // includes_url を使う場合
-        // $full_path = content_url('themes/integlight' . $path); // テーマディレクトリからのパスの場合
+        // $full_path = content_url('themes/auroraDesignBlocks' . $path); // テーマディレクトリからのパスの場合
 
         // 1. 移動対象のスクリプトを事前にヘッダーで登録・エンキューしておく
         wp_register_script($handle, $full_path, [], '1.0', false); // in_footer = false (ヘッダー)

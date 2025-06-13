@@ -1,4 +1,4 @@
-<?php // tests/unit-tests/InteglightFunctionsBlockTest.php
+<?php // tests/unit-tests/AuroraDesignBlocksFunctionsBlockTest.php
 
 declare(strict_types=1);
 
@@ -35,8 +35,8 @@ class aurora_design_blocks_awesomeTest extends WP_UnitTestCase
 
         // AuroraDesignBlocks_add_fontawesome_button_to_toolbar() がグローバルスコープで
         // 実行された影響をリセット
-        $this->reset_static_property(InteglightEditorScripts::class, 'scripts');
-        $this->reset_static_property(InteglightDeferJs::class, 'deferred_scripts');
+        $this->reset_static_property(AuroraDesignBlocksEditorScripts::class, 'scripts');
+        $this->reset_static_property(AuroraDesignBlocksDeferJs::class, 'deferred_scripts');
 
         // WordPress のスクリプト/スタイルシステムをリセット
         //$this->reset_wp_scripts_styles();
@@ -52,8 +52,8 @@ class aurora_design_blocks_awesomeTest extends WP_UnitTestCase
     public function tearDown(): void
     {
         // 静的プロパティをリセット
-        $this->reset_static_property(InteglightEditorScripts::class, 'scripts');
-        $this->reset_static_property(InteglightDeferJs::class, 'deferred_scripts');
+        $this->reset_static_property(AuroraDesignBlocksEditorScripts::class, 'scripts');
+        $this->reset_static_property(AuroraDesignBlocksDeferJs::class, 'deferred_scripts');
 
         // WordPress のスクリプト/スタイルシステムを再度リセット
         //$this->reset_wp_scripts_styles();
@@ -132,7 +132,7 @@ class aurora_design_blocks_awesomeTest extends WP_UnitTestCase
         // Act: 関数を直接呼び出す
         AuroraDesignBlocks_add_fontawesome_button_to_toolbar();
 
-        // Assert: InteglightEditorScripts にスクリプトが追加されたか
+        // Assert: AuroraDesignBlocksEditorScripts にスクリプトが追加されたか
         $editor_scripts = $this->get_static_property_value(AuroraDesignBlocksEditorScripts::class, 'scripts');
         $this->assertArrayHasKey('AuroraDesignBlocks-gfontawesome', $editor_scripts, 'EditorScripts should have "AuroraDesignBlocks-gfontawesome" key.');
         $expected_script_data = [
@@ -141,7 +141,7 @@ class aurora_design_blocks_awesomeTest extends WP_UnitTestCase
         ];
         $this->assertEquals($expected_script_data, $editor_scripts['AuroraDesignBlocks-gfontawesome'], 'Editor script data should be correct.');
 
-        // Assert: InteglightDeferJs に遅延スクリプトが追加されたか
+        // Assert: AuroraDesignBlocksDeferJs に遅延スクリプトが追加されたか
         $deferred_scripts = $this->get_static_property_value(AuroraDesignBlocksDeferJs::class, 'deferred_scripts');
         $this->assertContains('AuroraDesignBlocks-gfontawesome', $deferred_scripts, 'Script "AuroraDesignBlocks-gfontawesome" should be added for deferring.');
     }
@@ -234,7 +234,7 @@ class aurora_design_blocks_awesomeTest extends WP_UnitTestCase
         AuroraDesignBlocks_add_fontawesome_button_to_toolbar();
         // enqueue_block_editor_assets アクションにフック登録
         add_action('enqueue_block_editor_assets', 'AuroraDesignBlocks_enqueue_block_assets');
-        // InteglightEditorScripts のフックも登録しておく (スクリプトが実際に登録されるように)
+        // AuroraDesignBlocksEditorScripts のフックも登録しておく (スクリプトが実際に登録されるように)
         AuroraDesignBlocksEditorScripts::init();
 
         // Act: アクションを実行
