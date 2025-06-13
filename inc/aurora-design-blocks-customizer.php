@@ -30,10 +30,10 @@ class AuroraDesignBlocks_customizer_ga
 
         // トラッキングコード入力フィールドを追加
         $wp_customize->add_control('integlight_ga_trackingCode', array(
-            'label' => __('Google Analytics Tracking Code', 'integlight'),
+            'label' => __('Google Analytics Tracking Code', 'aurora-design-blocks'),
             'section' => 'integlight_ga_section',
             'type' => 'textarea', // 複数行のテキストエリアを使用
-            'description' => __('Please paste the entire tracking code provided by Google Analytics.', 'integlight'),
+            'description' => __('Please paste the entire tracking code provided by Google Analytics.', 'aurora-design-blocks'),
 
         ));
     }
@@ -76,7 +76,7 @@ class AuroraDesignBlocks_customizer_gtm
     {
         // Google Tag Manager 設定セクションを追加
         $wp_customize->add_section('integlight_gtm_section', array(
-            'title' => __('Google Tag Manager Setting', 'integlight'),
+            'title' => __('Google Tag Manager Setting', 'aurora-design-blocks'),
             'priority' => 1000,
         ));
 
@@ -89,10 +89,10 @@ class AuroraDesignBlocks_customizer_gtm
 
         // GTM トラッキングコード入力フィールドを追加
         $wp_customize->add_control('integlight_gtm_trackingCode', array(
-            'label' => __('Code to output in the <head> tag', 'integlight'),
+            'label' => __('Code to output in the <head> tag', 'aurora-design-blocks'),
             'section' => 'integlight_gtm_section',
             'type' => 'textarea', // 複数行のテキストエリアを使用
-            'description' => __('Please paste the code provided by Google Tag Manager.', 'integlight'),
+            'description' => __('Please paste the code provided by Google Tag Manager.', 'aurora-design-blocks'),
         ));
 
         // Google Tag Manager noscript バックアップコードを入力する設定を追加
@@ -105,10 +105,10 @@ class AuroraDesignBlocks_customizer_gtm
 
         // noscript トラッキングコード入力フィールドを追加
         $wp_customize->add_control('integlight_gtm_noscriptCode', array(
-            'label' => __('Code to output immediately after the opening <body> tag', 'integlight'),
+            'label' => __('Code to output immediately after the opening <body> tag', 'aurora-design-blocks'),
             'section' => 'integlight_gtm_section',
             'type' => 'textarea',
-            'description' => __('Please paste the code provided by Google Tag Manager.', 'integlight'),
+            'description' => __('Please paste the code provided by Google Tag Manager.', 'aurora-design-blocks'),
         ));
     }
 
