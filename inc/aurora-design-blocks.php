@@ -22,13 +22,19 @@ auroraDesignBlocksDeferCss::add_deferred_styles($auroraDesignBlocks_deferredStyl
 
 function aurora_design_blocks_load_textdomain()
 {
+    // AURORA_DESIGN_BLOCKS_PATH はプラグインのルートディレクトリへの絶対パスです。
+    // load_plugin_textdomain の第3引数は、WP_PLUGIN_DIR からの相対パス、
+    // またはプラグインのルートディレクトリからの相対パスを期待します。
+    // 例: 'aurora-design-blocks/languages'
+    $plugin_folder_name = basename(rtrim(AURORA_DESIGN_BLOCKS_PATH, '/')); // 'aurora-design-blocks' を取得
+    $languages_relative_path = $plugin_folder_name . '/languages'; // 'aurora-design-blocks/languages' を作成
     $loaded = load_plugin_textdomain(
         'aurora-design-blocks', // テキストドメイン
         false,
-        AURORA_DESIGN_BLOCKS_PATH . '/languages'
+        $languages_relative_path
     );
 }
-add_action('init', 'aurora_design_blocks_load_textdomain');
+add_action('plugins_loaded', 'aurora_design_blocks_load_textdomain');
 
 
 // 国際化対応_e ////////////////////////////////////////////////////////////////////////////////

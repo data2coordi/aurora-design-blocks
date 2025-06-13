@@ -17,7 +17,7 @@ class AuroraDesignBlocks_customizer_ga
     {
         // Google Analytics 設定セクションを追加
         $wp_customize->add_section('integlight_ga_section', array(
-            'title' => __('Google Analytics Setting', 'integlight'),
+            'title' => __('Google Analytics Setting', 'aurora-design-blocks'),
             'priority' => 1000,
         ));
 
