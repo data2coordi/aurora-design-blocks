@@ -1,4 +1,4 @@
-######build環境構築
+######build環境構築 test 6.29
 
 npm init -y
 
