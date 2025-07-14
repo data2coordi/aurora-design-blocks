@@ -24,17 +24,12 @@
             "type": "string",
             "default": ""
         },
-        "backgroundColor": {
-            "type": "string",
-            "default": "#00aabb"
-        },
-        "textColor": {
-            "type": "string",
-            "default": "#ffffff"
-        },
         "reverse": {
             "type": "boolean",
             "default": false
+        },
+        "style": {
+            "type": "object"
         }
     },
     "supports": {

@@ -1,4 +1,3 @@
-// 注意: useBlockProps は @wordpress/block-editor からインポートする
 import './editor.css';
 import './style.css';
 
@@ -11,18 +10,40 @@ import {
     useBlockProps
 } from '@wordpress/block-editor';
 import { PanelBody, Button, ToggleControl } from '@wordpress/components';
-
 import { __ } from '@wordpress/i18n';
-
-
+import { useEffect } from '@wordpress/element';
 
 registerBlockType('aurora-design-blocks/speech-bubble', {
     edit: (props) => {
         const {
-            attributes: { content, imageUrl, imageAlt, imageCaption, backgroundColor, textColor, reverse },
+            attributes: {
+                content,
+                imageUrl,
+                imageAlt,
+                imageCaption,
+                reverse,
+                style = {}
+            },
             setAttributes,
             className
         } = props;
+
+        const backgroundColor = style?.color?.background;
+        const textColor = style?.color?.text;
+
+        // 🔽 初期状態で色が未設定なら、初期色を設定
+        useEffect(() => {
+            if (!backgroundColor && !textColor) {
+                setAttributes({
+                    style: {
+                        color: {
+                            background: '#00aabb',
+                            text: '#ffffff'
+                        }
+                    }
+                });
+            }
+        }, []);
 
         const onSelectImage = (media) => {
             setAttributes({
@@ -31,19 +52,11 @@ registerBlockType('aurora-design-blocks/speech-bubble', {
             });
         };
 
-        // 編集画面用のブロックプロパティ（背景色・テキスト色を inline style に反映）
         const contentBlockProps = useBlockProps({
             className: 'speech-bubble__content',
             style: {
-                color: textColor,
-                ...(backgroundColor &&
-                    (backgroundColor.startsWith('#') ||
-                        backgroundColor.startsWith('linear-gradient') ||
-                        backgroundColor.startsWith('radial-gradient')
-                    )
-                    ? { backgroundColor }
-                    : {}
-                )
+                backgroundColor,
+                color: textColor
             }
         });
 
@@ -59,7 +72,6 @@ registerBlockType('aurora-design-blocks/speech-bubble', {
                                     isLink
                                     isDestructive
                                 >
-
                                     {__("Change image", "aurora-design-blocks")}
                                 </Button>
                             </div>
@@ -85,9 +97,8 @@ registerBlockType('aurora-design-blocks/speech-bubble', {
                         />
                     </PanelBody>
                 </InspectorControls>
+
                 <div className={`${className} wp-block aurora-design-blocks-speech-bubble ${reverse ? "aurora-design-blocks-speech-bubble--reverse" : "aurora-design-blocks-speech-bubble--normal"}`}>
-
-
                     {imageUrl && (
                         <figure className="speech-bubble__image">
                             <img src={imageUrl} alt={imageAlt} />
@@ -115,31 +126,29 @@ registerBlockType('aurora-design-blocks/speech-bubble', {
 
     save: (props) => {
         const {
-            attributes: { content, imageUrl, imageAlt, imageCaption, backgroundColor, textColor, reverse }
-
+            attributes: {
+                content,
+                imageUrl,
+                imageAlt,
+                imageCaption,
+                reverse,
+                style = {}
+            }
         } = props;
 
-        // 保存側でも useBlockProps.save を使って inline style を出力
+        const backgroundColor = style?.color?.background;
+        const textColor = style?.color?.text;
+
         const contentBlockProps = useBlockProps.save({
             className: 'speech-bubble__content',
             style: {
-                color: textColor,
-                ...(backgroundColor &&
-                    (backgroundColor.startsWith('#') ||
-                        backgroundColor.startsWith('linear-gradient') ||
-                        backgroundColor.startsWith('radial-gradient')
-                    )
-                    ? { backgroundColor }
-                    : {}
-                )
+                backgroundColor,
+                color: textColor
             }
         });
 
         return (
-
             <div className={`aurora-design-blocks-speech-bubble ${reverse ? "aurora-design-blocks-speech-bubble--reverse" : "aurora-design-blocks-speech-bubble--normal"}`}>
-
-
                 {imageUrl && (
                     <figure className="speech-bubble__image">
                         <img src={imageUrl} alt={imageAlt} />
