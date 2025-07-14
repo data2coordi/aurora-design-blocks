@@ -42,8 +42,7 @@
         "color": {
             "background": true,
             "text": true
-        },
-        "gradients": true
+        }
     },
     "editorScript": "file:./build/index.js",
     "editorStyle": "file:./build/index.css",

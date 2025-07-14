@@ -36,14 +36,7 @@ registerBlockType('aurora-design-blocks/speech-bubble', {
             className: 'speech-bubble__content',
             style: {
                 color: textColor,
-                ...(backgroundColor &&
-                    (backgroundColor.startsWith('#') ||
-                        backgroundColor.startsWith('linear-gradient') ||
-                        backgroundColor.startsWith('radial-gradient')
-                    )
-                    ? { backgroundColor }
-                    : {}
-                )
+                backgroundColor: backgroundColor
             }
         });
 
@@ -124,14 +117,7 @@ registerBlockType('aurora-design-blocks/speech-bubble', {
             className: 'speech-bubble__content',
             style: {
                 color: textColor,
-                ...(backgroundColor &&
-                    (backgroundColor.startsWith('#') ||
-                        backgroundColor.startsWith('linear-gradient') ||
-                        backgroundColor.startsWith('radial-gradient')
-                    )
-                    ? { backgroundColor }
-                    : {}
-                )
+                backgroundColor: backgroundColor
             }
         });
 
