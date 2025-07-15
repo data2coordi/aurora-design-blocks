@@ -15,7 +15,7 @@ jobs:
       - name: build
         run: |
           zip -r aurora-design-blocks.zip . \
-            -x ".*" \
+            -x "./.*" \
               "./.phpcs.xml.dist" \
               "./.phpunit.result.cache" \
               "./phpunit.xml.dist" \
