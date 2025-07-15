@@ -10,6 +10,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+            submodules: recursive
+
 
 
       - name: build
@@ -19,7 +22,6 @@ jobs:
             "blocks/" \
             "css/" \
             "inc/" \
-            "js/" \
             "languages/" \
             "plugin-update-checker/" \
             "webfonts/" \
