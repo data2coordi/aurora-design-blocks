@@ -15,16 +15,14 @@ jobs:
       - name: build
         run: |
           zip -r aurora-design-blocks.zip . \
-            -x "*/.git/*" \
-              "*/.DS_Store" \
-              "*/.phpcs.xml.dist" \
-              "*/.phpunit.result.cache" \
-              "*/phpunit.xml.dist" \
-              "*/vendor/*" \
-              "*/tests/*" \
-              "*/tmp/*" \
-              "*/bin/*"
-
+            -x ".*" \
+              ".phpcs.xml.dist" \
+              ".phpunit.result.cache" \
+              "phpunit.xml.dist" \
+              "vendor/" "vendor/*" \
+              "tests/" "tests/*" \
+              "tmp/" "tmp/*" \
+              "bin/" "bin/*"
 
       - name: リリースを作成する
         uses: actions/create-release@v1
