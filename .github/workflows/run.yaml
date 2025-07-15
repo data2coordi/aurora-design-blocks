@@ -13,21 +13,20 @@ jobs:
 
 
       - name: build
+        # ホワイトリスト方式：リリースに必要なファイルとディレクトリのみを指定してzip化します。
         run: |
-          zip -r aurora-design-blocks.zip . \
-            -x "./.*" \
-              "./.phpcs.xml.dist" \
-              "./.phpunit.result.cache" \
-              "./phpunit.xml.dist" \
-              "./vendor/" \
-              "./vendor/*" \
-              "./tests/" \
-              "./tests/*" \
-              "./tmp/" \
-              "./tmp/*" \
-              "./bin/" \
-              "./bin/*"      
-
+          zip -r aurora-design-blocks.zip \
+            blocks/ \
+            css/ \
+            inc/ \
+            js/ \
+            languages/ \  
+            plugin-update-checker/ \
+            webfonts/ \
+            plugin.php \
+            readme.text
+                              
+            
 
       - name: リリースを作成する
         uses: actions/create-release@v1
@@ -49,5 +48,3 @@ jobs:
           asset_name: aurora-design-blocks.zip
           asset_path: ./aurora-design-blocks.zip
           asset_content_type: application/zip
-
-
