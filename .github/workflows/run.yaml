@@ -24,6 +24,8 @@ jobs:
                 "./tmp/" "./tmp/*" \
                 "./bin/" "./bin/*"
 
+          zip -r aurora-design-blocks.zip plugin-update-checker
+
       - name: リリースを作成する
         uses: actions/create-release@v1
         id: create-release
