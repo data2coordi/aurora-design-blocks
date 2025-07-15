@@ -39,7 +39,7 @@ require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-awesome.php';
 
 
 ///////////////////////////////////////////
-//プラグインの自動更新s//
+//プラグインの自動更新s//////a/
 ///////////////////////////////////////////
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
