@@ -10,10 +10,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-            submodules: recursive
-
-
 
       - name: build
         # ホワイトリスト方式：リリースに必要なファイルとディレクトリのみを指定してzip化します。
