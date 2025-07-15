@@ -13,8 +13,17 @@ jobs:
 
 
       - name: build
-        run: zip -r aurora-design-blocks.zip . -x ".*" ".phpcs.xml.dist" ".phpunit.result.cache" "phpunit.xml.dist" "vendor/" "vendor/*"  "tests/" "tests/*"  "tmp/" "tmp/*" "bin/" "bin/*"
-        
+        run: |
+          zip -r aurora-design-blocks.zip . \
+            -x "*/.git/*" \
+              "*/.DS_Store" \
+              "*/.phpcs.xml.dist" \
+              "*/.phpunit.result.cache" \
+              "*/phpunit.xml.dist" \
+              "*/vendor/*" \
+              "*/tests/*" \
+              "*/tmp/*" \
+              "*/bin/*"
 
 
       - name: リリースを作成する
