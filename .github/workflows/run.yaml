@@ -21,7 +21,7 @@ jobs:
             "languages/" \
             "plugin-update-checker/" \
             "webfonts/" \
-            "plugin.php" \
+            "aurora-design-blocks.php" \
             "readme.text"
 
       - name: リリースを作成する
