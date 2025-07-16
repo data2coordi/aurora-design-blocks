@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Aurora Design Blocks 
  * Description: カスタムブロックを追加するプラグイン。
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: Yurika Toshida at Aurora Lab
  * Text Domain: aurora-design-blocks
  */
@@ -39,7 +39,7 @@ require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-awesome.php';
 
 
 ///////////////////////////////////////////
-//プラグインの自動更新s//////abcde/
+//プラグインの自動更新s///////
 ///////////////////////////////////////////
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
