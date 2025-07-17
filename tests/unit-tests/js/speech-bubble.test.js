@@ -5,6 +5,9 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import * as blocks from '@wordpress/blocks';
+import { createElement } from '@wordpress/element';  // ← 追加
+
+
 
 // モック定義
 jest.mock('@wordpress/blocks', () => ({ registerBlockType: jest.fn() }));
@@ -47,6 +50,10 @@ jest.mock('@wordpress/components', () => ({
 
 jest.mock('@wordpress/i18n', () => ({ __: text => text }));
 
+jest.mock('@wordpress/element', () => require('react'));
+
+
+
 // エラー抑制
 beforeAll(() => {
     jest.spyOn(console, 'error').mockImplementation(() => { });
@@ -75,34 +82,88 @@ describe('aurora-design-blocks/speech-bubble', () => {
         beforeEach(() => setAttributes.mockClear());
 
         it('toggles reverse attribute', () => {
-            render(settings.edit({ attributes: baseAttrs, setAttributes, className: 'test-class' }));
+            render(
+                // OK: createElement でコンポーネントとしてマウント
+                createElement(settings.edit, {
+                    attributes: baseAttrs,
+                    setAttributes,
+                    className: 'test-class',
+                })
+            );
+
+
             const toggle = screen.getByLabelText('Reverse the positions of the image and speech bubble.');
             fireEvent.click(toggle);
             expect(setAttributes).toHaveBeenCalledWith({ reverse: true });
         });
 
         it('renders select image button when no imageUrl', () => {
-            render(settings.edit({ attributes: baseAttrs, setAttributes, className: 'test-class' }));
+            render(
+                // OK: createElement でコンポーネントとしてマウント
+                createElement(settings.edit, {
+                    attributes: baseAttrs,
+                    setAttributes,
+                    className: 'test-class',
+                })
+            );
             expect(screen.getByText('Select image')).toBeInTheDocument();
         });
 
         it('renders change image and destructive button when imageUrl present', () => {
             const attrs = { ...baseAttrs, imageUrl: 'url.jpg', imageAlt: 'Alt' };
-            render(settings.edit({ attributes: attrs, setAttributes, className: 'test-class' }));
+            render(
+                createElement(settings.edit, {
+                    attributes: attrs,
+                    setAttributes,
+                    className: 'test-class',
+                })
+            );
             expect(screen.getByText('Change image')).toBeInTheDocument();
         });
 
         it('renders RichText for content', () => {
-            render(settings.edit({ attributes: baseAttrs, setAttributes, className: 'test-class' }));
+            render(
+                // OK: createElement でコンポーネントとしてマウント
+                createElement(settings.edit, {
+                    attributes: baseAttrs,
+                    setAttributes,
+                    className: 'test-class',
+                })
+            );
+
             expect(screen.getByTestId('mock-rich-text')).toBeInTheDocument();
         });
 
         it('applies inline styles via useBlockProps', () => {
-            const attrs = { ...baseAttrs, textColor: '#123456', backgroundColor: 'linear-gradient(red, blue)' };
-            const { container } = render(settings.edit({ attributes: attrs, setAttributes, className: 'test-class' }));
+
+            // ネストした style プロパティで渡す
+            const attrs = {
+                ...baseAttrs,
+                style: {
+                    color: {
+                        text: '#123456',
+                        background: 'linear-gradient(red, blue)',
+                    },
+                },
+            };
+
+
+
+
+
+            const { container } = render(
+                createElement(settings.edit, {
+                    attributes: attrs,
+                    setAttributes,
+                    className: 'test-class',
+                })
+            );
+
+
             const div = container.querySelector('[data-testid="mock-block-props-edit"]');
-            expect(div).toHaveStyle('color: #123456');
-            expect(div).toHaveStyle('backgroundColor: linear-gradient(red, blue)');
+
+            expect(div).toHaveStyle('color: rgb(18, 52, 86)');
+            expect(div).toHaveStyle('background-color: linear-gradient(red, blue)');
         });
     });
 
@@ -113,9 +174,13 @@ describe('aurora-design-blocks/speech-bubble', () => {
                 imageUrl: 'url.jpg',
                 imageAlt: 'Alt',
                 imageCaption: 'Caption',
-                backgroundColor: '#000',
-                textColor: '#fff',
                 reverse: true,
+                style: {
+                    color: {
+                        background: '#000',
+                        text: '#fff'
+                    }
+                }
             };
             const { container } = render(settings.save({ attributes: attrs }));
             const contents = screen.getAllByTestId('mock-rich-text-content');
