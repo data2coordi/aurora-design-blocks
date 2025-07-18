@@ -660,6 +660,9 @@ msgstr "Copy Rightの設定"
 msgid "Please enter the Copyright information."
 msgstr "Copy Rightを入力してください。"
 
+msgid "Index"
+msgstr "目次"
+
 
 #: blocks/cta-block/build/index.js:1
 msgid "CTA Position Setteing"

@@ -130,7 +130,7 @@ class AuroraDesignBlocksTableOfContents
 
         if (!empty($matches)) {
             // 目次を生成
-            $toc = '<div class="post-toc"><B>Index</B><ul>';
+            $toc = '<div class="post-toc"><b>' . esc_html(__('Index', 'aurora-design-blocks')) . '</b><ul>';
             foreach ($matches as $match) {
                 $heading_tag = $match[1]; // h1, h2, h3
                 $heading_attributes = $match[2]; // クラスやIDなどの属性
