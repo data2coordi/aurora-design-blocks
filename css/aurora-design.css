@@ -59,3 +59,11 @@
     content: " ";
     /*ダミー*/
 }
+
+
+@media (max-width: 768px) {
+    .post-toc {
+        margin-top: calc(var(--ly-elementTopMargin) * 2);
+        margin-bottom: calc(var(--ly-elementTopMargin) * 2);
+    }
+}
