@@ -103,7 +103,7 @@ HTML;
         // Assert
         // Check if TOC div exists
         $this->assertStringContainsString('<div class="post-toc">', $filtered_content);
-        $this->assertStringContainsString('<B>Index</B>', $filtered_content);
+        $this->assertStringContainsString('<b>Index</b>', $filtered_content);
         $this->assertStringContainsString('<ul>', $filtered_content);
         $this->assertStringContainsString('</ul></div>', $filtered_content);
 

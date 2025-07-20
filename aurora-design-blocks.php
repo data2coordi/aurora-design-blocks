@@ -35,7 +35,13 @@ require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-forBlocks.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-customizer.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-awesome.php';
-require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-popularPosts.php';
+
+
+if (defined('WP_ENVIRONMENT_TYPE') && WP_ENVIRONMENT_TYPE !== 'testing') {
+
+    require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-popularPosts.php';
+}
+
 
 
 
