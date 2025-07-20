@@ -35,6 +35,7 @@ require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-forBlocks.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-customizer.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-awesome.php';
+require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-popularPosts.php';
 
 
 
@@ -54,4 +55,14 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 );
 ///////////////////////////////////////////
 //プラグインの自動更新e//
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+//DB用s///////
+///////////////////////////////////////////
+register_activation_hook(__FILE__, ['AuroraDesignBlocks_PostViewTracker', 'create_views_table']);
+
+
+///////////////////////////////////////////
+//DB用e///////
 ///////////////////////////////////////////
