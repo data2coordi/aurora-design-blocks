@@ -96,6 +96,8 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
         $limit = !empty($instance['number']) ? absint($instance['number']) : 5;
         $days = !empty($instance['days']) ? absint($instance['days']) : 30;
         $show_views = isset($instance['show_views']) ? (bool) $instance['show_views'] : true;
+        $show_thumbnail = isset($instance['show_thumbnail']) ? (bool) $instance['show_thumbnail'] : true;
+
 
         // 人気記事取得
         $popular_posts = AuroraDesignBlocks_Popular_Posts_Widget::get_popular_posts_by_days($days, $limit);
@@ -111,9 +113,11 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
 
                     echo "<li>";
                     echo "<a href='{$permalink}'>";
-                    if ($thumb_url) {
+
+                    if ($show_thumbnail && $thumb_url) {
                         echo "<img src='{$thumb_url}' alt=''>";
                     }
+
                     echo "{$title}";
                     if ($show_views) {
                         echo " ({$item['views']})";
@@ -138,6 +142,7 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
         $number = !empty($instance['number']) ? absint($instance['number']) : 5;
         $days = !empty($instance['days']) ? absint($instance['days']) : 30;
         $show_views = isset($instance['show_views']) ? (bool) $instance['show_views'] : true;
+        $show_thumbnail = isset($instance['show_thumbnail']) ? (bool) $instance['show_thumbnail'] : true;
 
 ?>
         <p>
@@ -163,6 +168,11 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
             <input class="checkbox" type="checkbox" <?php checked($show_views); ?> id="<?php echo esc_attr($this->get_field_id('show_views')); ?>" name="<?php echo esc_attr($this->get_field_name('show_views')); ?>" />
             <label for="<?php echo esc_attr($this->get_field_id('show_views')); ?>"><?php _e('PV件数を表示する', 'text-domain'); ?></label>
         </p>
+        <p>
+            <input class="checkbox" type="checkbox" <?php checked($show_thumbnail); ?> id="<?php echo esc_attr($this->get_field_id('show_thumbnail')); ?>" name="<?php echo esc_attr($this->get_field_name('show_thumbnail')); ?>" />
+            <label for="<?php echo esc_attr($this->get_field_id('show_thumbnail')); ?>"><?php _e('サムネイルを表示する', 'text-domain'); ?></label>
+        </p>
+
 <?php
     }
 
@@ -173,6 +183,8 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
         $instance['number'] = absint($new_instance['number']);
         $instance['days'] = absint($new_instance['days']);
         $instance['show_views'] = !empty($new_instance['show_views']) ? 1 : 0;
+        $instance['show_thumbnail'] = !empty($new_instance['show_thumbnail']) ? 1 : 0;
+
 
         return $instance;
     }
