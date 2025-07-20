@@ -95,6 +95,7 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
         // 設定値を取得
         $limit = !empty($instance['number']) ? absint($instance['number']) : 5;
         $days = !empty($instance['days']) ? absint($instance['days']) : 30;
+        $show_views = isset($instance['show_views']) ? (bool) $instance['show_views'] : true;
 
         // 人気記事取得
         $popular_posts = AuroraDesignBlocks_Popular_Posts_Widget::get_popular_posts_by_days($days, $limit);
@@ -106,7 +107,18 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
                 if ($post) {
                     $title = esc_html(get_the_title($post));
                     $permalink = esc_url(get_permalink($post));
-                    echo "<li><a href='{$permalink}'>{$title} ({$item['views']})</a></li>";
+                    $thumb_url = AuroraDesignBlocksPostThumbnail::getUrl($post->ID, 'thumbnail');
+
+                    echo "<li>";
+                    echo "<a href='{$permalink}'>";
+                    if ($thumb_url) {
+                        echo "<img src='{$thumb_url}' alt=''>";
+                    }
+                    echo "{$title}";
+                    if ($show_views) {
+                        echo " ({$item['views']})";
+                    }
+                    echo "</a></li>";
                 }
             }
             echo '</ul>';
@@ -125,6 +137,8 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
         $title = !empty($instance['title']) ? $instance['title'] : __('人気記事', 'text-domain');
         $number = !empty($instance['number']) ? absint($instance['number']) : 5;
         $days = !empty($instance['days']) ? absint($instance['days']) : 30;
+        $show_views = isset($instance['show_views']) ? (bool) $instance['show_views'] : true;
+
 ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php _e('タイトル:'); ?></label>
@@ -144,6 +158,11 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
                 name="<?php echo esc_attr($this->get_field_name('days')); ?>" type="number" step="1" min="1"
                 value="<?php echo esc_attr($days); ?>" size="3">
         </p>
+
+        <p>
+            <input class="checkbox" type="checkbox" <?php checked($show_views); ?> id="<?php echo esc_attr($this->get_field_id('show_views')); ?>" name="<?php echo esc_attr($this->get_field_name('show_views')); ?>" />
+            <label for="<?php echo esc_attr($this->get_field_id('show_views')); ?>"><?php _e('PV件数を表示する', 'text-domain'); ?></label>
+        </p>
 <?php
     }
 
@@ -153,6 +172,8 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
         $instance['title'] = sanitize_text_field($new_instance['title']);
         $instance['number'] = absint($new_instance['number']);
         $instance['days'] = absint($new_instance['days']);
+        $instance['show_views'] = !empty($new_instance['show_views']) ? 1 : 0;
+
         return $instance;
     }
 }
