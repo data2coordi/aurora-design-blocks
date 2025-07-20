@@ -5,7 +5,7 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
     public function __construct()
     {
         parent::__construct(
-            'popular_posts_widget',
+            'AuroraDesignBlocks_popular_posts_widget',
             __('[aurora-design-blocks]Popular Posts Widget', 'aurora-design-blocks'),
             ['description' => __('A widget that displays popular posts based on view count', 'aurora-design-blocks')]
         );
