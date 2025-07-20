@@ -6,8 +6,8 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
     {
         parent::__construct(
             'popular_posts_widget',
-            __('【aurora-design-blocks】人気記事ウィジェット', 'text-domain'),
-            ['description' => __('アクセス数順で人気記事を表示するウィジェット', 'text-domain')]
+            __('[aurora-design-blocks]Popular Posts Widget', 'aurora-design-blocks'),
+            ['description' => __('A widget that displays popular posts based on view count', 'aurora-design-blocks')]
         );
     }
 
@@ -115,7 +115,7 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
                     echo "<a href='{$permalink}'>";
 
                     if ($show_thumbnail && $thumb_url) {
-                        echo "<img src='{$thumb_url}' alt=''>";
+                        echo "<img src='{$thumb_url}' alt='{$title}'>";
                     }
 
                     echo "{$title}";
@@ -127,7 +127,7 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
             }
             echo '</ul>';
         } else {
-            echo '<p>人気記事がまだありません。</p>';
+            echo '<p>' . __('No popular posts yet.', 'aurora-design-blocks') . '</p>';
         }
 
         echo $args['after_widget'];
@@ -138,7 +138,7 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
 
     public function form($instance)
     {
-        $title = !empty($instance['title']) ? $instance['title'] : __('人気記事', 'text-domain');
+        $title = !empty($instance['title']) ? $instance['title'] : __('Popular Posts', 'aurora-design-blocks');
         $number = !empty($instance['number']) ? absint($instance['number']) : 5;
         $days = !empty($instance['days']) ? absint($instance['days']) : 30;
         $show_views = isset($instance['show_views']) ? (bool) $instance['show_views'] : true;
@@ -146,19 +146,19 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
 
 ?>
         <p>
-            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php _e('タイトル:'); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php _e('Title:', 'aurora-design-blocks'); ?></label>
             <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text"
                 value="<?php echo esc_attr($title); ?>">
         </p>
         <p>
-            <label for="<?php echo esc_attr($this->get_field_id('number')); ?>"><?php _e('表示件数:'); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id('number')); ?>"><?php _e('Number of posts to display:', 'aurora-design-blocks'); ?></label>
             <input class="tiny-text" id="<?php echo esc_attr($this->get_field_id('number')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('number')); ?>" type="number" step="1" min="1"
                 value="<?php echo esc_attr($number); ?>" size="3">
         </p>
         <p>
-            <label for="<?php echo esc_attr($this->get_field_id('days')); ?>"><?php _e('集計期間（日）:'); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id('days')); ?>"><?php _e('Aggregation period (days):', 'aurora-design-blocks'); ?></label>
             <input class="tiny-text" id="<?php echo esc_attr($this->get_field_id('days')); ?>"
                 name="<?php echo esc_attr($this->get_field_name('days')); ?>" type="number" step="1" min="1"
                 value="<?php echo esc_attr($days); ?>" size="3">
@@ -166,11 +166,11 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
 
         <p>
             <input class="checkbox" type="checkbox" <?php checked($show_views); ?> id="<?php echo esc_attr($this->get_field_id('show_views')); ?>" name="<?php echo esc_attr($this->get_field_name('show_views')); ?>" />
-            <label for="<?php echo esc_attr($this->get_field_id('show_views')); ?>"><?php _e('PV件数を表示する', 'text-domain'); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id('show_views')); ?>"><?php _e('Display view count', 'aurora-design-blocks'); ?></label>
         </p>
         <p>
             <input class="checkbox" type="checkbox" <?php checked($show_thumbnail); ?> id="<?php echo esc_attr($this->get_field_id('show_thumbnail')); ?>" name="<?php echo esc_attr($this->get_field_name('show_thumbnail')); ?>" />
-            <label for="<?php echo esc_attr($this->get_field_id('show_thumbnail')); ?>"><?php _e('サムネイルを表示する', 'text-domain'); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id('show_thumbnail')); ?>"><?php _e('Display thumbnails', 'aurora-design-blocks'); ?></label>
         </p>
 
 <?php

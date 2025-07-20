@@ -711,3 +711,31 @@ msgstr "右中央"
 #: blocks/gfontawesome/build/index.js:1
 msgid "Icon not found"
 msgstr "アイコンが見つかりません"
+
+
+msgid "[aurora-design-blocks]Popular Posts Widget"
+msgstr "【aurora-design-blocks】人気記事ウィジェット"
+
+msgid "A widget that displays popular posts based on view count"
+msgstr "アクセス数順で人気記事を表示するウィジェット"
+
+msgid "Title:"
+msgstr "タイトル:"
+
+msgid "Number of posts to display:"
+msgstr "表示件数:"
+
+msgid "Aggregation period (days):"
+msgstr "集計期間（日）："
+
+msgid "Display view count"
+msgstr "PV件数を表示する"
+
+msgid "Display thumbnails"
+msgstr "サムネイルを表示する"
+
+msgid "Popular Posts"
+msgstr "人気記事"
+
+msgid "No popular posts yet."
+msgstr "人気記事がまだありません。"
