@@ -31,9 +31,8 @@ require_once "{$_tests_dir}/includes/functions.php";
  * Manually load the plugin being tested.
  */
 
-if (!defined('WP_ENVIRONMENT_TYPE')) {
-	define('WP_ENVIRONMENT_TYPE', 'testing');
-}
+define('AURORA_DESIGN_BLOCKS_WP_ENVIRONMENT_TYPE', 'testing');
+
 function _manually_load_plugin()
 {
 	require dirname(dirname(__FILE__)) . '/aurora-design-blocks.php';

@@ -137,13 +137,7 @@
 /* 人気記事ランキング s*/
 /* 人気記事ランキング */
 /* 人気記事ランキング */
-/* .widget_auroradesignblocks_popular_posts_widget {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 5px;
-  font-family: Arial, sans-serif;
-} */
+
 
 .widget_auroradesignblocks_popular_posts_widget ul {
   list-style: none;
@@ -153,12 +147,11 @@
 }
 
 .widget_auroradesignblocks_popular_posts_widget li {
-  margin-bottom: 1em;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   gap: 0.8em;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* ←wrapをやめる！ */
 }
 
 .ly_site_content_widgetArea_right .widget_auroradesignblocks_popular_posts_widget li {
@@ -174,14 +167,16 @@
   flex-shrink: 0;
 }
 
-.widget_auroradesignblocks_popular_posts_widget li a {
+.ly_site_content_widgetArea_right .widget_auroradesignblocks_popular_posts_widget li a {
   text-decoration: none;
   color: #333;
   flex: 1;
   display: flex;
-  /* flex-direction: column; */
-  gap: 5px;
-  justify-content: center;
+  flex-direction: row; /* ←こっちをON！ */
+  gap: 0.8rem; /* ←ここを広めにするとスッキリ！ */
+  padding: 0.3em 0; /* ←上下にも少し余白を足す */
+  font-size: 0.8rem;
+  justify-content: flex-start; /* ←テキストを上寄せに */
 }
 
 .widget_auroradesignblocks_popular_posts_widget li a:hover {
@@ -192,7 +187,7 @@
   font-weight: normal;
   color: #999;
   margin-top: 0.3em;
-  font-size: 0.9em;
+  font-size: 0.8rem;
 }
 
 
