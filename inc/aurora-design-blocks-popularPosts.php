@@ -68,7 +68,7 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
         );
 
         $results = $wpdb->get_results($sql);
-        set_transient($cache_key, $results, 5 * MINUTE_IN_SECONDS); // 5分キャッシュ
+        set_transient($cache_key, $results, 1 * MINUTE_IN_SECONDS); // 5分キャッシュ
 
         return self::format_popular_post_results($results);
     }
@@ -144,6 +144,14 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
         $show_views = isset($instance['show_views']) ? (bool) $instance['show_views'] : true;
         $show_thumbnail = isset($instance['show_thumbnail']) ? (bool) $instance['show_thumbnail'] : true;
 
+        // テーブル未作成ならメッセージ表示
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'auroradesignblocks_access_ct';
+        if ($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") != $table_name) {
+            echo '<p style="color:red;">' . __('※ 初回は表示件数や期間を変更して「更新」してください。データベーステーブルを作成します。', 'aurora-design-blocks') . '</p>';
+        }
+
+
 ?>
         <p>
             <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php _e('Title:', 'aurora-design-blocks'); ?></label>
@@ -179,6 +187,7 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
             <?php _e('Clear cache on save', 'aurora-design-blocks'); ?>
         </label>
 
+
         <p style="font-size: 0.9em; color: #555;">
             <?php _e('* Views from logged-in users are not counted.', 'aurora-design-blocks'); ?>
         </p>
@@ -191,6 +200,9 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
 
     public function update($new_instance, $old_instance)
     {
+
+        AuroraDesignBlocks_PostViewTracker::maybe_create_views_table();
+
         $instance = [];
         $instance['title'] = sanitize_text_field($new_instance['title']);
         $instance['number'] = absint($new_instance['number']);
@@ -201,6 +213,7 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
             $cache_key = "adb_popular_posts_{$instance['days']}_{$instance['number']}";
             delete_transient($cache_key);
         }
+        $instance['clear_cache'] = 0;
 
 
         return $instance;
@@ -213,7 +226,6 @@ function AuroraDesignBlocks_register_popular_posts_widget()
     register_widget('AuroraDesignBlocks_Popular_Posts_Widget');
 }
 add_action('widgets_init', 'AuroraDesignBlocks_register_popular_posts_widget');
-
 
 
 
@@ -252,6 +264,16 @@ class AuroraDesignBlocks_PostViewTracker
 
         // 投稿表示時のカウント処理
         add_action('wp', [__CLASS__, 'maybe_record_view']);
+    }
+
+    public static function maybe_create_views_table()
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'auroradesignblocks_access_ct';
+
+        if ($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") != $table_name) {
+            self::create_views_table();
+        }
     }
 
     public static function create_views_table()
@@ -319,9 +341,25 @@ class AuroraDesignBlocks_PostViewTracker
             );
         }
     }
+
+    public static function drop_views_table()
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'auroradesignblocks_access_ct';
+
+        $wpdb->query("DROP TABLE IF EXISTS {$table_name}");
+    }
 }
 
 AuroraDesignBlocks_PostViewTracker::init();
+
+
+add_action('admin_init', function () {
+    if (current_user_can('manage_options') && isset($_GET['drop_adb_table'])) {
+        AuroraDesignBlocks_PostViewTracker::drop_views_table();
+        wp_die('auroradesignblocks_access_ct テーブルを削除しました。');
+    }
+});
 
 
 /**********************************************************     */
