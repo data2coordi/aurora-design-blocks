@@ -173,6 +173,19 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
             <label for="<?php echo esc_attr($this->get_field_id('show_thumbnail')); ?>"><?php _e('Display thumbnails', 'aurora-design-blocks'); ?></label>
         </p>
 
+        <input class="checkbox" type="checkbox" id="<?php echo esc_attr($this->get_field_id('clear_cache')); ?>"
+            name="<?php echo esc_attr($this->get_field_name('clear_cache')); ?>" />
+        <label for="<?php echo esc_attr($this->get_field_id('clear_cache')); ?>">
+            <?php _e('Clear cache on save', 'aurora-design-blocks'); ?>
+        </label>
+
+        <p style="font-size: 0.9em; color: #555;">
+            <?php _e('* Views from logged-in users are not counted.', 'aurora-design-blocks'); ?>
+        </p>
+        <p style="font-size: 0.9em; color: #555;">
+            <?php _e('* Popular posts data is cached for 5 minutes. To clear the cache, check [Clear cache on save] above and click the Save button.', 'aurora-design-blocks'); ?>
+        </p>
+
 <?php
     }
 
@@ -184,6 +197,10 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
         $instance['days'] = absint($new_instance['days']);
         $instance['show_views'] = !empty($new_instance['show_views']) ? 1 : 0;
         $instance['show_thumbnail'] = !empty($new_instance['show_thumbnail']) ? 1 : 0;
+        if (!empty($new_instance['clear_cache'])) {
+            $cache_key = "adb_popular_posts_{$instance['days']}_{$instance['number']}";
+            delete_transient($cache_key);
+        }
 
 
         return $instance;
@@ -261,7 +278,7 @@ class AuroraDesignBlocks_PostViewTracker
 
     public static function maybe_record_view()
     {
-        if (is_user_logged_in() || is_admin() || wp_doing_ajax()) return;
+        if (is_user_logged_in() ||  wp_doing_ajax()) return;
 
         if (is_single()) {
             global $post;

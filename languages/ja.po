@@ -739,3 +739,14 @@ msgstr "人気記事"
 
 msgid "No popular posts yet."
 msgstr "人気記事がまだありません。"
+
+#. Description note in widget settings
+msgid "* Views from logged-in users are not counted."
+msgstr "※ログインユーザーのアクセスはカウントされません。"
+
+#. Cache note in widget settings
+msgid "* Popular posts data is cached for 5 minutes. To clear the cache, check [Clear cache on save] above and click the Save button."
+msgstr "※人気記事のデータは5分間キャッシュされています。上記の「保存時にキャッシュクリア」をチャックして更新ボタンをクリックするとキャッシュがクリアされます。"
+
+msgid "Clear cache on save"
+msgstr "保存時にキャッシュクリア"
