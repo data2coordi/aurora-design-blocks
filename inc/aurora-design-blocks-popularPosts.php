@@ -51,7 +51,7 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
         }
 
 
-        $table_name = $wpdb->prefix . 'auroradesignblocks_access_ct';
+        $table_name = AuroraDesignBlocks_PostViewTracker::get_table_name();
 
         $date_limit = date('Y-m-d', strtotime("-{$days} days", current_time('timestamp')));
 
@@ -146,7 +146,7 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
 
         // テーブル未作成ならメッセージ表示
         global $wpdb;
-        $table_name = $wpdb->prefix . 'auroradesignblocks_access_ct';
+        $table_name = AuroraDesignBlocks_PostViewTracker::get_table_name();
         if ($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") != $table_name) {
             echo '<p style="color:red;">' . __('※ 初回は表示件数や期間を変更して「更新」してください。データベーステーブルを作成します。', 'aurora-design-blocks') . '</p>';
         }
@@ -269,7 +269,7 @@ class AuroraDesignBlocks_PostViewTracker
     public static function maybe_create_views_table()
     {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'auroradesignblocks_access_ct';
+        $table_name = self::$table_name;
 
         if ($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") != $table_name) {
             self::create_views_table();
@@ -279,7 +279,6 @@ class AuroraDesignBlocks_PostViewTracker
     public static function create_views_table()
     {
         global $wpdb;
-        self::$table_name = $wpdb->prefix . 'auroradesignblocks_access_ct';
 
         $charset_collate = $wpdb->get_charset_collate();
 
@@ -311,7 +310,6 @@ class AuroraDesignBlocks_PostViewTracker
     public static function record_post_view($post_id)
     {
         global $wpdb;
-        self::$table_name = $wpdb->prefix . 'auroradesignblocks_access_ct';
         $today = current_time('Y-m-d');
 
         $existing = $wpdb->get_var(
@@ -345,19 +343,26 @@ class AuroraDesignBlocks_PostViewTracker
     public static function drop_views_table()
     {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'auroradesignblocks_access_ct';
+        $table_name = self::$table_name;
 
         $wpdb->query("DROP TABLE IF EXISTS {$table_name}");
+    }
+
+    public static function get_table_name()
+    {
+
+        return self::$table_name;
     }
 }
 
 AuroraDesignBlocks_PostViewTracker::init();
 
 
+//admin_url?drop_adb_table=1でテーブルを削除する。
 add_action('admin_init', function () {
     if (current_user_can('manage_options') && isset($_GET['drop_adb_table'])) {
         AuroraDesignBlocks_PostViewTracker::drop_views_table();
-        wp_die('auroradesignblocks_access_ct テーブルを削除しました。');
+        wp_die(AuroraDesignBlocks_PostViewTracker::get_table_name() . 'テーブルを削除しました。');
     }
 });
 
