@@ -745,8 +745,11 @@ msgid "* Views from logged-in users are not counted."
 msgstr "※ログインユーザーのアクセスはカウントされません。"
 
 #. Cache note in widget settings
-msgid "* Popular posts data is cached for 5 minutes. To clear the cache, check [Clear cache on save] above and click the Save button."
-msgstr "※人気記事のデータは5分間キャッシュされています。上記の「保存時にキャッシュクリア」をチェックして更新ボタンをクリックするとキャッシュがクリアされます。"
+msgid "* Popular posts data is cached for 1 minutes. To clear the cache, check [Clear cache on save] above and click the Save button."
+msgstr "※人気記事のデータは1分間キャッシュされています。上記の「保存時にキャッシュクリア」をチェックして更新ボタンをクリックするとキャッシュがクリアされます。"
 
 msgid "Clear cache on save"
 msgstr "保存時にキャッシュクリア"
+
+msgid "Please change the display count or period and click [Update] the first time. The database table will be created."
+msgstr "※ 初回は表示件数や期間を変更して「更新」してください。データベーステーブルを作成します。"

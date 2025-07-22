@@ -15,6 +15,8 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
 
 
     /**
+
+
      * 指定期間の日数分のアクセス数集計で人気記事を取得
      *
      * @param int $days 過去何日間を集計するか
@@ -148,7 +150,7 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
         global $wpdb;
         $table_name = AuroraDesignBlocks_PostViewTracker::get_table_name();
         if ($wpdb->get_var("SHOW TABLES LIKE '{$table_name}'") != $table_name) {
-            echo '<p style="color:red;">' . __('※ 初回は表示件数や期間を変更して「更新」してください。データベーステーブルを作成します。', 'aurora-design-blocks') . '</p>';
+            echo '<p style="color:red;">' . __('Please change the display count or period and click [Update] the first time. The database table will be created.', 'aurora-design-blocks') . '</p>';
         }
 
 
@@ -192,7 +194,7 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
             <?php _e('* Views from logged-in users are not counted.', 'aurora-design-blocks'); ?>
         </p>
         <p style="font-size: 0.9em; color: #555;">
-            <?php _e('* Popular posts data is cached for 5 minutes. To clear the cache, check [Clear cache on save] above and click the Save button.', 'aurora-design-blocks'); ?>
+            <?php _e('* Popular posts data is cached for 1 minutes. To clear the cache, check [Clear cache on save] above and click the Save button.', 'aurora-design-blocks'); ?>
         </p>
 
 <?php
@@ -362,7 +364,7 @@ AuroraDesignBlocks_PostViewTracker::init();
 add_action('admin_init', function () {
     if (current_user_can('manage_options') && isset($_GET['drop_adb_table'])) {
         AuroraDesignBlocks_PostViewTracker::drop_views_table();
-        wp_die(AuroraDesignBlocks_PostViewTracker::get_table_name() . 'テーブルを削除しました。');
+        wp_die(AuroraDesignBlocks_PostViewTracker::get_table_name() . ':Drop table complete');
     }
 });
 
