@@ -753,3 +753,12 @@ msgstr "保存時にキャッシュクリア"
 
 msgid "Please change the display count or period and click [Update] the first time. The database table will be created."
 msgstr "※ 初回は表示件数や期間を変更して「更新」してください。データベーステーブルを作成します。"
+
+msgid "Google AdSense Auto Ads"
+msgstr "Googleアドセンス自動広告"
+
+msgid "AdSense Auto Ads Code"
+msgstr "アドセンス自動広告コード"
+
+msgid "Paste the entire AdSense auto ads code here."
+msgstr "AdSenseの自動広告コード全体をここに貼り付けてください。"
