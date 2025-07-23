@@ -142,3 +142,50 @@ class AuroraDesignBlocks_customizer_gtm
 // クラスをインスタンス化して処理を開始
 new AuroraDesignBlocks_customizer_gtm();
 // ## Google_GTM _e /////////////////////////////////////////////
+
+
+// ## Google_adSense _s /////////////////////////////////////////////
+class AuroraDesignBlocks_customizer_adsense_auto
+{
+    public function __construct()
+    {
+        add_action('customize_register', [$this, 'regSettings']);
+        add_action('wp_head', [$this, 'outCode']);
+    }
+
+    public function regSettings($wp_customize)
+    {
+        $wp_customize->add_section('auroraDesignBlocks_adsense_section', [
+            'title' => __('Google AdSense Auto Ads', 'aurora-design-blocks'),
+            'priority' => 1001,
+        ]);
+
+        $wp_customize->add_setting('auroraDesignBlocks_adsense_code', [
+            'default' => '',
+            'sanitize_callback' => [$this, 'allow_script_tags'],
+        ]);
+
+        $wp_customize->add_control('auroraDesignBlocks_adsense_code', [
+            'label' => __('AdSense Auto Ads Code', 'aurora-design-blocks'),
+            'section' => 'auroraDesignBlocks_adsense_section',
+            'type' => 'textarea',
+            'description' => __('Paste the entire AdSense auto ads code here.', 'aurora-design-blocks'),
+        ]);
+    }
+
+    public function allow_script_tags($value)
+    {
+        return $value; // スクリプトタグを許可するためサニタイズなし（要注意）
+    }
+
+    public function outCode()
+    {
+        $code = get_theme_mod('auroraDesignBlocks_adsense_code');
+        if ($code) {
+            echo $code;
+        }
+    }
+}
+
+new AuroraDesignBlocks_customizer_adsense_auto();
+// ## Google_adSense _e /////////////////////////////////////////////
