@@ -5,6 +5,7 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
 {
     protected $ga;
     protected $gtm;
+    protected $adsense;
 
     public function setUp(): void
     {
@@ -23,6 +24,7 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
         // 本体クラスをインスタンス化（本来はファイル読み込みが必要）
         $this->ga = new AuroraDesignBlocks_customizer_ga();
         $this->gtm = new AuroraDesignBlocks_customizer_gtm();
+        $this->adsense = new AuroraDesignBlocks_customizer_adsense_auto();
     }
 
     public function tearDown(): void
@@ -31,6 +33,7 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
         remove_theme_mod('auroraDesignBlocks_ga_trackingCode');
         remove_theme_mod('auroraDesignBlocks_gtm_trackingCode');
         remove_theme_mod('auroraDesignBlocks_gtm_noscriptCode');
+        remove_theme_mod('auroraDesignBlocks_adsense_code'); // 追加
 
         parent::tearDown();
     }
@@ -134,6 +137,49 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
 
         ob_start();
         $this->gtm->outNoscriptCode();
+        $output = ob_get_clean();
+
+        $this->assertEmpty($output);
+    }
+
+    //adsense用のテスト
+
+
+
+    public function test_adsense_customizer_registration()
+    {
+        $wp_customize = new WP_Customize_Manager();
+
+        $this->adsense->regSettings($wp_customize);
+
+        // セクションが登録されているか
+        $this->assertArrayHasKey('auroraDesignBlocks_adsense_section', $wp_customize->sections());
+
+        // 設定が登録されているか
+        $this->assertArrayHasKey('auroraDesignBlocks_adsense_code', $wp_customize->settings());
+
+        // コントロールが登録されているか
+        $this->assertArrayHasKey('auroraDesignBlocks_adsense_code', $wp_customize->controls());
+    }
+
+    public function test_adsense_outCode_outputs_code()
+    {
+        $adsense_code = '<script data-ad-client="ca-pub-xxxxx"></script>';
+        set_theme_mod('auroraDesignBlocks_adsense_code', $adsense_code);
+
+        ob_start();
+        $this->adsense->outCode();
+        $output = ob_get_clean();
+
+        $this->assertStringContainsString($adsense_code, $output);
+    }
+
+    public function test_adsense_outCode_outputs_nothing_when_no_code()
+    {
+        set_theme_mod('auroraDesignBlocks_adsense_code', '');
+
+        ob_start();
+        $this->adsense->outCode();
         $output = ob_get_clean();
 
         $this->assertEmpty($output);
