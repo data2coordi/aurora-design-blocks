@@ -16,6 +16,7 @@
     padding: calc(var(--ly-elementPadding) * 2);
     /*2倍にしている*/
     margin-bottom: var(--ly-elementBottomMargin);
+    border-radius: 15px;
 }
 
 .post-toc h2 {
