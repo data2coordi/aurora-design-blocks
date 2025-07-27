@@ -671,6 +671,16 @@ msgid "[aurora-design-blocks]frame-line"
 msgstr "[aurora-design-blocks]枠線ブロック"
 
 #: blocks/frame-line/build/index.js:1
+msgid "Title Settings"
+msgstr "タイトル設定"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Title Color"
+msgstr "タイトルの色"
+
+
+
+#: blocks/frame-line/build/index.js:1
 msgid "Frame-line Settings"
 msgstr "枠線設定"
 
@@ -692,7 +702,7 @@ msgstr "タイトル文字色"
 
 #: blocks/frame-line/build/index.js:1
 msgid "Frame-line-title Alignment"
-msgstr "枠線タイトルの配置"
+msgstr "タイトルの配置"
 
 #: blocks/frame-line/build/index.js:1
 msgid "Left"
@@ -723,16 +733,32 @@ msgid "None"
 msgstr "なし"
 
 #: blocks/frame-line/build/index.js:1
-msgid "Border Width (e.g., 1px)"
-msgstr "枠線の太さ（例：1px）"
+msgid "Border Width (px)"
+msgstr "枠線の太さ（px）"
 
 #: blocks/frame-line/build/index.js:1
-msgid "Border Radius (e.g., 4px)"
-msgstr "枠線の角丸（例：4px）"
+msgid "Border Radius (px)"
+msgstr "枠線の角丸（px）"
 
 #: blocks/frame-line/build/index.js:1
 msgid "Enter title..."
 msgstr "タイトルを入力してください..."
+
+#: blocks/frame-line/build/index.js:1
+msgid "Title Border Radius"
+msgstr "タイトル枠の角丸"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Normal (0px)"
+msgstr "角なし（0px）"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Rounded (8px)"
+msgstr "やや角丸（8px）"
+
+#: blocks/frame-line/build/index.js:1s
+msgid "More Rounded (16px)"
+msgstr "角丸大（16px）"
 
 
 

@@ -36,6 +36,8 @@ registerBlockType('aurora-design-blocks/frame-line', {
         borderStyle: { type: 'string', default: 'solid' },
         borderWidth: { type: 'string', default: '1px' },
         borderRadius: { type: 'string', default: '0px' },
+        titleBorderRadius: { type: 'string', default: '0px' },
+
     },
 
     edit: ({ attributes, setAttributes }) => {
@@ -47,7 +49,9 @@ registerBlockType('aurora-design-blocks/frame-line', {
             borderColor,
             borderStyle,
             borderWidth,
-            borderRadius } = attributes;
+            borderRadius,
+            titleBorderRadius
+        } = attributes;
 
         const blockProps = useBlockProps({
             className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
@@ -63,7 +67,42 @@ registerBlockType('aurora-design-blocks/frame-line', {
         return (
             <>
                 <InspectorControls>
+                    <PanelBody title={__('Title Settings', 'aurora-design-blocks')}>
+                        <SelectControl
+                            label={__('Frame-line-title Alignment', 'aurora-design-blocks')}
+                            value={frameLineAlign}
+                            options={[
+                                { label: __('Left', 'aurora-design-blocks'), value: 'left' },
+                                { label: __('Center', 'aurora-design-blocks'), value: 'center' },
+                                { label: __('Right', 'aurora-design-blocks'), value: 'right' },
+                            ]}
+                            onChange={(val) => setAttributes({ frameLineAlign: val })}
+                        />
+
+                        <SelectControl
+                            label={__('Title Border Radius', 'aurora-design-blocks')}
+                            value={titleBorderRadius}
+                            options={[
+                                { label: __('Normal (0px)', 'aurora-design-blocks'), value: '0px' },
+                                { label: __('Rounded (8px)', 'aurora-design-blocks'), value: '8px' },
+                                { label: __('More Rounded (16px)', 'aurora-design-blocks'), value: '16px' },
+                            ]}
+                            onChange={(val) => setAttributes({ titleBorderRadius: val })}
+                        />
+
+                        <PanelColorSettings
+                            title={__('Title Color', 'aurora-design-blocks')}
+                            colorSettings={[
+                                {
+                                    label: __('Title Text Color', 'aurora-design-blocks'),
+                                    value: titleColor,
+                                    onChange: (value) => setAttributes({ titleColor: value }),
+                                },
+                            ]}
+                        />
+                    </PanelBody>
                     <PanelBody title={__('Frame-line Settings', 'aurora-design-blocks')}>
+
                         <PanelColorSettings
                             title={__('Frame-line Color', 'aurora-design-blocks')}
                             colorSettings={[
@@ -77,23 +116,10 @@ registerBlockType('aurora-design-blocks/frame-line', {
                                     value: borderColor,
                                     onChange: (value) => setAttributes({ borderColor: value }),
                                 },
-                                {
-                                    label: __('Title Text Color', 'aurora-design-blocks'),
-                                    value: titleColor,
-                                    onChange: (value) => setAttributes({ titleColor: value }),
-                                },
+
                             ]}
                         />
-                        <SelectControl
-                            label={__('Frame-line-title Alignment', 'aurora-design-blocks')}
-                            value={frameLineAlign}
-                            options={[
-                                { label: __('Left', 'aurora-design-blocks'), value: 'left' },
-                                { label: __('Center', 'aurora-design-blocks'), value: 'center' },
-                                { label: __('Right', 'aurora-design-blocks'), value: 'right' },
-                            ]}
-                            onChange={(val) => setAttributes({ frameLineAlign: val })}
-                        />
+
                         <SelectControl
                             label={__('Border Style', 'aurora-design-blocks')}
                             value={borderStyle}
@@ -130,6 +156,8 @@ registerBlockType('aurora-design-blocks/frame-line', {
                         style={{
                             backgroundColor: borderColor || 'white',
                             color: titleColor,
+                            borderRadius: titleBorderRadius,
+
                         }}
                     />
                     <div className="frame-line-content">
@@ -141,7 +169,7 @@ registerBlockType('aurora-design-blocks/frame-line', {
     },
 
     save: ({ attributes }) => {
-        const { title, frameLineAlign, borderStyle, backgroundColor, borderColor, titleColor, borderWidth, borderRadius } = attributes;
+        const { title, frameLineAlign, borderStyle, backgroundColor, borderColor, titleColor, borderWidth, borderRadius, titleBorderRadius } = attributes;
 
         const blockProps = useBlockProps.save({
             className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
@@ -163,6 +191,8 @@ registerBlockType('aurora-design-blocks/frame-line', {
                     style={{
                         backgroundColor: borderColor || 'white',
                         color: titleColor,
+                        borderRadius: titleBorderRadius,
+
                     }}
                 />}
                 <div className="frame-line-content">
