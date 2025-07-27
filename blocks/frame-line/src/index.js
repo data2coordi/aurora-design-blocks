@@ -31,12 +31,14 @@ registerBlockType('aurora-design-blocks/frame-line', {
         frameLineAlign: { type: 'string', default: 'center' },
         borderStyle: { type: 'string', default: 'solid' },
         backgroundColor: { type: 'string' },
-        borderColor: { type: 'string' },  // 追加
+        borderColor: { type: 'string' },
+        titleColor: { type: 'string' },
+
 
     },
 
     edit: ({ attributes, setAttributes }) => {
-        const { title, frameLineAlign, borderStyle, backgroundColor, borderColor } = attributes;
+        const { title, frameLineAlign, borderStyle, backgroundColor, borderColor, titleColor } = attributes;
 
         const blockProps = useBlockProps({
             className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
@@ -63,6 +65,11 @@ registerBlockType('aurora-design-blocks/frame-line', {
                                     label: __('Border Color', 'aurora-design-blocks'),  // 追加
                                     value: borderColor,
                                     onChange: (value) => setAttributes({ borderColor: value }),
+                                },
+                                {
+                                    label: __('Title Text Color', 'aurora-design-blocks'), // ←追加
+                                    value: titleColor,
+                                    onChange: (value) => setAttributes({ titleColor: value }),
                                 },
 
                             ]}
@@ -97,7 +104,10 @@ registerBlockType('aurora-design-blocks/frame-line', {
                         placeholder={__('Enter title...', 'aurora-design-blocks')}
                         value={title}
                         onChange={(val) => setAttributes({ title: val })}
-                        style={{ backgroundColor: borderColor || 'white' }}  // ここを追加
+                        style={{
+                            backgroundColor: borderColor || 'white',
+                            color: titleColor || undefined,
+                        }}
 
                     />
                     <div className="frame-line-content">
@@ -109,7 +119,7 @@ registerBlockType('aurora-design-blocks/frame-line', {
     },
 
     save: ({ attributes }) => {
-        const { title, frameLineAlign, borderStyle, backgroundColor, borderColor } = attributes;
+        const { title, frameLineAlign, borderStyle, backgroundColor, borderColor, titleColor } = attributes;
 
         const blockProps = useBlockProps.save({
             className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
@@ -125,8 +135,10 @@ registerBlockType('aurora-design-blocks/frame-line', {
                     tagName="div"
                     className={`frame-line-title frame-line-title-${frameLineAlign}`}
                     value={title}
-                    style={{ backgroundColor: borderColor || 'white' }}  // ここを追加
-
+                    style={{
+                        backgroundColor: borderColor || 'white',
+                        color: titleColor || undefined,
+                    }}
                 />
                 }
                 <div className="frame-line-content">

@@ -67,7 +67,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     borderColor: {
       type: 'string'
-    } // 追加
+    },
+    titleColor: {
+      type: 'string'
+    }
   },
   edit: ({
     attributes,
@@ -78,7 +81,8 @@ __webpack_require__.r(__webpack_exports__);
       frameLineAlign,
       borderStyle,
       backgroundColor,
-      borderColor
+      borderColor,
+      titleColor
     } = attributes;
     const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
       className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
@@ -105,6 +109,13 @@ __webpack_require__.r(__webpack_exports__);
               value: borderColor,
               onChange: value => setAttributes({
                 borderColor: value
+              })
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Title Text Color', 'aurora-design-blocks'),
+              // ←追加
+              value: titleColor,
+              onChange: value => setAttributes({
+                titleColor: value
               })
             }]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
@@ -152,8 +163,9 @@ __webpack_require__.r(__webpack_exports__);
             title: val
           }),
           style: {
-            backgroundColor: borderColor || 'white'
-          } // ここを追加
+            backgroundColor: borderColor || 'white',
+            color: titleColor || undefined
+          }
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "frame-line-content",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {})
@@ -169,7 +181,8 @@ __webpack_require__.r(__webpack_exports__);
       frameLineAlign,
       borderStyle,
       backgroundColor,
-      borderColor
+      borderColor,
+      titleColor
     } = attributes;
     const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
       className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
@@ -185,8 +198,9 @@ __webpack_require__.r(__webpack_exports__);
         className: `frame-line-title frame-line-title-${frameLineAlign}`,
         value: title,
         style: {
-          backgroundColor: borderColor || 'white'
-        } // ここを追加
+          backgroundColor: borderColor || 'white',
+          color: titleColor || undefined
+        }
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "frame-line-content",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, {})
