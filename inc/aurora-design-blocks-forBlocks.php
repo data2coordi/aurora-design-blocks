@@ -77,6 +77,12 @@ function auroraDesignBlocks_enqueue_block_assets()
 		AURORA_DESIGN_BLOCKS_PATH . 'languages'
 	);
 
+	wp_set_script_translations(
+		'aurora-design-blocks-frame-line-editor-script',
+		'aurora-design-blocks',
+		AURORA_DESIGN_BLOCKS_PATH . 'languages'
+	);
+
 
 	wp_set_script_translations(
 		'AuroraDesignBlocks-gfontawesome',
