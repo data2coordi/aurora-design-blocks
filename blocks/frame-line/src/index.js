@@ -43,7 +43,7 @@ registerBlockType('aurora-design-blocks/frame-line', {
                 <InspectorControls>
                     <PanelBody title={__('Frame-line Settings', 'aurora-design-blocks')}>
                         <SelectControl
-                            label={__('Frame-line Alignment', 'aurora-design-blocks')}
+                            label={__('Frame-line-title Alignment', 'aurora-design-blocks')}
                             value={frameLineAlign}
                             options={[
                                 { label: __('Left', 'aurora-design-blocks'), value: 'left' },
@@ -68,7 +68,7 @@ registerBlockType('aurora-design-blocks/frame-line', {
                 <div {...blockProps}>
                     <RichText
                         tagName="div"
-                        className="frame-line-title"
+                        className={`frame-line-title frame-line-title-${frameLineAlign}`}
                         placeholder={__('Enter title...', 'aurora-design-blocks')}
                         value={title}
                         onChange={(val) => setAttributes({ title: val })}
@@ -90,7 +90,8 @@ registerBlockType('aurora-design-blocks/frame-line', {
 
         return (
             <div {...blockProps}>
-                {title && <RichText.Content tagName="div" className="frame-line-title" value={title} />}
+                {title && <RichText.Content tagName="div" className={`frame-line-title frame-line-title-${frameLineAlign}`}
+                    value={title} />}
                 <div className="frame-line-content">
                     <InnerBlocks.Content />
                 </div>

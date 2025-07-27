@@ -6,27 +6,9 @@
     padding: 1.5em;
     margin: 1em 0;
     position: relative;
-    max-width: 300px;
+
 }
 
-/* ブロック全体の配置位置制御 */
-.frame-line-left {
-    margin-right: 0;
-    margin-left: auto;
-    /* または display: block; width調整など */
-}
-
-.frame-line-center {
-    margin-right: auto;
-    margin-left: auto;
-
-    /* 必要に応じて幅制限 */
-}
-
-.frame-line-right {
-    margin-right: auto;
-    margin-left: 0;
-}
 
 
 .border-solid {
@@ -47,4 +29,22 @@
     background: white;
     padding: 0 0.5em;
     font-weight: bold;
+}
+
+
+/* 配置制御 */
+.frame-line-title-left {
+    right: 0;
+    left: auto;
+}
+
+.frame-line-title-center {
+    right: 50%;
+    transform: translateX(50%);
+    left: auto;
+}
+
+.frame-line-title-right {
+    left: 0;
+    right: auto;
 }

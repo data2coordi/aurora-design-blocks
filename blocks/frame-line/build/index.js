@@ -80,7 +80,7 @@ __webpack_require__.r(__webpack_exports__);
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
           title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Frame-line Settings', 'aurora-design-blocks'),
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Frame-line Alignment', 'aurora-design-blocks'),
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Frame-line-title Alignment', 'aurora-design-blocks'),
             value: frameLineAlign,
             options: [{
               label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Left', 'aurora-design-blocks'),
@@ -117,7 +117,7 @@ __webpack_require__.r(__webpack_exports__);
         ...blockProps,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
           tagName: "div",
-          className: "frame-line-title",
+          className: `frame-line-title frame-line-title-${frameLineAlign}`,
           placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter title...', 'aurora-design-blocks'),
           value: title,
           onChange: val => setAttributes({
@@ -145,7 +145,7 @@ __webpack_require__.r(__webpack_exports__);
       ...blockProps,
       children: [title && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
         tagName: "div",
-        className: "frame-line-title",
+        className: `frame-line-title frame-line-title-${frameLineAlign}`,
         value: title
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "frame-line-content",
