@@ -64,7 +64,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     backgroundColor: {
       type: 'string'
-    }
+    },
+    borderColor: {
+      type: 'string'
+    } // 追加
   },
   edit: ({
     attributes,
@@ -74,12 +77,14 @@ __webpack_require__.r(__webpack_exports__);
       title,
       frameLineAlign,
       borderStyle,
-      backgroundColor
+      backgroundColor,
+      borderColor
     } = attributes;
     const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
       className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
       style: {
-        backgroundColor: backgroundColor || undefined
+        backgroundColor: backgroundColor || undefined,
+        borderColor: borderColor || undefined // 追加
       }
     });
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
@@ -87,12 +92,19 @@ __webpack_require__.r(__webpack_exports__);
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
           title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Frame-line Settings', 'aurora-design-blocks'),
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.PanelColorSettings, {
-            title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Background Color', 'aurora-design-blocks'),
+            title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Frame-line Color', 'aurora-design-blocks'),
             colorSettings: [{
               label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Background Color', 'aurora-design-blocks'),
               value: backgroundColor,
               onChange: value => setAttributes({
                 backgroundColor: value
+              })
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Border Color', 'aurora-design-blocks'),
+              // 追加
+              value: borderColor,
+              onChange: value => setAttributes({
+                borderColor: value
               })
             }]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
@@ -138,7 +150,10 @@ __webpack_require__.r(__webpack_exports__);
           value: title,
           onChange: val => setAttributes({
             title: val
-          })
+          }),
+          style: {
+            backgroundColor: borderColor || 'white'
+          } // ここを追加
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "frame-line-content",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {})
@@ -153,12 +168,14 @@ __webpack_require__.r(__webpack_exports__);
       title,
       frameLineAlign,
       borderStyle,
-      backgroundColor
+      backgroundColor,
+      borderColor
     } = attributes;
     const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
       className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
       style: {
-        backgroundColor: backgroundColor || undefined
+        backgroundColor: backgroundColor || undefined,
+        borderColor: borderColor || undefined // 追加
       }
     });
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
@@ -166,7 +183,10 @@ __webpack_require__.r(__webpack_exports__);
       children: [title && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
         tagName: "div",
         className: `frame-line-title frame-line-title-${frameLineAlign}`,
-        value: title
+        value: title,
+        style: {
+          backgroundColor: borderColor || 'white'
+        } // ここを追加
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "frame-line-content",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, {})

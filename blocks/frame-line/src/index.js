@@ -31,14 +31,19 @@ registerBlockType('aurora-design-blocks/frame-line', {
         frameLineAlign: { type: 'string', default: 'center' },
         borderStyle: { type: 'string', default: 'solid' },
         backgroundColor: { type: 'string' },
+        borderColor: { type: 'string' },  // 追加
+
     },
 
     edit: ({ attributes, setAttributes }) => {
-        const { title, frameLineAlign, borderStyle, backgroundColor } = attributes;
+        const { title, frameLineAlign, borderStyle, backgroundColor, borderColor } = attributes;
 
         const blockProps = useBlockProps({
             className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
-            style: { backgroundColor: backgroundColor || undefined }
+            style: {
+                backgroundColor: backgroundColor || undefined,
+                borderColor: borderColor || undefined,  // 追加
+            }
 
         });
 
@@ -47,13 +52,19 @@ registerBlockType('aurora-design-blocks/frame-line', {
                 <InspectorControls>
                     <PanelBody title={__('Frame-line Settings', 'aurora-design-blocks')}>
                         <PanelColorSettings
-                            title={__('Background Color', 'aurora-design-blocks')}
+                            title={__('Frame-line Color', 'aurora-design-blocks')}
                             colorSettings={[
                                 {
                                     label: __('Background Color', 'aurora-design-blocks'),
                                     value: backgroundColor,
                                     onChange: (value) => setAttributes({ backgroundColor: value }),
                                 },
+                                {
+                                    label: __('Border Color', 'aurora-design-blocks'),  // 追加
+                                    value: borderColor,
+                                    onChange: (value) => setAttributes({ borderColor: value }),
+                                },
+
                             ]}
                         />
                         <SelectControl
@@ -86,6 +97,8 @@ registerBlockType('aurora-design-blocks/frame-line', {
                         placeholder={__('Enter title...', 'aurora-design-blocks')}
                         value={title}
                         onChange={(val) => setAttributes({ title: val })}
+                        style={{ backgroundColor: borderColor || 'white' }}  // ここを追加
+
                     />
                     <div className="frame-line-content">
                         <InnerBlocks />
@@ -96,17 +109,26 @@ registerBlockType('aurora-design-blocks/frame-line', {
     },
 
     save: ({ attributes }) => {
-        const { title, frameLineAlign, borderStyle, backgroundColor } = attributes;
+        const { title, frameLineAlign, borderStyle, backgroundColor, borderColor } = attributes;
 
         const blockProps = useBlockProps.save({
             className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
-            style: { backgroundColor: backgroundColor || undefined }
+            style: {
+                backgroundColor: backgroundColor || undefined,
+                borderColor: borderColor || undefined,  // 追加
+            }
         });
 
         return (
             <div {...blockProps}>
-                {title && <RichText.Content tagName="div" className={`frame-line-title frame-line-title-${frameLineAlign}`}
-                    value={title} />}
+                {title && <RichText.Content
+                    tagName="div"
+                    className={`frame-line-title frame-line-title-${frameLineAlign}`}
+                    value={title}
+                    style={{ backgroundColor: borderColor || 'white' }}  // ここを追加
+
+                />
+                }
                 <div className="frame-line-content">
                     <InnerBlocks.Content />
                 </div>
