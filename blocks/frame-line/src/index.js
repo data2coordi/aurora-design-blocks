@@ -1,4 +1,5 @@
 /* frame-line*/
+import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
 import { registerBlockType } from '@wordpress/blocks';
 import {
     useBlockProps,
@@ -103,15 +104,18 @@ registerBlockType('aurora-design-blocks/frame-line', {
                             ]}
                             onChange={(val) => setAttributes({ borderStyle: val })}
                         />
-                        <TextControl
-                            label={__('Border Width (e.g., 1px)', 'aurora-design-blocks')}
-                            value={borderWidth}
-                            onChange={(val) => setAttributes({ borderWidth: val })}
+                        <NumberControl
+                            label={__('Border Width (px)', 'aurora-design-blocks')}
+                            value={parseInt(borderWidth)}
+                            onChange={(val) => setAttributes({ borderWidth: `${val}px` })}
+                            min={0}
                         />
-                        <TextControl
-                            label={__('Border Radius (e.g., 4px)', 'aurora-design-blocks')}
-                            value={borderRadius}
-                            onChange={(val) => setAttributes({ borderRadius: val })}
+
+                        <NumberControl
+                            label={__('Border Radius (px)', 'aurora-design-blocks')}
+                            value={parseInt(borderRadius)}
+                            onChange={(val) => setAttributes({ borderRadius: `${val}px` })}
+                            min={0}
                         />
                     </PanelBody>
                 </InspectorControls>
