@@ -762,3 +762,73 @@ msgstr "アドセンス自動広告コード"
 
 msgid "Paste the entire AdSense auto ads code here."
 msgstr "AdSenseの自動広告コード全体をここに貼り付けてください。"
+
+
+
+#: blocks/frame-line/build/index.js:1
+msgid "[aurora-design-blocks]frame-line"
+msgstr "[aurora-design-blocks]枠線ブロック"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Frame-line Settings"
+msgstr "フレームライン設定"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Frame-line Color"
+msgstr "フレームラインの色"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Background Color"
+msgstr "背景色"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Border Color"
+msgstr "枠線色"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Title Text Color"
+msgstr "タイトル文字色"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Frame-line-title Alignment"
+msgstr "フレームラインタイトルの配置"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Left"
+msgstr "左"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Center"
+msgstr "中央"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Right"
+msgstr "右"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Border Style"
+msgstr "枠線スタイル"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Solid"
+msgstr "実線"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Dashed"
+msgstr "破線"
+
+#: blocks/frame-line/build/index.js:1
+msgid "None"
+msgstr "なし"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Border Width (e.g., 1px)"
+msgstr "枠線の太さ（例：1px）"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Border Radius (e.g., 4px)"
+msgstr "枠線の角丸（例：4px）"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Enter title..."
+msgstr "タイトルを入力してください..."
