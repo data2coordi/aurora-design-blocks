@@ -5,6 +5,7 @@ import {
     InspectorControls,
     InnerBlocks,
     RichText,
+    PanelColorSettings
 } from '@wordpress/block-editor';
 import {
     PanelBody,
@@ -29,19 +30,32 @@ registerBlockType('aurora-design-blocks/frame-line', {
         title: { type: 'string', default: '' },
         frameLineAlign: { type: 'string', default: 'center' },
         borderStyle: { type: 'string', default: 'solid' },
+        backgroundColor: { type: 'string' },
     },
 
     edit: ({ attributes, setAttributes }) => {
-        const { title, frameLineAlign, borderStyle } = attributes;
+        const { title, frameLineAlign, borderStyle, backgroundColor } = attributes;
 
         const blockProps = useBlockProps({
             className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
+            style: { backgroundColor: backgroundColor || undefined }
+
         });
 
         return (
             <>
                 <InspectorControls>
                     <PanelBody title={__('Frame-line Settings', 'aurora-design-blocks')}>
+                        <PanelColorSettings
+                            title={__('Background Color', 'aurora-design-blocks')}
+                            colorSettings={[
+                                {
+                                    label: __('Background Color', 'aurora-design-blocks'),
+                                    value: backgroundColor,
+                                    onChange: (value) => setAttributes({ backgroundColor: value }),
+                                },
+                            ]}
+                        />
                         <SelectControl
                             label={__('Frame-line-title Alignment', 'aurora-design-blocks')}
                             value={frameLineAlign}
@@ -82,10 +96,11 @@ registerBlockType('aurora-design-blocks/frame-line', {
     },
 
     save: ({ attributes }) => {
-        const { title, frameLineAlign, borderStyle } = attributes;
+        const { title, frameLineAlign, borderStyle, backgroundColor } = attributes;
 
         const blockProps = useBlockProps.save({
             className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
+            style: { backgroundColor: backgroundColor || undefined }
         });
 
         return (

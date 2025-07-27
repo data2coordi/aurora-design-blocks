@@ -61,6 +61,9 @@ __webpack_require__.r(__webpack_exports__);
     borderStyle: {
       type: 'string',
       default: 'solid'
+    },
+    backgroundColor: {
+      type: 'string'
     }
   },
   edit: ({
@@ -70,16 +73,29 @@ __webpack_require__.r(__webpack_exports__);
     const {
       title,
       frameLineAlign,
-      borderStyle
+      borderStyle,
+      backgroundColor
     } = attributes;
     const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
-      className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`
+      className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
+      style: {
+        backgroundColor: backgroundColor || undefined
+      }
     });
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
           title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Frame-line Settings', 'aurora-design-blocks'),
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.PanelColorSettings, {
+            title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Background Color', 'aurora-design-blocks'),
+            colorSettings: [{
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Background Color', 'aurora-design-blocks'),
+              value: backgroundColor,
+              onChange: value => setAttributes({
+                backgroundColor: value
+              })
+            }]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
             label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Frame-line-title Alignment', 'aurora-design-blocks'),
             value: frameLineAlign,
             options: [{
@@ -136,10 +152,14 @@ __webpack_require__.r(__webpack_exports__);
     const {
       title,
       frameLineAlign,
-      borderStyle
+      borderStyle,
+      backgroundColor
     } = attributes;
     const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
-      className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`
+      className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
+      style: {
+        backgroundColor: backgroundColor || undefined
+      }
     });
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
       ...blockProps,

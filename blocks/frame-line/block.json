@@ -22,6 +22,10 @@
         "borderStyle": {
             "type": "string",
             "default": "solid"
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": ""
         }
     },
     "editorScript": "file:./build/index.js",
