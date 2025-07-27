@@ -1,3 +1,4 @@
+/* frame-line */
 import { registerBlockType } from '@wordpress/blocks';
 import {
     useBlockProps,
@@ -40,7 +41,7 @@ registerBlockType('aurora-design-blocks/frame-line', {
         return (
             <>
                 <InspectorControls>
-                    <PanelBody title={__('Box Settings', 'aurora-design-blocks')}>
+                    <PanelBody title={__('Frame-line Settings', 'aurora-design-blocks')}>
                         <SelectControl
                             label={__('Title Alignment', 'aurora-design-blocks')}
                             value={titleAlign}
@@ -67,12 +68,12 @@ registerBlockType('aurora-design-blocks/frame-line', {
                 <div {...blockProps}>
                     <RichText
                         tagName="div"
-                        className="box-title"
+                        className="frame-line-title"
                         placeholder={__('Enter title...', 'aurora-design-blocks')}
                         value={title}
                         onChange={(val) => setAttributes({ title: val })}
                     />
-                    <div className="box-content">
+                    <div className="frame-line-content">
                         <InnerBlocks />
                     </div>
                 </div>
@@ -89,11 +90,12 @@ registerBlockType('aurora-design-blocks/frame-line', {
 
         return (
             <div {...blockProps}>
-                {title && <RichText.Content tagName="div" className="box-title" value={title} />}
-                <div className="box-content">
+                {title && <RichText.Content tagName="div" className="frame-line-title" value={title} />}
+                <div className="frame-line-content">
                     <InnerBlocks.Content />
                 </div>
             </div>
         );
     },
 });
+
