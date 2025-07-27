@@ -1,6 +1,6 @@
 .frame-line {
     border: 2px solid #ccc;
-    padding: 1.5em;
+    padding: 0 1.5em;
     margin: 1em 0;
     position: relative;
 
@@ -19,7 +19,7 @@
 
 /* 配置制御 */
 .frame-line-title-left {
-    left: 0;
+    left: 1em;
     right: auto;
 }
 
@@ -30,6 +30,6 @@
 }
 
 .frame-line-title-right {
-    right: 0;
+    right: 1em;
     left: auto;
 }

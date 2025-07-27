@@ -752,13 +752,16 @@ msgstr "タイトル枠の角丸"
 msgid "Normal (0px)"
 msgstr "角なし（0px）"
 
+
+#: blocks/frame-line/build/index.js:1
+msgid "More Rounded (16px)"
+msgstr "角丸大（16px）"
+
 #: blocks/frame-line/build/index.js:1
 msgid "Rounded (8px)"
 msgstr "やや角丸（8px）"
 
-#: blocks/frame-line/build/index.js:1s
-msgid "More Rounded (16px)"
-msgstr "角丸大（16px）"
+
 
 
 
