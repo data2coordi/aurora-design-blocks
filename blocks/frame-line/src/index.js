@@ -1,4 +1,4 @@
-/* frame-line */
+/* frame-line   */
 import { registerBlockType } from '@wordpress/blocks';
 import {
     useBlockProps,
@@ -27,15 +27,15 @@ registerBlockType('aurora-design-blocks/frame-line', {
 
     attributes: {
         title: { type: 'string', default: '' },
-        titleAlign: { type: 'string', default: 'center' },
+        frameLineAlign: { type: 'string', default: 'center' },
         borderStyle: { type: 'string', default: 'solid' },
     },
 
     edit: ({ attributes, setAttributes }) => {
-        const { title, titleAlign, borderStyle } = attributes;
+        const { title, frameLineAlign, borderStyle } = attributes;
 
         const blockProps = useBlockProps({
-            className: `frame-line border-${borderStyle} title-${titleAlign}`,
+            className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
         });
 
         return (
@@ -43,14 +43,14 @@ registerBlockType('aurora-design-blocks/frame-line', {
                 <InspectorControls>
                     <PanelBody title={__('Frame-line Settings', 'aurora-design-blocks')}>
                         <SelectControl
-                            label={__('Title Alignment', 'aurora-design-blocks')}
-                            value={titleAlign}
+                            label={__('Frame-line Alignment', 'aurora-design-blocks')}
+                            value={frameLineAlign}
                             options={[
                                 { label: __('Left', 'aurora-design-blocks'), value: 'left' },
                                 { label: __('Center', 'aurora-design-blocks'), value: 'center' },
                                 { label: __('Right', 'aurora-design-blocks'), value: 'right' },
                             ]}
-                            onChange={(val) => setAttributes({ titleAlign: val })}
+                            onChange={(val) => setAttributes({ frameLineAlign: val })}
                         />
                         <SelectControl
                             label={__('Border Style', 'aurora-design-blocks')}
@@ -82,10 +82,10 @@ registerBlockType('aurora-design-blocks/frame-line', {
     },
 
     save: ({ attributes }) => {
-        const { title, titleAlign, borderStyle } = attributes;
+        const { title, frameLineAlign, borderStyle } = attributes;
 
         const blockProps = useBlockProps.save({
-            className: `frame-line border-${borderStyle} title-${titleAlign}`,
+            className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
         });
 
         return (
