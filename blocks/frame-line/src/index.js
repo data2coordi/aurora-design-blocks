@@ -1,4 +1,4 @@
-/* frame-line   */
+/* frame-line*/
 import { registerBlockType } from '@wordpress/blocks';
 import {
     useBlockProps,
@@ -29,24 +29,34 @@ registerBlockType('aurora-design-blocks/frame-line', {
     attributes: {
         title: { type: 'string', default: '' },
         frameLineAlign: { type: 'string', default: 'center' },
-        borderStyle: { type: 'string', default: 'solid' },
         backgroundColor: { type: 'string' },
-        borderColor: { type: 'string' },
         titleColor: { type: 'string' },
-
-
+        borderColor: { type: 'string' },
+        borderStyle: { type: 'string', default: 'solid' },
+        borderWidth: { type: 'string', default: '1px' },
+        borderRadius: { type: 'string', default: '0px' },
     },
 
     edit: ({ attributes, setAttributes }) => {
-        const { title, frameLineAlign, borderStyle, backgroundColor, borderColor, titleColor } = attributes;
+        const {
+            title,
+            frameLineAlign,
+            backgroundColor,
+            titleColor,
+            borderColor,
+            borderStyle,
+            borderWidth,
+            borderRadius } = attributes;
 
         const blockProps = useBlockProps({
             className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
             style: {
-                backgroundColor: backgroundColor || undefined,
-                borderColor: borderColor || undefined,  // 追加
+                backgroundColor,
+                borderColor,
+                borderStyle,
+                borderWidth,
+                borderRadius,
             }
-
         });
 
         return (
@@ -62,16 +72,15 @@ registerBlockType('aurora-design-blocks/frame-line', {
                                     onChange: (value) => setAttributes({ backgroundColor: value }),
                                 },
                                 {
-                                    label: __('Border Color', 'aurora-design-blocks'),  // 追加
+                                    label: __('Border Color', 'aurora-design-blocks'),
                                     value: borderColor,
                                     onChange: (value) => setAttributes({ borderColor: value }),
                                 },
                                 {
-                                    label: __('Title Text Color', 'aurora-design-blocks'), // ←追加
+                                    label: __('Title Text Color', 'aurora-design-blocks'),
                                     value: titleColor,
                                     onChange: (value) => setAttributes({ titleColor: value }),
                                 },
-
                             ]}
                         />
                         <SelectControl
@@ -94,6 +103,16 @@ registerBlockType('aurora-design-blocks/frame-line', {
                             ]}
                             onChange={(val) => setAttributes({ borderStyle: val })}
                         />
+                        <TextControl
+                            label={__('Border Width (e.g., 1px)', 'aurora-design-blocks')}
+                            value={borderWidth}
+                            onChange={(val) => setAttributes({ borderWidth: val })}
+                        />
+                        <TextControl
+                            label={__('Border Radius (e.g., 4px)', 'aurora-design-blocks')}
+                            value={borderRadius}
+                            onChange={(val) => setAttributes({ borderRadius: val })}
+                        />
                     </PanelBody>
                 </InspectorControls>
 
@@ -106,9 +125,8 @@ registerBlockType('aurora-design-blocks/frame-line', {
                         onChange={(val) => setAttributes({ title: val })}
                         style={{
                             backgroundColor: borderColor || 'white',
-                            color: titleColor || undefined,
+                            color: titleColor,
                         }}
-
                     />
                     <div className="frame-line-content">
                         <InnerBlocks />
@@ -119,13 +137,16 @@ registerBlockType('aurora-design-blocks/frame-line', {
     },
 
     save: ({ attributes }) => {
-        const { title, frameLineAlign, borderStyle, backgroundColor, borderColor, titleColor } = attributes;
+        const { title, frameLineAlign, borderStyle, backgroundColor, borderColor, titleColor, borderWidth, borderRadius } = attributes;
 
         const blockProps = useBlockProps.save({
             className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
             style: {
-                backgroundColor: backgroundColor || undefined,
-                borderColor: borderColor || undefined,  // 追加
+                backgroundColor,
+                borderColor,
+                borderStyle,
+                borderWidth,
+                borderRadius,
             }
         });
 
@@ -137,10 +158,9 @@ registerBlockType('aurora-design-blocks/frame-line', {
                     value={title}
                     style={{
                         backgroundColor: borderColor || 'white',
-                        color: titleColor || undefined,
+                        color: titleColor,
                     }}
-                />
-                }
+                />}
                 <div className="frame-line-content">
                     <InnerBlocks.Content />
                 </div>
@@ -148,4 +168,3 @@ registerBlockType('aurora-design-blocks/frame-line', {
         );
     },
 });
-

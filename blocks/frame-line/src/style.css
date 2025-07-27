@@ -8,18 +8,6 @@
 
 
 
-.border-solid {
-    border-style: solid;
-}
-
-.border-dashed {
-    border-style: dashed;
-}
-
-.border-none {
-    border: none;
-}
-
 .frame-line-title {
     position: absolute;
     top: -0.9em;
