@@ -1,6 +1,10 @@
 <?php
 
+/************************************************************/
+/*cssのロード s*/
+/************************************************************/
 
+//フロントエンド用
 $auroraDesignBlocks_FrontendStyles = [
     'aurora-design-blocks-style-block-module' => 'css/block-module.css',
     'aurora-design-style-aurora-design' => 'css/aurora-design.css',
@@ -13,6 +17,18 @@ $auroraDesignBlocks_deferredStyles = [
 ];
 // 遅延対象のスタイルを登録
 auroraDesignBlocksDeferCss::add_deferred_styles($auroraDesignBlocks_deferredStyles);
+
+
+//エディタ用
+$auroraDesignBlocks_EditorStyles = [
+    'aurora-design-style-awesome' => 'css/awesome-all.min.css',
+];
+AuroraDesignBlocksEditorStyles::add_styles($auroraDesignBlocks_EditorStyles);
+/************************************************************/
+/*cssのロード e*/
+/************************************************************/
+
+
 
 
 
