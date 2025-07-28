@@ -1,6 +1,29 @@
 <?php
 
+
+/*get_theme_modを使っていた不具合対応 一時的なコード*/
+class AuroraDesignBlocks_forFront
+{
+
+    public static function outCode($code_name)
+    {
+        $tracking_code = get_option($code_name);
+
+        if (empty($tracking_code)) {
+            $tracking_code = get_theme_mod($code_name);
+        }
+
+        if (!empty($tracking_code)) {
+            echo $tracking_code;
+        }
+    }
+}
+
+
+
 // ## Google_Analytics _s /////////////////////////////////////////////
+
+
 
 class AuroraDesignBlocks_customizer_ga
 {
@@ -25,6 +48,7 @@ class AuroraDesignBlocks_customizer_ga
         $wp_customize->add_setting('auroraDesignBlocks_ga_trackingCode', array(
             'default' => '',
             'sanitize_callback' =>  [$this, 'auroraDesignBlocks_innocuousSanitize'], // 無害なサニタイズ関数を適用
+            'type' => 'option',
 
         ));
 
@@ -47,10 +71,7 @@ class AuroraDesignBlocks_customizer_ga
     // Google アナリティクスコードをサイトの <head> に出力
     public function outCode()
     {
-        $tracking_code = get_theme_mod('auroraDesignBlocks_ga_trackingCode');
-        if ($tracking_code) {
-            echo $tracking_code; // HTMLをそのまま出力
-        }
+        AuroraDesignBlocks_forFront::outCode('auroraDesignBlocks_ga_trackingCode');
     }
 }
 
@@ -84,6 +105,7 @@ class AuroraDesignBlocks_customizer_gtm
         $wp_customize->add_setting('auroraDesignBlocks_gtm_trackingCode', array(
             'default' => '',
             'sanitize_callback' =>  [$this, 'auroraDesignBlocks_innocuousSanitize'], // 無害なサニタイズ関数を適用
+            'type' => 'option',
 
         ));
 
@@ -99,6 +121,7 @@ class AuroraDesignBlocks_customizer_gtm
         $wp_customize->add_setting('auroraDesignBlocks_gtm_noscriptCode', array(
             'default' => '',
             'sanitize_callback' => [$this, 'auroraDesignBlocks_innocuousSanitize'], // 無害なサニタイズ関数を適用
+            'type' => 'option',
 
         ));
 
@@ -123,19 +146,14 @@ class AuroraDesignBlocks_customizer_gtm
     // Google Tag Manager コードをサイトの <head> に出力
     public function outCode()
     {
-        $tracking_code = get_theme_mod('auroraDesignBlocks_gtm_trackingCode');
-        if ($tracking_code) {
-            echo $tracking_code; // HTMLをそのまま出力
-        }
+
+        AuroraDesignBlocks_forFront::outCode('auroraDesignBlocks_gtm_trackingCode');
     }
 
     // Google Tag Manager noscript バックアップコードを <body> タグ直後に出力
     public function outNoscriptCode()
     {
-        $noscript_code = get_theme_mod('auroraDesignBlocks_gtm_noscriptCode');
-        if ($noscript_code) {
-            echo $noscript_code; // noscriptタグを出力
-        }
+        AuroraDesignBlocks_forFront::outCode('auroraDesignBlocks_gtm_noscriptCode');
     }
 }
 
@@ -163,6 +181,7 @@ class AuroraDesignBlocks_customizer_adsense_auto
         $wp_customize->add_setting('auroraDesignBlocks_adsense_code', [
             'default' => '',
             'sanitize_callback' => [$this, 'allow_script_tags'],
+            'type' => 'option',
         ]);
 
         $wp_customize->add_control('auroraDesignBlocks_adsense_code', [
@@ -180,10 +199,7 @@ class AuroraDesignBlocks_customizer_adsense_auto
 
     public function outCode()
     {
-        $code = get_theme_mod('auroraDesignBlocks_adsense_code');
-        if ($code) {
-            echo $code;
-        }
+        AuroraDesignBlocks_forFront::outCode('auroraDesignBlocks_adsense_code');
     }
 }
 
