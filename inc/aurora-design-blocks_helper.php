@@ -28,11 +28,12 @@ function aurora_design_blocks_migrate_theme_mods_to_options_once()
             $theme_mod_value = get_theme_mod($option_name);
             if ($theme_mod_value !== null && $theme_mod_value !== '') {
                 update_option($option_name, $theme_mod_value);
+                update_option('aurora_design_blocks_options_migrated', true);
             }
         }
     }
 
     // フラグを保存して2回目以降はスキップ
-    update_option('aurora_design_blocks_options_migrated', true);
+
 }
-add_action('admin_init', 'aurora_design_blocks_migrate_theme_mods_to_options_once');
+add_action('after_setup_theme', 'aurora_design_blocks_migrate_theme_mods_to_options_once');
