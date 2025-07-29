@@ -8,11 +8,6 @@ class AuroraDesignBlocks_forFront
     public static function outCode($code_name)
     {
         $tracking_code = get_option($code_name);
-
-        if (empty($tracking_code)) {
-            $tracking_code = get_theme_mod($code_name);
-        }
-
         if (!empty($tracking_code)) {
             echo $tracking_code;
         }
