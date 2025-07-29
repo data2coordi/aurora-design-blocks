@@ -1,7 +1,7 @@
 <?php
 
 
-/*get_theme_modを使っていた不具合対応 一時的なコード*/
+/*フロントにカスタマイザーでセットした値を表示*/
 class AuroraDesignBlocks_forFront
 {
 

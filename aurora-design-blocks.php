@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Aurora Design Blocks 
  * Description: カスタムブロックを追加するプラグイン。
- * Version: 1.0.12
+ * Version: 1.0.13
  * Author: Yurika Toshida at Aurora Lab
  * Text Domain: aurora-design-blocks
  */
