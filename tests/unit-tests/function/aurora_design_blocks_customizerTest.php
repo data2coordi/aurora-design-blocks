@@ -30,10 +30,10 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
     public function tearDown(): void
     {
         // テーマモッドのクリア
-        remove_theme_mod('auroraDesignBlocks_ga_trackingCode');
-        remove_theme_mod('auroraDesignBlocks_gtm_trackingCode');
-        remove_theme_mod('auroraDesignBlocks_gtm_noscriptCode');
-        remove_theme_mod('auroraDesignBlocks_adsense_code'); // 追加
+        delete_option('auroraDesignBlocks_ga_trackingCode');
+        delete_option('auroraDesignBlocks_gtm_trackingCode');
+        delete_option('auroraDesignBlocks_gtm_noscriptCode');
+        delete_option('auroraDesignBlocks_adsense_code'); // 追加
 
         parent::tearDown();
     }
@@ -75,7 +75,7 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
     public function test_ga_outCode_outputs_tracking_code()
     {
         $tracking_code = '<script>GAコード</script>';
-        set_theme_mod('auroraDesignBlocks_ga_trackingCode', $tracking_code);
+        update_option('auroraDesignBlocks_ga_trackingCode', $tracking_code);
 
         // 出力バッファリングで出力をキャプチャ
         ob_start();
@@ -87,7 +87,7 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
 
     public function test_ga_outCode_outputs_nothing_when_no_code()
     {
-        set_theme_mod('auroraDesignBlocks_ga_trackingCode', '');
+        update_option('auroraDesignBlocks_ga_trackingCode', '');
 
         ob_start();
         $this->ga->outCode();
@@ -99,7 +99,7 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
     public function test_gtm_outCode_outputs_tracking_code()
     {
         $tracking_code = '<script>GTMコード</script>';
-        set_theme_mod('auroraDesignBlocks_gtm_trackingCode', $tracking_code);
+        update_option('auroraDesignBlocks_gtm_trackingCode', $tracking_code);
 
         ob_start();
         $this->gtm->outCode();
@@ -110,7 +110,7 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
 
     public function test_gtm_outCode_outputs_nothing_when_no_code()
     {
-        set_theme_mod('auroraDesignBlocks_gtm_trackingCode', '');
+        update_option('auroraDesignBlocks_gtm_trackingCode', '');
 
         ob_start();
         $this->gtm->outCode();
@@ -122,7 +122,7 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
     public function test_gtm_outNoscriptCode_outputs_noscript_code()
     {
         $noscript_code = '<noscript>バックアップコード</noscript>';
-        set_theme_mod('auroraDesignBlocks_gtm_noscriptCode', $noscript_code);
+        update_option('auroraDesignBlocks_gtm_noscriptCode', $noscript_code);
 
         ob_start();
         $this->gtm->outNoscriptCode();
@@ -133,7 +133,7 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
 
     public function test_gtm_outNoscriptCode_outputs_nothing_when_no_code()
     {
-        set_theme_mod('auroraDesignBlocks_gtm_noscriptCode', '');
+        update_option('auroraDesignBlocks_gtm_noscriptCode', '');
 
         ob_start();
         $this->gtm->outNoscriptCode();
@@ -165,7 +165,7 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
     public function test_adsense_outCode_outputs_code()
     {
         $adsense_code = '<script data-ad-client="ca-pub-xxxxx"></script>';
-        set_theme_mod('auroraDesignBlocks_adsense_code', $adsense_code);
+        update_option('auroraDesignBlocks_adsense_code', $adsense_code);
 
         ob_start();
         $this->adsense->outCode();
@@ -176,7 +176,7 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
 
     public function test_adsense_outCode_outputs_nothing_when_no_code()
     {
-        set_theme_mod('auroraDesignBlocks_adsense_code', '');
+        update_option('auroraDesignBlocks_adsense_code', '');
 
         ob_start();
         $this->adsense->outCode();
