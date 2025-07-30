@@ -16,7 +16,7 @@
     margin-top: var(--ly-elementTopMargin);
     padding: calc(var(--ly-elementPadding) * 2);
     /*2倍にしている*/
-    margin-bottom: var(--ly-elementBottomMargin);
+    margin-bottom: calc(var(--ly-elementBottomMargin) * 2);
     border-radius: 15px;
 }
 

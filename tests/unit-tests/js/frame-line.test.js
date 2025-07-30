@@ -170,3 +170,23 @@ describe('aurora-design-blocks/frame-line - FL-002', () => {
         expect(titleRichText).toHaveTextContent('My Awesome Title');
     });
 });
+
+
+/*
+タイトル
+title がHTML内に出力されること
+frameLineAlign に応じたクラスが付与される
+borderColor が title の背景色として反映される
+titleColor が文字色として反映される
+titleBorderRadius が反映される
+
+枠線
+backgroundColor がブロック背景に適用される
+borderColor が枠線に適用される
+borderStyle（solid, dashedなど）が適用される
+borderWidth が適用される
+borderRadius がブロック全体に適用される
+align 属性（例：full）に応じてクラスが追加される
+InnerBlocks の中身（段落など）が出力される
+
+*/
