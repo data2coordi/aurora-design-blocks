@@ -1,6 +1,7 @@
 clear
 
-npm run test:unit:js  tests/unit-tests/js
+#npm run test:unit:js  tests/unit-tests/js
+npm run test:unit:js  tests/unit-tests/js/gfontawesome.test.js
 
 
 exit
