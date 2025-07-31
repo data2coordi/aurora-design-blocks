@@ -43,28 +43,30 @@ class AuroraDesignBlocks_Block_Assets
      */
     private function register_block_patterns()
     {
-        // Check if the function exists before calling it (good practice)
 
-        $content = file_get_contents(AURORA_DESIGN_BLOCKS_PATH . 'patterns/frame-line1.html');
+        $patterns = [
+            'frame-line1' => [
+                'title' => __('AuroraDesignBlocks pattern frame-line1', 'AuroraDesignBlocks'),
+                'file' => 'frame-line1.html',
+            ],
+            'frame-line2' => [
+                'title' => __('AuroraDesignBlocks pattern frame-line2', 'AuroraDesignBlocks'),
+                'file' => 'frame-line2.html',
+            ],
+            'slider1' => [
+                'title' => __('AuroraDesignBlocks pattern slider1', 'AuroraDesignBlocks'),
+                'file' => 'slider1.html',
+            ],
+        ];
 
-        register_block_pattern(
-            'AuroraDesignBlocks/frame-line-pattern1',
-            array(
-                'title'       => __('AuroraDesignBlocks frame-line1', 'AuroraDesignBlocks'),
-                'categories'  => array('aurora-design-blocks'),
-                'content'     => $content,
-            )
-        );
-
-        $content = file_get_contents(AURORA_DESIGN_BLOCKS_PATH . 'patterns/frame-line2.html');
-        register_block_pattern(
-            'AuroraDesignBlocks/frame-line-pattern2',
-            array(
-                'title'       => __('AuroraDesignBlocks frame-line1', 'AuroraDesignBlocks'),
-                'categories'  => array('aurora-design-blocks'),
-                'content'     => $content,
-            )
-        );
+        foreach ($patterns as $slug => $data) {
+            $content = file_get_contents(AURORA_DESIGN_BLOCKS_PATH . 'patterns/' . $data['file']);
+            register_block_pattern("AuroraDesignBlocks/$slug", [
+                'title' => $data['title'],
+                'categories' => ['aurora-design-blocks'],
+                'content' => $content,
+            ]);
+        }
     }
 }
 
