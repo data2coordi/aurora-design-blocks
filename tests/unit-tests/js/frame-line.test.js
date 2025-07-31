@@ -28,6 +28,7 @@ jest.mock('@wordpress/block-editor', () => {
         const Tag = tagName || 'div';
         const ref = React.useRef(null);
 
+
         React.useEffect(() => {
             if (ref.current && ref.current.textContent !== value) {
                 ref.current.textContent = value || '';
@@ -144,7 +145,7 @@ jest.mock('@wordpress/i18n', () => ({ __: text => text }));
 require('../../../blocks/frame-line/src/index.js');
 const [, settings] = blocks.registerBlockType.mock.calls[0];
 
-describe('aurora-design-blocks/frame-line - FL-002', () => {
+describe('aurora-design-blocks/frame-line title', () => {
     const setAttributes = jest.fn();
 
     beforeEach(() => {
@@ -169,8 +170,123 @@ describe('aurora-design-blocks/frame-line - FL-002', () => {
         }));
         expect(titleRichText).toHaveTextContent('My Awesome Title');
     });
-});
+    it('SelectControl の操作で frameLineAlign が更新されクラスが変わる', () => {
+        const { rerender } = render(settings.edit({
+            attributes: { frameLineAlign: 'center' },
+            setAttributes,
+        }));
 
+        const blockPropsElement = screen.getByTestId('mock-block-props-edit');
+        expect(blockPropsElement).toHaveClass('frame-line-center');
+
+        // aria-label で特定して取得
+        const select = screen.getByLabelText('Frame-line-title Alignment');
+        expect(select.value).toBe('center');
+
+        fireEvent.change(select, { target: { value: 'left' } });
+        expect(setAttributes).toHaveBeenCalledWith({ frameLineAlign: 'left' });
+
+        rerender(settings.edit({
+            attributes: { frameLineAlign: 'left' },
+            setAttributes,
+        }));
+
+        const updatedBlockPropsElement = screen.getByTestId('mock-block-props-edit');
+        expect(updatedBlockPropsElement).toHaveClass('frame-line-left');
+
+        const updatedSelect = screen.getByLabelText('Frame-line-title Alignment');
+        expect(updatedSelect.value).toBe('left');
+    });
+
+    it('Border Color の操作で title の背景色に borderColor が反映される', () => {
+        const { rerender } = render(settings.edit({
+            attributes: { frameLineAlign: 'center', title: 'Hello', borderColor: undefined },
+            setAttributes,
+        }));
+
+        // 初期状態：borderColor 未設定 → white が入っているはず
+        const titleRichText = screen.getByTestId('mock-richtext');
+        expect(titleRichText).toHaveStyle({ backgroundColor: 'white' });
+
+        // 「Border Color」のカラーピッカーを取得して変更
+        const borderColorInput = screen.getByLabelText('Border Color');
+        fireEvent.change(borderColorInput, { target: { value: '#123456' } });
+
+        // setAttributes が正しく呼ばれる
+        expect(setAttributes).toHaveBeenCalledWith({ borderColor: '#123456' });
+
+        // 属性が更新された想定で再レンダリング
+        rerender(settings.edit({
+            attributes: { frameLineAlign: 'center', title: 'Hello', borderColor: '#123456' },
+            setAttributes,
+        }));
+
+        // タイトル背景に反映されていることを検証
+        const updatedTitleRichText = screen.getByTestId('mock-richtext');
+        expect(updatedTitleRichText).toHaveStyle({ backgroundColor: '#123456' });
+    });
+    it('Title Text Color の操作で titleColor が文字色として反映される', () => {
+        const { rerender } = render(settings.edit({
+            attributes: { frameLineAlign: 'center', title: 'Hello', titleColor: undefined },
+            setAttributes,
+        }));
+
+        // カラーピッカー（Title Text Color）を取得して変更
+        const titleTextColorInput = screen.getByLabelText('Title Text Color');
+        fireEvent.change(titleTextColorInput, { target: { value: '#ff0000' } });
+
+        // setAttributes が適切に呼ばれる
+        expect(setAttributes).toHaveBeenCalledWith({ titleColor: '#ff0000' });
+
+        // 属性更新後として再レンダリング
+        rerender(settings.edit({
+            attributes: { frameLineAlign: 'center', title: 'Hello', titleColor: '#ff0000' },
+            setAttributes,
+        }));
+
+        // タイトル（RichText）の文字色に反映されていること
+        const titleRichText = screen.getByTestId('mock-richtext');
+        expect(titleRichText).toHaveStyle({ color: '#ff0000' });
+    });
+    it('Title Border Radius の操作で titleBorderRadius がタイトルに反映される（edit）', () => {
+        const { rerender } = render(settings.edit({
+            attributes: {
+                frameLineAlign: 'center',
+                title: 'Hello',
+                titleBorderRadius: '0px',
+            },
+            setAttributes,
+        }));
+
+        // 初期は 0px のはず
+        let titleRichText = screen.getByTestId('mock-richtext');
+        expect(titleRichText).toHaveStyle({ borderRadius: '0px' });
+
+        // セレクトを 16px に変更
+        const radiusSelect = screen.getByLabelText('Title Border Radius');
+        fireEvent.change(radiusSelect, { target: { value: '16px' } });
+
+        // setAttributes が適切に呼ばれる
+        expect(setAttributes).toHaveBeenCalledWith({ titleBorderRadius: '16px' });
+
+        // 属性更新後として再レンダリング
+        rerender(settings.edit({
+            attributes: {
+                frameLineAlign: 'center',
+                title: 'Hello',
+                titleBorderRadius: '16px',
+            },
+            setAttributes,
+        }));
+
+        // タイトルへの反映を確認
+        titleRichText = screen.getByTestId('mock-richtext');
+        expect(titleRichText).toHaveStyle({ borderRadius: '16px' });
+    });
+
+
+
+});
 
 /*
 タイトル
