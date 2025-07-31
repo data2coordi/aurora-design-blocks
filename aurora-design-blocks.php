@@ -36,6 +36,8 @@ require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-customizer.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-base.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-awesome.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks_helper.php';
+require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-pattern.php';
+
 
 
 if (!defined('AURORA_DESIGN_BLOCKS_WP_ENVIRONMENT_TYPE') || AURORA_DESIGN_BLOCKS_WP_ENVIRONMENT_TYPE !== 'testing') {
