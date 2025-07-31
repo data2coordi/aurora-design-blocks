@@ -288,6 +288,148 @@ describe('aurora-design-blocks/frame-line title', () => {
 
 });
 
+
+describe('aurora-design-blocks/frame-line frame-line', () => {
+    const setAttributes = jest.fn();
+
+    beforeEach(() => {
+        setAttributes.mockClear();
+        cleanup(); // 各テストの前にDOMをクリーンアップ
+    });
+
+    it('Background Color の操作で backgroundColor がブロック背景に適用される（edit）', () => {
+        const { rerender } = render(settings.edit({
+            attributes: { frameLineAlign: 'center', backgroundColor: undefined },
+            setAttributes,
+        }));
+
+        // 初期は未設定（明示テストは省略）。色を #112233 に変更
+        const bgColorInput = screen.getByLabelText('Background Color');
+        fireEvent.change(bgColorInput, { target: { value: '#112233' } });
+
+        // setAttributes が正しく呼ばれる
+        expect(setAttributes).toHaveBeenCalledWith({ backgroundColor: '#112233' });
+
+        // 属性更新を想定して再レンダリング
+        rerender(settings.edit({
+            attributes: { frameLineAlign: 'center', backgroundColor: '#112233' },
+            setAttributes,
+        }));
+
+        // useBlockProps の付いた要素（ブロック本体）に反映されていること
+        const block = screen.getByTestId('mock-block-props-edit');
+        expect(block).toHaveStyle({ backgroundColor: '#112233' });
+    });
+    it('Border Style の操作で borderStyle が枠線に適用される（edit）', () => {
+        const { rerender } = render(settings.edit({
+            attributes: { frameLineAlign: 'center', borderStyle: 'solid' },
+            setAttributes,
+        }));
+
+        // 初期状態
+        let block = screen.getByTestId('mock-block-props-edit');
+        expect(block).toHaveStyle({ borderStyle: 'solid' });
+        expect(block).toHaveClass('border-solid');
+
+        // セレクトで dashed を選択
+        const borderStyleSelect = screen.getByLabelText('Border Style');
+        fireEvent.change(borderStyleSelect, { target: { value: 'dashed' } });
+
+        // setAttributes が正しく呼ばれる
+        expect(setAttributes).toHaveBeenCalledWith({ borderStyle: 'dashed' });
+
+        // 属性更新を想定して再レンダリング
+        rerender(settings.edit({
+            attributes: { frameLineAlign: 'center', borderStyle: 'dashed' },
+            setAttributes,
+        }));
+
+        // 反映確認（style と class 両方）
+        block = screen.getByTestId('mock-block-props-edit');
+        expect(block).toHaveStyle({ borderStyle: 'dashed' });
+        expect(block).toHaveClass('border-dashed');
+    });
+
+    it('Border Radius の操作で borderRadius が枠線に適用される（edit）', () => {
+        const { rerender } = render(settings.edit({
+            attributes: {
+                frameLineAlign: 'center',
+                borderRadius: '0px', // 初期値
+            },
+            setAttributes,
+        }));
+
+        // 初期確認
+        let block = screen.getByTestId('mock-block-props-edit');
+        expect(block).toHaveStyle({ borderRadius: '0px' });
+
+        // 「Border Radius (px)」入力を 12 に変更（NumberControl の onChange は数値を渡す）
+        const radiusInput = screen.getByLabelText('Border Radius (px)');
+        fireEvent.change(radiusInput, { target: { value: '12' } });
+
+        // setAttributes が '12px' で呼ばれる
+        expect(setAttributes).toHaveBeenCalledWith({ borderRadius: '12px' });
+
+        // 属性更新を想定して再レンダリング
+        rerender(settings.edit({
+            attributes: {
+                frameLineAlign: 'center',
+                borderRadius: '12px',
+            },
+            setAttributes,
+        }));
+
+        // 反映確認
+        block = screen.getByTestId('mock-block-props-edit');
+        expect(block).toHaveStyle({ borderRadius: '12px' });
+    });
+    it('edit: 枠線内(.frame-line-content)に InnerBlocks の領域が出力される', () => {
+        render(settings.edit({
+            attributes: { frameLineAlign: 'center', title: 'Hello' },
+            setAttributes,
+        }));
+
+        // 枠線コンテナ（useBlockProps が付いたブロック本体）
+        const block = screen.getByTestId('mock-block-props-edit');
+
+        // 枠線内のコンテンツ領域
+        const contentArea = block.querySelector('.frame-line-content');
+        expect(contentArea).toBeInTheDocument();
+
+        // モックの InnerBlocks が入っていること
+        const inner = screen.getByTestId('mock-inner-blocks');
+        expect(contentArea).toContainElement(inner);
+
+        // さらに、デフォルトの ButtonBlockAppender（+ ボタン）が表示されること
+        expect(screen.getByTestId('mock-append-btn')).toBeInTheDocument();
+    });
+
+    it('save: 枠線内(.frame-line-content)に InnerBlocks の中身が出力される', () => {
+        const view = settings.save({
+            attributes: { frameLineAlign: 'center', title: 'Hello' },
+        });
+
+        render(view);
+
+        // 保存時のブロック本体
+        const saved = screen.getByTestId('mock-block-props-save');
+
+        // 枠線内のコンテンツ領域
+        const contentArea = saved.querySelector('.frame-line-content');
+        expect(contentArea).toBeInTheDocument();
+
+        // モックの InnerBlocks.Content が入っていること
+        const innerContent = screen.getByTestId('mock-inner-content');
+        expect(contentArea).toContainElement(innerContent);
+
+        // 文字列を簡易確認（モック実装は "InnerBlocks Content"）
+        expect(innerContent).toHaveTextContent('InnerBlocks Content');
+    });
+
+
+
+});
+
 /*
 タイトル
 title がHTML内に出力されること
@@ -302,7 +444,6 @@ borderColor が枠線に適用される
 borderStyle（solid, dashedなど）が適用される
 borderWidth が適用される
 borderRadius がブロック全体に適用される
-align 属性（例：full）に応じてクラスが追加される
 InnerBlocks の中身（段落など）が出力される
 
 */
