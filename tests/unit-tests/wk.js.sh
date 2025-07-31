@@ -1,10 +1,11 @@
 clear
 
-npm run test:unit:js  tests/unit-tests/js/frame-line.test.js
-#npm run test:unit:js  tests/unit-tests/js
+npm run test:unit:js  tests/unit-tests/js
 
 
 exit
+npm run test:unit:js  tests/unit-tests/js/frame-line.test.js
+
 npm run test:unit:js  tests/unit-tests/js/speech-bubble.test.js
 
 npm run test:unit:js  tests/unit-tests/js

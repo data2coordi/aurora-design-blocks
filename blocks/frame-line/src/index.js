@@ -31,14 +31,13 @@ registerBlockType('aurora-design-blocks/frame-line', {
         title: { type: 'string', default: '' },
         frameLineAlign: { type: 'string', default: 'left' },
         backgroundColor: { type: 'string' },
-        titleColor: { type: 'string', default: 'black' },
+        titleColor: { type: 'string', default: 'block' },
         borderColor: { type: 'string', default: 'lightgreen' },
         borderStyle: { type: 'string', default: 'solid' },
         borderWidth: { type: 'string', default: '1px' },
         borderRadius: { type: 'string', default: '10px' },
         titleBorderRadius: { type: 'string', default: '0px' },
         showTitle: { type: 'boolean', default: true },
-
 
     },
 

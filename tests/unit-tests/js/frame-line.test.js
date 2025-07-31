@@ -117,6 +117,15 @@ jest.mock('@wordpress/components', () => ({
             {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
         </select>
     ),
+    ToggleControl: ({ checked, onChange, label }) => (
+        <input
+            data-testid="mock-toggle-control"
+            type="checkbox"
+            checked={!!checked}
+            onChange={e => onChange(e.target.checked)}
+            aria-label={label}
+        />
+    ),
     __experimentalNumberControl: ({ value, onChange, label, min }) => (
         <input
             data-testid="mock-number-control"
@@ -153,10 +162,11 @@ describe('aurora-design-blocks/frame-line title', () => {
         cleanup(); // 各テストの前にDOMをクリーンアップ
     });
 
-    // FL-002: title 属性の更新とレンダリング
+
+
     it('title 属性が更新され、RichText に正しく表示される', () => {
         const { rerender } = render(settings.edit({ // 初期レンダリング
-            attributes: { title: '', frameLineAlign: 'center' },
+            attributes: { title: '', frameLineAlign: 'center', showTitle: true },
             setAttributes,
         }));
         const titleRichText = screen.getByTestId('mock-richtext');
@@ -165,11 +175,102 @@ describe('aurora-design-blocks/frame-line title', () => {
 
         // 属性が更新された状態で再レンダリングをシミュレート
         rerender(settings.edit({
-            attributes: { title: 'My Awesome Title', frameLineAlign: 'center' },
+            attributes: { title: 'My Awesome Title', frameLineAlign: 'center', showTitle: true },
             setAttributes,
         }));
         expect(titleRichText).toHaveTextContent('My Awesome Title');
     });
+
+    it('Show Title のトグルでタイトルが表示/非表示になる（edit）', () => {
+        const { rerender } = render(settings.edit({
+            attributes: {
+                title: 'Hello Title',
+                frameLineAlign: 'center',
+                showTitle: true,
+                borderColor: '#abcdef',
+            },
+            setAttributes,
+        }));
+
+        // 初期状態：表示されている
+        const toggle = screen.getByLabelText('Show Title');
+        expect(toggle).toBeChecked();
+        expect(screen.getByTestId('mock-richtext')).toBeInTheDocument();
+
+        // OFF にする
+        fireEvent.click(toggle);
+        expect(setAttributes).toHaveBeenCalledWith({ showTitle: false });
+
+        // 属性が変わった想定で再レンダリング
+        rerender(settings.edit({
+            attributes: {
+                title: 'Hello Title',
+                frameLineAlign: 'center',
+                showTitle: false,
+                borderColor: '#abcdef',
+            },
+            setAttributes,
+        }));
+
+        // 非表示になっている
+        expect(screen.queryByTestId('mock-richtext')).toBeNull();
+
+        // 再度 ON に戻す
+        // （UI操作の代わりに props 変更で確認）
+        rerender(settings.edit({
+            attributes: {
+                title: 'Hello Title',
+                frameLineAlign: 'center',
+                showTitle: true,
+                borderColor: '#abcdef',
+            },
+            setAttributes,
+        }));
+        expect(screen.getByTestId('mock-richtext')).toBeInTheDocument();
+    });
+
+    it('save: showTitle=false のとき RichText.Content が出力されない', () => {
+        // 非表示パターン
+        const viewHidden = settings.save({
+            attributes: {
+                title: 'Saved Title',
+                frameLineAlign: 'left',
+                borderStyle: 'solid',
+                backgroundColor: undefined,
+                borderColor: '#123456',
+                titleColor: '#000000',
+                borderWidth: '1px',
+                borderRadius: '10px',
+                titleBorderRadius: '0px',
+                showTitle: false,
+            },
+        });
+        render(viewHidden);
+        expect(screen.queryByTestId('mock-richtext-content')).toBeNull();
+    });
+
+    it('save: showTitle=true のとき RichText.Content が出力される', () => {
+        const viewShown = settings.save({
+            attributes: {
+                title: 'Saved Title',
+                frameLineAlign: 'left',
+                borderStyle: 'solid',
+                backgroundColor: undefined,
+                borderColor: '#123456',
+                titleColor: '#000000',
+                borderWidth: '1px',
+                borderRadius: '10px',
+                titleBorderRadius: '0px',
+                showTitle: true,
+            },
+        });
+        render(viewShown);
+        const titleEl = screen.getByTestId('mock-richtext-content');
+        expect(titleEl).toBeInTheDocument();
+        // 値が入っていることの簡易確認（モックは innerHTML に value を入れる）
+        expect(titleEl).toHaveTextContent('Saved Title');
+    });
+
     it('SelectControl の操作で frameLineAlign が更新されクラスが変わる', () => {
         const { rerender } = render(settings.edit({
             attributes: { frameLineAlign: 'center' },
@@ -200,7 +301,7 @@ describe('aurora-design-blocks/frame-line title', () => {
 
     it('Border Color の操作で title の背景色に borderColor が反映される', () => {
         const { rerender } = render(settings.edit({
-            attributes: { frameLineAlign: 'center', title: 'Hello', borderColor: undefined },
+            attributes: { frameLineAlign: 'center', title: 'Hello', borderColor: undefined, showTitle: true },
             setAttributes,
         }));
 
@@ -217,7 +318,7 @@ describe('aurora-design-blocks/frame-line title', () => {
 
         // 属性が更新された想定で再レンダリング
         rerender(settings.edit({
-            attributes: { frameLineAlign: 'center', title: 'Hello', borderColor: '#123456' },
+            attributes: { frameLineAlign: 'center', title: 'Hello', borderColor: '#123456', showTitle: true },
             setAttributes,
         }));
 
@@ -227,7 +328,7 @@ describe('aurora-design-blocks/frame-line title', () => {
     });
     it('Title Text Color の操作で titleColor が文字色として反映される', () => {
         const { rerender } = render(settings.edit({
-            attributes: { frameLineAlign: 'center', title: 'Hello', titleColor: undefined },
+            attributes: { frameLineAlign: 'center', title: 'Hello', titleColor: undefined, showTitle: true },
             setAttributes,
         }));
 
@@ -240,7 +341,7 @@ describe('aurora-design-blocks/frame-line title', () => {
 
         // 属性更新後として再レンダリング
         rerender(settings.edit({
-            attributes: { frameLineAlign: 'center', title: 'Hello', titleColor: '#ff0000' },
+            attributes: { frameLineAlign: 'center', title: 'Hello', titleColor: '#ff0000', showTitle: true },
             setAttributes,
         }));
 
@@ -254,6 +355,7 @@ describe('aurora-design-blocks/frame-line title', () => {
                 frameLineAlign: 'center',
                 title: 'Hello',
                 titleBorderRadius: '0px',
+                showTitle: true
             },
             setAttributes,
         }));
@@ -275,6 +377,7 @@ describe('aurora-design-blocks/frame-line title', () => {
                 frameLineAlign: 'center',
                 title: 'Hello',
                 titleBorderRadius: '16px',
+                showTitle: true,
             },
             setAttributes,
         }));
