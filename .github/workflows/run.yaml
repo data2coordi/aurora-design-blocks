@@ -17,6 +17,8 @@ jobs:
           zip -r aurora-design-blocks.zip \
             "blocks/" \
             "css/" \
+            "patterns/" \
+            "assets/" \
             "inc/" \
             "languages/" \
             "plugin-update-checker/" \
