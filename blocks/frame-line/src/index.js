@@ -11,7 +11,7 @@ import {
 import {
     PanelBody,
     SelectControl,
-    TextControl,
+    ToggleControl,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
@@ -29,14 +29,16 @@ registerBlockType('aurora-design-blocks/frame-line', {
 
     attributes: {
         title: { type: 'string', default: '' },
-        frameLineAlign: { type: 'string', default: 'center' },
+        frameLineAlign: { type: 'string', default: 'left' },
         backgroundColor: { type: 'string' },
-        titleColor: { type: 'string' },
-        borderColor: { type: 'string' },
+        titleColor: { type: 'string', default: 'black' },
+        borderColor: { type: 'string', default: 'lightgreen' },
         borderStyle: { type: 'string', default: 'solid' },
         borderWidth: { type: 'string', default: '1px' },
-        borderRadius: { type: 'string', default: '0px' },
+        borderRadius: { type: 'string', default: '10px' },
         titleBorderRadius: { type: 'string', default: '0px' },
+        showTitle: { type: 'boolean', default: true },
+
 
     },
 
@@ -50,7 +52,8 @@ registerBlockType('aurora-design-blocks/frame-line', {
             borderStyle,
             borderWidth,
             borderRadius,
-            titleBorderRadius
+            titleBorderRadius,
+            showTitle
         } = attributes;
 
         const blockProps = useBlockProps({
@@ -68,6 +71,11 @@ registerBlockType('aurora-design-blocks/frame-line', {
             <>
                 <InspectorControls>
                     <PanelBody title={__('Title Settings', 'aurora-design-blocks')}>
+                        <ToggleControl
+                            label={__('Show Title', 'aurora-design-blocks')}
+                            checked={!!attributes.showTitle}
+                            onChange={(val) => setAttributes({ showTitle: val })}
+                        />
                         <SelectControl
                             label={__('Frame-line-title Alignment', 'aurora-design-blocks')}
                             value={frameLineAlign}
@@ -147,19 +155,20 @@ registerBlockType('aurora-design-blocks/frame-line', {
                 </InspectorControls>
 
                 <div {...blockProps}>
-                    <RichText
-                        tagName="div"
-                        className={`frame-line-title frame-line-title-${frameLineAlign}`}
-                        placeholder={__('Enter title...', 'aurora-design-blocks')}
-                        value={title}
-                        onChange={(val) => setAttributes({ title: val })}
-                        style={{
-                            backgroundColor: borderColor || 'white',
-                            color: titleColor,
-                            borderRadius: titleBorderRadius,
+                    {showTitle && (
+                        <RichText
+                            tagName="div"
+                            className={`frame-line-title frame-line-title-${frameLineAlign}`}
+                            placeholder={__('Enter title...', 'aurora-design-blocks')}
+                            value={title}
+                            onChange={(val) => setAttributes({ title: val })}
+                            style={{
+                                backgroundColor: borderColor || 'white',
+                                color: titleColor,
+                                borderRadius: titleBorderRadius,
 
-                        }}
-                    />
+                            }}
+                        />)}
                     <div className="frame-line-content">
                         <InnerBlocks />
                     </div>
@@ -169,7 +178,7 @@ registerBlockType('aurora-design-blocks/frame-line', {
     },
 
     save: ({ attributes }) => {
-        const { title, frameLineAlign, borderStyle, backgroundColor, borderColor, titleColor, borderWidth, borderRadius, titleBorderRadius } = attributes;
+        const { title, frameLineAlign, borderStyle, backgroundColor, borderColor, titleColor, borderWidth, borderRadius, titleBorderRadius, showTitle } = attributes;
 
         const blockProps = useBlockProps.save({
             className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
@@ -179,12 +188,13 @@ registerBlockType('aurora-design-blocks/frame-line', {
                 borderStyle,
                 borderWidth,
                 borderRadius,
+                showTitle,
             }
         });
 
         return (
             <div {...blockProps}>
-                {title && <RichText.Content
+                {showTitle && <RichText.Content
                     tagName="div"
                     className={`frame-line-title frame-line-title-${frameLineAlign}`}
                     value={title}

@@ -666,9 +666,14 @@ msgstr "目次"
 
 
 
+
 #: blocks/frame-line/build/index.js:1
 msgid "[aurora-design-blocks]frame-line"
 msgstr "[aurora-design-blocks]枠線ブロック"
+
+#: blocks/frame-line/build/index.js:1
+msgid "Show Title"
+msgstr "タイトル表示"
 
 #: blocks/frame-line/build/index.js:1
 msgid "Title Settings"
@@ -760,6 +765,9 @@ msgstr "角丸大（16px）"
 #: blocks/frame-line/build/index.js:1
 msgid "Rounded (8px)"
 msgstr "やや角丸（8px）"
+
+
+
 
 
 
