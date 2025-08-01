@@ -236,6 +236,14 @@ class auroraDesignBlocks_PopularPostsWidgetTest extends WP_UnitTestCase
      */
     public function test_widget_displays_thumbnail_if_enabled()
     {
+
+        add_filter('upload_dir', function ($dirs) {
+            $dirs['subdir'] = '/2025/07';
+            $dirs['path'] = $dirs['basedir'] . $dirs['subdir'];
+            $dirs['url'] = $dirs['baseurl'] . $dirs['subdir'];
+            return $dirs;
+        });
+
         // 投稿とサムネイル画像を作成
         $post_id = $this->create_post_with_views('Thumbnail pv Post', 15);
         $attachment_id = self::factory()->attachment->create_upload_object(
@@ -255,6 +263,7 @@ class auroraDesignBlocks_PopularPostsWidgetTest extends WP_UnitTestCase
 
         $output = $this->render_widget($instance);
 
+
         /*サムネイル表示されるパターン*/
         $this->assertStringContainsString("<img src='http://example.org/wp-content/uploads/2025/07/canola", $output);
         $this->assertStringContainsString('Thumbnail pv Post (15)', $output);
@@ -273,6 +282,9 @@ class auroraDesignBlocks_PopularPostsWidgetTest extends WP_UnitTestCase
         $this->assertStringNotContainsString('<img', $output);
         $this->assertStringNotContainsString('Thumbnail pv Post (15)', $output);
         $this->assertStringContainsString('Thumbnail pv Post', $output);
+
+        remove_all_filters('upload_dir'); // あるいは remove_filter() で個別に外してもOK
+
     }
 
     /**
