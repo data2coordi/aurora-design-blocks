@@ -56,11 +56,51 @@ class AuroraDesignBlocks_Block_Assets
             'slider1' => [
                 'title' => __('AuroraDesignBlocks pattern slider1', 'AuroraDesignBlocks'),
                 'file' => 'slider1.html',
+
             ],
+            'speech-bubble1' => [
+                'title' => __('AuroraDesignBlocks pattern speech-bubble1', 'AuroraDesignBlocks'),
+                'file' => 'speech-bubble1.html',
+
+            ],
+            'speech-bubble2' => [
+                'title' => __('AuroraDesignBlocks pattern speech-bubble2', 'AuroraDesignBlocks'),
+                'file' => 'speech-bubble2.html',
+
+            ],
+            'tab' => [
+                'title' => __('AuroraDesignBlocks pattern tab', 'AuroraDesignBlocks'),
+                'file' => 'tab.html',
+
+            ],
+            'flow-text' => [
+                'title' => __('AuroraDesignBlocks pattern flow-text', 'AuroraDesignBlocks'),
+                'file' => 'flow-text.html',
+
+            ],
+            'custom-cover' => [
+                'title' => __('AuroraDesignBlocks pattern custom-cover', 'AuroraDesignBlocks'),
+                'file' => 'custom-cover.html',
+
+            ],
+            'cta' => [
+                'title' => __('AuroraDesignBlocks pattern cta', 'AuroraDesignBlocks'),
+                'file' => 'cta.html',
+
+            ],
+
         ];
+
 
         foreach ($patterns as $slug => $data) {
             $content = file_get_contents(AURORA_DESIGN_BLOCKS_PATH . 'patterns/' . $data['file']);
+
+
+            $plugin_url = AURORA_DESIGN_BLOCKS_URL . 'assets';
+
+            $content = str_replace('%%PLUGIN_URL%%', $plugin_url, $content);
+
+
             register_block_pattern("AuroraDesignBlocks/$slug", [
                 'title' => $data['title'],
                 'categories' => ['aurora-design-blocks'],
