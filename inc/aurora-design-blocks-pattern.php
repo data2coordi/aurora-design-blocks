@@ -46,45 +46,45 @@ class AuroraDesignBlocks_Block_Assets
 
         $patterns = [
             'frame-line1' => [
-                'title' => __('AuroraDesignBlocks pattern frame-line1', 'AuroraDesignBlocks'),
+                'title' => __('[aurora-design-blocks]frame-line', 'aurora-design-blocks'),
                 'file' => 'frame-line1.html',
             ],
             'frame-line2' => [
-                'title' => __('AuroraDesignBlocks pattern frame-line2', 'AuroraDesignBlocks'),
+                'title' => __('[aurora-design-blocks]frame-line', 'aurora-design-blocks'),
                 'file' => 'frame-line2.html',
             ],
             'slider1' => [
-                'title' => __('AuroraDesignBlocks pattern slider1', 'AuroraDesignBlocks'),
+                'title' => _x('[aurora-design-blocks]slider block', 'block title', 'aurora-design-blocks'),
                 'file' => 'slider1.html',
 
             ],
             'speech-bubble1' => [
-                'title' => __('AuroraDesignBlocks pattern speech-bubble1', 'AuroraDesignBlocks'),
+                'title' => _x('[aurora-design-blocks]speech bubble', 'block title', 'aurora-design-blocks'),
                 'file' => 'speech-bubble1.html',
 
             ],
             'speech-bubble2' => [
-                'title' => __('AuroraDesignBlocks pattern speech-bubble2', 'AuroraDesignBlocks'),
+                'title' => _x('[aurora-design-blocks]speech bubble', 'block title', 'aurora-design-blocks'),
                 'file' => 'speech-bubble2.html',
 
             ],
             'tab' => [
-                'title' => __('AuroraDesignBlocks pattern tab', 'AuroraDesignBlocks'),
+                'title' => _x('[aurora-design-blocks]Tab switching feature.', 'block title',  'aurora-design-blocks'),
                 'file' => 'tab.html',
 
             ],
             'flow-text' => [
-                'title' => __('AuroraDesignBlocks pattern flow-text', 'AuroraDesignBlocks'),
+                'title' => _x('[aurora-design-blocks]text flow animation', 'block title', 'aurora-design-blocks'),
                 'file' => 'flow-text.html',
 
             ],
             'custom-cover' => [
-                'title' => __('AuroraDesignBlocks pattern custom-cover', 'AuroraDesignBlocks'),
+                'title' => _x('[aurora-design-blocks]Custom Cover', 'block title',  'aurora-design-blocks'),
                 'file' => 'custom-cover.html',
 
             ],
             'cta' => [
-                'title' => __('AuroraDesignBlocks pattern cta', 'AuroraDesignBlocks'),
+                'title' => _x('[aurora-design-blocks]CTA Block', 'block title', 'aurora-design-blocks'),
                 'file' => 'cta.html',
 
             ],

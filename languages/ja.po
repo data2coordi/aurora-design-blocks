@@ -147,10 +147,7 @@ msgstr "フェード"
 msgid "Slide"
 msgstr "スライド"
 
-#: inc/aurora-design-blocks-customizer.php:196
-#: inc/aurora-design-blocks-customizer.php:399
-msgid "None"
-msgstr "なし"
+
 
 #: inc/aurora-design-blocks-customizer.php:260
 msgid "Slider Fade Duration (seconds)"
@@ -276,14 +273,6 @@ msgstr "サイドバー"
 msgid "Position"
 msgstr "位置"
 
-
-#: inc/aurora-design-blocks-customizer.php:396
-msgid "Right"
-msgstr "右"
-
-#: inc/aurora-design-blocks-customizer.php:397
-msgid "Left"
-msgstr "左"
 
 #: inc/aurora-design-blocks-customizer.php:398
 msgid "Bottom"
@@ -880,4 +869,5 @@ msgstr "アドセンス自動広告コード"
 
 msgid "Paste the entire AdSense auto ads code here."
 msgstr "AdSenseの自動広告コード全体をここに貼り付けてください。"
+
 
