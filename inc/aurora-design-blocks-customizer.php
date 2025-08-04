@@ -84,7 +84,7 @@ class AuroraDesignBlocks_customizer_gtm
     {
         add_action('customize_register', array($this, 'regSettings'));
         add_action('wp_head', array($this, 'outCode'));
-        add_action('wp_footer', array($this, 'outNoscriptCode')); // body終了直前に追加
+        add_action('wp_footer', array($this, 'outNoscriptCode')); // PF対応!!!body終了直前に追加
     }
 
     // カスタマイザーに設定項目を登録
