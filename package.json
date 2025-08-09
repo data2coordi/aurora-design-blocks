@@ -559,7 +559,6 @@
     "pkg-dir": "^4.2.0",
     "plur": "^4.0.0",
     "possible-typed-array-names": "^1.1.0",
-    "postcss": "^8.5.3",
     "postcss-calc": "^9.0.1",
     "postcss-colormin": "^6.1.0",
     "postcss-convert-values": "^6.1.0",
@@ -823,7 +822,10 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@wordpress/block-editor": "^14.16.0",
-    "@wordpress/scripts": "^30.13.0"
+    "@wordpress/scripts": "^30.13.0",
+    "chokidar-cli": "^3.0.0",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1"
   },
   "description": ""
 }

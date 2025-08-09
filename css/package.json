@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build:css": "mkdir -p build && for file in src/*.css; do filename=$(basename \"$file\" .css); postcss \"$file\" -o \"build/${filename}.css\"; done",
+    "build:one": "node build-one.js",
+    "watch:css": "chokidar 'src/*.css' -c \"npm run build:one {path}\"",
+    "watch:css2": "chokidar 'src/*.css' -c 'filename=$(basename {path} .css); postcss {path} -o build/${filename}.css'"
+  }
+}

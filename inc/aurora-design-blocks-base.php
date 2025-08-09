@@ -6,9 +6,9 @@
 
 //フロントエンド用
 $auroraDesignBlocks_FrontendStyles = [
-    'aurora-design-blocks-style-block-module' => 'css/block-module.css',
-    'aurora-design-style-aurora-design' => 'css/aurora-design.css',
-    'aurora-design-style-awesome' => 'css/awesome-all.min.css',
+    'aurora-design-blocks-style-block-module' => 'css/build/block-module.css',
+    'aurora-design-style-aurora-design' => 'css/build/aurora-design.css',
+    'aurora-design-style-awesome' => 'css/build/awesome-all.css',
 ];
 auroraDesignBlocksFrontendStyles::add_styles($auroraDesignBlocks_FrontendStyles);
 
@@ -21,7 +21,7 @@ auroraDesignBlocksDeferCss::add_deferred_styles($auroraDesignBlocks_deferredStyl
 
 //エディタ用
 $auroraDesignBlocks_EditorStyles = [
-    'aurora-design-style-awesome' => 'css/awesome-all.min.css',
+    'aurora-design-style-awesome' => 'css/build/awesome-all.css',
 ];
 AuroraDesignBlocksEditorStyles::add_styles($auroraDesignBlocks_EditorStyles);
 /************************************************************/

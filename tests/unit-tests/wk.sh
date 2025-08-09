@@ -5,7 +5,7 @@ clear
 
 
 
- sudo docker exec -it dev_wp_env-wordpress-1 bash \
+ sudo docker exec -it dev_wp_env-wordpress_wpdev-1 bash \
   -c "cd /var/www/html/wp-content/plugins/aurora-design-blocks && ./vendor/bin/phpunit  \
   tests/unit-tests/function/"
 
@@ -17,11 +17,11 @@ clear
 
 
 
-sudo docker exec -it dev_wp_env-wordpress-1 bash \
+sudo docker exec -it dev_wp_env-wordpress_wpdev-1 bash \
   -c "cd /var/www/html/wp-content/plugins/aurora-design-blocks && ./vendor/bin/phpunit \
   tests/unit-tests/function/auroraDesignBlocks_PopularPostsWidgetTestDbSetupTest.php"
 
-sudo docker exec -it dev_wp_env-wordpress-1 bash \
+sudo docker exec -it dev_wp_env-wordpress_wpdev-1 bash \
   -c "cd /var/www/html/wp-content/plugins/aurora-design-blocks && ./vendor/bin/phpunit \
   tests/unit-tests/function/auroraDesignBlocks_PopularPostsWidgetDbRegTest.php"
 
