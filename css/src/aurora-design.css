@@ -68,6 +68,6 @@
         margin-top: calc(var(--ly-elementTopMargin) * 2);
         margin-bottom: calc(var(--ly-elementTopMargin) * 2);
         padding: 1.5rem;
-        border-radius: 10px;
+        border-radius: 10px ;
     }
 }
