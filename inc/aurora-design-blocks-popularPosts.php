@@ -117,7 +117,7 @@ class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
                     echo "<a href='{$permalink}'>";
 
                     if ($show_thumbnail && $thumb_url) {
-                        echo "<img src='{$thumb_url}' loading='lazy' alt='{$title}'>";
+                        echo "<img src='{$thumb_url}' loading='lazy' alt=''>";
                     }
 
                     echo "{$title}";
