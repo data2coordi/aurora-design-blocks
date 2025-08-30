@@ -177,7 +177,7 @@
   color: inherit;                         /* 親の文字色を継承 */
   overflow: hidden;                       /* 念のためのはみ出し防止 */
   text-indent: 0 ;              /* ★ぶら下げインデントの無効化＝1行目の食い込み防止 */
-  border-bottom: .01em solid #e9e8e8;
+  border-bottom: .01em solid #e9e8e8;     /*下線を引く*/
 }
 
 /* 念押し：a配下の要素/疑似要素にもインデント系があればリセット */
