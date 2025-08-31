@@ -28,7 +28,7 @@ class aurora_design_AuroraDesignBlocks_add_ogp_meta_tagsTest extends WP_UnitTest
             // 現在のファイル構造 (tests/unit-tests/aurora_designTest.php) を前提としています。
             define('AURORA_DESIGN_BLOCKS_PATH', dirname(__DIR__, 2) . '/');
         }
-        require_once AURORA_DESIGN_BLOCKS_PATH . 'inc/aurora-design-blocks-base.php';
+        require_once AURORA_DESIGN_BLOCKS_PATH . 'inc/aurora-design-blocks-auroraDesignBlocks.php';
 
         // add_ogp_meta_tags が wp_head にフックされていることを確認し、
         // もしフックされていなければテスト内でフックします。

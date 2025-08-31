@@ -33,7 +33,7 @@ define('AURORA_DESIGN_BLOCKS_URL', plugin_dir_url(__FILE__));
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-outerAssets.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-forBlocks.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-customizer.php';
-require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-base.php';
+require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-auroraDesignBlocks.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-awesome.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks_helper.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-pattern.php';
