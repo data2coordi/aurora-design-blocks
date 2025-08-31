@@ -4,26 +4,99 @@
 /*cssのロード s*/
 /************************************************************/
 
-//フロントエンド用
-$auroraDesignBlocks_FrontendStyles = [
-    'aurora-design-blocks-style-block-module' => 'css/build/block-module.css',
-    'aurora-design-style-aurora-design' => 'css/build/aurora-design.css',
-    'aurora-design-style-awesome' => 'css/build/awesome-all.css',
-];
-auroraDesignBlocksFrontendStyles::add_styles($auroraDesignBlocks_FrontendStyles);
-
-$auroraDesignBlocks_deferredStyles = [
-    'aurora-design-style-awesome',
-];
-// 遅延対象のスタイルを登録
-auroraDesignBlocksDeferCss::add_deferred_styles($auroraDesignBlocks_deferredStyles);
 
 
-//エディタ用
-$auroraDesignBlocks_EditorStyles = [
-    'aurora-design-style-awesome' => 'css/build/awesome-all.css',
-];
-AuroraDesignBlocksEditorStyles::add_styles($auroraDesignBlocks_EditorStyles);
+
+class AuroraDesignBlocksPreDetermineCssAssets
+{
+    private static $styles = [];
+
+    private static $EditorStyles = [];
+
+    private static $deferredStyles = [
+        'aurora-design-style-awesome',
+    ];
+
+
+    public static function init()
+    {
+
+        // 以下、必要に応じて追加
+        if (is_single()) {
+            self::$styles = array_merge(self::$styles, [
+                'aurora-design-blocks-style-block-module' => 'css/build/block-module.css',
+                'aurora-design-style-aurora-design' => 'css/build/aurora-design.css',
+                'aurora-design-style-awesome' => 'css/build/awesome-all.css',
+            ]);
+        }
+
+        if (is_page()) {
+            self::$styles = array_merge(self::$styles, [
+                'aurora-design-blocks-style-block-module' => 'css/build/block-module.css',
+                'aurora-design-style-aurora-design' => 'css/build/aurora-design.css',
+                'aurora-design-style-awesome' => 'css/build/awesome-all.css',
+            ]);
+        }
+
+        if (is_front_page() && (!is_home())) {
+            self::$styles = array_merge(self::$styles, [
+                'aurora-design-blocks-style-block-module' => 'css/build/block-module.css',
+                'aurora-design-style-aurora-design' => 'css/build/aurora-design.css',
+                'aurora-design-style-awesome' => 'css/build/awesome-all.css',
+            ]);
+        }
+
+        if (is_archive() || is_search() || is_404()) {
+            // 漏れているページ用の CSS をここで追加
+            self::$styles = array_merge(self::$styles, [
+                'aurora-design-blocks-style-block-module' => 'css/build/block-module.css',
+                'aurora-design-style-aurora-design' => 'css/build/aurora-design.css',
+                'aurora-design-style-awesome' => 'css/build/awesome-all.css',
+            ]);
+        }
+
+        if (is_home()) {
+        }
+
+        // スタイルリストを設定（追記可能）
+        auroraDesignBlocksFrontendStyles::add_styles(self::$styles);
+
+        self::$EditorStyles = [
+            'aurora-design-style-awesome' => 'css/build/awesome-all.css',
+        ];
+        AuroraDesignBlocksEditorStyles::add_styles(self::$EditorStyles);
+
+        // 遅延対象のスタイルを登録
+        auroraDesignBlocksDeferCss::add_deferred_styles(self::$deferredStyles);
+    }
+}
+
+// 初期化処理（ルートで実行）
+add_action('wp', ['AuroraDesignBlocksPreDetermineCssAssets', 'init']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /************************************************************/
 /*cssのロード e*/
 /************************************************************/
