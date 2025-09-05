@@ -14,6 +14,8 @@ class AuroraDesignBlocksPreDetermineCssAssets
     private static $EditorStyles = [];
 
     private static $deferredStyles = [
+        'aurora-design-blocks-style-block-module',
+        'aurora-design-style-aurora-design',
         'aurora-design-style-awesome',
     ];
 
