@@ -92,12 +92,18 @@ class AuroraDesignBlocksPreDetermineJsAssets
         if (!is_home()) {
         // フッターに移動するスクリプトを登録
 
-             $footerScripts = [
-                 'aurora-design-blocks-tab-block-script'   => AURORA_DESIGN_BLOCKS_URL . 'blocks/tab-block/build/frontend.js',
-                 'aurora-design-blocks-slider-block-script'   => AURORA_DESIGN_BLOCKS_URL   . 'blocks/slider-block/build/frontend.js',
+            $scripts = [
+                'aurora-design-blocks-tab-block-script' => [
+                    'path' => 'blocks/tab-block/build/frontend.js',
+                    'deps' => [],
+                ],
+                'aurora-design-blocks-slider-block-script' => [
+                    'path' => 'blocks/slider-block/build/frontend.js',
+                    'deps' => [],
+                ],
+            ];
 
-             ];
-             AuroraDesignBlocksMoveScripts::add_scripts($footerScripts);
+            AuroraDesignBlocksFrontendScripts::add_scripts($scripts);
 
 
              $deferredScripts = [
