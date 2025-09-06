@@ -88,36 +88,42 @@ class AuroraDesignBlocksPreDetermineJsAssets
 
     public static function init()
     {
+        // 個別ページかつ該当ブロックが存在する場合のみ処理
+        if (is_singular()) {
 
-        if (!is_home()) {
-        // フッターに移動するスクリプトを登録
+            // 投稿のコンテンツを取得
+            global $post;
+            $content = $post ? $post->post_content : '';
 
-            $scripts = [
-                'aurora-design-blocks-tab-block-script' => [
+            $scripts = [];
+
+            // タブブロックが存在する場合のみ登録
+            if (has_block('aurora-design-blocks/tab-block', $post)) {
+                $scripts['aurora-design-blocks-tab-block-script'] = [
                     'path' => 'blocks/tab-block/build/frontend.js',
                     'deps' => [],
-                ],
-                'aurora-design-blocks-slider-block-script' => [
+                ];
+            }
+
+            // スライダーブロックが存在する場合のみ登録
+            if (has_block('aurora-design-blocks/slider-block', $post)) {
+                $scripts['aurora-design-blocks-slider-block-script'] = [
                     'path' => 'blocks/slider-block/build/frontend.js',
                     'deps' => [],
-                ],
-            ];
+                ];
+            }
 
-            AuroraDesignBlocksFrontendScripts::add_scripts($scripts);
+            if (! empty($scripts)) {
+                // 登録
+                AuroraDesignBlocksFrontendScripts::add_scripts($scripts);
 
+                // defer 適用
+                $deferredScripts = array_keys($scripts);
+                AuroraDesignBlocksDeferJs::add_deferred_scripts($deferredScripts);
 
-             $deferredScripts = [
-                 'aurora-design-blocks-tab-block-script',
-                 'aurora-design-blocks-slider-block-script'
-
-             ];
-             AuroraDesignBlocksDeferJs::add_deferred_scripts($deferredScripts);
-
-            /* レンダリングブロック、layout計算増加の防止のためのチューニング e*/
-        
+                /* レンダリングブロック、layout計算増加の防止のためのチューニング */
+            }
         }
-    
-
     }
 }
 
@@ -125,32 +131,13 @@ class AuroraDesignBlocksPreDetermineJsAssets
 add_action('wp', ['AuroraDesignBlocksPreDetermineJsAssets', 'init']);
 
 /************************************************************/
-/*jsのロード s*/
+/*jsのロード e*/
 /************************************************************/
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/************************************************************/
-/*cssのロード e*/
-/************************************************************/
 
 
 
