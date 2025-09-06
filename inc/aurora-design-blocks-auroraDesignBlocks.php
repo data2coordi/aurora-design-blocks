@@ -76,8 +76,51 @@ class AuroraDesignBlocksPreDetermineCssAssets
 // 初期化処理（ルートで実行）
 add_action('wp', ['AuroraDesignBlocksPreDetermineCssAssets', 'init']);
 
+/************************************************************/
+/*cssのロード e*/
+/************************************************************/
+
+/************************************************************/
+/*jsのロード s*/
+/************************************************************/
+class AuroraDesignBlocksPreDetermineJsAssets
+{
+
+    public static function init()
+    {
+
+        if (!is_home()) {
+        // フッターに移動するスクリプトを登録
+
+             $footerScripts = [
+                 'aurora-design-blocks-tab-block-script'   => AURORA_DESIGN_BLOCKS_URL . 'blocks/tab-block/build/frontend.js',
+                 'aurora-design-blocks-slider-block-script'   => AURORA_DESIGN_BLOCKS_URL   . 'blocks/slider-block/build/frontend.js',
+
+             ];
+             AuroraDesignBlocksMoveScripts::add_scripts($footerScripts);
 
 
+             $deferredScripts = [
+                 'aurora-design-blocks-tab-block-script',
+                 'aurora-design-blocks-slider-block-script'
+
+             ];
+             AuroraDesignBlocksDeferJs::add_deferred_scripts($deferredScripts);
+
+            /* レンダリングブロック、layout計算増加の防止のためのチューニング e*/
+        
+        }
+    
+
+    }
+}
+
+// 初期化処理（ルートで実行）
+add_action('wp', ['AuroraDesignBlocksPreDetermineJsAssets', 'init']);
+
+/************************************************************/
+/*jsのロード s*/
+/************************************************************/
 
 
 

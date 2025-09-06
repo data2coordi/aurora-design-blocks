@@ -98,32 +98,6 @@ add_action('enqueue_block_editor_assets', 'auroraDesignBlocks_enqueue_block_asse
 /********************************************************************/
 /*ブロックの国際化対応e*/
 /********************************************************************/
-/********************************************************************/
-/*PF最適化 s*/
-/********************************************************************/
 
 
-// フッターに移動するスクリプトを登録
 
-
-$footerScripts = [
-	'aurora-design-blocks-tab-block-script'   => AURORA_DESIGN_BLOCKS_URL . 'blocks/tab-block/build/frontend.js',
-	'aurora-design-blocks-slider-block-script'   => AURORA_DESIGN_BLOCKS_URL   . 'blocks/slider-block/build/frontend.js',
-
-];
-AuroraDesignBlocksMoveScripts::add_scripts($footerScripts);
-
-
-$deferredScripts = [
-	'aurora-design-blocks-tab-block-script',
-	'aurora-design-blocks-slider-block-script'
-
-];
-AuroraDesignBlocksDeferJs::add_deferred_scripts($deferredScripts);
-
-/* レンダリングブロック、layout計算増加の防止のためのチューニング e*/
-
-
-/********************************************************************/
-/*PF最適化 e*/
-/********************************************************************/
