@@ -79,7 +79,7 @@ add_action('wp', ['AuroraDesignBlocksPreDetermineCssAssets', 'init']);
 add_action('init', [
     'AuroraDesignBlocksPreDetermineCssAssets',
     'init_forEditor',
-])
+]);
 /************************************************************/
 /*cssのロード e*/
 /************************************************************/
