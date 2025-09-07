@@ -112,8 +112,8 @@ class AuroraDesignBlocksPreDetermineCssBlocks
 		'aurora-design-blocks/cta-block' => [
 			'aurora-design-blocks-cta-block-style' => 'blocks/cta-block/build/style-index.css',
 		],
-		'aurora-design-blocks/another-block' => [
-			'aurora-design-blocks-another-block-style' => 'blocks/another-block/build/style-index.css',
+		'aurora-design-blocks/custom-cover-block' => [
+			'aurora-design-blocks-custom-cover-style' => 'blocks/custom-cover/build/style-index.css',
 		],
 		// 他ブロックもここに追加可能
 	];

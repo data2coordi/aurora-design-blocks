@@ -1,47 +1,46 @@
 {
-    "apiVersion": 2,
-    "name": "aurora-design-blocks/custom-cover",
-    "title": "[aurora-design-blocks]Custom Cover",
-    "category": "design",
-    "description": "A custom cover block with fixed full-width outer container and inner content width selectable as article width or full width.",
-    "icon": "cover-image",
-    "textdomain": "aurora-design-blocks",
-    "supports": {
-        "align": false,
-        "color": {
-            "background": true,
-            "gradient": true
-        }
+  "apiVersion": 2,
+  "name": "aurora-design-blocks/custom-cover",
+  "title": "[aurora-design-blocks]Custom Cover",
+  "category": "design",
+  "description": "A custom cover block with fixed full-width outer container and inner content width selectable as article width or full width.",
+  "icon": "cover-image",
+  "textdomain": "aurora-design-blocks",
+  "supports": {
+    "align": false,
+    "color": {
+      "background": true,
+      "gradient": true
+    }
+  },
+  "attributes": {
+    "innerWidthArticle": {
+      "type": "boolean",
+      "default": true
     },
-    "attributes": {
-        "innerWidthArticle": {
-            "type": "boolean",
-            "default": true
-        },
-        "url": {
-            "type": "string",
-            "default": ""
-        },
-        "id": {
-            "type": "number"
-        },
-        "alt": {
-            "type": "string",
-            "default": ""
-        },
-        "focalPoint": {
-            "type": "object",
-            "default": {
-                "x": 0.5,
-                "y": 0.5
-            }
-        },
-        "dimRatio": {
-            "type": "number",
-            "default": 0
-        }
+    "url": {
+      "type": "string",
+      "default": ""
     },
-    "editorScript": "file:./build/index.js",
-    "style": "file:./build/style-index.css",
-    "editorStyle": "file:./build/index.css"
+    "id": {
+      "type": "number"
+    },
+    "alt": {
+      "type": "string",
+      "default": ""
+    },
+    "focalPoint": {
+      "type": "object",
+      "default": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "dimRatio": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "editorScript": "file:./build/index.js",
+  "editorStyle": ["file:./build/style-index.css", "file:./build/index.css"]
 }
