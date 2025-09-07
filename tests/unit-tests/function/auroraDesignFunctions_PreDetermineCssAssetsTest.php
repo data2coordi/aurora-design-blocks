@@ -136,7 +136,7 @@ class auroraDesignFunctions_PreDetermineCssAssetsTest extends WP_UnitTestCase
      */
     public function test_init_sets_editor_styles(): void
     {
-        self::TARGET_CLASS::init();
+        self::TARGET_CLASS::init_forEditor();
 
         $editor_styles = $this->get_static_property(self::EDITOR_STYLES_PROPERTY);
         $this->assertArrayHasKey('aurora-design-style-awesome', $editor_styles);
