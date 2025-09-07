@@ -118,7 +118,6 @@ class AuroraDesignBlocksPreDetermineCssBlocks
 		// 他ブロックもここに追加可能
 	];
 
-	private static $EditorStyles = [];
 	private static $deferredStyles = [];
 
 	/**
@@ -153,20 +152,7 @@ class AuroraDesignBlocksPreDetermineCssBlocks
 			AuroraDesignBlocksDeferCss::add_deferred_styles(self::$deferredStyles);
 		}
 	}
-
-	/**
-	 * エディター用初期化（全ブロック常時読み込む）
-	 */
-	public static function init_forEditor()
-	{
-		foreach (self::$blocks as $blockName => $styles) {
-			self::$EditorStyles = array_merge(self::$EditorStyles, $styles);
-		}
-
-		AuroraDesignBlocksEditorStyles::add_styles(self::$EditorStyles);
-	}
 }
 
 // 初期化フック
 add_action('wp', ['AuroraDesignBlocksPreDetermineCssBlocks', 'init']);
-add_action('init', ['AuroraDesignBlocksPreDetermineCssBlocks', 'init_forEditor']);
