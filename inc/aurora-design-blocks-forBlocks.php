@@ -118,6 +118,13 @@ class AuroraDesignBlocksPreDetermineCssBlocks
 		'aurora-design-blocks/frame-line' => [
 			'aurora-design-blocks-frame-line-style' => 'blocks/frame-line/build/style-index.css',
 		],
+		'aurora-design-blocks/slider-block' => [
+			'aurora-design-blocks-slider-block-style' => 'blocks/slider-block/build/style-index.css',
+		],
+		'aurora-design-blocks/speech-bubble' => [
+			'aurora-design-blocks-speech-bubble-style' => 'blocks/speech-bubble/build/style-index.css',
+		],
+
 		// 他ブロックもここに追加可能
 	];
 
