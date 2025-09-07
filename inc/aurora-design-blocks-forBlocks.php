@@ -115,6 +115,9 @@ class AuroraDesignBlocksPreDetermineCssBlocks
 		'aurora-design-blocks/custom-cover-block' => [
 			'aurora-design-blocks-custom-cover-style' => 'blocks/custom-cover/build/style-index.css',
 		],
+		'aurora-design-blocks/frame-line' => [
+			'aurora-design-blocks-frame-line-style' => 'blocks/frame-line/build/style-index.css',
+		],
 		// 他ブロックもここに追加可能
 	];
 
