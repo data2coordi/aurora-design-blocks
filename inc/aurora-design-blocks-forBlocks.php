@@ -124,6 +124,9 @@ class AuroraDesignBlocksPreDetermineCssBlocks
 		'aurora-design-blocks/speech-bubble' => [
 			'aurora-design-blocks-speech-bubble-style' => 'blocks/speech-bubble/build/style-index.css',
 		],
+		'aurora-design-blocks/tab-block' => [
+			'aurora-design-blocks-tab-block-style' => 'blocks/tab-block/build/style-index.css',
+		],
 
 		// 他ブロックもここに追加可能
 	];
