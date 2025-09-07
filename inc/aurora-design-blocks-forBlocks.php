@@ -127,8 +127,9 @@ class AuroraDesignBlocksPreDetermineCssBlocks
 		'aurora-design-blocks/tab-block' => [
 			'aurora-design-blocks-tab-block-style' => 'blocks/tab-block/build/style-index.css',
 		],
-
-		// 他ブロックもここに追加可能
+		'aurora-design-blocks/text-flow-animation' => [
+			'aurora-design-blocks-text-flow-animation-style' => 'blocks/text-flow-animation/build/style-index.css',
+		],
 	];
 
 	private static $deferredStyles = [];
