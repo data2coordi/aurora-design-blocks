@@ -100,6 +100,10 @@ add_action('enqueue_block_editor_assets', 'auroraDesignBlocks_enqueue_block_asse
 /********************************************************************/
 
 
+/********************************************************************/
+/*ブロックアイテムのフロント用のCSSの登録s*/
+/********************************************************************/
+
 
 
 class AuroraDesignBlocksPreDetermineCssBlocks
@@ -170,3 +174,61 @@ class AuroraDesignBlocksPreDetermineCssBlocks
 
 // 初期化フック
 add_action('wp', ['AuroraDesignBlocksPreDetermineCssBlocks', 'init']);
+
+/********************************************************************/
+/*ブロックアイテムのフロント用のCSSの登録e*/
+/********************************************************************/
+
+/************************************************************/
+/*ブロックアイテムのjsのロード s*/
+/************************************************************/
+class AuroraDesignBlocksPreDetermineJsAssets
+{
+
+	public static function init()
+	{
+		// 個別ページかつ該当ブロックが存在する場合のみ処理
+		if (is_singular()) {
+
+			// 投稿のコンテンツを取得
+			global $post;
+			$content = $post ? $post->post_content : '';
+
+			$scripts = [];
+
+			// タブブロックが存在する場合のみ登録
+			if (has_block('aurora-design-blocks/tab-block', $post)) {
+				$scripts['aurora-design-blocks-tab-block-script'] = [
+					'path' => 'blocks/tab-block/build/frontend.js',
+					'deps' => [],
+				];
+			}
+
+			// スライダーブロックが存在する場合のみ登録
+			if (has_block('aurora-design-blocks/slider-block', $post)) {
+				$scripts['aurora-design-blocks-slider-block-script'] = [
+					'path' => 'blocks/slider-block/build/frontend.js',
+					'deps' => [],
+				];
+			}
+
+			if (! empty($scripts)) {
+				// 登録
+				AuroraDesignBlocksFrontendScripts::add_scripts($scripts);
+
+				// defer 適用
+				$deferredScripts = array_keys($scripts);
+				AuroraDesignBlocksDeferJs::add_deferred_scripts($deferredScripts);
+
+				/* レンダリングブロック、layout計算増加の防止のためのチューニング */
+			}
+		}
+	}
+}
+
+// 初期化処理（ルートで実行）
+add_action('wp', ['AuroraDesignBlocksPreDetermineJsAssets', 'init']);
+
+/************************************************************/
+/*ブロックアイテムのjsのロード s*/
+/************************************************************/
