@@ -157,6 +157,11 @@ class auroraDesignFunctions_PreDetermineCssAssetsTest extends WP_UnitTestCase
         $deferred_styles = $property->getValue();
 
         $this->assertContains('aurora-design-style-awesome', $deferred_styles);
+        $this->assertContains('aurora-design-style-aurora-design', $deferred_styles);
+        $this->assertContains('aurora-design-blocks-style-block-module', $deferred_styles);
+
+
+
     }
 
     // -----------------------

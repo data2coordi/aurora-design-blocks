@@ -5,14 +5,14 @@ clear
 
 
 
-  # sudo docker exec -it dev_wp_env-wordpress_wpdev-1 bash \
-  #  -c "cd /var/www/html/wp-content/plugins/aurora-design-blocks && ./vendor/bin/phpunit  \
-  #  tests/unit-tests/function/"
+   sudo docker exec -it dev_wp_env-wordpress_wpdev-1 bash \
+    -c "cd /var/www/html/wp-content/plugins/aurora-design-blocks && ./vendor/bin/phpunit  \
+    tests/unit-tests/function/"
 
 
-sudo docker exec -it dev_wp_env-wordpress_wpdev-1 bash \
-  -c "cd /var/www/html/wp-content/plugins/aurora-design-blocks && ./vendor/bin/phpunit \
-  tests/unit-tests/function/auroraDesignFunctions_PreDetermineCssAssetsTest.php"
+#sudo docker exec -it dev_wp_env-wordpress_wpdev-1 bash \
+  #-c "cd /var/www/html/wp-content/plugins/aurora-design-blocks && ./vendor/bin/phpunit \
+  #tests/unit-tests/function/auroraDesignFunctions_PreDetermineCssAssetsTest.php"
 
 
   exit
