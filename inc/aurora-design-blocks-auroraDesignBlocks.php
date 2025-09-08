@@ -14,7 +14,7 @@ class AuroraDesignBlocksPreDetermineCssAssets
     private static $EditorStyles = [];
 
     private static $deferredStyles = [
-        "aurora-design-blocks-style-block-module",
+        "aurora-design-blocks-style-module",
         "aurora-design-style-aurora-design",
         "aurora-design-style-awesome",
     ];
@@ -25,7 +25,7 @@ class AuroraDesignBlocksPreDetermineCssAssets
         // 以下、必要に応じて追加
         if (is_singular()) {
             self::$styles = array_merge(self::$styles, [
-                'aurora-design-blocks-style-block-module' => 'css/build/block-module.css',
+                'aurora-design-blocks-style-module' => 'css/build/module.css',
                 'aurora-design-style-aurora-design' => 'css/build/aurora-design.css',
             ]);
             if (strpos($post->post_content, '[fontawesome') !== false) {
@@ -38,7 +38,7 @@ class AuroraDesignBlocksPreDetermineCssAssets
         if (is_archive() || is_search() || is_404()) {
             // 漏れているページ用の CSS をここで追加
             self::$styles = array_merge(self::$styles, [
-                'aurora-design-blocks-style-block-module' => 'css/build/block-module.css',
+                'aurora-design-blocks-style-module' => 'css/build/module.css',
                 'aurora-design-style-aurora-design' => 'css/build/aurora-design.css',
                 'aurora-design-style-awesome' => 'css/build/awesome-all.css',
             ]);
