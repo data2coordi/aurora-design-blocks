@@ -1,0 +1,65 @@
+{
+  "cookies": [
+    {
+      "name": "wordpress_sec_da5bec4a4c0d7514ecd6ae730119ce05",
+      "value": "tech%7C1756964124%7CwKjcLDk0yBcldWKRejFYtfENIVc4v2L21uyvhE68jW8%7C15657bc489abf29b7042aafdfa8f4e74817e8b673b259af0100828ec6da8cf4e",
+      "domain": "wpdev.toshidayurika.com",
+      "path": "/wp-content/plugins",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "wordpress_sec_da5bec4a4c0d7514ecd6ae730119ce05",
+      "value": "tech%7C1756964124%7CwKjcLDk0yBcldWKRejFYtfENIVc4v2L21uyvhE68jW8%7C15657bc489abf29b7042aafdfa8f4e74817e8b673b259af0100828ec6da8cf4e",
+      "domain": "wpdev.toshidayurika.com",
+      "path": "/wp-admin",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "wordpress_test_cookie",
+      "value": "WP%20Cookie%20check",
+      "domain": "wpdev.toshidayurika.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "wordpress_logged_in_da5bec4a4c0d7514ecd6ae730119ce05",
+      "value": "tech%7C1756964124%7CwKjcLDk0yBcldWKRejFYtfENIVc4v2L21uyvhE68jW8%7Caf9fff5870d491516a92ac7ce3f1e703ecbd70f22bb18d0be5066f8d7092d7ae",
+      "domain": "wpdev.toshidayurika.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "wp-settings-6",
+      "value": "libraryContent%3Dbrowse%26mfold%3Do%26posts_list_mode%3Dlist",
+      "domain": "wpdev.toshidayurika.com",
+      "path": "/",
+      "expires": 1788327324.815488,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "wp-settings-time-6",
+      "value": "1756791324",
+      "domain": "wpdev.toshidayurika.com",
+      "path": "/",
+      "expires": 1788327324.815645,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}

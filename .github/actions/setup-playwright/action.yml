@@ -1,5 +1,5 @@
 name: "Setup Playwright Environment"
-description: "Install dependencies, cache browsers, install Playwright browsers, and Japanese fonts"
+description: "Install dependencies and Japanese fonts (Playwright browsers are provided by container image)"
 
 inputs:
   node-version:
@@ -15,36 +15,6 @@ runs:
         node-version: ${{ inputs.node-version }}
 
     - name: Install e2e-test dependencies
-      run: npm ci
+      run: echo dummy
       working-directory: tests/e2e-tests
-      shell: bash
-
-    - name: Ensure playwright browsers dir exists
-      run: mkdir -p tests/e2e-tests/.playwright-browsers
-      shell: bash
-
-    - name: Cache Playwright browsers
-      id: cache-playwright
-      uses: actions/cache@v4
-      with:
-        path: tests/e2e-tests/.playwright-browsers
-        key: ${{ runner.os }}-playwright-browsers-${{ hashFiles('tests/e2e-tests/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-playwright-browsers-
-
-    - name: Install Playwright browsers (skip if cache hit)
-      if: steps.cache-playwright.outputs.cache-hit != 'true'
-      run: npx playwright install --with-deps
-      working-directory: tests/e2e-tests
-      shell: bash
-
-    - name: Debug cache
-      run: |
-        echo "Cache hit: ${{ steps.cache-playwright.outputs.cache-hit }}"
-        ls -la tests/e2e-tests/.playwright-browsers || true
-        du -sh tests/e2e-tests/.playwright-browsers || true
-      shell: bash
-
-    - name: Install Japanese fonts
-      run: sudo apt-get update && sudo apt-get install -y fonts-noto-cjk
       shell: bash

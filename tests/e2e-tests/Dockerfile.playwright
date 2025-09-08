@@ -1,0 +1,10 @@
+# 公式 Playwright イメージをベース
+FROM mcr.microsoft.com/playwright:v1.51.1-jammy
+
+# 日本語フォントなど追加
+RUN apt-get update && apt-get install -y fonts-noto-cjk
+
+# Playwright Test を /usr/local/lib にインストール
+
+# デフォルトコマンド
+CMD ["bash"]

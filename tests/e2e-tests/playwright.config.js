@@ -2,6 +2,7 @@ import { defineConfig, devices } from "@playwright/test";
 
 // 環境によってURLや認証ファイルパスが変わるため、定数として定義
 const BASE_URL = "https://wpdev.auroralab-design.com";
+const authFile = "playwright/.auth/user.json";
 
 export default defineConfig({
   // 各テストのデフォルトタイムアウト（ms）
@@ -12,21 +13,35 @@ export default defineConfig({
     // click や fill など1アクションのタイムアウト
     actionTimeout: 10_000,
     // 動画録画設定
-    video: "off",
+    video: "on",
     // ブラウザのベースURL
     baseURL: BASE_URL,
   },
 
   // 複数のテストプロジェクトを定義
   projects: [
+    {
+      name: "setup",
+      testDir: "./tests", // テストファイルのディレクトリを指定
+      testMatch: "auth.setup.ts",
+    },
+
     // 2. 【新規】認証が不要なテスト用のプロジェクト
     {
       name: "unauthenticated",
-      testDir: "./unauthenticated", // テストファイルのディレクトリを指定
+      testDir: "./tests/unauthenticated", // テストファイルのディレクトリを指定
       testMatch: [/menu\.spec\.js/], // 認証不要なテストファイルを指定
       use: {
         ...devices["Desktop Chrome"],
-        // storageState を使わないので、ログイン状態にはならない
+      },
+    },
+    {
+      name: "main",
+      testDir: "./tests/main", // テストファイルのディレクトリを指定
+      testMatch: [/customiser\.spec\.ts/], // 認証不要なテストファイルを指定
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: authFile,
       },
     },
   ],
