@@ -21,29 +21,18 @@ class AuroraDesignBlocksPreDetermineCssAssets
 
     public static function init()
     {
+        global $post;
         // 以下、必要に応じて追加
-        if (is_single()) {
+        if (is_singular()) {
             self::$styles = array_merge(self::$styles, [
                 'aurora-design-blocks-style-block-module' => 'css/build/block-module.css',
                 'aurora-design-style-aurora-design' => 'css/build/aurora-design.css',
-                'aurora-design-style-awesome' => 'css/build/awesome-all.css',
             ]);
-        }
-
-        if (is_page()) {
-            self::$styles = array_merge(self::$styles, [
-                'aurora-design-blocks-style-block-module' => 'css/build/block-module.css',
-                'aurora-design-style-aurora-design' => 'css/build/aurora-design.css',
-                'aurora-design-style-awesome' => 'css/build/awesome-all.css',
-            ]);
-        }
-
-        if (is_front_page() && (!is_home())) {
-            self::$styles = array_merge(self::$styles, [
-                'aurora-design-blocks-style-block-module' => 'css/build/block-module.css',
-                'aurora-design-style-aurora-design' => 'css/build/aurora-design.css',
-                'aurora-design-style-awesome' => 'css/build/awesome-all.css',
-            ]);
+            if (strpos($post->post_content, '[fontawesome') !== false) {
+                self::$styles = array_merge(self::$styles, [
+                    'aurora-design-style-awesome' => 'css/build/awesome-all.css',
+                ]);
+            }
         }
 
         if (is_archive() || is_search() || is_404()) {
