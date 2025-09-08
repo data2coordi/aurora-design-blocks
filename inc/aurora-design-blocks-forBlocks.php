@@ -106,7 +106,7 @@ add_action('enqueue_block_editor_assets', 'auroraDesignBlocks_enqueue_block_asse
 
 
 
-class AuroraDesignBlocksPreDetermineCssBlocks
+class AuroraDesignBlocksPreDetermineBlocksCss
 {
 	/**
 	 * ブロックごとのフロントCSS設定
@@ -173,7 +173,7 @@ class AuroraDesignBlocksPreDetermineCssBlocks
 }
 
 // 初期化フック
-add_action('wp', ['AuroraDesignBlocksPreDetermineCssBlocks', 'init']);
+add_action('wp', ['AuroraDesignBlocksPreDetermineBlocksCss', 'init']);
 
 /********************************************************************/
 /*ブロックアイテムのフロント用のCSSの登録e*/

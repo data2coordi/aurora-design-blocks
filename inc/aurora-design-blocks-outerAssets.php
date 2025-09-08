@@ -71,7 +71,7 @@ class AuroraDesignBlocksRegStyles
 	public static function enqueue_styles()
 	{
 		foreach (static::$styles as $handle => $path) {
-			wp_enqueue_style($handle, plugin_dir_url(dirname(__FILE__))  . $path, [], _S_VERSION);
+			wp_enqueue_style($handle, plugin_dir_url(dirname(__FILE__))  . $path, [], _AuroraDesignBlocks_S_VERSION);
 		}
 	}
 }
@@ -135,7 +135,7 @@ class AuroraDesignBlocksRegScripts
 			$path = $data['path'];
 			$deps = isset($data['deps']) ? $data['deps'] : [];
 
-			wp_enqueue_script($handle,  plugin_dir_url(dirname(__FILE__)) . $path, $deps, _S_VERSION, true);
+			wp_enqueue_script($handle,  plugin_dir_url(dirname(__FILE__)) . $path, $deps, _AuroraDesignBlocks_S_VERSION, true);
 		}
 	}
 }
@@ -265,7 +265,7 @@ class AuroraDesignBlocksMoveScripts
 
 				wp_dequeue_script($handle);
 				wp_deregister_script($handle);
-				wp_register_script($handle, $path, [], _S_VERSION, true);
+				wp_register_script($handle, $path, [], _AuroraDesignBlocks_S_VERSION, true);
 				wp_enqueue_script($handle);
 			}
 		}

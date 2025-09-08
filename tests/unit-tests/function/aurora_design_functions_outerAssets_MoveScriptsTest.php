@@ -5,9 +5,9 @@ declare(strict_types=1);
 // テスト対象クラスを含むファイルを読み込む (オートロードされていない場合)
 // require_once dirname(__DIR__, 2) . '/inc/auroraDesignBlocks-functions-outerAssets.php';
 
-// _INTEGLIGHT_S_VERSION 定数が定義されていない場合に定義 (テスト環境用)
-if (!defined('_S_VERSION')) {
-    define('_S_VERSION', '1.0.1');
+// _AuroraDesignBlocks_S_VERSION 定数が定義されていない場合に定義 (テスト環境用)
+if (!defined('_AuroraDesignBlocks_S_VERSION')) {
+    define('_AuroraDesignBlocks_S_VERSION', '1.0.1');
 }
 
 /**
@@ -250,7 +250,7 @@ class aurora_design_functions_outerAssets_MoveScriptsTest extends WP_UnitTestCas
         $this->assertTrue(isset($script_obj_after->extra['group']) && $script_obj_after->extra['group'] === 1, "Script '{$handle}' should be moved to footer (group===1).");
         // バージョンや依存関係が維持されているかも確認 (オプション)
 
-        $this->assertEquals(_S_VERSION, $script_obj_after->ver, "Script '{$handle}' version should be maintained.");
+        $this->assertEquals(_AuroraDesignBlocks_S_VERSION, $script_obj_after->ver, "Script '{$handle}' version should be maintained.");
 
         // $this->assertEquals([], $script_obj_after->deps, "Script '{$handle}' dependencies should be maintained.");
     }

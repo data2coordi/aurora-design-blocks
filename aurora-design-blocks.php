@@ -8,9 +8,9 @@
  * Text Domain: aurora-design-blocks
  */
 
-if (!defined('_S_VERSION')) {
+if (!defined('_AuroraDesignBlocks_S_VERSION')) {
     // Replace the version number of the theme on each release.
-    define('_S_VERSION', '1.0.27');
+    define('_AuroraDesignBlocks_S_VERSION', '1.0.27');
 }
 
 
