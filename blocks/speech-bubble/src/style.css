@@ -1,56 +1,51 @@
 /* 通常レイアウト */
 .aurora-design-blocks-speech-bubble {
-    display: flex;
-    align-items: flex-start;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    gap: 1vw;
+  display: flex;
+  align-items: flex-start;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  gap: 1vw;
 }
 
-.aurora-design-blocks-speech-bubble .speech-bubble__image {}
+.aurora-design-blocks-speech-bubble .speech-bubble__image {
+}
 
 .aurora-design-blocks-speech-bubble .speech-bubble__image img {
-    display: block;
-    width: clamp(50px, 5vw, 100px);
-    height: clamp(50px, 5vw, 100px);
-    border-radius: 50%;
-    object-fit: cover;
+  display: block;
+  width: clamp(50px, 5vw, 100px);
+  height: clamp(50px, 5vw, 100px);
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-.aurora-design-blocks-speech-bubble .speech-bubble__image .speech-bubble__image-caption {
-    font-size: 0.8rem;
-    text-align: center;
+.aurora-design-blocks-speech-bubble
+  .speech-bubble__image
+  .speech-bubble__image-caption {
+  font-size: 0.8rem;
+  text-align: center;
 }
-
-
 
 .aurora-design-blocks-speech-bubble .speech-bubble__content {
-    position: relative;
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 10px;
+  position: relative;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 10px;
 }
-
 
 .aurora-design-blocks-speech-bubble--normal .speech-bubble__content::before {
-    content: "";
-    position: absolute;
-    top: calc(50% - 10px);
-    left: -10px;
-    width: 0;
-    height: 0;
-    background-color: inherit;
-    width: 50px;
-    height: 50px;
-    clip-path: polygon(0 10px, 20px 0, 20px 20px);
+  content: "";
+  position: absolute;
+  top: calc(50% - 10px);
+  left: -10px;
+  width: 0;
+  height: 0;
+  background-color: inherit;
+  width: 50px;
+  height: 50px;
+  clip-path: polygon(0 10px, 20px 0, 20px 20px);
 }
 
-
-
-
-
 /* 反転レイアウトの場合の吹き出しの口 */
-
 
 /*
 .speech-bubble__content:before {
@@ -65,31 +60,41 @@
 }
     */
 
-
-
-
 /* 反転レイアウト */
 .aurora-design-blocks-speech-bubble--reverse {
-    flex-direction: row-reverse;
+  flex-direction: row-reverse;
 }
 
 .aurora-design-blocks-speech-bubble--reverse .speech-bubble__image {
-    margin-right: 0;
-    margin-left: 10px;
+  margin-right: 0;
+  margin-left: 10px;
 }
-
-
 
 /* 反転レイアウトの場合の吹き出しの口 */
 .aurora-design-blocks-speech-bubble--reverse .speech-bubble__content::after {
-    content: "";
-    position: absolute;
-    top: calc(50% - 10px);
-    /* 高さが20px分の場合、中央に配置 */
-    right: -10px;
-    /* 親要素の右側に20px分はみ出す */
-    width: 50px;
-    height: 50px;
-    background-color: inherit;
-    clip-path: polygon(30px 0, 30px 20px, 50px 10px);
+  content: "";
+  position: absolute;
+  top: calc(50% - 10px);
+  /* 高さが20px分の場合、中央に配置 */
+  right: -10px;
+  /* 親要素の右側に20px分はみ出す */
+  width: 50px;
+  height: 50px;
+  background-color: inherit;
+  clip-path: polygon(30px 0, 30px 20px, 50px 10px);
+}
+
+/******吹き出し画像********/
+.aurora-design-blocks-speech-bubble figure.speech-bubble__image {
+  flex-basis: 10%;
+  min-width: 95px;
+  /* これ以下にならない */
+}
+
+@media (max-width: 768px) {
+  /******吹き出し画像********/
+  .aurora-design-blocks-speech-bubble figure.speech-bubble__image {
+    flex-basis: 10%;
+    min-width: 55px;
+  }
 }

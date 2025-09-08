@@ -1,64 +1,92 @@
 .wp-block-aurora-design-blocks-slider-block {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    min-height: 300px;
-    /* スライダーの高さを適切なサイズに設定 */
-
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  min-height: 300px;
+  /* スライダーの高さを適切なサイズに設定 */
 }
 
 .wp-block-aurora-design-blocks-slider-block .blockSliders-content {
-    display: grid;
-    grid-template-columns: 1fr;
-    /* 1列 */
-    grid-template-rows: auto;
-    /* 高さはコンテンツに応じて自動 */
-    position: relative;
-    /* relative は不要になるが、保険として残す */
+  display: grid;
+  grid-template-columns: 1fr;
+  /* 1列 */
+  grid-template-rows: auto;
+  /* 高さはコンテンツに応じて自動 */
+  position: relative;
+  /* relative は不要になるが、保険として残す */
 }
 
-.wp-block-aurora-design-blocks-slider-block.blockSliders .blockSliders-content>* {
-    grid-column: 1 / -1;
-    /* すべての要素を1列目に配置 */
-    grid-row: 1 / -1;
-    /* すべての要素を1行目に配置（重ねる） */
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+.wp-block-aurora-design-blocks-slider-block.blockSliders
+  .blockSliders-content
+  > * {
+  grid-column: 1 / -1;
+  /* すべての要素を1列目に配置 */
+  grid-row: 1 / -1;
+  /* すべての要素を1行目に配置（重ねる） */
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 
-.wp-block-aurora-design-blocks-slider-block.blockSliders .blockSliders-content>*:first-child {
-    position: relative;
-    opacity: 1;
+.wp-block-aurora-design-blocks-slider-block.blockSliders
+  .blockSliders-content
+  > *:first-child {
+  position: relative;
+  opacity: 1;
 }
 
-
-.wp-block-aurora-design-blocks-slider-block.blockSliders .blockSliders-content>*.active {
-    opacity: 1;
+.wp-block-aurora-design-blocks-slider-block.blockSliders
+  .blockSliders-content
+  > *.active {
+  opacity: 1;
 }
-
 
 .wp-block-aurora-design-blocks-slider-block .slide-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 18px;
-    z-index: 10;
-    border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 10;
+  border-radius: 5px;
 }
 
 .wp-block-aurora-design-blocks-slider-block .slide-button:hover {
-    background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .wp-block-aurora-design-blocks-slider-block .slide-button.prev {
-    left: 10px;
+  left: 10px;
 }
 
 .wp-block-aurora-design-blocks-slider-block .slide-button.next {
-    right: 10px;
+  right: 10px;
 }
+
+/*//////////////////////////////////////////////*/
+/*//////////////////////////////////////////////*/
+/*//////////////////////////////////////////////*/
+
+/*********************************/
+/*********************************/
+/******コンテンツ内スライダー********/
+.wp-block-aurora-design-blocks-slider-block .wp-block-columns {
+  padding: 0px 20px;
+  /* コンテンツ内スライダーのパディング */
+}
+
+.wp-block-aurora-design-blocks-slider-block.blockSliders .wp-block-columns {
+  border-radius: 20px;
+  /* コンテンツ内スライダーの角を丸く */
+}
+
+/* .aurora-design-blocks-tabs-block .block-editor-button-block-appender {
+  width: 800px;
+  
+  position: relative;
+  margin-top: 100px;
+  z-index: -1;
+} */

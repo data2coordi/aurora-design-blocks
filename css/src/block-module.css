@@ -1,144 +1,16 @@
 /***********ブロックエディタのセクション********/
 /*********************************/
 /*********************************/
-/*-------------タブブロック----------*/
-.wp-block-aurora-design-blocks-tab-block .tabs-navigation {
-  border-bottom: 2px solid #000;
-  background: #fff;
-  margin-top: var(--ly-elementTopMarginSmall);
-}
-
-/* 現在指している所のスタイル */
-.wp-block-aurora-design-blocks-tab-block .tabs-navigation li.active {
-  background: #000;
-  border-radius: 10px 10px 0 0;
-  /* 角丸の半径 */
-  padding-left: 2em;
-  padding-right: 2em;
-  /* 左右にパディングを追加している */
-  color: #fff;
-  border: none;
-}
-
-/* 現在指していない所のスタイル */
-.wp-block-aurora-design-blocks-tab-block .tabs-navigation li {
-  background: #eee;
-  border-radius: 10px 10px 0 0;
-  cursor: pointer;
-  padding: 0.5em 2em;
-  margin-left: 5px;
-}
-
-/* タブ全体を囲む線を消している */
-.wp-block-aurora-design-blocks-tab-block.tabs {
-  border: none;
-}
-
-/* タブナビの縦幅を狭くしている */
-.wp-block-aurora-design-blocks-tab-block ul.tabs-navigation {
-  line-height: 1;
-}
-
-/* タブナビの上にマージンをつけている */
-.wp-block-aurora-design-blocks-tab-block
-  .aurora-design-blocks-tabs
-  .tabs-navigation {
-  margin-top: 30px;
-}
-
-.wp-block-aurora-design-blocks-tab-block
-  .aurora-design-blocks-tabs-block
-  .block-editor-default-block-appender
-  .block-editor-inserter {
-  margin-top: 25px;
-  /* デフォルトの追加ボタンの位置を下げている */
-}
-
-.wp-block-aurora-design-blocks-tab-block.aurora-design-blocks-tabs {
-  border: 1px solid #eee;
-  padding: 0 2em;
-  /* タブを線で囲んでいる */
-}
-
-.wp-block-aurora-design-blocks-tab.tab a {
-  word-break: break-all;
-  overflow-wrap: break-word;
-  /* urlをコンテンツに応じて折り曲げている */
-}
-
-.wp-block-aurora-design-blocks-tab-block .wp-block-column {
-  /* padding-left: 2em;
-  padding-right: 2em; */
-  /* カラムレイアウトにパディングを追加している */
-
-}
-
-.aurora-design-blocks-tabs .ly_site_content_main .wp-block-columns {
-  padding: 0;
-}
 
 /*********************************/
 /*********************************/
-/******コンテンツ内スライダー********/
-.wp-block-aurora-design-blocks-slider-block .wp-block-columns {
-  padding: 0px 20px;
-  /* コンテンツ内スライダーのパディング */
-}
-
-.wp-block-aurora-design-blocks-slider-block.blockSliders .wp-block-columns {
-  border-radius: 20px;
-  /* コンテンツ内スライダーの角を丸く */
-}
-
-/* .aurora-design-blocks-tabs-block .block-editor-button-block-appender {
-  width: 800px;
-  
-  position: relative;
-  margin-top: 100px;
-  z-index: -1;
-} */
 
 /*********************************/
 /*********************************/
-/******吹き出し画像********/
-.aurora-design-blocks-speech-bubble figure.speech-bubble__image {
-  flex-basis: 10%;
-  min-width: 95px;
-  /* これ以下にならない */
-}
-
-/*********************************/
-/*********************************/
-/******全幅ブロック********/
-/* 背景色にパディング */
-.wp-block-aurora-design-blocks-custom-cover {
-  padding-top: .25em;
-  padding-bottom: 2em;
-}
-
-/* 背景色のついた全幅ブロックコンテンツにパディングを付与 */
-.wp-block-aurora-design-blocks-custom-cover.alignfull.has-background .wp-block-column {
-  padding: 0 1.2em;
-}
-
-/* 背景色のついた全幅ブロックからパディングを消す */
-.wp-block-aurora-design-blocks-custom-cover.alignfull.has-background .wp-block-columns {
-  padding: 0;
-}
-
-/*********************************/
-/*********************************/
-/******CTA********/
-.wp-block-aurora-design-blocks-cta-block {
-  background: none;
-  border: none;
-}
-
 
 /* 人気記事ランキング s*/
 /* 人気記事ランキング */
 /* 人気記事ランキング */
-
 
 /* =========================================
    人気記事（右カラム）
@@ -150,69 +22,93 @@
 
 /* ULの既定インデントと丸ポチを削除（左ズレの元を断つ） */
 .ly_site_content_widgetArea_right
-  .widget_auroradesignblocks_popular_posts_widget ul{
-  margin: 0;                  /* 外側余白なし */
-  padding: 0;                 /* ULの左インデントをゼロに */
-  list-style: none;           /* ● を非表示 */
+  .widget_auroradesignblocks_popular_posts_widget
+  ul {
+  margin: 0; /* 外側余白なし */
+  padding: 0; /* ULの左インデントをゼロに */
+  list-style: none; /* ● を非表示 */
 }
 
 /* LI側の左パディングもゼロ（テーマ既定の1.2rem≒19.2pxを上書き） */
 .ly_site_content_widgetArea_right
-  .widget_auroradesignblocks_popular_posts_widget li{
-  padding-left: 0;            /* 物理プロパティで上書き */
-  padding-inline-start: 0;    /* 論理プロパティでの指定も潰す */
-  margin: 0 0 12px;           /* 行間だけ下に作る */
+  .widget_auroradesignblocks_popular_posts_widget
+  li {
+  padding-left: 0; /* 物理プロパティで上書き */
+  padding-inline-start: 0; /* 論理プロパティでの指定も潰す */
+  margin: 0 0 12px; /* 行間だけ下に作る */
 }
 
 /* 本体：リンク全体（a）をブロック化し、左に“画像サイズ＋間隔”の実スペースを確保 */
 .ly_site_content_widgetArea_right
-  .widget_auroradesignblocks_popular_posts_widget li > a{
-  display: block;                         /* 行全体を1ブロックとして扱う */
-  position: relative;                     /* 子のabsolute配置の基準 */
-  padding-left: calc(100px + 12px);       /* 画像100px＋余白12px → テキスト開始位置を右へ固定 */
-  min-height: 56px;                       /* 画像の高さ(16:9の100×9/16)と同じにして行高さを安定化 */
-  line-height: 1.5;                       /* 読みやすい行間 */
-  font-size: 0.8rem;                       
-  text-decoration: none;                  /* 下線消し（任意） */
-  color: inherit;                         /* 親の文字色を継承 */
-  overflow: hidden;                       /* 念のためのはみ出し防止 */
-  text-indent: 0 ;              /* ★ぶら下げインデントの無効化＝1行目の食い込み防止 */
-  border-bottom: .01em solid #e9e8e8;     /*下線を引く*/
+  .widget_auroradesignblocks_popular_posts_widget
+  li
+  > a {
+  display: block; /* 行全体を1ブロックとして扱う */
+  position: relative; /* 子のabsolute配置の基準 */
+  padding-left: calc(
+    100px + 12px
+  ); /* 画像100px＋余白12px → テキスト開始位置を右へ固定 */
+  min-height: 56px; /* 画像の高さ(16:9の100×9/16)と同じにして行高さを安定化 */
+  line-height: 1.5; /* 読みやすい行間 */
+  font-size: 0.8rem;
+  text-decoration: none; /* 下線消し（任意） */
+  color: inherit; /* 親の文字色を継承 */
+  overflow: hidden; /* 念のためのはみ出し防止 */
+  text-indent: 0; /* ★ぶら下げインデントの無効化＝1行目の食い込み防止 */
+  border-bottom: 0.01em solid #e9e8e8; /*下線を引く*/
 }
 
 /* 念押し：a配下の要素/疑似要素にもインデント系があればリセット */
 .ly_site_content_widgetArea_right
-  .widget_auroradesignblocks_popular_posts_widget li > a *,
+  .widget_auroradesignblocks_popular_posts_widget
+  li
+  > a
+  *,
 .ly_site_content_widgetArea_right
-  .widget_auroradesignblocks_popular_posts_widget li > a::before{
-  text-indent: 0 ;  /* 子/疑似要素が持つインデントの影響もゼロに */
-  margin-left: 0 ;  /* ぶら下げ系の負のマージン対策 */
+  .widget_auroradesignblocks_popular_posts_widget
+  li
+  > a::before {
+  text-indent: 0; /* 子/疑似要素が持つインデントの影響もゼロに */
+  margin-left: 0; /* ぶら下げ系の負のマージン対策 */
 }
 
 /* 画像は“空中固定”：左に絶対配置＋縦センター、16:9で中央トリミング */
 .ly_site_content_widgetArea_right
-  .widget_auroradesignblocks_popular_posts_widget li > a img{
-  position: absolute;                     /* レイアウトフローから外す（テキストは画像を無視できる） */
-  left: 0;                                /* 左端に固定 */
-  top: 50%; transform: translateY(-50%);  /* 縦方向の中央揃え */
-  width: 100px; height: 56px;             /* 16:9固定（100×9/16） */
-  object-fit: cover;                       /* 枠いっぱいに表示しつつ切り抜く */
-  object-position: 50% 50%;               /* 切り抜きの基準を中央に固定 */
-  display: block;                          /* 画像下の微妙な隙間を消す */
-  float: none ;                  /* 旧CSSの回り込み指定を完全無効化 */
-  margin: 0 ;                    /* 回り込み用の余白も無効化 */
+  .widget_auroradesignblocks_popular_posts_widget
+  li
+  > a
+  img {
+  position: absolute; /* レイアウトフローから外す（テキストは画像を無視できる） */
+  left: 0; /* 左端に固定 */
+  top: 50%;
+  transform: translateY(-50%); /* 縦方向の中央揃え */
+  width: 100px;
+  height: 56px; /* 16:9固定（100×9/16） */
+  object-fit: cover; /* 枠いっぱいに表示しつつ切り抜く */
+  object-position: 50% 50%; /* 切り抜きの基準を中央に固定 */
+  display: block; /* 画像下の微妙な隙間を消す */
+  float: none; /* 旧CSSの回り込み指定を完全無効化 */
+  margin: 0; /* 回り込み用の余白も無効化 */
 }
 
 /* 既存：ホバー色／補足テキスト（そのまま維持） */
-.widget_auroradesignblocks_popular_posts_widget li a:hover{ color:#999; }
-.widget_auroradesignblocks_popular_posts_widget li a span.views-count{
-  font-weight: normal; color:#999; margin-top:.3em; font-size:.7rem;
+.widget_auroradesignblocks_popular_posts_widget li a:hover {
+  color: #999;
+}
+.widget_auroradesignblocks_popular_posts_widget li a span.views-count {
+  font-weight: normal;
+  color: #999;
+  margin-top: 0.3em;
+  font-size: 0.7rem;
 }
 
-.ly_site_content_widgetArea_right .widget_auroradesignblocks_popular_posts_widget li>a img:hover {
+.ly_site_content_widgetArea_right
+  .widget_auroradesignblocks_popular_posts_widget
+  li
+  > a
+  img:hover {
   opacity: 0.7;
 }
-
 
 /* 閲覧数などの補足テキスト（既存指定を維持） */
 .widget_auroradesignblocks_popular_posts_widget li a span.views-count {
@@ -222,29 +118,5 @@
   font-size: 0.7rem;
 }
 
-
 /* 人気記事ランキング e*/
 /* 人気記事ランキング */
-
-
-
-@media (max-width: 768px) {
-  /******吹き出し画像********/
-  .aurora-design-blocks-speech-bubble figure.speech-bubble__image {
-    flex-basis: 10%;
-    min-width: 55px;
-  }
-
-  /* 背景色のついた全幅ブロックコンテンツにマージンを付与 */
-  .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background .wp-block-columns .wp-block-column {
-    margin: 0 1.2em;
-  }
-
-  /* 背景色のついた全幅ブロックタイトルにパディングを付与 */
-  .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background h2,
-  .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background h3,
-  .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background h4,
-  .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background h5 {
-    padding: 0 1.2em !important;
-  }
-}
