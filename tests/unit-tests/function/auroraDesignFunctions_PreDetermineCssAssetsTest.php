@@ -46,7 +46,6 @@ class auroraDesignFunctions_PreDetermineCssAssetsTest extends WP_UnitTestCase
 
         $styles = $this->get_static_property(self::STYLES_PROPERTY);
         $this->assertArrayHasKey('aurora-design-style-aurora-design', $styles);
-        $this->assertArrayHasKey('aurora-design-style-awesome', $styles);
     }
 
     /**
@@ -63,7 +62,6 @@ class auroraDesignFunctions_PreDetermineCssAssetsTest extends WP_UnitTestCase
 
         $styles = $this->get_static_property(self::STYLES_PROPERTY);
         $this->assertArrayHasKey('aurora-design-style-aurora-design', $styles);
-        $this->assertArrayHasKey('aurora-design-style-awesome', $styles);
     }
 
     /**
@@ -80,7 +78,7 @@ class auroraDesignFunctions_PreDetermineCssAssetsTest extends WP_UnitTestCase
         self::TARGET_CLASS::init();
 
         $styles = $this->get_static_property(self::STYLES_PROPERTY);
-        $this->assertArrayHasKey('aurora-design-style-awesome', $styles);
+        $this->assertArrayHasKey('aurora-design-style-aurora-design', $styles);
     }
 
     /**
@@ -111,7 +109,7 @@ class auroraDesignFunctions_PreDetermineCssAssetsTest extends WP_UnitTestCase
         self::TARGET_CLASS::init();
 
         $styles = $this->get_static_property(self::STYLES_PROPERTY);
-        $this->assertArrayHasKey('aurora-design-blocks-style-block-module', $styles);
+        $this->assertArrayHasKey('aurora-design-blocks-style-module', $styles);
     }
 
     /**
@@ -158,10 +156,7 @@ class auroraDesignFunctions_PreDetermineCssAssetsTest extends WP_UnitTestCase
 
         $this->assertContains('aurora-design-style-awesome', $deferred_styles);
         $this->assertContains('aurora-design-style-aurora-design', $deferred_styles);
-        $this->assertContains('aurora-design-blocks-style-block-module', $deferred_styles);
-
-
-
+        $this->assertContains('aurora-design-blocks-style-module', $deferred_styles);
     }
 
     // -----------------------

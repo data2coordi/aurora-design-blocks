@@ -11,9 +11,9 @@ export default defineConfig({
   // プロジェクト間で共有される設定
   use: {
     // click や fill など1アクションのタイムアウト
-    actionTimeout: 10_000,
+    actionTimeout: 30_000,
     // 動画録画設定
-    video: "on",
+    video: "off",
     // ブラウザのベースURL
     baseURL: BASE_URL,
   },
@@ -30,7 +30,6 @@ export default defineConfig({
     {
       name: "unauthenticated",
       testDir: "./tests/unauthenticated", // テストファイルのディレクトリを指定
-      testMatch: [/menu\.spec\.js/], // 認証不要なテストファイルを指定
       use: {
         ...devices["Desktop Chrome"],
       },

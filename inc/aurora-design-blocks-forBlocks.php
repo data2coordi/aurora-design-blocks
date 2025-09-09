@@ -116,7 +116,7 @@ class AuroraDesignBlocksPreDetermineBlocksCss
 		'aurora-design-blocks/cta-block' => [
 			'aurora-design-blocks-cta-block-style' => 'blocks/cta-block/build/style-index.css',
 		],
-		'aurora-design-blocks/custom-cover-block' => [
+		'aurora-design-blocks/custom-cover' => [
 			'aurora-design-blocks-custom-cover-style' => 'blocks/custom-cover/build/style-index.css',
 		],
 		'aurora-design-blocks/frame-line' => [
@@ -165,7 +165,6 @@ class AuroraDesignBlocksPreDetermineBlocksCss
 				self::$deferredStyles = array_merge(self::$deferredStyles, array_keys($styles));
 			}
 		}
-
 		if (!empty(self::$deferredStyles)) {
 			AuroraDesignBlocksDeferCss::add_deferred_styles(self::$deferredStyles);
 		}

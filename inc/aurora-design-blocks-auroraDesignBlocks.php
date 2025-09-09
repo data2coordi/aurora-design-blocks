@@ -40,7 +40,6 @@ class AuroraDesignBlocksPreDetermineCssAssets
             self::$styles = array_merge(self::$styles, [
                 'aurora-design-blocks-style-module' => 'css/build/module.css',
                 'aurora-design-style-aurora-design' => 'css/build/aurora-design.css',
-                'aurora-design-style-awesome' => 'css/build/awesome-all.css',
             ]);
         }
 

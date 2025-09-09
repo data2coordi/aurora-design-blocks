@@ -1,0 +1,53 @@
+name: Playwright Unauthenticated Test
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  unauthenticated-test:
+    if: contains(github.event.head_commit.message, 'uatest')
+    runs-on: ubuntu-latest
+    container:
+      # 公式のPlaywrightイメージを使用x
+      image: mcr.microsoft.com/playwright:v1.51.1-jammy
+
+    env:
+      WP_ADMIN_USER: ${{ secrets.WP_ADMIN_USER }}
+      WP_ADMIN_PASSWORD: ${{ secrets.WP_ADMIN_PASSWORD }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # GitHub Actionsのキャッシュを設定
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: tests/e2e-tests/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('tests/e2e-tests/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      # 依存関係をインストール
+      - name: Install dependencies
+        run: npm ci
+        working-directory: tests/e2e-tests
+
+      - name: Run Playwright tests
+        run:
+          #npx playwright test tests/e2e-tests/tests/unauthenticated/setBlocksCss.spec.ts \
+          npx playwright test tests/e2e-tests/tests/unauthenticated/setNormalCss.spec.ts \
+          --project=unauthenticated \
+          --config=playwright.config.js
+          --reporter=list
+        working-directory: tests/e2e-tests
+
+      - name: Upload test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-artifacts
+          path: tests/e2e-tests/test-results/
