@@ -12,6 +12,59 @@ class AuroraDesignBlocks_forFront
             echo $tracking_code;
         }
     }
+
+
+    public static function outGA4Id($id_name)
+    {
+
+        $tracking_id = get_option($id_name);
+?>
+        <script>
+            // gtag関数とdataLayerを初期化
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+
+            var gtagLoaded = false;
+
+            // GA4のスクリプトを読み込む関数
+            var loadGtag = function() {
+                if (gtagLoaded) return;
+                gtagLoaded = true;
+
+                // gtag.jsスクリプトを動的に作成・追加
+                var script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=<?php echo $tracking_id; ?>';
+
+                document.head.appendChild(script);
+
+                // gtagの初期設定コマンドをキューにプッシュ
+                gtag('js', new Date());
+                gtag('config', '<?php echo $tracking_id; ?>');
+            };
+
+            // ブラウザがアイドル状態になったときに読み込む
+            if ('requestIdleCallback' in window) {
+                window.requestIdleCallback(loadGtag);
+            } else {
+                // サポートしていない場合は、フォールバックとしてsetTimeoutを使用
+                setTimeout(loadGtag, 4000);
+            }
+
+
+
+            // ユーザーの最初のインタラクションを監視して読み込む
+            // ['scroll', 'mousemove', 'click', 'touchstart', 'keydown'].forEach(function(event) {
+            //     window.addEventListener(event, loadGtag, {
+            //         once: true
+            //     });
+            // });
+        </script>
+<?php
+    }
 }
 
 
@@ -27,7 +80,7 @@ class AuroraDesignBlocks_customizer_ga
     public function __construct()
     {
         add_action('customize_register', array($this, 'regSettings'));
-        add_action('wp_head', array($this, 'outCode'));
+        add_action('wp_footer', array($this, 'outCode'));
     }
 
     // カスタマイザーに設定項目を登録
@@ -66,7 +119,7 @@ class AuroraDesignBlocks_customizer_ga
     // Google アナリティクスコードをサイトの <head> に出力
     public function outCode()
     {
-        AuroraDesignBlocks_forFront::outCode('auroraDesignBlocks_ga_trackingCode');
+        AuroraDesignBlocks_forFront::outGA4Id('auroraDesignBlocks_ga_trackingCode');
     }
 }
 
