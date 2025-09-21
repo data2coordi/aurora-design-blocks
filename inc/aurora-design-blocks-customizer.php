@@ -13,12 +13,34 @@ class AuroraDesignBlocks_forFront
         }
     }
 
-
-    public static function outGA4Id($id_name)
+    public static function outGA4Id_normal($id_name)
     {
 
         $tracking_id = get_option($id_name);
+        if (empty($tracking_id)) {
+            return;
+        }
 ?>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr($tracking_id); ?>"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', '<?php echo esc_js($tracking_id); ?>');
+        </script>
+    <?php
+    }
+
+
+    public static function outGA4Id_speedUp($id_name)
+    {
+
+        $tracking_id = get_option($id_name);
+    ?>
         <script>
             // gtag関数とdataLayerを初期化
             window.dataLayer = window.dataLayer || [];
@@ -37,13 +59,13 @@ class AuroraDesignBlocks_forFront
                 // gtag.jsスクリプトを動的に作成・追加
                 var script = document.createElement('script');
                 script.async = true;
-                script.src = 'https://www.googletagmanager.com/gtag/js?id=<?php echo $tracking_id; ?>';
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr($tracking_id); ?>';
 
                 document.head.appendChild(script);
 
                 // gtagの初期設定コマンドをキューにプッシュ
                 gtag('js', new Date());
-                gtag('config', '<?php echo $tracking_id; ?>');
+                gtag('config', '<?php echo esc_js($tracking_id); ?>');
             };
 
             // ブラウザがアイドル状態になったときに読み込む
@@ -53,8 +75,6 @@ class AuroraDesignBlocks_forFront
                 // サポートしていない場合は、フォールバックとしてsetTimeoutを使用
                 setTimeout(loadGtag, 4000);
             }
-
-
 
             // ユーザーの最初のインタラクションを監視して読み込む
             // ['scroll', 'mousemove', 'click', 'touchstart', 'keydown'].forEach(function(event) {
@@ -80,7 +100,7 @@ class AuroraDesignBlocks_customizer_ga
     public function __construct()
     {
         add_action('customize_register', array($this, 'regSettings'));
-        add_action('wp_footer', array($this, 'outCode'));
+        add_action('init', array($this, 'outCode'));
     }
 
     // カスタマイザーに設定項目を登録
@@ -92,21 +112,34 @@ class AuroraDesignBlocks_customizer_ga
             'priority' => 1000,
         ));
 
-        // Google Analytics トラッキングコードを入力する設定を追加
-        $wp_customize->add_setting('auroraDesignBlocks_ga_trackingCode', array(
-            'default' => '',
-            'sanitize_callback' =>  [$this, 'auroraDesignBlocks_innocuousSanitize'], // 無害なサニタイズ関数を適用
-            'type' => 'option',
 
+        // GA4 Measurement ID を入力する設定を追加
+        $wp_customize->add_setting('auroraDesignBlocks_ga_trackingCode', array(
+            'default'           => '',
+            'sanitize_callback' => 'sanitize_text_field', // IDだけなので安全に
+            'type'              => 'option',
         ));
 
-        // トラッキングコード入力フィールドを追加
+        // テキストフィールドでID入力
         $wp_customize->add_control('auroraDesignBlocks_ga_trackingCode', array(
-            'label' => __('Google Analytics Tracking Code', 'aurora-design-blocks'),
-            'section' => 'auroraDesignBlocks_ga_section',
-            'type' => 'textarea', // 複数行のテキストエリアを使用
-            'description' => __('Please paste the entire tracking code provided by Google Analytics.', 'aurora-design-blocks'),
+            'label'       => __('GA4 Measurement ID', 'aurora-design-blocks'),
+            'section'     => 'auroraDesignBlocks_ga_section',
+            'type'        => 'text',
+            'description' => __('Enter your GA4 Measurement ID (e.g. G-XXXXXXX)', 'aurora-design-blocks'),
+        ));
 
+        // 高速化モード設定を追加
+        $wp_customize->add_setting('auroraDesignBlocks_ga_optimize', array(
+            'default'           => true,
+            'sanitize_callback' => 'rest_sanitize_boolean',
+            'type'              => 'option',
+        ));
+
+        $wp_customize->add_control('auroraDesignBlocks_ga_optimize', array(
+            'label'       => __('Enable Performance Optimization (defer GA4)', 'aurora-design-blocks'),
+            'section'     => 'auroraDesignBlocks_ga_section',
+            'type'        => 'checkbox',
+            'description' => __('Check to load GA4 script with defer for faster page rendering.', 'aurora-design-blocks'),
         ));
     }
 
@@ -119,7 +152,17 @@ class AuroraDesignBlocks_customizer_ga
     // Google アナリティクスコードをサイトの <head> に出力
     public function outCode()
     {
-        AuroraDesignBlocks_forFront::outGA4Id('auroraDesignBlocks_ga_trackingCode');
+        $optimize = get_option('auroraDesignBlocks_ga_optimize');
+
+        if ($optimize) {
+            add_action('wp_footer', function () {
+                AuroraDesignBlocks_forFront::outGA4Id_speedUp('auroraDesignBlocks_ga_trackingCode');
+            });
+        } else {
+            add_action('wp_head', function () {
+                AuroraDesignBlocks_forFront::outGA4Id_normal('auroraDesignBlocks_ga_trackingCode');
+            });
+        }
     }
 }
 
