@@ -143,16 +143,11 @@ class AuroraDesignBlocks_customizer_ga
         ));
     }
 
-    public function auroraDesignBlocks_innocuousSanitize($value)
-    {
 
-        return $value;
-    }
-
-    // Google アナリティクスコードをサイトの <head> に出力
+    // Google アナリティクスコードをサイトの <head>or<body> に出力
     public function outCode()
     {
-        $optimize = get_option('auroraDesignBlocks_ga_optimize');
+        $optimize = get_option('auroraDesignBlocks_ga_optimize', true);
 
         if ($optimize) {
             add_action('wp_footer', function () {
