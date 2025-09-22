@@ -122,10 +122,10 @@ class AuroraDesignBlocks_customizer_ga
 
         // テキストフィールドでID入力
         $wp_customize->add_control('auroraDesignBlocks_ga_trackingCode', array(
-            'label'       => __('GA4 Measurement ID', 'aurora-design-blocks'),
+            'label'       => __('Google Analytics Measurement ID', 'aurora-design-blocks'),
             'section'     => 'auroraDesignBlocks_ga_section',
             'type'        => 'text',
-            'description' => __('Enter your GA4 Measurement ID (e.g. G-XXXXXXX)', 'aurora-design-blocks'),
+            'description' => __('Enter your Google Analytics Measurement ID (e.g. G-XXXXXXX)', 'aurora-design-blocks'),
         ));
 
         // 高速化モード設定を追加
@@ -136,10 +136,10 @@ class AuroraDesignBlocks_customizer_ga
         ));
 
         $wp_customize->add_control('auroraDesignBlocks_ga_optimize', array(
-            'label'       => __('Enable Performance Optimization (defer GA4)', 'aurora-design-blocks'),
+            'label'       => __('Enable Performance Optimization', 'aurora-design-blocks'),
             'section'     => 'auroraDesignBlocks_ga_section',
             'type'        => 'checkbox',
-            'description' => __('Check to load GA4 script with defer for faster page rendering.', 'aurora-design-blocks'),
+            'description' => __('We prioritize page rendering by deferring the execution of the GA script. This usually does not affect GA measurement.', 'aurora-design-blocks'),
         ));
     }
 

@@ -614,11 +614,18 @@ msgstr "例) 英語のスピーキングに苦労していませんか？ 会話
 msgid "Google Analytics Setting"
 msgstr "Google Analytics 設定"
 
-msgid "Google Analytics Tracking Code"
-msgstr "Google Analytics トラッキングコード"
+msgid "Google Analytics Measurement ID"
+msgstr "Google Analytics 測定ID"
 
-msgid "Please paste the entire tracking code provided by Google Analytics."
-msgstr "Google Analytics から提供されたトラッキングコード全体を貼り付けてください"
+msgid "Enter your Google Analytics Measurement ID (e.g. G-XXXXXXX)"
+msgstr "Google Analytics から提供された測定ID(例：G-XXXXXXX)を入力してください"
+
+msgid "Enable Performance Optimization"
+msgstr "高速化オプションを有効にする"
+
+msgid "We prioritize page rendering by deferring the execution of the GA script. This usually does not affect GA measurement."
+msgstr "ベージ表示を優先してGAスクリプトの実行を遅延させます。通常はGAの測定に影響はありません。"
+
 
 #: google GTM
 msgid "Google Tag Manager Setting"
@@ -630,7 +637,7 @@ msgid "Code to output in the <head> tag"
 msgstr "headタグに出力するコード"
 
 msgid "Please paste the code provided by Google Tag Manager."
-msgstr "Google Tag Manager から提供されたコードを貼り付けてください"
+gstr "Google Tag Manager から提供されたコードを貼り付けてください"
 
 
 msgid "Code to output immediately after the opening <body> tag"
