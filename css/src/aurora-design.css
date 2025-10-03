@@ -17,7 +17,8 @@
   padding: calc(var(--ly-elementPadding) * 2);
   /*2倍にしている*/
   margin-bottom: calc(var(--ly-elementBottomMargin) * 2);
-  border-radius: 15px;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .post-toc h2 {
@@ -28,11 +29,13 @@
 
 .post-toc ul {
   list-style-type: none;
+  text-align: left;
 }
 
 .post-toc ul li {
   content: " ";
   /*ダミー*/
+  border-bottom: 1px dotted #999;
 }
 
 .post-toc ul li a {
