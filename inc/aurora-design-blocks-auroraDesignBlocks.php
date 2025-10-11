@@ -130,18 +130,27 @@ add_action('plugins_loaded', 'aurora_design_blocks_load_textdomain');
 
 function AuroraDesignBlocks_add_ogp_meta_tags()
 {
-    if (is_singular()) { // 投稿・固定ページなどの単一ページでのみ出力
+    if (is_singular() || is_front_page() || is_home()) { // トップページも対象
         global $post;
 
-        $title = esc_attr(get_the_title($post));
-        $excerpt = get_the_excerpt($post);
-        if (empty($excerpt)) {
-            $content = get_the_content(null, false, $post);
-            $excerpt = wp_trim_words(strip_tags($content), 25, '...');
+
+        if (is_front_page() || is_home()) {
+            // トップページ用の値
+            $title = esc_attr(get_bloginfo('name'));
+            $excerpt = esc_attr(get_bloginfo('description'));
+            $url = esc_url(home_url('/'));
+        } else {
+
+            $title = esc_attr(get_the_title($post));
+            $excerpt = get_the_excerpt($post);
+            if (empty($excerpt)) {
+                $content = get_the_content(null, false, $post);
+                $excerpt = wp_trim_words(strip_tags($content), 25, '...');
+            }
+            $excerpt = esc_attr($excerpt);
+            $url = esc_url(get_permalink($post));
         }
-        $excerpt = esc_attr($excerpt);
-        $url = esc_url(get_permalink($post));
-        $image = has_post_thumbnail($post) ? esc_url(get_the_post_thumbnail_url($post, 'full')) : '';
+        $image = esc_url(AuroraDesignBlocksPostThumbnail::getUrl($post->ID, 'full'));
         $site_name = esc_attr(get_bloginfo('name'));
         $locale = esc_attr(get_locale());
 
