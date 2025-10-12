@@ -143,10 +143,6 @@ function AuroraDesignBlocks_add_ogp_meta_tags()
 
             $title = esc_attr(get_the_title($post));
             $excerpt = get_the_excerpt($post);
-            if (empty($excerpt)) {
-                $content = get_the_content(null, false, $post);
-                $excerpt = wp_trim_words(strip_tags($content), 25, '...');
-            }
             $excerpt = esc_attr($excerpt);
             $url = esc_url(get_permalink($post));
         }
