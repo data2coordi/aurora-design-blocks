@@ -1,4 +1,4 @@
-######build環境構築 test 6.29 testa
+######build環境構築 test 6.29 testab
 
 npm init -y
 
