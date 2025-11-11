@@ -21,6 +21,9 @@ jobs:
           rm -rf patterns
           rm -rf css/src/awesome-all.css
           rm -rf css/src/module.css
+          rm -rf build/src/awesome-all.css
+          rm -rf build/src/module.css
+          rm -rf webfonts
 
       - name: Freeブランチを作成・更新
         run: |
