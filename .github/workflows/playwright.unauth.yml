@@ -42,7 +42,7 @@ jobs:
           #npx playwright test tests/e2e-tests/tests/unauthenticated/setNormalCss.spec.ts \
           npx playwright test tests/e2e-tests/tests \
           --project=unauthenticated \
-          --config=playwright.config.js
+          --config=playwright.config.js \
           --reporter=list
         working-directory: tests/e2e-tests
 
