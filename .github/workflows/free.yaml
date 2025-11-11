@@ -18,6 +18,7 @@ jobs:
           rm -rf aurora-design-blocks-pro.php
           rm -rf assets
           rm -rf blocks
+          rm -rf patterns
 
       - name: Freeブランチを作成・更新
         run: |
