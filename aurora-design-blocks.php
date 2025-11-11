@@ -27,6 +27,6 @@ require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-customizer.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-auroraDesignBlocks.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks_helper.php';
 
-if (file_exists(AURORA_DESIGN_BLOCKS_PATH . "inc/aurora-design-blocks-forBlocks.php")) {
+if (file_exists(AURORA_DESIGN_BLOCKS_PATH . "/aurora-design-blocks_pro.php")) {
     require AURORA_DESIGN_BLOCKS_PATH . '/aurora-design-blocks_pro.php';
 }
