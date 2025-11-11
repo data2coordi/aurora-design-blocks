@@ -1,5 +1,4 @@
-
-name: Release 
+name: Release
 
 on:
   push:
@@ -25,6 +24,7 @@ jobs:
             "plugin-update-checker/" \
             "webfonts/" \
             "aurora-design-blocks.php" \
+            "aurora-design-blocks-pro.php" \
             "readme.text"
 
       - name: リリースを作成する
@@ -37,7 +37,6 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: release body
 
- 
       - name: リリースアセットをアップロードする
         uses: actions/upload-release-asset@v1.0.2
         env:
