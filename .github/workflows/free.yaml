@@ -19,11 +19,18 @@ jobs:
           rm -rf assets
           rm -rf blocks
           rm -rf patterns
+          rm -rf webfonts
+          rm -rf plugin-update-checker
+          rm -rf languages/*.json
           rm -rf css/src/awesome-all.css
           rm -rf css/src/module.css
           rm -rf build/src/awesome-all.css
           rm -rf build/src/module.css
-          rm -rf webfonts
+          rm -rf inc/aurora-design-blocks-auroraDesignBlocks_pro.php
+          rm -rf inc/aurora-design-blocks-awesome.php
+          rm -rf inc/aurora-design-blocks-forBlocks.php
+          rm -rf inc/aurora-design-blocks-pattern.php
+          rm -rf inc/aurora-design-blocks-popularPosts.php
 
       - name: Freeブランチを作成・更新
         run: |
