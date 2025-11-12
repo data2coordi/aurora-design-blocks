@@ -1,4 +1,4 @@
-######build環aa境構築 test 6.29aa testaab
+######build環aaa境構築 test 6.29aa testaab
 
 npm init -y
 
