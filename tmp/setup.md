@@ -1,6 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 ######build環a境構築 teast 6.2a9a teastaab
+=======
+######build環a境a構築 teast 6.2a9a teastaab
+>>>>>>> 55d58f3549ea5fa3e2002cc763ff86cdee5f31e8
 
 >>>>>>> a70967e8401d2074a7c2fd302b2e7ade0ded1538
 npm init -y
