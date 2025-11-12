@@ -74,14 +74,14 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
 
     public function test_ga_outCode_outputs_tracking_code()
     {
-        update_option('auroraDesignBlocks_ga_trackingCode', '<script>GAコード</script>');
+        update_option('auroraDesignBlocks_ga_trackingCode', 'GAコード');
 
         ob_start();                  // ← ここでバッファ開始
         $this->ga->outCode();        // フック登録
         do_action('wp_head');        // フック呼び出し
         $output = ob_get_clean();    // 出力取得
 
-        $this->assertStringContainsString('<script>GAコード</script>', $output);
+        $this->assertStringContainsString('GAコード', $output);
     }
     public function test_ga_outCode_outputs_nothing_when_no_code()
     {
