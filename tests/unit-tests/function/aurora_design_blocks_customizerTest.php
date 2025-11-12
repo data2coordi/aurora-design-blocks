@@ -92,8 +92,11 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
     {
         update_option('auroraDesignBlocks_ga_trackingCode', '');
 
-        ob_start();
         $this->ga->outCode();
+        ob_start();
+        do_action('wp_head'); // もしくは wp_footer
+        do_action('wp_footer'); // もしくは wp_footer
+
         $output = ob_get_clean();
 
         $this->assertEmpty($output);
