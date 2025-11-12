@@ -9,7 +9,8 @@ class AuroraDesignBlocks_forFront
     {
         $tracking_code = get_option($code_name);
         if (!empty($tracking_code)) {
-            echo $tracking_code;
+            // 【修正箇所】出力時にも必ずサニタイズ処理を適用する
+            echo self::sanitize_tracking_code($tracking_code);
         }
     }
 
@@ -84,6 +85,78 @@ class AuroraDesignBlocks_forFront
             // });
         </script>
 <?php
+    }
+
+    /*
+     * GoogleトラッキングコードなどのHTMLを安全にサニタイズする共通関数
+     * @param string $value ユーザー入力値
+     * @return string サニタイズされた値
+     */
+    public static function sanitize_tracking_code($value)
+    {
+        // Googleコード全般に必要なタグと属性を最大限に定義した許可リスト
+        $allowed_html_for_tracking = [
+            'script' => [
+                'async' => true,
+                'src' => true,
+                'type' => true,
+                'charset' => true,
+                'crossorigin' => true,
+                'nonce' => true,
+            ],
+            'style' => [
+                'type' => true,
+                'media' => true,
+                'scoped' => true,
+            ],
+            'noscript' => [
+                'id' => true,
+            ],
+            'iframe' => [
+                'src' => true,
+                'style' => true,
+                'width' => true,
+                'height' => true,
+                'frameborder' => true,
+                'scrolling' => true,
+                'allow' => true,
+                'title' => true,
+                'class' => true,
+                'id' => true,
+                'name' => true,
+                'marginwidth' => true,
+                'marginheight' => true,
+                'loading' => true,
+            ],
+            'img' => [
+                'src' => true,
+                'alt' => true,
+                'width' => true,
+                'height' => true,
+                'loading' => true,
+                'border' => true,
+                'style' => true,
+                'class' => true,
+                'id' => true,
+            ],
+            'a' => [
+                'href' => true,
+                'target' => true,
+                'rel' => true,
+                'class' => true,
+                'id' => true,
+            ],
+            'div' => [
+                'id' => true,
+                'class' => true,
+                'style' => true,
+            ],
+            'p' => ['class' => true, 'style' => true,],
+            'span' => ['class' => true, 'style' => true,],
+            'meta' => ['name' => true, 'content' => true,],
+        ];
+
+        return wp_kses($value, $allowed_html_for_tracking);
     }
 }
 
@@ -225,8 +298,7 @@ class AuroraDesignBlocks_customizer_gtm
 
     public function auroraDesignBlocks_innocuousSanitize($value)
     {
-
-        return $value;
+        return AuroraDesignBlocks_forFront::sanitize_tracking_code($value);
     }
 
     // Google Tag Manager コードをサイトの <head> に出力
@@ -280,7 +352,7 @@ class AuroraDesignBlocks_customizer_adsense_auto
 
     public function allow_script_tags($value)
     {
-        return $value; // スクリプトタグを許可するためサニタイズなし（要注意）
+        return AuroraDesignBlocks_forFront::sanitize_tracking_code($value);
     }
 
     public function outCode()
