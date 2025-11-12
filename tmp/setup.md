@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ######build環aaa境構築a test 6.29aa testaab
+=======
+######build環a境構築 teast 6.29a teastaab
+>>>>>>> 93406d6825af04d657f113afa0b2784b0c77ef31
 
 npm init -y
 
