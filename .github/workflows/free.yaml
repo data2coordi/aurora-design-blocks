@@ -19,9 +19,13 @@ jobs:
           rm -rf assets
           rm -rf blocks
           rm -rf patterns
-          rm -rf webfonts
           rm -rf plugin-update-checker
           rm -rf languages/*.json
+          rm -rf css/webfonts
+          rm -rf css/webfonts
+          rm -rf css/*.js
+          rm -rf css/*.json
+          rm -rf css/css
           rm -rf css/src/awesome-all.css
           rm -rf css/src/module.css
           rm -rf build/src/awesome-all.css
