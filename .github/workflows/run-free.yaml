@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    branches: [master]
+    branches: [free]
 
 jobs:
   upload-release-asset:
@@ -16,7 +16,6 @@ jobs:
         # ホワイトリスト方式：リリースに必要なファイルとディレクトリのみを指定してzip化します。
         run: |
           zip -r aurora-design-blocks.zip \
-            "blocks/" \
             "css/" \
             "patterns/" \
             "assets/" \
@@ -34,7 +33,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: tag_${{ github.ref }}_${{github.sha}}
+          tag_name: tag_free_${{ github.ref }}_${{github.sha}}
           release_name: Release ${{ github.ref }}
           body: release body
 
