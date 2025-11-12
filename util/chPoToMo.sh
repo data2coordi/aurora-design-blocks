@@ -4,7 +4,7 @@ rm -f ../languages/*.mo
 rm -f ../languages/*.json
 
 ## mo生成
-src=../languages/ja.po
+src=../languages/aurora-design-blocks-ja.po
 tgt=../languages/aurora-design-blocks-ja.mo
 msgfmt ${src} -o ${tgt}
 
