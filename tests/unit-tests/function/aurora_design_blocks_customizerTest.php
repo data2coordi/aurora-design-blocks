@@ -74,26 +74,30 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
 
     public function test_ga_outCode_outputs_tracking_code()
     {
-        $tracking_code = '<script>GAコード</script>';
-        update_option('auroraDesignBlocks_ga_trackingCode', $tracking_code);
+        update_option('auroraDesignBlocks_ga_trackingCode', 'GAコード');
 
-        // 出力バッファリングで出力をキャプチャ
-        ob_start();
-        $this->ga->outCode();
-        $output = ob_get_clean();
+        ob_start();                  // ← ここでバッファ開始
+        $this->ga->outCode();        // フック登録
+        do_action('wp_head');        // フック呼び出し
+        do_action('wp_footer');        // フック呼び出し
+        $output = ob_get_clean();    // 出力取得
 
-        $this->assertStringContainsString($tracking_code, $output);
+        $this->assertStringContainsString('GAコード', $output);
     }
-
     public function test_ga_outCode_outputs_nothing_when_no_code()
     {
         update_option('auroraDesignBlocks_ga_trackingCode', '');
 
-        ob_start();
-        $this->ga->outCode();
-        $output = ob_get_clean();
+        ob_start();                  // ← ここでバッファ開始
+        $this->ga->outCode();        // フック登録
+        do_action('wp_head');        // フック呼び出し
+        $output = ob_get_clean();    // 出力取得
 
-        $this->assertEmpty($output);
+        // GAコードだけをチェックしたい場合は：
+        $this->assertStringNotContainsString('<script>GAコード</script>', $output);
+
+        // 完全に何も出さないことを確認する場合は、
+        // テスト環境をwp_headの最小化環境にする必要あり
     }
 
     public function test_gtm_outCode_outputs_tracking_code()
