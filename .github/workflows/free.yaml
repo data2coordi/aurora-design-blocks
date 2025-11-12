@@ -26,7 +26,7 @@ jobs:
           rm -rf css/src/module.css
           rm -rf build/src/awesome-all.css
           rm -rf build/src/module.css
-          rm -rf inc/aurora-design-blocks-auroraDesignBlocks_pro.php
+          rm -rf inc/aurora-design-blocks-auroraDesignBlocks-pro.php
           rm -rf inc/aurora-design-blocks-awesome.php
           rm -rf inc/aurora-design-blocks-forBlocks.php
           rm -rf inc/aurora-design-blocks-pattern.php
