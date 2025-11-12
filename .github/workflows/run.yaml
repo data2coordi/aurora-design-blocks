@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    branches: [master]
+    branches: [リモート更新テスト]
 
 jobs:
   upload-release-asset:
