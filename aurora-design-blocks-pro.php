@@ -19,7 +19,7 @@ require_once __DIR__ . '/plugin-update-checker/plugin-update-checker.php';
 // アップデートチェッカーのインスタンス作成
 $myUpdateChecker = PucFactory::buildUpdateChecker(
     'https://integlight.auroralab-design.com/wp-content/updates/aurora-design-blocks.json', // WebアクセスできるJSONのURL
-    __FILE__,   // プラグインのメインファイルの絶対パス（ここでは現在のファイル）
+    AURORA_DESIGN_BLOCKS_PATH . '/aurora-design-blocks.php', // ← メインプラグイン
     'aurora-design-blocks' // プラグインの一意のスラッグ（通常はフォルダ名）
 );
 ///////////////////////////////////////////
