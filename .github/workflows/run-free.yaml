@@ -6,7 +6,7 @@ on:
 
 jobs:
   upload-release-asset:
-    if: contains(github.event.head_commit.message, 'douki')
+    if: contains(github.event.head_commit.message, 'fdouki')
     runs-on: ubuntu-latest
 
     steps:
