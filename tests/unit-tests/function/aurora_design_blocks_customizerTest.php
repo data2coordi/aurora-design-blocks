@@ -79,6 +79,7 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
         ob_start();                  // ← ここでバッファ開始
         $this->ga->outCode();        // フック登録
         do_action('wp_head');        // フック呼び出し
+        do_action('wp_footer');        // フック呼び出し
         $output = ob_get_clean();    // 出力取得
 
         $this->assertStringContainsString('GAコード', $output);
