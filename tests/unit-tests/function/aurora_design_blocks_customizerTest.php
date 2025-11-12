@@ -75,11 +75,14 @@ class aurora_design_blocks_customizerTest extends WP_UnitTestCase
     public function test_ga_outCode_outputs_tracking_code()
     {
         $tracking_code = '<script>GAコード</script>';
-        update_option('auroraDesignBlocks_ga_trackingCode', $tracking_code);
 
-        // 出力バッファリングで出力をキャプチャ
+        update_option('auroraDesignBlocks_ga_trackingCode', $tracking_code);
+        update_option('auroraDesignBlocks_ga_optimize', false); // または true
+
+        $this->ga->outCode(); // フック登録
+
         ob_start();
-        $this->ga->outCode();
+        do_action('wp_head'); // または wp_footer
         $output = ob_get_clean();
 
         $this->assertStringContainsString($tracking_code, $output);
