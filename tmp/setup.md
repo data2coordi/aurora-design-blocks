@@ -1,4 +1,4 @@
-######build環a境構築 teast 6.29a teastaab
+######build環a境構築 teast 6.2a9a teastaab
 
 npm init -y
 
