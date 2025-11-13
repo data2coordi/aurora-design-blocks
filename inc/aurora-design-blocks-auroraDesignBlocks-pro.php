@@ -22,7 +22,7 @@ class AuroraDesignBlocksPreDetermineCssAssets_pro
     {
         global $post;
         // 以下、必要に応じて追加
-        if (is_singular()) {
+        if (is_singular() || is_active_sidebar('sidebar-1') || is_active_sidebar('sidebar-2') || is_active_sidebar('sidebar-3')) {
             self::$styles = array_merge(self::$styles, [
                 'aurora-design-blocks-style-module' => 'css/build/module.css',
             ]);
