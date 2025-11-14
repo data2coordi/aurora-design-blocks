@@ -7,6 +7,8 @@ Stable tag: 1.0.31
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
+Short Description: Multi-functional plugin for GA4, GTM, AdSense, OGP, and automated Table of Contents (TOC), generally essential for blogs.
+
 == Description ==
 Aurora Design Blocks is a multi-functional plugin supports external asset management.
 

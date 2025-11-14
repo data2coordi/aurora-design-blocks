@@ -174,7 +174,7 @@ class AuroraDesignBlocksTableOfContents
                 }
 
                 // 目次を作成
-                $toc .= '<li class="toc-' . strtolower($heading_tag) . '">' . $indent . '<a href="#' . $id . '">' . strip_tags($heading_text) . '</a></li>';
+                $toc .= '<li class="toc-' . strtolower($heading_tag) . '">' . $indent . '<a href="#' . $id . '">' . wp_strip_all_tags($heading_text) . '</a></li>';
 
 
                 $content = str_replace(
@@ -213,28 +213,44 @@ class AuroraDesignBlocksTableOfContents
 ?>
         <label for="hide_toc">
             <input type="checkbox" name="hide_toc" id="hide_toc" value="1" <?php checked($value, '1'); ?> />
-            <?php echo __('Hide TOC', 'aurora-design-blocks'); ?>
+            <?php echo esc_html__('Hide TOC', 'aurora-design-blocks'); ?>
         </label>
 <?php
 
     }
 
-    public  function save_toc_visibility_meta_box_data($post_id)
+    /**
+     * Save the TOC visibility meta box data.
+     *
+     * @param int $post_id Post ID.
+     */
+    public function save_toc_visibility_meta_box_data($post_id)
     {
-        if (!isset($_POST['toc_visibility_nonce'])) {
-            return;
-        }
-        if (!wp_verify_nonce(wp_unslash($_POST['toc_visibility_nonce']), 'toc_visibility_nonce_action')) {
-            return;
-        }
-        if (wp_is_post_autosave($post_id)) {
-            return;
-        }
-        if (!current_user_can('edit_post', $post_id)) {
+
+        // Check if nonce is set.
+        if (! isset($_POST['toc_visibility_nonce'])) {
             return;
         }
 
+        // Verify that the nonce is valid.
+        if (! wp_verify_nonce(wp_unslash($_POST['toc_visibility_nonce']), 'toc_visibility_nonce_action')) {
+            return;
+        }
+
+        // Check if this is an autosave.
+        if (wp_is_post_autosave($post_id)) {
+            return;
+        }
+
+        // Check user permissions.
+        if (! current_user_can('edit_post', $post_id)) {
+            return;
+        }
+
+        // Sanitize and save TOC visibility.
         $hide_toc = isset($_POST['hide_toc']) ? '1' : '0';
+        $hide_toc = sanitize_text_field($hide_toc); // 明示的にサニタイズ
+
         update_post_meta($post_id, 'hide_toc', $hide_toc);
     }
 }
@@ -289,7 +305,7 @@ class AuroraDesignBlocksPostThumbnail
           */
     public static function render($post_id = null, $size = 'medium', $default_url = '')
     {
-        echo '<img src="' . self::get_thumbnail_url($post_id, $size, $default_url) . '" alt="">';
+        echo '<img src="' . esc_url(self::get_thumbnail_url($post_id, $size, $default_url)) . '" alt="">';
 
         return;
     }
