@@ -1,3 +1,4 @@
+clear
 git checkout master
 git commit --allow-empty -m "free"
 git push  --force
