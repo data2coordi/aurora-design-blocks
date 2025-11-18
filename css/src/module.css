@@ -23,6 +23,9 @@
 /* ULの既定インデントと丸ポチを削除（左ズレの元を断つ） */
 .ly_site_content_widgetArea_right
   .widget_auroradesignblocks_popular_posts_widget
+  ul,
+.ly_site_content_widgetArea_left
+  .widget_auroradesignblocks_popular_posts_widget
   ul {
   margin: 0; /* 外側余白なし */
   padding: 0; /* ULの左インデントをゼロに */
@@ -32,6 +35,9 @@
 /* LI側の左パディングもゼロ（テーマ既定の1.2rem≒19.2pxを上書き） */
 .ly_site_content_widgetArea_right
   .widget_auroradesignblocks_popular_posts_widget
+  li,
+.ly_site_content_widgetArea_left
+  .widget_auroradesignblocks_popular_posts_widget
   li {
   padding-left: 0; /* 物理プロパティで上書き */
   padding-inline-start: 0; /* 論理プロパティでの指定も潰す */
@@ -40,6 +46,10 @@
 
 /* 本体：リンク全体（a）をブロック化し、左に“画像サイズ＋間隔”の実スペースを確保 */
 .ly_site_content_widgetArea_right
+  .widget_auroradesignblocks_popular_posts_widget
+  li
+  > a,
+.ly_site_content_widgetArea_left
   .widget_auroradesignblocks_popular_posts_widget
   li
   > a {
@@ -67,6 +77,15 @@
 .ly_site_content_widgetArea_right
   .widget_auroradesignblocks_popular_posts_widget
   li
+  > a::before,
+.ly_site_content_widgetArea_left
+  .widget_auroradesignblocks_popular_posts_widget
+  li
+  > a
+  *,
+.ly_site_content_widgetArea_left
+  .widget_auroradesignblocks_popular_posts_widget
+  li
   > a::before {
   text-indent: 0; /* 子/疑似要素が持つインデントの影響もゼロに */
   margin-left: 0; /* ぶら下げ系の負のマージン対策 */
@@ -74,6 +93,11 @@
 
 /* 画像は“空中固定”：左に絶対配置＋縦センター、16:9で中央トリミング */
 .ly_site_content_widgetArea_right
+  .widget_auroradesignblocks_popular_posts_widget
+  li
+  > a
+  img,
+.ly_site_content_widgetArea_left
   .widget_auroradesignblocks_popular_posts_widget
   li
   > a
