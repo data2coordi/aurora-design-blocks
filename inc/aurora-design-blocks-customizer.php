@@ -1,5 +1,7 @@
 <?php
 
+if (! defined('ABSPATH')) exit;
+
 
 /*フロントにカスタマイザーでセットした値を表示*/
 class AuroraDesignBlocks_forFront

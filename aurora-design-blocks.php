@@ -1,4 +1,5 @@
 <?php
+if (! defined('ABSPATH')) exit;
 
 /**
  * Plugin Name: Aurora Design Blocks

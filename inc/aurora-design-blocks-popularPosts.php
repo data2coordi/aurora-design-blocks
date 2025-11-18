@@ -1,4 +1,5 @@
 <?php
+if (! defined('ABSPATH')) exit;
 class AuroraDesignBlocks_Popular_Posts_Widget extends WP_Widget
 {
 
