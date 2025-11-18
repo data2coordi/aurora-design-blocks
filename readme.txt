@@ -3,33 +3,46 @@ Contributors: data2coordi
 Tags: toc, analytics, ga4, gtm, ogp
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 1.0.31
+Stable tag: 1.0.32
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Short Description: Multi-functional plugin for GA4, GTM, AdSense, OGP, and automated Table of Contents (TOC), generally essential for blogs.
 
 == Description ==
-Aurora Design Blocks is a multi-functional plugin supports external asset management.
+Aurora Design Blocks is a multi-functional plugin that supports external asset management and provides essential features for content-rich websites.  
+It allows you to configure GA4, GTM, AdSense, and OGP settings directly from the WordPress Customizer without editing any code.  
+In addition, it includes a customizable Table of Contents (TOC) block that automatically generates navigation based on H2 and H3 headings.
+
+All tracking IDs (GA4/GTM/Adsense) must be manually entered by the user.  
+This plugin does not automatically send or collect any data.
 
 == Features ==
-* **External Asset Management:**
-    * Set your Google Analytics 4 (GA4) Measurement ID with built-in speed optimization options.
-    * Set and output your Google Tag Manager (GTM) container code.
-    * Easy insertion of Google AdSense Auto Ads code via the Customizer.
-    Note: GA4 and GTM codes must be manually configured by the user by entering their own Measurement ID or Container ID.
-    This plugin does not automatically send or collect any data.
-* **SEO & Social Media Optimization:**
-    * Open Graph Protocol (OGP) Management.Easily set title, description, and featured image for social media sharing (Facebook, X/Twitter, etc.) on a per-post or site-wide basis.
-* **Automated Table of Contents (TOC) Block:** 
-    * Automatically generates an elegant Table of Contents based on H2, H3 headings within the post. It features a modern, centered box design with rounded corners, ensuring optimal readability and user experience. The design is compact and aesthetically pleasing, helping to improve user retention by offering clear content navigation.
+
+### 1. External Asset Management
+* **GA4 Integration** – Add your Measurement ID and optionally enable speed-optimized loading.
+* **GTM Integration** – Insert your Google Tag Manager container code.
+* **Google AdSense Auto Ads** – Output the Auto Ads script via the Customizer.
+
+### 2. SEO & Social Media Optimization
+* **Open Graph Protocol (OGP)** – Set global or per-post values for title, description, and image for social media sharing.
+
+### 3. Automated Table of Contents (TOC) Block
+* Automatically generates a clean TOC from H2/H3 headings.
+* Provides a compact, readable, and mobile-friendly design.
+
 == Installation ==
+1. Log in to your WordPress administration panel.
+2. Navigate to **Plugins > Add New**, search for "Aurora Design Blocks", or upload the ZIP file.
+3. Click **Install Now**, then **Activate**.
+4. Configuration options are available under **Appearance > Customizer**.
 
-1.  Log in to your WordPress administration panel.
-2.  Navigate to **Plugins** > **Add New**, search for "Aurora Design Blocks", or upload the plugin ZIP file.
-3.  Click **Install Now**, then click **Activate**.
-4.  After activation, you can access the features.
+== Frequently Asked Questions ==
 
+= Does this plugin send any data? =
+No. GA4/GTM/AdSense codes are output *only after the user enters their own IDs*.  
+This plugin itself does not track or send any data.
 
-
-
+== Changelog ==
+= 1.0.32 =
+* Initial public release.

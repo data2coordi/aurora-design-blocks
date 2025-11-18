@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Plugin Name: Aurora Design Blocks 
- * Description: カスタムブロックを追加するプラグイン。
+ * Plugin Name: Aurora Design Blocks
+ * Description: Multi-functional plugin for GA4, GTM, AdSense, OGP, and automated Table of Contents (TOC), generally essential for blogs.
  * Version: 1.0.32
  * Author: Yurika Toshida at Aurora Lab
  * Text Domain: aurora-design-blocks
