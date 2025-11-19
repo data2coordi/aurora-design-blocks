@@ -33,3 +33,6 @@ require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks_helper.php';
 if (file_exists(AURORA_DESIGN_BLOCKS_PATH . "/aurora-design-blocks-pro.php")) {
     require AURORA_DESIGN_BLOCKS_PATH . '/aurora-design-blocks-pro.php';
 }
+if (file_exists(AURORA_DESIGN_BLOCKS_PATH . "/inc/aurora-design-blocks-textDomain.php")) {
+    require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-textDomain.php';
+}
