@@ -11,8 +11,7 @@ git branch -D $TARGET_BRANCH
 # 4. 次の作業のための dev ブランチを再作成
 # 最新の jmaster を基に新しい free を作成します
 git checkout -b $TARGET_BRANCH
-
-
+git push -u origin $TARGET_BRANCH
 
 
 
