@@ -1,9 +1,10 @@
 <?php
+if (! defined('ABSPATH')) exit;
 
 /**
- * Plugin Name: Aurora Design Blocks 
- * Description: カスタムブロックを追加するプラグイン。
- * Version: 1.0.31
+ * Plugin Name: Aurora Design Blocks
+ * Description: Multi-functional plugin for GA4, GTM, AdSense, OGP, and automated Table of Contents (TOC), generally essential for blogs.
+ * Version: 1.0.32
  * Author: Yurika Toshida at Aurora Lab
  * Text Domain: aurora-design-blocks
  * License: GPLv2 or later
@@ -12,7 +13,7 @@
 
 if (!defined('_AuroraDesignBlocks_S_VERSION')) {
     // Replace the version number of the theme on each release.
-    define('_AuroraDesignBlocks_S_VERSION', '1.0.31');
+    define('_AuroraDesignBlocks_S_VERSION', '1.0.32');
 }
 
 

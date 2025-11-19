@@ -1,5 +1,7 @@
 <?php
 
+if (! defined('ABSPATH')) exit;
+
 
 /*フロントにカスタマイザーでセットした値を表示*/
 class AuroraDesignBlocks_forFront
@@ -16,75 +18,75 @@ class AuroraDesignBlocks_forFront
 
     public static function outGA4Id_normal($id_name)
     {
-
         $tracking_id = get_option($id_name);
         if (empty($tracking_id)) {
             return;
         }
-?>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr($tracking_id); ?>"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
 
-            function gtag() {
-                dataLayer.push(arguments);
+        // 1. GA4 の外部スクリプト（async 読み込み）
+        wp_enqueue_script(
+            'aurora-ga4',
+            "https://www.googletagmanager.com/gtag/js?id={$tracking_id}",
+            [],
+            null,
+            false // フッターではなく head に入れる
+        );
+
+        // async 属性を追加
+        add_filter('script_loader_tag', function ($tag, $handle, $src) {
+            if ($handle === 'aurora-ga4') {
+                //    return '<script async src="' . esc_url($src) . '"></script>';
+                return str_replace(' src', ' async src', $tag);
             }
-            gtag('js', new Date());
-            gtag('config', '<?php echo esc_js($tracking_id); ?>');
-        </script>
-    <?php
-    }
+            return $tag;
+        }, 10, 3);
 
+        // 2. gtag の初期化コード（inline script）
+        $inline = "
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{$tracking_id}');
+    ";
+
+        wp_add_inline_script('aurora-ga4', $inline, 'after');
+    }
 
     public static function outGA4Id_speedUp($id_name)
     {
-
         $tracking_id = get_option($id_name);
-    ?>
-        <script>
-            // gtag関数とdataLayerを初期化
-            window.dataLayer = window.dataLayer || [];
+        if (empty($tracking_id)) return;
 
-            function gtag() {
-                dataLayer.push(arguments);
-            }
+        // ダミースクリプト（外部JSはまだ読み込まない）
+        wp_register_script('aurora-ga4-speedup', false);
+        wp_enqueue_script('aurora-ga4-speedup');
 
-            var gtagLoaded = false;
+        $inline = "
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        var gtagLoaded = false;
 
-            // GA4のスクリプトを読み込む関数
-            var loadGtag = function() {
-                if (gtagLoaded) return;
-                gtagLoaded = true;
+        var loadGtag = function() {
+            if (gtagLoaded) return;
+            gtagLoaded = true;
 
-                // gtag.jsスクリプトを動的に作成・追加
-                var script = document.createElement('script');
-                script.async = true;
-                script.src = 'https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr($tracking_id); ?>';
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id={$tracking_id}';
+            document.head.appendChild(script);
 
-                document.head.appendChild(script);
+            gtag('js', new Date());
+            gtag('config', '{$tracking_id}');
+        };
 
-                // gtagの初期設定コマンドをキューにプッシュ
-                gtag('js', new Date());
-                gtag('config', '<?php echo esc_js($tracking_id); ?>');
-            };
+        if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(loadGtag);
+        } else {
+            setTimeout(loadGtag, 4000);
+        }
+    ";
 
-            // ブラウザがアイドル状態になったときに読み込む
-            if ('requestIdleCallback' in window) {
-                window.requestIdleCallback(loadGtag);
-            } else {
-                // サポートしていない場合は、フォールバックとしてsetTimeoutを使用
-                setTimeout(loadGtag, 4000);
-            }
-
-            // ユーザーの最初のインタラクションを監視して読み込む
-            // ['scroll', 'mousemove', 'click', 'touchstart', 'keydown'].forEach(function(event) {
-            //     window.addEventListener(event, loadGtag, {
-            //         once: true
-            //     });
-            // });
-        </script>
-<?php
+        wp_add_inline_script('aurora-ga4-speedup', $inline, 'after');
     }
 
     /*
@@ -204,7 +206,7 @@ class AuroraDesignBlocks_customizer_ga
         // 高速化モード設定を追加
         $wp_customize->add_setting('auroraDesignBlocks_ga_optimize', array(
             'default'           => true,
-            'sanitize_callback' => 'rest_sanitize_boolean',
+            'sanitize_callback' => 'wp_validate_boolean',
             'type'              => 'option',
         ));
 
@@ -227,7 +229,7 @@ class AuroraDesignBlocks_customizer_ga
                 AuroraDesignBlocks_forFront::outGA4Id_speedUp('auroraDesignBlocks_ga_trackingCode');
             });
         } else {
-            add_action('wp_head', function () {
+            add_action('wp_enqueue_scripts', function () {
                 AuroraDesignBlocks_forFront::outGA4Id_normal('auroraDesignBlocks_ga_trackingCode');
             });
         }

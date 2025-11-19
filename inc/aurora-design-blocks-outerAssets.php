@@ -1,4 +1,5 @@
 <?php
+if (! defined('ABSPATH')) exit;
 
 /**
  * AuroraDesignBlocks functions and definitions
