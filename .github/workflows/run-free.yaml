@@ -26,7 +26,8 @@ jobs:
             "webfonts/" \
             "aurora-design-blocks.php" \
             "aurora-design-blocks-pro.php" \
-            "readme.txt"
+            "readme.txt" \
+            -x "inc/aurora-design-blocks-textDomain.php"
 
       - name: リリースを作成する
         uses: actions/create-release@v1
