@@ -25,7 +25,7 @@ git checkout -b $TARGET_BRANCH
 #########################
 git checkout master
 
-
+#"コミットでgithub actionsが実行される"
 git commit --allow-empty -m "free"
 git push  --force
 
@@ -52,6 +52,8 @@ while [ $RETRY -lt $MAX_RETRY ]; do
         rm -rf /home/xsaurora/auroralab-design.com/public_html/wpdev.auroralab-design.com/wp-content/plugins/aurora-design-blocks/blocks
 
         echo "FREE環境をリモートからPULLしました"
+
+        #"コミットでgithub actionsが実行される"
         git commit --allow-empty -m "fdouki"
         git push  --force
 
