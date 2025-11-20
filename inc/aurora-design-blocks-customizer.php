@@ -252,6 +252,20 @@ class AuroraDesignBlocks_customizer_ga
 // クラスをインスタンス化して処理を開始
 new AuroraDesignBlocks_customizer_ga();
 // ## Google_Analytics _e /////////////////////////////////////////////
+add_action('customize_controls_print_footer_scripts', function () {
+    $value = get_option('auroraDesignBlocks_ga_optimize');
+    echo '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Customizer value: ';
+    var_dump($value);
+});
+
+
+add_action('wp_footer', function () {
+    $value = get_option('auroraDesignBlocks_ga_optimize');
+    echo '<pre>@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Frontend value: ';
+    var_dump($value);
+    echo '</pre>';
+});
+
 
 
 // ## Google_GTM _s /////////////////////////////////////////////
