@@ -233,8 +233,12 @@ class AuroraDesignBlocksTableOfContents
             return;
         }
 
-        // Verify that the nonce is valid.
-        if (! wp_verify_nonce(wp_unslash($_POST['toc_visibility_nonce']), 'toc_visibility_nonce_action')) {
+        if (
+            ! wp_verify_nonce(
+                sanitize_text_field(wp_unslash($_POST['toc_visibility_nonce'])),
+                'toc_visibility_nonce_action'
+            )
+        ) {
             return;
         }
 

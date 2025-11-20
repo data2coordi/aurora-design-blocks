@@ -11,9 +11,9 @@ if (! defined('ABSPATH')) exit;
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
-if (!defined('_AuroraDesignBlocks_S_VERSION')) {
+if (!defined('AURORA_DESIGN_BLOCKS_VERSION')) {
     // Replace the version number of the theme on each release.
-    define('_AuroraDesignBlocks_S_VERSION', '1.0.33');
+    define('AURORA_DESIGN_BLOCKS_VERSION', '1.0.33');
 }
 
 

@@ -23,12 +23,14 @@ class AuroraDesignBlocks_forFront
             return;
         }
 
+        $tracking_id = sanitize_text_field($tracking_id);
+
         // 1. GA4 の外部スクリプト（async 読み込み）
         wp_enqueue_script(
             'aurora-ga4',
             "https://www.googletagmanager.com/gtag/js?id={$tracking_id}",
             [],
-            null,
+            AURORA_DESIGN_BLOCKS_VERSION,
             false // フッターではなく head に入れる
         );
 
@@ -56,10 +58,22 @@ class AuroraDesignBlocks_forFront
     {
         $tracking_id = get_option($id_name);
         if (empty($tracking_id)) return;
+        $tracking_id = sanitize_text_field($tracking_id);
 
         // ダミースクリプト（外部JSはまだ読み込まない）
         wp_register_script('aurora-ga4-speedup', false);
-        wp_enqueue_script('aurora-ga4-speedup');
+        wp_register_script(
+            'aurora-ga4-speedup',
+            false,        // URL はまだなし
+            array(),
+            AURORA_DESIGN_BLOCKS_VERSION,      // ここでバージョンを指定
+            true          // フッターに出力
+        );
+
+
+
+
+
 
         $inline = "
         window.dataLayer = window.dataLayer || [];

@@ -74,5 +74,4 @@ No. GA4/GTM/AdSense codes are output *only after the user enters their own IDs*.
 This plugin itself does not track or send any data.
 
 == Changelog ==
-= 1.0.32 =
 * Initial public release.
