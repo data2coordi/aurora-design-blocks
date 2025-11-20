@@ -61,8 +61,7 @@ class AuroraDesignBlocks_forFront
         $tracking_id = sanitize_text_field($tracking_id);
 
         // ダミースクリプト（外部JSはまだ読み込まない）
-        wp_register_script('aurora-ga4-speedup', false);
-        wp_register_script(
+        wp_enqueue_script(
             'aurora-ga4-speedup',
             false,        // URL はまだなし
             array(),
