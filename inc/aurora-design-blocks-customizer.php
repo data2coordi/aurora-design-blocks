@@ -240,7 +240,7 @@ class AuroraDesignBlocks_customizer_ga
         if (empty($value)) {
             // 明示的に論理値の false を返す。
             // これにより、WordPressはオプション値として '0' をDBに保存する。
-            return "0";
+            return "";
         }
 
         // 値がセットされている場合（チェックONの状態）、wp_validate_boolean を適用する
@@ -264,6 +264,7 @@ class AuroraDesignBlocks_customizer_ga
     }
 }
 
+new AuroraDesignBlocks_customizer_ga();
 
 
 // ## Google_GTM _s /////////////////////////////////////////////
