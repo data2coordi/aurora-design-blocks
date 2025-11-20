@@ -5,9 +5,9 @@ declare(strict_types=1);
 // テスト対象クラスを含むファイルを読み込む (オートロードされていない場合)
 // require_once dirname(__DIR__, 2) . '/inc/AuroraDesignBlocks-functions-outerAssets.php';
 
-// _AuroraDesignBlocks_S_VERSION 定数が定義されていない場合に定義 (テスト環境用)
-if (!defined('_AuroraDesignBlocks_S_VERSION')) {
-    define('_AuroraDesignBlocks_S_VERSION', '1.0.0');
+// AURORA_DESIGN_BLOCKS_VERSION 定数が定義されていない場合に定義 (テスト環境用)
+if (!defined('AURORA_DESIGN_BLOCKS_VERSION')) {
+    define('AURORA_DESIGN_BLOCKS_VERSION', '1.0.0');
 }
 
 /**
