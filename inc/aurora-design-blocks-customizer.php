@@ -219,7 +219,7 @@ class AuroraDesignBlocks_customizer_ga
         // 高速化モード設定を追加
         $wp_customize->add_setting('auroraDesignBlocks_ga_optimize', array(
             'default'           => true,
-            'sanitize_callback' => 'wp_validate_boolean',
+            'sanitize_callback' => [$this, 'sanitize_ga_optimize'],
             'type'              => 'option',
         ));
 
@@ -231,6 +231,21 @@ class AuroraDesignBlocks_customizer_ga
         ));
     }
 
+    // AuroraDesignBlocks_customizer_ga クラス内に追加
+    public function sanitize_ga_optimize($value)
+    {
+        // カスタマイザーでチェックボックスがOFFの場合、この関数に渡される $value は空になる
+
+        // 値がセットされていない、または空の場合（チェックOFFの状態）
+        if (empty($value)) {
+            // 明示的に論理値の false を返す。
+            // これにより、WordPressはオプション値として '0' をDBに保存する。
+            return "0";
+        }
+
+        // 値がセットされている場合（チェックONの状態）、wp_validate_boolean を適用する
+        return wp_validate_boolean($value);
+    }
 
     // Google アナリティクスコードをサイトの <head>or<body> に出力
     public function outCode()
@@ -248,23 +263,6 @@ class AuroraDesignBlocks_customizer_ga
         }
     }
 }
-
-// クラスをインスタンス化して処理を開始
-new AuroraDesignBlocks_customizer_ga();
-// ## Google_Analytics _e /////////////////////////////////////////////
-add_action('customize_controls_print_footer_scripts', function () {
-    $value = get_option('auroraDesignBlocks_ga_optimize');
-    echo '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Customizer value: ';
-    var_dump($value);
-});
-
-
-add_action('wp_footer', function () {
-    $value = get_option('auroraDesignBlocks_ga_optimize');
-    echo '<pre>@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Frontend value: ';
-    var_dump($value);
-    echo '</pre>';
-});
 
 
 
