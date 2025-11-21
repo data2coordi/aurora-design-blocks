@@ -15,7 +15,7 @@ jobs:
       - name: build
         # ホワイトリスト方式：リリースに必要なファイルとディレクトリのみを指定してzip化します。
         run: |
-          zip -r aurora-design-blocks.zip \
+          zip -r aurora-design-blocks.pro.zip \
             "blocks/" \
             "css/" \
             "patterns/" \
@@ -44,6 +44,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_name: aurora-design-blocks.zip
-          asset_path: ./aurora-design-blocks.zip
+          asset_name: aurora-design-blocks.pro.zip
+          asset_path: ./aurora-design-blocks.pro.zip
           asset_content_type: application/zip
