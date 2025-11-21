@@ -1,4 +1,4 @@
-######build環a境aa構築 teast 6.2a9a teastaab
+k#a##build環a境aa構築 teast 6.2a9a teastaab
 
 npm init -y
 
