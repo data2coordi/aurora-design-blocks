@@ -1,0 +1,31 @@
+{
+  "apiVersion": 2,
+  "name": "aurora-design-blocks/text-flow-animation",
+  "title": "[aurora-design-blocks]text flow animation",
+  "category": "design",
+  "icon": "editor-alignleft",
+  "textdomain": "aurora-design-blocks",
+  "supports": {
+    "align": ["wide", "full"]
+  },
+  "attributes": {
+    "content": {
+      "type": "string",
+      "default": "SAMPLE TEXT"
+    },
+    "fontSize": {
+      "type": "number",
+      "default": 60
+    },
+    "color": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "fontFamily": {
+      "type": "string",
+      "default": "Arial Black, sans-serif"
+    }
+  },
+  "editorScript": "file:./build/index.js",
+  "editorStyle": ["file:./build/style-index.css", "file:./build/index.css"]
+}

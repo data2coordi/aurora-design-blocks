@@ -1,0 +1,16 @@
+{
+  "apiVersion": 2,
+  "name": "aurora-design-blocks/cta-block",
+  "title": "[aurora-design-blocks]CTA Block",
+  "category": "design",
+  "icon": "megaphone",
+  "supports": {
+    "html": false,
+    "color": {
+      "background": true,
+      "text": false
+    }
+  },
+  "editorScript": "file:./build/index.js",
+  "editorStyle": "file:./build/style-index.css"
+}

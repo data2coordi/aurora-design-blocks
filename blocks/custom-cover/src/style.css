@@ -1,0 +1,60 @@
+/* カスタムカバー全体：エディター上で全幅表示（グローバルな max-width を上書き） */
+.wp-block-aurora-design-blocks-custom-cover {
+  padding: 20px 0;
+}
+
+/* カスタムカバーの直下の要素は全幅にする */
+/*
+.wp-block-aurora-design-blocks-custom-cover>* {}
+*/
+
+/* 内側コンテンツコンテナの基本スタイル */
+.wp-block-aurora-design-blocks-custom-cover .inner-container {
+  margin: 0 auto;
+}
+
+/* 内側コンテンツが全幅の場合 */
+/*
+.wp-block-aurora-design-blocks-custom-cover .inner-container.inner-full {}
+*/
+
+/* 内側コンテンツが記事幅の場合（コンテンツ最大幅に制限） */
+.wp-block-aurora-design-blocks-custom-cover .inner-container.inner-article {
+  max-width: var(--ly-content-max-width) !important;
+}
+
+/******全幅ブロック********/
+/* 背景色にパディング */
+.wp-block-aurora-design-blocks-custom-cover {
+  padding-top: 0.25em;
+  padding-bottom: 2em;
+}
+
+/* 背景色のついた全幅ブロックコンテンツにパディングを付与 */
+.wp-block-aurora-design-blocks-custom-cover.alignfull.has-background
+  .wp-block-column {
+  padding: 0 1.2em;
+}
+
+/* 背景色のついた全幅ブロックからパディングを消す */
+.wp-block-aurora-design-blocks-custom-cover.alignfull.has-background
+  .wp-block-columns {
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  /* 背景色のついた全幅ブロックコンテンツにマージンを付与 */
+  .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background
+    .wp-block-columns
+    .wp-block-column {
+    margin: 0 1.2em;
+  }
+
+  /* 背景色のついた全幅ブロックタイトルにパディングを付与 */
+  .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background h2,
+  .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background h3,
+  .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background h4,
+  .wp-block-aurora-design-blocks-custom-cover.alignfull.has-background h5 {
+    padding: 0 1.2em !important;
+  }
+}

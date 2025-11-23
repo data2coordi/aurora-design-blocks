@@ -1,0 +1,14 @@
+{
+  "apiVersion": 2,
+  "name": "aurora-design-blocks/tab-block",
+  "title": "[aurora-design-blocks]Tab switching feature.",
+  "category": "design",
+  "icon": "index-card",
+  "description": "A feature that allows switching between multiple contents using tabs.",
+  "textdomain": "aurora-design-blocks",
+  "supports": {
+    "html": false
+  },
+  "editorScript": "file:./build/index.js",
+  "editorStyle": ["file:./build/style-index.css", "file:./build/index.css"]
+}
