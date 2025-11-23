@@ -27,7 +27,7 @@ class AuroraDesignBlocksPreDetermineCssAssets_pro
             self::$styles = array_merge(self::$styles, [
                 'aurora-design-blocks-style-module' => 'css/build/module.css',
             ]);
-            if (strpos($post->post_content, '[fontawesome') !== false) {
+            if (isset($post) && strpos($post->post_content, '[fontawesome') !== false) {
                 self::$styles = array_merge(self::$styles, [
                     'aurora-design-style-awesome' => 'css/build/awesome-all.css',
                 ]);
