@@ -11,8 +11,8 @@ class AuroraDesignBlocks_forFront
     {
         $tracking_code = get_option($code_name);
         if (!empty($tracking_code)) {
-            // 【修正箇所】出力時にも必ずサニタイズ処理を適用する
-            echo self::sanitize_tracking_code($tracking_code);
+            // 【修正箇所】出力の瞬間に wp_kses でエスケープする (Late Escaping)
+            echo wp_kses($tracking_code, self::get_allowed_html_list());
         }
     }
 
@@ -23,12 +23,15 @@ class AuroraDesignBlocks_forFront
             return;
         }
 
-        $tracking_id = sanitize_text_field($tracking_id);
+
+        // 【修正箇所】JS文字列内で使用するために事前にエスケープする
+        $tracking_id_esc = esc_js($tracking_id);
 
         // 1. GA4 の外部スクリプト（async 読み込み）
         wp_enqueue_script(
             'aurora-ga4',
-            "https://www.googletagmanager.com/gtag/js?id={$tracking_id}",
+            // URLとして安全か確認するために esc_url を推奨
+            esc_url("https://www.googletagmanager.com/gtag/js?id={$tracking_id}"),
             [],
             AURORA_DESIGN_BLOCKS_VERSION,
             false // フッターではなく head に入れる
@@ -37,18 +40,18 @@ class AuroraDesignBlocks_forFront
         // async 属性を追加
         add_filter('script_loader_tag', function ($tag, $handle, $src) {
             if ($handle === 'aurora-ga4') {
-                //    return '<script async src="' . esc_url($src) . '"></script>';
                 return str_replace(' src', ' async src', $tag);
             }
             return $tag;
         }, 10, 3);
 
         // 2. gtag の初期化コード（inline script）
+        // 【修正箇所】エスケープ済みの $tracking_id_esc を使用する
         $inline = "
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', '{$tracking_id}');
+        gtag('config', '{$tracking_id_esc}');
     ";
 
         wp_add_inline_script('aurora-ga4', $inline, 'after');
@@ -58,7 +61,8 @@ class AuroraDesignBlocks_forFront
     {
         $tracking_id = get_option($id_name);
         if (empty($tracking_id)) return;
-        $tracking_id = sanitize_text_field($tracking_id);
+
+        $tracking_id_esc = esc_js($tracking_id);
 
         wp_register_script(
             'aurora-ga4-speedup',
@@ -86,11 +90,11 @@ class AuroraDesignBlocks_forFront
 
             var script = document.createElement('script');
             script.async = true;
-            script.src = 'https://www.googletagmanager.com/gtag/js?id={$tracking_id}';
+            script.src = 'https://www.googletagmanager.com/gtag/js?id={$tracking_id_esc}';
             document.head.appendChild(script);
 
             gtag('js', new Date());
-            gtag('config', '{$tracking_id}');
+            gtag('config', '{$tracking_id_esc}');
         };
 
         if ('requestIdleCallback' in window) {
@@ -103,15 +107,13 @@ class AuroraDesignBlocks_forFront
         wp_add_inline_script('aurora-ga4-speedup', $inline, 'after');
     }
 
-    /*
-     * GoogleトラッキングコードなどのHTMLを安全にサニタイズする共通関数
-     * @param string $value ユーザー入力値
-     * @return string サニタイズされた値
+    /**
+     * 許可するHTMLタグのリストを返すヘルパー関数
+     * サニタイズ時と出力時の両方で使用する
      */
-    public static function sanitize_tracking_code($value)
+    private static function get_allowed_html_list()
     {
-        // Googleコード全般に必要なタグと属性を最大限に定義した許可リスト
-        $allowed_html_for_tracking = [
+        return [
             'script' => [
                 'async' => true,
                 'src' => true,
@@ -171,8 +173,17 @@ class AuroraDesignBlocks_forFront
             'span' => ['class' => true, 'style' => true,],
             'meta' => ['name' => true, 'content' => true,],
         ];
+    }
 
-        return wp_kses($value, $allowed_html_for_tracking);
+    /*
+     * GoogleトラッキングコードなどのHTMLを安全にサニタイズする共通関数
+     * @param string $value ユーザー入力値
+     * @return string サニタイズされた値
+     */
+    public static function sanitize_tracking_code($value)
+    {
+        // 定義済みのリストを使用してサニタイズする
+        return wp_kses($value, self::get_allowed_html_list());
     }
 }
 
