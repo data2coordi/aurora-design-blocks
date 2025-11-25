@@ -209,27 +209,57 @@ add_action('wp', ['AuroraDesignBlocksPreDetermineBlocksCss', 'init']);
 /************************************************************/
 class AuroraDesignBlocksPreDetermineJsAssets
 {
+	// スクリプト登録が必要なブロックのリスト
+	private static $script_blocks = [
+		'aurora-design-blocks/tab-block',
+		'aurora-design-blocks/slider-block',
+		// 他のスクリプトを必要とするブロックもここに追加
+	];
+
+	/**
+	 * ブロックがページ（メインコンテンツまたはウィジェット）に存在するかをチェックする
+	 * @param string $blockName 
+	 * @return bool
+	 */
+	private static function block_is_present(string $blockName): bool
+	{
+		// A. メインコンテンツ内のチェック
+		if (has_block($blockName)) {
+			return true;
+		}
+
+		// B. サイドバー（ウィジェット）内のチェック
+		$all_widget_blocks = get_option('widget_block');
+
+		if (!empty($all_widget_blocks) && is_array($all_widget_blocks)) {
+			foreach ($all_widget_blocks as $widget_data) {
+				// ウィジェットのコンテンツ内にブロック名が含まれているかチェック
+				if (isset($widget_data['content']) && has_block($blockName, $widget_data['content'])) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
 
 	public static function init()
 	{
-		// 個別ページかつ該当ブロックが存在する場合のみ処理
-
-		// 投稿のコンテンツを取得
+		// 投稿のコンテンツを取得（この行は残すものの、直接 $post を使わず関数化）
 		global $post;
-		$content = $post ? $post->post_content : '';
 
 		$scripts = [];
 
-		// タブブロックが存在する場合のみ登録
-		if (has_block('aurora-design-blocks/tab-block', $post)) {
+		// 1. タブブロックが存在する場合のみ登録
+		if (self::block_is_present('aurora-design-blocks/tab-block')) {
 			$scripts['aurora-design-blocks-tab-block-script'] = [
 				'path' => 'blocks/tab-block/build/frontend.js',
 				'deps' => [],
 			];
 		}
 
-		// スライダーブロックが存在する場合のみ登録
-		if (has_block('aurora-design-blocks/slider-block', $post)) {
+		// 2. スライダーブロックが存在する場合のみ登録
+		if (self::block_is_present('aurora-design-blocks/slider-block')) {
 			$scripts['aurora-design-blocks-slider-block-script'] = [
 				'path' => 'blocks/slider-block/build/frontend.js',
 				'deps' => [],
@@ -249,9 +279,8 @@ class AuroraDesignBlocksPreDetermineJsAssets
 	}
 }
 
-// 初期化処理（ルートで実行）
+// 初期化フック ('wp' アクションで実行することを推奨)
 add_action('wp', ['AuroraDesignBlocksPreDetermineJsAssets', 'init']);
-
 /************************************************************/
 /*ブロックアイテムのjsのロード s*/
 /************************************************************/
