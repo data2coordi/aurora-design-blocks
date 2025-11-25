@@ -158,7 +158,7 @@ class AuroraDesignBlocksPreDetermineBlocksCss
 
 		// 各ブロックごとに判定してフロントでenqueue
 		foreach (self::$blocks as $blockName => $styles) {
-			if (is_singular() && has_block($blockName)) {
+			if (has_block($blockName)) {
 				// フロント用に登録（enqueueではなく add_styles に登録）
 				AuroraDesignBlocksFrontendStyles::add_styles($styles);
 
@@ -188,40 +188,38 @@ class AuroraDesignBlocksPreDetermineJsAssets
 	public static function init()
 	{
 		// 個別ページかつ該当ブロックが存在する場合のみ処理
-		if (is_singular()) {
 
-			// 投稿のコンテンツを取得
-			global $post;
-			$content = $post ? $post->post_content : '';
+		// 投稿のコンテンツを取得
+		global $post;
+		$content = $post ? $post->post_content : '';
 
-			$scripts = [];
+		$scripts = [];
 
-			// タブブロックが存在する場合のみ登録
-			if (has_block('aurora-design-blocks/tab-block', $post)) {
-				$scripts['aurora-design-blocks-tab-block-script'] = [
-					'path' => 'blocks/tab-block/build/frontend.js',
-					'deps' => [],
-				];
-			}
+		// タブブロックが存在する場合のみ登録
+		if (has_block('aurora-design-blocks/tab-block', $post)) {
+			$scripts['aurora-design-blocks-tab-block-script'] = [
+				'path' => 'blocks/tab-block/build/frontend.js',
+				'deps' => [],
+			];
+		}
 
-			// スライダーブロックが存在する場合のみ登録
-			if (has_block('aurora-design-blocks/slider-block', $post)) {
-				$scripts['aurora-design-blocks-slider-block-script'] = [
-					'path' => 'blocks/slider-block/build/frontend.js',
-					'deps' => [],
-				];
-			}
+		// スライダーブロックが存在する場合のみ登録
+		if (has_block('aurora-design-blocks/slider-block', $post)) {
+			$scripts['aurora-design-blocks-slider-block-script'] = [
+				'path' => 'blocks/slider-block/build/frontend.js',
+				'deps' => [],
+			];
+		}
 
-			if (! empty($scripts)) {
-				// 登録
-				AuroraDesignBlocksFrontendScripts::add_scripts($scripts);
+		if (! empty($scripts)) {
+			// 登録
+			AuroraDesignBlocksFrontendScripts::add_scripts($scripts);
 
-				// defer 適用
-				$deferredScripts = array_keys($scripts);
-				AuroraDesignBlocksDeferJs::add_deferred_scripts($deferredScripts);
+			// defer 適用
+			$deferredScripts = array_keys($scripts);
+			AuroraDesignBlocksDeferJs::add_deferred_scripts($deferredScripts);
 
-				/* レンダリングブロック、layout計算増加の防止のためのチューニング */
-			}
+			/* レンダリングブロック、layout計算増加の防止のためのチューニング */
 		}
 	}
 }

@@ -5,7 +5,31 @@ if (! defined('ABSPATH')) exit;
 /*cssのロード s*/
 /************************************************************/
 
+class AuroraDesignBlocks_Utils
+{
 
+    /**
+     * どれか1つでもアクティブなサイドバーがあるかを判定
+     *
+     * @return bool
+     */
+    public static function has_sidebar()
+    {
+        global $wp_registered_sidebars;
+
+        if (empty($wp_registered_sidebars)) {
+            return false;
+        }
+
+        foreach ($wp_registered_sidebars as $sidebar) {
+            if (is_active_sidebar($sidebar['id'])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
 
 
 class AuroraDesignBlocksPreDetermineCssAssets_pro
@@ -23,7 +47,7 @@ class AuroraDesignBlocksPreDetermineCssAssets_pro
     {
         global $post;
         // 以下、必要に応じて追加
-        if (is_singular() || is_active_sidebar('sidebar-1') || is_active_sidebar('sidebar-2') || is_active_sidebar('sidebar-3')) {
+        if (is_singular() || AuroraDesignBlocks_Utils::has_sidebar()) {
             self::$styles = array_merge(self::$styles, [
                 'aurora-design-blocks-style-module' => 'css/build/module.css',
             ]);

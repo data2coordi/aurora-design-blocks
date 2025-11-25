@@ -41,7 +41,14 @@ function AuroraDesignBlocks_replace_fontawesome_icons($content)
 		$content
 	);
 }
-add_filter('the_content', 'AuroraDesignBlocks_replace_fontawesome_icons', 10);
+
+add_filter('render_block', function ($block_content, $block) {
+
+	// ここで FontAwesome の置換を実行
+	$block_content = AuroraDesignBlocks_replace_fontawesome_icons($block_content);
+
+	return $block_content;
+}, 10, 2);
 
 /********************************************************************/
 /*font awesome 用のショートコードe*/
