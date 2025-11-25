@@ -106,12 +106,15 @@ add_action('enqueue_block_editor_assets', 'auroraDesignBlocks_enqueue_block_asse
 /********************************************************************/
 
 
-
+/**
+ * クラス名：AuroraDesignBlocksPreDetermineBlocksCss
+ * 目的：ページ内で使用されているブロックを render_block フィルターで検出し、
+ * 必要なスタイルを遅延ロードリストに追加する。
+ */
 class AuroraDesignBlocksPreDetermineBlocksCss
 {
 	/**
 	 * ブロックごとのフロントCSS設定
-	 * 'block-name' => ['handle' => 'css-path']
 	 */
 	private static $blocks = [
 		'aurora-design-blocks/cta-block' => [
@@ -144,7 +147,7 @@ class AuroraDesignBlocksPreDetermineBlocksCss
 	 */
 	public static function init()
 	{
-		// まず全ブロックを登録
+		// 1. まず全ブロックを登録 (wp_register_style)
 		foreach (self::$blocks as $blockName => $styles) {
 			foreach ($styles as $handle => $path) {
 				wp_register_style(
@@ -156,25 +159,47 @@ class AuroraDesignBlocksPreDetermineBlocksCss
 			}
 		}
 
-		// 各ブロックごとに判定してフロントでenqueue
+		// ウィジェット（サイドバー）のデータを一度だけ取得しておく
+		$all_widget_blocks = get_option('widget_block');
+
+		// 各ブロックごとに判定
 		foreach (self::$blocks as $blockName => $styles) {
+			$found = false;
+
+			// A. メインコンテンツ内のチェック (既存のロジック)
 			if (has_block($blockName)) {
-				// フロント用に登録（enqueueではなく add_styles に登録）
+				$found = true;
+			}
+
+			// B. サイドバー（ウィジェット）内のチェック (Aで見つからなかった場合のみ)
+			if (!$found && !empty($all_widget_blocks) && is_array($all_widget_blocks)) {
+				foreach ($all_widget_blocks as $widget_data) {
+					// ウィジェットのコンテンツ内にブロック名が含まれているかチェック
+					if (isset($widget_data['content']) && has_block($blockName, $widget_data['content'])) {
+						$found = true;
+						break; // 見つかったらこのブロックの検索は終了
+					}
+				}
+			}
+
+			// 見つかった場合の処理
+			if ($found) {
+				// フロント用に登録
 				AuroraDesignBlocksFrontendStyles::add_styles($styles);
 
 				// 遅延対象に追加
 				self::$deferredStyles = array_merge(self::$deferredStyles, array_keys($styles));
 			}
 		}
+
 		if (!empty(self::$deferredStyles)) {
 			AuroraDesignBlocksDeferCss::add_deferred_styles(self::$deferredStyles);
 		}
 	}
 }
 
-// 初期化フック
+// 初期化フック ('wp' アクションに戻しました)
 add_action('wp', ['AuroraDesignBlocksPreDetermineBlocksCss', 'init']);
-
 /********************************************************************/
 /*ブロックアイテムのフロント用のCSSの登録e*/
 /********************************************************************/
