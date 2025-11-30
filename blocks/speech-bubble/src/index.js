@@ -9,7 +9,7 @@ import {
   MediaUploadCheck,
   useBlockProps,
 } from "@wordpress/block-editor";
-import { PanelBody, ToggleControl } from "@wordpress/components";
+import { PanelBody } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import { useEffect } from "@wordpress/element";
 
@@ -52,7 +52,7 @@ registerBlockType("aurora-design-blocks/speech-bubble", {
       style: { backgroundColor, color: textColor },
     });
 
-    // ブロック内クリックで画像をセットするUI
+    // 画像クリックで画像選択
     const renderImage = () => (
       <MediaUploadCheck>
         <MediaUpload
@@ -70,6 +70,7 @@ registerBlockType("aurora-design-blocks/speech-bubble", {
                 alignItems: "center",
                 justifyContent: "center",
                 overflow: "hidden",
+                marginBottom: "8px",
               }}
               onClick={open}
             >
@@ -94,24 +95,29 @@ registerBlockType("aurora-design-blocks/speech-bubble", {
       <>
         <InspectorControls>
           <PanelBody
-            title={__("Layout settings", "aurora-design-blocks")}
+            title={__("Speech Bubble Direction", "aurora-design-blocks")}
             initialOpen={false}
           >
-            <ToggleControl
-              label={__(
-                "Reverse the positions of the image and speech bubble.",
+            <p>
+              {__(
+                "Double click the speech bubble in the editor to switch left/right.",
                 "aurora-design-blocks"
               )}
-              checked={reverse}
-              onChange={(newVal) => setAttributes({ reverse: newVal })}
-            />
+            </p>
           </PanelBody>
         </InspectorControls>
 
+        {/* 吹き出しクリックで左右切り替え */}
         <div
-          className={`${className} aurora-design-blocks-speech-bubble ${reverse ? "aurora-design-blocks-speech-bubble--reverse" : "aurora-design-blocks-speech-bubble--normal"}`}
+          className={`${className} aurora-design-blocks-speech-bubble ${
+            reverse
+              ? "aurora-design-blocks-speech-bubble--reverse"
+              : "aurora-design-blocks-speech-bubble--normal"
+          }`}
+          onDoubleClick={() => setAttributes({ reverse: !reverse })}
         >
           {renderImage()}
+
           {imageCaption && (
             <RichText
               tagName="figcaption"
@@ -123,6 +129,7 @@ registerBlockType("aurora-design-blocks/speech-bubble", {
               placeholder={__("Enter caption here.", "aurora-design-blocks")}
             />
           )}
+
           <div {...contentBlockProps}>
             <RichText
               tagName="p"
@@ -147,6 +154,7 @@ registerBlockType("aurora-design-blocks/speech-bubble", {
         style = {},
       },
     } = props;
+
     const backgroundColor = style?.color?.background;
     const textColor = style?.color?.text;
 
@@ -157,7 +165,11 @@ registerBlockType("aurora-design-blocks/speech-bubble", {
 
     return (
       <div
-        className={`aurora-design-blocks-speech-bubble ${reverse ? "aurora-design-blocks-speech-bubble--reverse" : "aurora-design-blocks-speech-bubble--normal"}`}
+        className={`aurora-design-blocks-speech-bubble ${
+          reverse
+            ? "aurora-design-blocks-speech-bubble--reverse"
+            : "aurora-design-blocks-speech-bubble--normal"
+        }`}
       >
         {imageUrl && (
           <figure className="speech-bubble__image">

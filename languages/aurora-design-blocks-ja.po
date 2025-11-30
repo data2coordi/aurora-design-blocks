@@ -452,28 +452,12 @@ msgstr "*複数のコンテンツを作成してください。ウェブサイ�
 
 
 #: blocks/speech-bubble/build/index.js:1
-msgid "Image setting"
-msgstr "画像設定"
+msgid "Speech Bubble Direction"
+msgstr "吹き出しの向きの設定"
 
 #: blocks/speech-bubble/build/index.js:1
-msgid "Change image"
-msgstr "画像を変更"
-
-#: blocks/speech-bubble/build/index.js:1
-msgid "faceimage"
-msgstr "顔画像"
-
-#: blocks/speech-bubble/build/index.js:1
-msgid "Select image"
-msgstr "画像を選択"
-
-#: blocks/speech-bubble/build/index.js:1
-msgid "layout setting"
-msgstr "レイアウト設定"
-
-#: blocks/speech-bubble/build/index.js:1
-msgid "Reverse the positions of the image and speech bubble."
-msgstr "画像と吹き出しの位置を反転する。"
+msgid "Double click the speech bubble in the editor to switch left/right."
+msgstr "吹き出しをダブルクリックすると吹き出しの向きが左右反転します。"
 
 #: blocks/speech-bubble/build/index.js:1
 msgid "Enter caption here."
