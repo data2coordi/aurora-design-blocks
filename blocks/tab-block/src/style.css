@@ -1,48 +1,24 @@
+/* ------------- フロントエンドの親ブロック (.aurora-design-blocks-tabs) ------------- */
+
 .aurora-design-blocks-tabs {
-  border: 1px solid #ddd;
-  padding: 10px;
+  /* エディターでの枠線は editor.css に移したので、ここではフロントエンドで必要なもののみ */
+  border: 1px solid #eee;
+  padding: 0 2em; /* タブを線で囲むためのパディング */
 }
 
+/* フロントエンドでJSが生成するナビゲーションのベーススタイル */
 .aurora-design-blocks-tabs .tabs-navigation {
   list-style: none;
   display: flex;
-  background: #f1f1f1;
+  background: #fff; /* 背景色 */
   padding: 0;
-  margin: 0 0 10px;
-}
-
-.aurora-design-blocks-tabs .tabs-navigation li {
-  padding: 10px 15px;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-}
-
-.aurora-design-blocks-tabs .tabs-navigation li.active {
-  border-bottom: 2px solid #007cba;
-  font-weight: bold;
-}
-
-/*-------------タブブロック----------*/
-.wp-block-aurora-design-blocks-tab-block .tabs-navigation {
-  border-bottom: 2px solid #000;
-  background: #fff;
-  margin-top: var(--ly-elementTopMarginSmall);
-}
-
-/* 現在指している所のスタイル */
-.wp-block-aurora-design-blocks-tab-block .tabs-navigation li.active {
-  background: #000;
-  border-radius: 10px 10px 0 0;
-  /* 角丸の半径 */
-  padding-left: 2em;
-  padding-right: 2em;
-  /* 左右にパディングを追加している */
-  color: #fff;
-  border: none;
+  margin: 30px 0 0; /* マージンを再現 */
+  border-bottom: 2px solid #000; /* 全体を囲む線 */
+  line-height: 1;
 }
 
 /* 現在指していない所のスタイル */
-.wp-block-aurora-design-blocks-tab-block .tabs-navigation li {
+.aurora-design-blocks-tabs .tabs-navigation li {
   background: #eee;
   border-radius: 10px 10px 0 0;
   cursor: pointer;
@@ -50,49 +26,37 @@
   margin-left: 5px;
 }
 
-/* タブ全体を囲む線を消している */
-.wp-block-aurora-design-blocks-tab-block.tabs {
+/* 現在指している所のスタイル */
+.aurora-design-blocks-tabs .tabs-navigation li.active {
+  background: #000;
+  border-radius: 10px 10px 0 0;
+  color: #fff;
   border: none;
+  font-weight: bold;
 }
 
-/* タブナビの縦幅を狭くしている */
-.wp-block-aurora-design-blocks-tab-block ul.tabs-navigation {
-  line-height: 1;
+/* ---------------------------------------------------------------- */
+/* --- ★重要: タブコンテンツの表示制御 (JSと連携) --- */
+/* ---------------------------------------------------------------- */
+
+/* 1. 全ての子ブロック (タブコンテンツ) を初期状態で非表示にする */
+.aurora-design-blocks-tabs .tab {
+  display: none !important;
 }
 
-/* タブナビの上にマージンをつけている */
-.wp-block-aurora-design-blocks-tab-block
-  .aurora-design-blocks-tabs
-  .tabs-navigation {
-  margin-top: 30px;
+/* 2. ただし、JSが active クラスを付与したタブコンテンツは表示する */
+.aurora-design-blocks-tabs .tab.active {
+  display: block !important;
 }
 
-.wp-block-aurora-design-blocks-tab-block
-  .aurora-design-blocks-tabs-block
-  .block-editor-default-block-appender
-  .block-editor-inserter {
-  margin-top: 25px;
-  /* デフォルトの追加ボタンの位置を下げている */
-}
+/* 3. 初期表示の保証 (JSが動作するまでの間のフォールバック。CSSのfirst-childはJSがactiveを付与するため不要) */
+/* JSがすぐに active クラスを付与するため、ここでは不要ですが、残しておいても問題ありません。 */
 
-.wp-block-aurora-design-blocks-tab-block.aurora-design-blocks-tabs {
-  border: 1px solid #eee;
-  padding: 0 2em;
-  /* タブを線で囲んでいる */
-}
+/* 子ブロックのコンテンツラッパー */
+/* .aurora-design-blocks-tabs .tab { ... } は上記で処理済み */
 
+/* URL折り返しスタイル */
 .wp-block-aurora-design-blocks-tab.tab a {
   word-break: break-all;
   overflow-wrap: break-word;
-  /* urlをコンテンツに応じて折り曲げている */
-}
-
-.wp-block-aurora-design-blocks-tab-block .wp-block-column {
-  /* padding-left: 2em;
-  padding-right: 2em; */
-  /* カラムレイアウトにパディングを追加している */
-}
-
-.aurora-design-blocks-tabs .ly_site_content_main .wp-block-columns {
-  padding: 0;
 }
