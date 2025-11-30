@@ -1,22 +1,47 @@
-.wp-block-aurora-design-blocks-slider-block .blockSliders-block {
-    border: 2px dashed #ccc;
-    padding: 10px;
+/* slider-block/src/editor.css */
+
+/* 親ブロックのスタイル */
+.wp-block-aurora-design-blocks-slider-block.editorBlockSliders {
+  border: 1px dashed #7e8993; /* 親ブロックの境界線 */
+  padding: 10px;
 }
 
+/* ナビゲーションや説明文のスタイル */
 .wp-block-aurora-design-blocks-slider-block .blockSliders-navigation-editor {
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 14px;
-    color: #666;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #666;
 }
 
+/* スライドコンテンツのラッパーエリア */
 .wp-block-aurora-design-blocks-slider-block .blockSliders-content-editor {
-    padding: 10px;
-    background-color: #f9f9f9;
-    min-height: 100px;
+  padding: 0; /* paddingは子ブロックで持たせる */
+  background-color: #f9f9f9;
 }
 
-.wp-block-aurora-design-blocks-slider-block.editorBlockSliders .block-editor-inner-blocks>.block-editor-block-list__layout>* {
-    border: 0.5px solid green;
+/* InnerBlocksのレイアウト（子ブロック全体） */
+.wp-block-aurora-design-blocks-slider-block.editorBlockSliders
+  .blockSliders-content-editor
+  .block-editor-block-list__layout {
+  /* 子ブロックを重ねるためのCSSをここでリセットまたは無効化する必要がある場合、追加する */
+  display: block; /* gridやflexを無効化 */
+}
 
+/* 個々の子スライド（InnerBlocksの直接の子）のスタイル */
+.wp-block-aurora-design-blocks-slider-block.editorBlockSliders
+  .blockSliders-content-editor
+  .block-editor-block-list__layout
+  > * {
+  /* スライドの区切りを明確にする */
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 15px; /* スライド間にスペースを入れる */
+  background-color: #fff;
+  /* 重ね合わせCSSの影響を打ち消すためのリセット */
+  position: relative !important;
+  opacity: 1 !important;
+  /* gridの重ね合わせを打ち消す */
+  grid-column: auto !important;
+  grid-row: auto !important;
 }
