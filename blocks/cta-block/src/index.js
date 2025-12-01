@@ -79,8 +79,9 @@ registerBlockType("aurora-design-blocks/cta-block", {
         <div {...blockProps}>
           {/* ★修正: ガイドメッセージを InnerBlocks の外側に常に表示 */}
           <div className="cta-editor-guide-message">
+            {"[CTA Block] : "}
             {__(
-              "画面右端の設定エリアで配置位置を設定できます。WEBサイトとして表示したときに、設定位置に移動します。",
+              "The position can be set in the setting area on the right side of the screen. It will move to the set position when displayed as a website.",
               "aurora-design-blocks"
             )}
             <p style={{ fontSize: "12px", color: "#007cba", marginTop: "5px" }}>

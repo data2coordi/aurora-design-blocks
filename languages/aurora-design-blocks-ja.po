@@ -806,6 +806,17 @@ msgstr "左中央"
 msgid "Right Center"
 msgstr "右中央"
 
+#: blocks/cta-block/build/index.js:1
+msgid "The position can be set in the setting area on the right side of the screen. It will move to the set position when displayed as a website."
+msgstr "画面右端の設定エリアで配置位置を設定できます。WEBサイトとして表示したときに、設定位置に移動します。"
+
+#: blocks/cta-block/build/index.js:1
+msgid "Current position setting:"
+msgstr "現在の配置設定:"
+
+
+
+
 #: blocks/gfontawesome/build/index.js:1
 msgid "Icon not found"
 msgstr "アイコンが見つかりません"

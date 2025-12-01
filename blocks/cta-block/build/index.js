@@ -111,7 +111,7 @@ __webpack_require__.r(__webpack_exports__);
         ...blockProps,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
           className: "cta-editor-guide-message",
-          children: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("画面右端の設定エリアで配置位置を設定できます。WEBサイトとして表示したときに、設定位置に移動します。", "aurora-design-blocks"), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
+          children: ["[CTA Block] : ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("The position can be set in the setting area on the right side of the screen. It will move to the set position when displayed as a website.", "aurora-design-blocks"), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
             style: {
               fontSize: "12px",
               color: "#007cba",
