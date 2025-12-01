@@ -1,0 +1,40 @@
+/* src/editor.css */
+
+/* 1. ブロック全体を分かりやすく囲み、固定表示を無効化 */
+.wp-block-aurora-design-blocks-cta-block {
+  border: 1px dashed #7e8993;
+  padding: 10px;
+  margin: 10px 0;
+  /* エディター内では固定表示を無効化（スクロール追従を停止） */
+  position: relative !important;
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+}
+
+/* 2. ガイド表示用のラッパーのスタイル */
+.wp-block-aurora-design-blocks-cta-block.editor-guide {
+  background: #f0f8ff; /* 薄い青 */
+  border: 2px solid #007cba; /* 青い枠線 */
+  opacity: 0.9;
+}
+
+/* 3. ★ガイドメッセージのスタイル */
+.wp-block-aurora-design-blocks-cta-block .cta-editor-guide-message {
+  background: #e6f3ff; /* 背景色をさらに薄く */
+  border: 1px dashed #007cba;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  text-align: center;
+  color: #32373c; /* テキストの色 */
+}
+
+/* 4. InnerBlocksのエリア（コンテンツ入力エリア） */
+.wp-block-aurora-design-blocks-cta-block .cta-inner {
+  min-height: 50px; /* 入力しやすいように最小高さを設定 */
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}

@@ -12,5 +12,5 @@
     }
   },
   "editorScript": "file:./build/index.js",
-  "editorStyle": "file:./build/style-index.css"
+  "editorStyle": ["file:./build/style-index.css", "file:./build/index.css"]
 }
