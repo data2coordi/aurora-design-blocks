@@ -86,42 +86,6 @@ __webpack_require__.r(__webpack_exports__);
         color: textColor
       }
     });
-
-    // 画像クリックで画像選択
-    const renderImage = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
-        onSelect: onSelectImage,
-        allowedTypes: ["image"],
-        render: ({
-          open
-        }) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-          className: "speech-bubble__image-wrapper",
-          style: {
-            cursor: "pointer",
-            width: "150px",
-            height: "150px",
-            border: "1px dashed #ccc",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            overflow: "hidden",
-            marginBottom: "8px"
-          },
-          onClick: open,
-          children: imageUrl ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
-            src: imageUrl,
-            alt: imageAlt,
-            style: {
-              width: "100%",
-              height: "100%",
-              objectFit: "cover"
-            }
-          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
-            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Click to select image", "aurora-design-blocks")
-          })
-        })
-      })
-    });
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
@@ -136,14 +100,52 @@ __webpack_require__.r(__webpack_exports__);
         onDoubleClick: () => setAttributes({
           reverse: !reverse
         }),
-        children: [renderImage(), imageCaption && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.RichText, {
-          tagName: "figcaption",
-          className: "speech-bubble__image-caption",
-          onChange: newCaption => setAttributes({
-            imageCaption: newCaption
-          }),
-          value: imageCaption,
-          placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Enter caption here.", "aurora-design-blocks")
+        children: [imageUrl || imageCaption ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("figure", {
+          className: "speech-bubble__image",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
+              onSelect: onSelectImage,
+              allowedTypes: ["image"],
+              render: ({
+                open
+              }) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+                src: imageUrl,
+                alt: imageAlt,
+                onClick: open,
+                style: {
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  cursor: "pointer"
+                }
+              })
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.RichText, {
+            tagName: "figcaption",
+            className: "speech-bubble__image-caption",
+            value: imageCaption,
+            onChange: newCaption => setAttributes({
+              imageCaption: newCaption
+            }),
+            placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Enter caption here.", "aurora-design-blocks")
+          })]
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          className: "speech-bubble__image-wrapper",
+          style: {
+            cursor: "pointer",
+            width: "150px",
+            height: "150px",
+            border: "1px dashed #ccc",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            overflow: "hidden",
+            marginBottom: "8px"
+          },
+          onClick: () => {},
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Click to select image", "aurora-design-blocks")
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
           ...contentBlockProps,
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.RichText, {

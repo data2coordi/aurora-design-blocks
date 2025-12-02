@@ -52,45 +52,6 @@ registerBlockType("aurora-design-blocks/speech-bubble", {
       style: { backgroundColor, color: textColor },
     });
 
-    // 画像クリックで画像選択
-    const renderImage = () => (
-      <MediaUploadCheck>
-        <MediaUpload
-          onSelect={onSelectImage}
-          allowedTypes={["image"]}
-          render={({ open }) => (
-            <div
-              className="speech-bubble__image-wrapper"
-              style={{
-                cursor: "pointer",
-                width: "150px",
-                height: "150px",
-                border: "1px dashed #ccc",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                overflow: "hidden",
-                marginBottom: "8px",
-              }}
-              onClick={open}
-            >
-              {imageUrl ? (
-                <img
-                  src={imageUrl}
-                  alt={imageAlt}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              ) : (
-                <span>
-                  {__("Click to select image", "aurora-design-blocks")}
-                </span>
-              )}
-            </div>
-          )}
-        />
-      </MediaUploadCheck>
-    );
-
     return (
       <>
         <InspectorControls>
@@ -107,7 +68,6 @@ registerBlockType("aurora-design-blocks/speech-bubble", {
           </PanelBody>
         </InspectorControls>
 
-        {/* 吹き出しクリックで左右切り替え */}
         <div
           className={`${className} aurora-design-blocks-speech-bubble ${
             reverse
@@ -116,18 +76,56 @@ registerBlockType("aurora-design-blocks/speech-bubble", {
           }`}
           onDoubleClick={() => setAttributes({ reverse: !reverse })}
         >
-          {renderImage()}
+          {imageUrl || imageCaption ? (
+            <figure className="speech-bubble__image">
+              <MediaUploadCheck>
+                <MediaUpload
+                  onSelect={onSelectImage}
+                  allowedTypes={["image"]}
+                  render={({ open }) => (
+                    <img
+                      src={imageUrl}
+                      alt={imageAlt}
+                      onClick={open}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        cursor: "pointer",
+                      }}
+                    />
+                  )}
+                />
+              </MediaUploadCheck>
 
-          {imageCaption && (
-            <RichText
-              tagName="figcaption"
-              className="speech-bubble__image-caption"
-              onChange={(newCaption) =>
-                setAttributes({ imageCaption: newCaption })
-              }
-              value={imageCaption}
-              placeholder={__("Enter caption here.", "aurora-design-blocks")}
-            />
+              <RichText
+                tagName="figcaption"
+                className="speech-bubble__image-caption"
+                value={imageCaption}
+                onChange={(newCaption) =>
+                  setAttributes({ imageCaption: newCaption })
+                }
+                placeholder={__("Enter caption here.", "aurora-design-blocks")}
+              />
+            </figure>
+          ) : (
+            <div
+              className="speech-bubble__image-wrapper"
+              style={{
+                cursor: "pointer",
+                width: "150px",
+                height: "150px",
+                border: "1px dashed #ccc",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                overflow: "hidden",
+                marginBottom: "8px",
+              }}
+              onClick={() => {}}
+            >
+              <span>{__("Click to select image", "aurora-design-blocks")}</span>
+            </div>
           )}
 
           <div {...contentBlockProps}>
