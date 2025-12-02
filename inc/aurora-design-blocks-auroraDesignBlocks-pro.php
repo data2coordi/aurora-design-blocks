@@ -51,7 +51,18 @@ class AuroraDesignBlocksPreDetermineCssAssets_pro
             self::$styles = array_merge(self::$styles, [
                 'aurora-design-blocks-style-module' => 'css/build/module.css',
             ]);
+            $has_fa = false;
+
+            // 本文チェック
             if (isset($post) && strpos($post->post_content, '[fontawesome') !== false) {
+                $has_fa = true;
+            }
+
+            // サイドバーチェック
+            if (!$has_fa && self::sidebar_has_fontawesome()) {
+                $has_fa = true;
+            }
+            if ($has_fa) {
                 self::$styles = array_merge(self::$styles, [
                     'aurora-design-style-awesome' => 'css/build/awesome-all.css',
                 ]);
@@ -79,6 +90,55 @@ class AuroraDesignBlocksPreDetermineCssAssets_pro
             'aurora-design-style-awesome' => 'css/build/awesome-all.css',
         ];
         AuroraDesignBlocksEditorStyles::add_styles(self::$EditorStyles);
+    }
+
+    private static function sidebar_has_fontawesome()
+    {
+        $sidebars = wp_get_sidebars_widgets();
+
+        if (empty($sidebars)) {
+            return false;
+        }
+
+        // 旧テキストウィジェットの取得
+        $text_widgets = get_option('widget_text', []);
+        // ブロックウィジェットの取得（WordPress 5.8+）
+        $block_widgets = get_option('widget_block', []);
+
+        foreach ($sidebars as $sidebar => $widgets) {
+
+            if (empty($widgets)) {
+                continue;
+            }
+
+            foreach ($widgets as $widget_id) {
+
+                /*** ① 旧テキストウィジェット(text-xxx) ***/
+                if (strpos($widget_id, 'text-') === 0) {
+                    $id = str_replace('text-', '', $widget_id);
+                    if (isset($text_widgets[$id]['text'])) {
+                        if (strpos($text_widgets[$id]['text'], '[fontawesome') !== false) {
+                            return true;
+                        }
+                    }
+                }
+
+                /*** ② ブロックウィジェット(block-xxx) ***/
+                if (strpos($widget_id, 'block-') === 0) {
+                    $id = str_replace('block-', '', $widget_id);
+                    if (isset($block_widgets[$id]['content'])) {
+                        $content = $block_widgets[$id]['content'];
+
+                        // ブロック内の H2, P, shortcode block 等を横断的に検査
+                        if (strpos($content, '[fontawesome') !== false) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }
 
