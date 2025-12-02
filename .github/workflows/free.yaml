@@ -33,9 +33,7 @@ jobs:
           rm -rf languages/*.json
           rm -rf patterns
           rm -rf plugin-update-checker
-          rm -rf tests
           rm -rf tmp
-          rm -rf util
           rm -f aurora-design-blocks-pro.php
           rm -f *.json
           rm -f *.lock
