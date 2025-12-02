@@ -39,6 +39,8 @@ jobs:
           rm -f *.lock
           rm -f *phpcs.xml*
           rm -f *phpunit*
+          rm -f .phpcs.xml.dist
+          rm -f .phpunit.result.cache
 
       - name: Freeブランチを作成・更新
         run: |
