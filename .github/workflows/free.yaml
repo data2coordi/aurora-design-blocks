@@ -15,6 +15,7 @@ jobs:
 
       - name: Free用に不要ファイルを削除
         run: |
+          rm -rf assets
           rm -rf blocks
           rm -rf css/webfonts
           rm -rf css/webfonts
