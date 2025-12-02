@@ -9,7 +9,13 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Short Description: Multi-functional plugin for GA4, GTM, AdSense, OGP, and automated Table of Contents (TOC), generally essential for blogs.
 
+
 == Description ==
+
+**✅ Manual: [Setup and Usage](https://integlight.auroralab-design.com/aurora-design-blocks/)**
+<和訳>マニュアル：[設定方法と使い方](https://integlight.auroralab-design.com/aurora-design-blocks/)
+
+
 Aurora Design Blocks is a multi-functional plugin that supports external asset management and provides essential features for content-rich websites.  
 It allows you to configure GA4, GTM, AdSense, and OGP settings directly from the WordPress Customizer without editing any code.  
 In addition, it includes a customizable Table of Contents (TOC) block that automatically generates navigation based on H2 and H3 headings.
