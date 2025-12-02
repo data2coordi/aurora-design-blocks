@@ -53,7 +53,7 @@ while [ $RETRY -lt $MAX_RETRY ]; do
         echo "FREE環境をリモートからPULLしました"
 
         #"コミットでgithub actionsが実行される"
-        git commit --allow-empty -m "fdouki"
+        git commit --allow-empty -m "fxdouki"
         git push  --force
 
         echo "リリースを完了しました"
