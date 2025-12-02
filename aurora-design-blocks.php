@@ -13,7 +13,7 @@ if (! defined('ABSPATH')) exit;
 
 if (!defined('AURORA_DESIGN_BLOCKS_VERSION')) {
     // Replace the version number of the theme on each release.
-    define('AURORA_DESIGN_BLOCKS_VERSION', '2.0.1');
+    define('AURORA_DESIGN_BLOCKS_VERSION', '2.0.2');
 }
 
 
