@@ -18,7 +18,6 @@ jobs:
           rm -rf assets
           rm -rf blocks
           rm -rf css/webfonts
-          rm -rf css/webfonts
           rm -rf css/*.js
           rm -rf css/*.json
           rm -rf css/css
