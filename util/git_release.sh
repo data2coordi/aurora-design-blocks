@@ -13,3 +13,4 @@ git add ../aurora-design-blocks.php
 git add ../readme.txt
 
 git commit -m "v$ver-release  $(date '+%Y-%m-%d %H:%M:%S') douki" --allow-empty
+git push 
