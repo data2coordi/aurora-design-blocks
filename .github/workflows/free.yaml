@@ -43,6 +43,27 @@ jobs:
           rm -f .phpcs.xml.dist
           rm -f .phpunit.result.cache
 
+      - name: Free用にバージョンを1つ下げる
+        run: |
+          ver=$(grep -i "^[[:space:]]*\*[[:space:]]*Version:" aurora-design-blocks.php \
+                | sed -E 's/.*Version:[[:space:]]*([0-9.]+).*/\1/')
+          major=$(echo "$ver" | cut -d. -f1)
+          rest=$(echo "$ver" | cut -d. -f2-)
+          major_minus1=$((major - 1))
+          ver_minus1="${major_minus1}.${rest}"
+          # -------------------------------
+          # 3) Version: を更新（PHPヘッダ）
+          # -------------------------------
+          sed -i "s/^\([[:space:]]*\*[[:space:]]*Version:\)[[:space:]]*[0-9.]\+/\1 $ver_minus1/" aurora-design-blocks.php
+          # -------------------------------
+          # 4) define('AURORA_DESIGN_BLOCKS_VERSION', 'x.y.z');
+          # -------------------------------
+          sed -i "s/define('AURORA_DESIGN_BLOCKS_VERSION', '[0-9.]*');/define('AURORA_DESIGN_BLOCKS_VERSION', '$ver_minus1');/" aurora-design-blocks.php
+          # -------------------------------
+          # 5) readme.txt の Stable tag:
+          # -------------------------------
+          sed -i "s/^Stable tag: [0-9.]*/Stable tag: $ver_minus1/" readme.txt
+
       - name: Freeブランチを作成・更新
         run: |
           git config user.name github-actions
