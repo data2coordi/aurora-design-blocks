@@ -4,7 +4,7 @@ if (! defined('ABSPATH')) exit;
 /**
  * Plugin Name: Aurora Design Blocks
  * Description: Multi-functional plugin for GA4, GTM, AdSense, OGP, and automated Table of Contents (TOC), generally essential for blogs.
- * Version: 2.0.4
+ * Version: 1.0.4
  * Author: Yurika Toshida at Aurora Lab
  * Text Domain: aurora-design-blocks
  * License: GPLv2 or later
@@ -13,7 +13,7 @@ if (! defined('ABSPATH')) exit;
 
 if (!defined('AURORA_DESIGN_BLOCKS_VERSION')) {
     // Replace the version number of the theme on each release.
-    define('AURORA_DESIGN_BLOCKS_VERSION', '2.0.4');
+    define('AURORA_DESIGN_BLOCKS_VERSION', '1.0.4');
 }
 
 
