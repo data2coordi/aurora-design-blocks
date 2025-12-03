@@ -1,1 +1,518 @@
-(()=>{"use strict";var e,r={325:()=>{const e=window.wp.components,r=window.wp.blocks,o=window.wp.blockEditor,l=window.wp.i18n,a=window.ReactJSXRuntime;(0,r.registerBlockType)("aurora-design-blocks/frame-line",{apiVersion:2,title:(0,l.__)("[aurora-design-blocks]frame-line","aurora-design-blocks"),category:"design",icon:"editor-table",supports:{align:["wide","full"]},attributes:{title:{type:"string",default:""},frameLineAlign:{type:"string",default:"left"},backgroundColor:{type:"string"},titleColor:{type:"string",default:"block"},borderColor:{type:"string",default:"lightgreen"},borderStyle:{type:"string",default:"solid"},borderWidth:{type:"string",default:"1px"},borderRadius:{type:"string",default:"10px"},titleBorderRadius:{type:"string",default:"0px"},showTitle:{type:"boolean",default:!0}},edit:({attributes:r,setAttributes:t})=>{const{title:i,frameLineAlign:n,backgroundColor:s,titleColor:d,borderColor:u,borderStyle:b,borderWidth:c,borderRadius:g,titleBorderRadius:p,showTitle:h}=r,_=(0,o.useBlockProps)({className:`frame-line border-${b} frame-line-${n}`,style:{backgroundColor:s,borderColor:u,borderStyle:b,borderWidth:c,borderRadius:g}});return(0,a.jsxs)(a.Fragment,{children:[(0,a.jsxs)(o.InspectorControls,{children:[(0,a.jsxs)(e.PanelBody,{title:(0,l.__)("Title Settings","aurora-design-blocks"),children:[(0,a.jsx)(e.ToggleControl,{label:(0,l.__)("Show Title","aurora-design-blocks"),checked:!!r.showTitle,onChange:e=>t({showTitle:e})}),(0,a.jsx)(e.SelectControl,{label:(0,l.__)("Frame-line-title Alignment","aurora-design-blocks"),value:n,options:[{label:(0,l.__)("Left","aurora-design-blocks"),value:"left"},{label:(0,l.__)("Center","aurora-design-blocks"),value:"center"},{label:(0,l.__)("Right","aurora-design-blocks"),value:"right"}],onChange:e=>t({frameLineAlign:e})}),(0,a.jsx)(e.SelectControl,{label:(0,l.__)("Title Border Radius","aurora-design-blocks"),value:p,options:[{label:(0,l.__)("Normal (0px)","aurora-design-blocks"),value:"0px"},{label:(0,l.__)("Rounded (8px)","aurora-design-blocks"),value:"8px"},{label:(0,l.__)("More Rounded (16px)","aurora-design-blocks"),value:"16px"}],onChange:e=>t({titleBorderRadius:e})}),(0,a.jsx)(o.PanelColorSettings,{title:(0,l.__)("Title Color","aurora-design-blocks"),colorSettings:[{label:(0,l.__)("Title Text Color","aurora-design-blocks"),value:d,onChange:e=>t({titleColor:e})}]})]}),(0,a.jsxs)(e.PanelBody,{title:(0,l.__)("Frame-line Settings","aurora-design-blocks"),children:[(0,a.jsx)(o.PanelColorSettings,{title:(0,l.__)("Frame-line Color","aurora-design-blocks"),colorSettings:[{label:(0,l.__)("Background Color","aurora-design-blocks"),value:s,onChange:e=>t({backgroundColor:e})},{label:(0,l.__)("Border Color","aurora-design-blocks"),value:u,onChange:e=>t({borderColor:e})}]}),(0,a.jsx)(e.SelectControl,{label:(0,l.__)("Border Style","aurora-design-blocks"),value:b,options:[{label:(0,l.__)("Solid","aurora-design-blocks"),value:"solid"},{label:(0,l.__)("Dashed","aurora-design-blocks"),value:"dashed"},{label:(0,l.__)("None","aurora-design-blocks"),value:"none"}],onChange:e=>t({borderStyle:e})}),(0,a.jsx)(e.__experimentalNumberControl,{label:(0,l.__)("Border Width (px)","aurora-design-blocks"),value:parseInt(c),onChange:e=>t({borderWidth:`${e}px`}),min:0}),(0,a.jsx)(e.__experimentalNumberControl,{label:(0,l.__)("Border Radius (px)","aurora-design-blocks"),value:parseInt(g),onChange:e=>t({borderRadius:`${e}px`}),min:0})]})]}),(0,a.jsxs)("div",{..._,children:[h&&(0,a.jsx)(o.RichText,{tagName:"div",className:`frame-line-title frame-line-title-${n}`,placeholder:(0,l.__)("Enter title...","aurora-design-blocks"),value:i,onChange:e=>t({title:e}),style:{backgroundColor:u||"white",color:d,borderRadius:p}}),(0,a.jsx)("div",{className:"frame-line-content",children:(0,a.jsx)(o.InnerBlocks,{})})]})]})},save:({attributes:e})=>{const{title:r,frameLineAlign:l,borderStyle:t,backgroundColor:i,borderColor:n,titleColor:s,borderWidth:d,borderRadius:u,titleBorderRadius:b,showTitle:c}=e,g=o.useBlockProps.save({className:`frame-line border-${t} frame-line-${l}`,style:{backgroundColor:i,borderColor:n,borderStyle:t,borderWidth:d,borderRadius:u,showTitle:c}});return(0,a.jsxs)("div",{...g,children:[c&&(0,a.jsx)(o.RichText.Content,{tagName:"div",className:`frame-line-title frame-line-title-${l}`,value:r,style:{backgroundColor:n||"white",color:s,borderRadius:b}}),(0,a.jsx)("div",{className:"frame-line-content",children:(0,a.jsx)(o.InnerBlocks.Content,{})})]})}})}},o={};function l(e){var a=o[e];if(void 0!==a)return a.exports;var t=o[e]={exports:{}};return r[e](t,t.exports,l),t.exports}l.m=r,e=[],l.O=(r,o,a,t)=>{if(!o){var i=1/0;for(u=0;u<e.length;u++){for(var[o,a,t]=e[u],n=!0,s=0;s<o.length;s++)(!1&t||i>=t)&&Object.keys(l.O).every((e=>l.O[e](o[s])))?o.splice(s--,1):(n=!1,t<i&&(i=t));if(n){e.splice(u--,1);var d=a();void 0!==d&&(r=d)}}return r}t=t||0;for(var u=e.length;u>0&&e[u-1][2]>t;u--)e[u]=e[u-1];e[u]=[o,a,t]},l.o=(e,r)=>Object.prototype.hasOwnProperty.call(e,r),(()=>{var e={57:0,350:0};l.O.j=r=>0===e[r];var r=(r,o)=>{var a,t,[i,n,s]=o,d=0;if(i.some((r=>0!==e[r]))){for(a in n)l.o(n,a)&&(l.m[a]=n[a]);if(s)var u=s(l)}for(r&&r(o);d<i.length;d++)t=i[d],l.o(e,t)&&e[t]&&e[t][0](),e[t]=0;return l.O(u)},o=globalThis.webpackChunk=globalThis.webpackChunk||[];o.forEach(r.bind(null,0)),o.push=r.bind(null,o.push.bind(o))})();var a=l.O(void 0,[350],(()=>l(325)));a=l.O(a)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/editor.css":
+/*!************************!*\
+  !*** ./src/editor.css ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
+/* harmony import */ var _editor_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.css */ "./src/editor.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+/* frame-line*/
+
+
+
+
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)('aurora-design-blocks/frame-line', {
+  apiVersion: 2,
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('[aurora-design-blocks]frame-line', 'aurora-design-blocks'),
+  category: 'design',
+  icon: 'editor-table',
+  supports: {
+    align: ['wide', 'full']
+  },
+  attributes: {
+    title: {
+      type: 'string',
+      default: ''
+    },
+    frameLineAlign: {
+      type: 'string',
+      default: 'left'
+    },
+    backgroundColor: {
+      type: 'string'
+    },
+    titleColor: {
+      type: 'string',
+      default: 'block'
+    },
+    borderColor: {
+      type: 'string',
+      default: 'lightgreen'
+    },
+    borderStyle: {
+      type: 'string',
+      default: 'solid'
+    },
+    borderWidth: {
+      type: 'string',
+      default: '1px'
+    },
+    borderRadius: {
+      type: 'string',
+      default: '10px'
+    },
+    titleBorderRadius: {
+      type: 'string',
+      default: '0px'
+    },
+    showTitle: {
+      type: 'boolean',
+      default: true
+    }
+  },
+  edit: ({
+    attributes,
+    setAttributes
+  }) => {
+    const {
+      title,
+      frameLineAlign,
+      backgroundColor,
+      titleColor,
+      borderColor,
+      borderStyle,
+      borderWidth,
+      borderRadius,
+      titleBorderRadius,
+      showTitle
+    } = attributes;
+    const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
+      className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
+      style: {
+        backgroundColor,
+        borderColor,
+        borderStyle,
+        borderWidth,
+        borderRadius
+      }
+    });
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelBody, {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Title Settings', 'aurora-design-blocks'),
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Show Title', 'aurora-design-blocks'),
+            checked: !!attributes.showTitle,
+            onChange: val => setAttributes({
+              showTitle: val
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.SelectControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Frame-line-title Alignment', 'aurora-design-blocks'),
+            value: frameLineAlign,
+            options: [{
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Left', 'aurora-design-blocks'),
+              value: 'left'
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Center', 'aurora-design-blocks'),
+              value: 'center'
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Right', 'aurora-design-blocks'),
+              value: 'right'
+            }],
+            onChange: val => setAttributes({
+              frameLineAlign: val
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.SelectControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Title Border Radius', 'aurora-design-blocks'),
+            value: titleBorderRadius,
+            options: [{
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Normal (0px)', 'aurora-design-blocks'),
+              value: '0px'
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Rounded (8px)', 'aurora-design-blocks'),
+              value: '8px'
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('More Rounded (16px)', 'aurora-design-blocks'),
+              value: '16px'
+            }],
+            onChange: val => setAttributes({
+              titleBorderRadius: val
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.PanelColorSettings, {
+            title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Title Color', 'aurora-design-blocks'),
+            colorSettings: [{
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Title Text Color', 'aurora-design-blocks'),
+              value: titleColor,
+              onChange: value => setAttributes({
+                titleColor: value
+              })
+            }]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.PanelBody, {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Frame-line Settings', 'aurora-design-blocks'),
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.PanelColorSettings, {
+            title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Frame-line Color', 'aurora-design-blocks'),
+            colorSettings: [{
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Background Color', 'aurora-design-blocks'),
+              value: backgroundColor,
+              onChange: value => setAttributes({
+                backgroundColor: value
+              })
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Border Color', 'aurora-design-blocks'),
+              value: borderColor,
+              onChange: value => setAttributes({
+                borderColor: value
+              })
+            }]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.SelectControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Border Style', 'aurora-design-blocks'),
+            value: borderStyle,
+            options: [{
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Solid', 'aurora-design-blocks'),
+              value: 'solid'
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Dashed', 'aurora-design-blocks'),
+              value: 'dashed'
+            }, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('None', 'aurora-design-blocks'),
+              value: 'none'
+            }],
+            onChange: val => setAttributes({
+              borderStyle: val
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.__experimentalNumberControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Border Width (px)', 'aurora-design-blocks'),
+            value: parseInt(borderWidth),
+            onChange: val => setAttributes({
+              borderWidth: `${val}px`
+            }),
+            min: 0
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.__experimentalNumberControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Border Radius (px)', 'aurora-design-blocks'),
+            value: parseInt(borderRadius),
+            onChange: val => setAttributes({
+              borderRadius: `${val}px`
+            }),
+            min: 0
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        ...blockProps,
+        children: [showTitle && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+          tagName: "div",
+          className: `frame-line-title frame-line-title-${frameLineAlign}`,
+          placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enter title...', 'aurora-design-blocks'),
+          value: title,
+          onChange: val => setAttributes({
+            title: val
+          }),
+          style: {
+            backgroundColor: borderColor || 'white',
+            color: titleColor,
+            borderRadius: titleBorderRadius
+          }
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          className: "frame-line-content",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks, {})
+        })]
+      })]
+    });
+  },
+  save: ({
+    attributes
+  }) => {
+    const {
+      title,
+      frameLineAlign,
+      borderStyle,
+      backgroundColor,
+      borderColor,
+      titleColor,
+      borderWidth,
+      borderRadius,
+      titleBorderRadius,
+      showTitle
+    } = attributes;
+    const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save({
+      className: `frame-line border-${borderStyle} frame-line-${frameLineAlign}`,
+      style: {
+        backgroundColor,
+        borderColor,
+        borderStyle,
+        borderWidth,
+        borderRadius,
+        showTitle
+      }
+    });
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      ...blockProps,
+      children: [showTitle && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText.Content, {
+        tagName: "div",
+        className: `frame-line-title frame-line-title-${frameLineAlign}`,
+        value: title,
+        style: {
+          backgroundColor: borderColor || 'white',
+          color: titleColor,
+          borderRadius: titleBorderRadius
+        }
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        className: "frame-line-content",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks.Content, {})
+      })]
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./src/style.css":
+/*!***********************!*\
+  !*** ./src/style.css ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "@wordpress/block-editor":
+/*!*************************************!*\
+  !*** external ["wp","blockEditor"] ***!
+  \*************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["blockEditor"];
+
+/***/ }),
+
+/***/ "@wordpress/blocks":
+/*!********************************!*\
+  !*** external ["wp","blocks"] ***!
+  \********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["blocks"];
+
+/***/ }),
+
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["components"];
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["i18n"];
+
+/***/ }),
+
+/***/ "react/jsx-runtime":
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = window["ReactJSXRuntime"];
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	(() => {
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
+/******/ 			}
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"index": 0,
+/******/ 			"./style-index": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			return __webpack_require__.O(result);
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = globalThis["webpackChunk"] = globalThis["webpackChunk"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["./style-index"], () => (__webpack_require__("./src/index.js")))
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	
+/******/ })()
+;
+//# sourceMappingURL=index.js.map

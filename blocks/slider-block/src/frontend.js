@@ -14,11 +14,12 @@ export function initializeSlider() {
     // スライドボタンを作成
     const prevButton = document.createElement("button");
     prevButton.className = "slide-button prev";
-    prevButton.innerHTML = '<i class="fa-solid fa-angle-left"></i>';
+    prevButton.innerHTML = '<span class="icon-leftarrow"></span>';
+    //prevButton.innerHTML = '<i class="icon-leftarrow"></i>';
 
     const nextButton = document.createElement("button");
     nextButton.className = "slide-button next";
-    nextButton.innerHTML = '<i class="fa-solid fa-angle-right"></i>';
+    nextButton.innerHTML = '<span class="icon-rightarrow"></span>';
 
     // `.wp-block-aurora-design-blocks-slider-block` にボタンを追加
     const sliderBlock = container.closest(

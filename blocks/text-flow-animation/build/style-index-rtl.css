@@ -1,1 +1,39 @@
-.aurora-design-blocks-text-flow-animation{overflow:hidden;width:100%}.aurora-design-blocks-text-flow-animation .loop_wrap{display:flex}.aurora-design-blocks-text-flow-animation .loop_wrap div{animation:loop_animation_right_double 10s linear infinite;flex:0 0 auto;overflow:hidden;white-space:wrap}@keyframes loop_animation_right_double{0%{transform:translateX(0)}to{transform:translateX(100%)}}@media screen and (max-width:768px){.aurora-design-blocks-text-flow-animation .loop_wrap div{font-size:2em}}
+/*!***************************************************************************************************************************************************************************!*\
+  !*** css ../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/style.css ***!
+  \***************************************************************************************************************************************************************************/
+.aurora-design-blocks-text-flow-animation {
+    overflow: hidden;
+    width: 100%;
+}
+
+.aurora-design-blocks-text-flow-animation .loop_wrap {
+    display: flex;
+}
+
+.aurora-design-blocks-text-flow-animation .loop_wrap div {
+    flex: 0 0 auto;
+    overflow: hidden;
+    white-space: wrap;
+    animation: loop_animation_right_double 10s linear infinite;
+}
+
+
+
+
+@keyframes loop_animation_right_double {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .aurora-design-blocks-text-flow-animation .loop_wrap div {
+        font-size: 2em;
+    }
+}

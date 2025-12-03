@@ -90,3 +90,19 @@
   margin-top: 100px;
   z-index: -1;
 } */
+
+.icon-leftarrow,
+.icon-rightarrow {
+  display: inline-block;
+  width: 10px; /* アイコンの幅 */
+  height: 50px; /* アイコンの高さ */
+  background-color: #fff; /* アイコン色 */
+  -webkit-mask-image: url("../../../assets/rightarrow.svg");
+  mask-image: url("../../../assets/rightarrow.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}

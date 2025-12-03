@@ -1,1 +1,68 @@
-.aurora-design-blocks-tabs{border:1px solid #eee;padding:0 2em}.aurora-design-blocks-tabs .tabs-navigation{background:#fff;border-bottom:2px solid #000;display:flex;line-height:1;list-style:none;margin:30px 0 0;padding:0}.aurora-design-blocks-tabs .tabs-navigation li{background:#eee;border-radius:10px 10px 0 0;cursor:pointer;margin-left:5px;padding:.5em 2em}.aurora-design-blocks-tabs .tabs-navigation li.active{background:#000;border:none;border-radius:10px 10px 0 0;color:#fff;font-weight:700}.aurora-design-blocks-tabs .tab{display:none!important}.aurora-design-blocks-tabs .tab.active{display:block!important}.wp-block-aurora-design-blocks-tab.tab a{overflow-wrap:break-word;word-break:break-all}
+/*!***************************************************************************************************************************************************************************!*\
+  !*** css ../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/style.css ***!
+  \***************************************************************************************************************************************************************************/
+/* ------------- フロントエンドの親ブロック (.aurora-design-blocks-tabs) ------------- */
+
+.aurora-design-blocks-tabs {
+  /* エディターでの枠線は editor.css に移したので、ここではフロントエンドで必要なもののみ */
+  border: 1px solid #eee;
+  padding: 0 2em; /* タブを線で囲むためのパディング */
+}
+
+/* フロントエンドでJSが生成するナビゲーションのベーススタイル */
+.aurora-design-blocks-tabs .tabs-navigation {
+  list-style: none;
+  display: flex;
+  background: #fff; /* 背景色 */
+  padding: 0;
+  margin: 30px 0 0; /* マージンを再現 */
+  border-bottom: 2px solid #000; /* 全体を囲む線 */
+  line-height: 1;
+}
+
+/* 現在指していない所のスタイル */
+.aurora-design-blocks-tabs .tabs-navigation li {
+  background: #eee;
+  border-radius: 10px 10px 0 0;
+  cursor: pointer;
+  padding: 0.5em 2em;
+  margin-left: 5px;
+}
+
+/* 現在指している所のスタイル */
+.aurora-design-blocks-tabs .tabs-navigation li.active {
+  background: #000;
+  border-radius: 10px 10px 0 0;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+}
+
+/* ---------------------------------------------------------------- */
+/* --- ★重要: タブコンテンツの表示制御 (JSと連携) --- */
+/* ---------------------------------------------------------------- */
+
+/* 1. 全ての子ブロック (タブコンテンツ) を初期状態で非表示にする */
+.aurora-design-blocks-tabs .tab {
+  display: none !important;
+}
+
+/* 2. ただし、JSが active クラスを付与したタブコンテンツは表示する */
+.aurora-design-blocks-tabs .tab.active {
+  display: block !important;
+}
+
+/* 3. 初期表示の保証 (JSが動作するまでの間のフォールバック。CSSのfirst-childはJSがactiveを付与するため不要) */
+/* JSがすぐに active クラスを付与するため、ここでは不要ですが、残しておいても問題ありません。 */
+
+/* 子ブロックのコンテンツラッパー */
+/* .aurora-design-blocks-tabs .tab { ... } は上記で処理済み */
+
+/* URL折り返しスタイル */
+.wp-block-aurora-design-blocks-tab.tab a {
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+
+/*# sourceMappingURL=style-index.css.map*/
