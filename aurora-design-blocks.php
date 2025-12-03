@@ -25,6 +25,8 @@ if (!defined('ABSPATH')) {
 define('AURORA_DESIGN_BLOCKS_PATH', plugin_dir_path(__FILE__));
 define('AURORA_DESIGN_BLOCKS_URL', plugin_dir_url(__FILE__));
 
+require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin.php';
+require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin-front.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-outerAssets.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-customizer.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-auroraDesignBlocks.php';

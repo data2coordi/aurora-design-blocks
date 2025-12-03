@@ -84,6 +84,9 @@ add_action('wp', ['AuroraDesignBlocksPreDetermineCssAssets', 'init']);
 
 function AuroraDesignBlocks_add_ogp_meta_tags()
 {
+    if (!Aurora_Feature_Flags::ogp()) {
+        return; // OGP 出力
+    }
     if (is_singular() || is_front_page() || is_home()) { // トップページも対象
         global $post;
 
@@ -145,7 +148,7 @@ class AuroraDesignBlocksTableOfContents
 
         $hide_toc = get_post_meta(get_the_ID(), 'hide_toc', true);
 
-        if ($hide_toc == '1') {
+        if ((!Aurora_Feature_Flags::toc()) || ($hide_toc == '1')) {
             return $content;
         }
 

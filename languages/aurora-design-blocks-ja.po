@@ -873,3 +873,39 @@ msgid "Paste the entire AdSense auto ads code here."
 msgstr "AdSenseの自動広告コード全体をここに貼り付けてください。"
 
 
+
+msgid "Aurora Design Blocks"
+msgstr "Aurora Design Blocks"
+
+msgid "Overview"
+msgstr "概要"
+
+msgid "Aurora Design Blocks is a collection of blocks registered as an official theme."
+msgstr "Aurora Design Blocks は公式テーマとして登録されたブロック集です。"
+
+msgid "This setup page allows you to manage site-wide feature settings."
+msgstr "このセットアップ画面では、サイト全体の機能設定を管理できます。"
+
+msgid "For detailed instructions, please refer to the"
+msgstr "詳細な使い方はマニュアルページをご覧ください。"
+
+msgid "[manual page]"
+msgstr "【マニュアルページ】"
+
+msgid "Enable / Disable Settings"
+msgstr "有効 / 無効設定"
+
+msgid "Enable / Disable Features"
+msgstr "機能の有効 / 無効"
+
+msgid "OGP Generation"
+msgstr "OGP 生成"
+
+msgid "Enable"
+msgstr "有効にする"
+
+msgid "Automatic Table of Contents"
+msgstr "目次 自動生成"
+
+msgid "Tab not found."
+msgstr "タブが見つかりません。"
