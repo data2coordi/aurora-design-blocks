@@ -33,6 +33,22 @@ exit
 
 svn commit -m "v1.0.1"
 
+
+
+
+## タグ作りなおし################ s
+svn delete https://plugins.svn.wordpress.org/aurora-design-blocks/tags/1.0.7 -m "Remove old tag 1.0.7 to recreate clean release"
+
+svn copy https://plugins.svn.wordpress.org/aurora-design-blocks/trunk \
+         https://plugins.svn.wordpress.org/aurora-design-blocks/tags/1.0.7 \
+         -m "Create clean tag 1.0.7"
+#rm でローカルの1.0.7削除
+ svn revert -R .
+ svn update
+
+########################################################## e
+
+
 ################## s
 svn diff
 svn status
