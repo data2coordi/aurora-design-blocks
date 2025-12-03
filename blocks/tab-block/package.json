@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "wp-scripts start",
+    "start": "wp-scripts start src/*.js",
     "build": "wp-scripts build src/*.js --output-path=build"
   }
 }
