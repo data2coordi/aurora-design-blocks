@@ -41,6 +41,7 @@ jobs:
           rm -f *phpunit*
           rm -f .phpcs.xml.dist
           rm -f .phpunit.result.cache
+          rm -f css2
 
       - name: Free用にバージョンを1つ下げる
         run: |
