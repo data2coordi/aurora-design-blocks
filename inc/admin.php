@@ -46,7 +46,7 @@ class Aurora_Admin
 
 ?>
         <div class="wrap">
-            <h1><?php echo esc_html__('Aurora Design Blocks(For Free)', 'aurora-design-blocks'); ?></h1>
+            <h1><?php echo esc_html__('Aurora Design Blocks', 'aurora-design-blocks'); ?></h1>
 
             <nav class="nav-tab-wrapper">
                 <?php $this->tabs->render_tabs($tab); ?>
@@ -129,7 +129,7 @@ class Aurora_Admin_Page_About
     {
     ?>
         <h2><?php echo esc_html__('Overview', 'aurora-design-blocks'); ?></h2>
-        <p><?php echo esc_html__('Welcome to the Aurora Design Blocks(For Free) setup screen. Here you can manage the various features provided by the block collection.', 'aurora-design-blocks'); ?></p>
+        <p><?php echo esc_html__('Welcome to the Aurora Design Blocks setting screen. Here you can manage the various features.', 'aurora-design-blocks'); ?></p>
 
         <h3><?php echo esc_html__('Feature Management', 'aurora-design-blocks'); ?></h3>
         <p><?php echo esc_html__('Features such as OGP and Table of Contents can be enabled or disabled in the "Enable/Disable Settings" tab.', 'aurora-design-blocks'); ?></p>
@@ -156,6 +156,7 @@ class Aurora_Admin_Page_About
             ?>
         </p>
 
+        <h3><?php echo esc_html__('Other features', 'aurora-design-blocks'); ?></h3>
         <p>
             <?php echo esc_html__('For detailed instructions, please refer to the', 'aurora-design-blocks'); ?>
             <a href="https://integlight.auroralab-design.com/aurora-design-blocks/"

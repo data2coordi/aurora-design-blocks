@@ -872,19 +872,53 @@ msgstr "アドセンス自動広告コード"
 msgid "Paste the entire AdSense auto ads code here."
 msgstr "AdSenseの自動広告コード全体をここに貼り付けてください。"
 
-
-
+#########
+#管理画面 s
+#########
 msgid "Aurora Design Blocks"
 msgstr "Aurora Design Blocks"
 
 msgid "Overview"
 msgstr "概要"
 
-msgid "Aurora Design Blocks is a collection of blocks registered as an official theme."
-msgstr "Aurora Design Blocks は公式テーマとして登録されたブロック集です。"
+msgid "Welcome to the Aurora Design Blocks setting screen. Here you can manage the various features."
+msgstr "Aurora Design Blocks の設定画面へようこそ。ここでは、各種機能を管理できます。"
 
-msgid "This setup page allows you to manage site-wide feature settings."
-msgstr "このセットアップ画面では、サイト全体の機能設定を管理できます。"
+msgid "Feature Management"
+msgstr "機能管理"
+
+msgid "Features such as OGP and Table of Contents can be enabled or disabled in the \"Enable/Disable Settings\" tab."
+msgstr "OGP や目次などの各機能は、「有効・無効設定」タブでオン／オフを切り替えられます。"
+
+msgid "- OGP (Open Graph Protocol): When enabled, OGP meta tags are automatically output to the header."
+msgstr "- OGP（Open Graph Protocol）：有効化すると、OGP メタタグがヘッダーに自動出力されます。"
+
+msgid "- Table of Contents (TOC): When enabled, a table of contents is automatically generated and displayed at the beginning of each Page and Post when the website is viewed."
+msgstr "- 目次（TOC）：有効化すると、閲覧時に各ページ・投稿の冒頭へ自動で目次が生成・表示されます。"
+
+msgid "Additionally, you can control whether the Table of Contents is output on a per-page basis using the settings section located at the bottom right of each page.\n"
+msgstr "さらに、各ページ右下の設定セクションから、ページ単位で目次の出力有無を制御できます。\n"
+
+msgid "Customizer Settings"
+msgstr "カスタマイザー設定"
+
+msgid "The following functions are managed in the WordPress Customizer:"
+msgstr "以下の機能は WordPress カスタマイザーで管理されます："
+
+msgid "- Google Analytics"
+msgstr "- Google Analytics"
+
+msgid "- Google Tag Manager"
+msgstr "- Google Tag Manager"
+
+msgid "- Google AdSense"
+msgstr "- Google AdSense"
+
+msgid "Configure these settings in the %sCustomizer%s."
+msgstr "これらの設定は %sカスタマイザー%s で行えます。"
+
+msgid "Other features"
+msgstr "その他の機能"
 
 msgid "For detailed instructions, please refer to the"
 msgstr "詳細な使い方はマニュアルページをご覧ください。"
@@ -909,3 +943,8 @@ msgstr "目次 自動生成"
 
 msgid "Tab not found."
 msgstr "タブが見つかりません。"
+
+
+#########
+#管理画面 e
+#########
