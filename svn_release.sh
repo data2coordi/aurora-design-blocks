@@ -1,5 +1,7 @@
 
 
+
+
 # リリース######################################################### s
 cd trunk
 git fetch origin
@@ -19,7 +21,9 @@ ver=$(grep -i "^[[:space:]]*\*[[:space:]]*Version:" aurora-design-blocks.php | a
 cd ..
 
 svn add --force . --auto-props --parents --depth infinity -q
-svn copy trunk/ tags/$ver/
+cd trunk
+svn copy . ../tags/$ver/
+cd ..
 svn commit -m "v$ver"
 
 exit
