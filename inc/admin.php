@@ -46,7 +46,7 @@ class Aurora_Admin
 
 ?>
         <div class="wrap">
-            <h1><?php echo esc_html__('Aurora Design Blocks', 'aurora-design-blocks'); ?></h1>
+            <h1><?php echo esc_html__('Aurora Design Blocks(For Free)', 'aurora-design-blocks'); ?></h1>
 
             <nav class="nav-tab-wrapper">
                 <?php $this->tabs->render_tabs($tab); ?>
@@ -129,8 +129,32 @@ class Aurora_Admin_Page_About
     {
     ?>
         <h2><?php echo esc_html__('Overview', 'aurora-design-blocks'); ?></h2>
-        <p><?php echo esc_html__('Aurora Design Blocks is a collection of blocks registered as an official theme.', 'aurora-design-blocks'); ?></p>
-        <p><?php echo esc_html__('This setup page allows you to manage site-wide feature settings.', 'aurora-design-blocks'); ?></p>
+        <p><?php echo esc_html__('Welcome to the Aurora Design Blocks(For Free) setup screen. Here you can manage the various features provided by the block collection.', 'aurora-design-blocks'); ?></p>
+
+        <h3><?php echo esc_html__('Feature Management', 'aurora-design-blocks'); ?></h3>
+        <p><?php echo esc_html__('Features such as OGP and Table of Contents can be enabled or disabled in the "Enable/Disable Settings" tab.', 'aurora-design-blocks'); ?></p>
+        <p><?php echo esc_html__('- OGP (Open Graph Protocol): When enabled, OGP meta tags are automatically output to the header.', 'aurora-design-blocks'); ?></p>
+        <p><?php echo esc_html__('- Table of Contents (TOC): When enabled, a table of contents is automatically generated and displayed at the beginning of each Page and Post when the website is viewed.', 'aurora-design-blocks'); ?></p>
+        <p><?php echo esc_html__('Additionally, you can control whether the Table of Contents is output on a per-page basis using the settings section located at the bottom right of each page.
+', 'aurora-design-blocks'); ?></p>
+        <h3><?php echo esc_html__('Customizer Settings', 'aurora-design-blocks'); ?></h3>
+        <p><?php echo esc_html__('The following functions are managed in the WordPress Customizer:', 'aurora-design-blocks'); ?></p>
+        <ul>
+            <li><?php echo esc_html__('- Google Analytics', 'aurora-design-blocks'); ?></li>
+            <li><?php echo esc_html__('- Google Tag Manager', 'aurora-design-blocks'); ?></li>
+            <li><?php echo esc_html__('- Google AdSense', 'aurora-design-blocks'); ?></li>
+        </ul>
+        <p>
+            <?php
+            // カスタマイザーへのリンクを動的に取得・表示する場合（WordPressの場合）
+            $customizer_link = admin_url('customize.php');
+            printf(
+                esc_html__('Configure these settings in the %sCustomizer%s.', 'aurora-design-blocks'),
+                '<a href="' . esc_url($customizer_link) . '">',
+                '</a>'
+            );
+            ?>
+        </p>
 
         <p>
             <?php echo esc_html__('For detailed instructions, please refer to the', 'aurora-design-blocks'); ?>
