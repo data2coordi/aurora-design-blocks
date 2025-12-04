@@ -1,7 +1,7 @@
 <?php
 // ファイル名: class-adbl-links-db-manager.php
 
-class ADBL_LinksDBManager
+class AuroraDesignBlocks_RelatedPosts_DBManager
 {
     private $adb_links_table;
     private $wpdb;
@@ -106,11 +106,11 @@ class ADBL_LinksDBManager
 
 // ファイル名: class-adbl-link-analyzer.php
 
-class ADBL_LinkAnalyzer
+class AuroraDesignBlocks_RelatedPosts_LinkAnalyzer
 {
     private $db_manager;
 
-    public function __construct(ADBL_LinksDBManager $db_manager)
+    public function __construct(AuroraDesignBlocks_RelatedPosts_DBManager $db_manager)
     {
         $this->db_manager = $db_manager;
     }
@@ -167,11 +167,11 @@ class ADBL_LinkAnalyzer
 }
 // ファイル名: class-adbl-related-posts-query.php
 
-class ADBL_RelatedPostsQuery
+class AuroraDesignBlocks_RelatedPosts_Query
 {
     private $db_manager;
 
-    public function __construct(ADBL_LinksDBManager $db_manager)
+    public function __construct(AuroraDesignBlocks_RelatedPosts_DBManager $db_manager)
     {
         $this->db_manager = $db_manager;
     }
@@ -207,11 +207,11 @@ class ADBL_RelatedPostsQuery
 
 // ファイル名: class-adbl-rest-api-endpoints.php
 
-class ADBL_RestApiEndpoints
+class AuroraDesignBlocks_RelatedPosts_RestApiEndpoints
 {
     private $query_handler;
 
-    public function __construct(ADBL_RelatedPostsQuery $query_handler)
+    public function __construct(AuroraDesignBlocks_RelatedPosts_Query $query_handler)
     {
         $this->query_handler = $query_handler;
     }
@@ -269,11 +269,11 @@ class ADBL_RestApiEndpoints
 
 // ファイル名: class-adbl-block-frontend.php
 
-class ADBL_BlockFrontend
+class AuroraDesignBlocks_RelatedPosts_BlockFrontend
 {
     private $query_handler;
 
-    public function __construct(ADBL_RelatedPostsQuery $query_handler)
+    public function __construct(AuroraDesignBlocks_RelatedPosts_Query $query_handler)
     {
         $this->query_handler = $query_handler;
     }
@@ -358,7 +358,7 @@ if (!defined('ADB_PLUGIN_FILE')) {
 // require_once 'class-adbl-block-frontend.php';
 
 
-class ADBL_Plugin
+class AuroraDesignBlocks_RelatedPosts_Plugin
 {
     private $db_manager;
     private $link_analyzer;
@@ -371,11 +371,11 @@ class ADBL_Plugin
         global $wpdb;
 
         // 依存関係の注入と初期化
-        $this->db_manager    = new ADBL_LinksDBManager($wpdb);
-        $this->query_handler = new ADBL_RelatedPostsQuery($this->db_manager);
-        $this->link_analyzer = new ADBL_LinkAnalyzer($this->db_manager);
-        $this->rest_api      = new ADBL_RestApiEndpoints($this->query_handler);
-        $this->frontend      = new ADBL_BlockFrontend($this->query_handler);
+        $this->db_manager    = new AuroraDesignBlocks_RelatedPosts_DBManager($wpdb);
+        $this->query_handler = new AuroraDesignBlocks_RelatedPosts_Query($this->db_manager);
+        $this->link_analyzer = new AuroraDesignBlocks_RelatedPosts_LinkAnalyzer($this->db_manager);
+        $this->rest_api      = new AuroraDesignBlocks_RelatedPosts_RestApiEndpoints($this->query_handler);
+        $this->frontend      = new AuroraDesignBlocks_RelatedPosts_BlockFrontend($this->query_handler);
 
         $this->setup_hooks();
     }
@@ -426,4 +426,4 @@ class ADBL_Plugin
 }
 
 // プラグインの実行
-new ADBL_Plugin();
+new AuroraDesignBlocks_RelatedPosts_Plugin();
