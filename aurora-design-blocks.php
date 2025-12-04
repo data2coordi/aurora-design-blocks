@@ -4,7 +4,7 @@ if (! defined('ABSPATH')) exit;
 /**
  * Plugin Name: Aurora Design Blocks
  * Description: Multi-functional plugin for GA4, GTM, AdSense, OGP, and automated Table of Contents (TOC), generally essential for blogs.
- * Version: 2.0.7
+ * Version: 2.0.8
  * Author: Yurika Toshida at Aurora Lab
  * Text Domain: aurora-design-blocks
  * Domain Path: /languages
@@ -25,6 +25,7 @@ if (!defined('ABSPATH')) {
 
 define('AURORA_DESIGN_BLOCKS_PATH', plugin_dir_path(__FILE__));
 define('AURORA_DESIGN_BLOCKS_URL', plugin_dir_url(__FILE__));
+define('ADB_PLUGIN_FILE', __FILE__);
 
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin-front.php';
