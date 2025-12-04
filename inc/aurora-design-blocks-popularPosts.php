@@ -360,6 +360,7 @@ class AuroraDesignBlocks_PostViewTracker
 
 AuroraDesignBlocks_PostViewTracker::init();
 
+register_activation_hook(ADB_PLUGIN_FILE, ['AuroraDesignBlocks_PostViewTracker', 'create_views_table']);
 
 //admin_url?drop_adb_table=1でテーブルを削除する。
 add_action('admin_init', function () {

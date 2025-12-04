@@ -7,18 +7,37 @@ if (! defined('ABSPATH')) exit;
 /*ブロックアイテムの読み込みs*/
 /********************************************************************/
 
-// ブロック登録処理を追加
+
+// ブロック登録処理をカスタマイズして実行
 function AuroraDesignBlocks_register_custom_blocks()
 {
 	$blocks = glob(AURORA_DESIGN_BLOCKS_PATH . 'blocks/*', GLOB_ONLYDIR);
 
-	foreach ($blocks as $block) {
-		if (file_exists($block . '/block.json')) {
-			register_block_type($block);
+	// 動的レンダリングコールバックが必要なブロックと、そのコールバック関数を定義
+	$dynamic_blocks_callbacks = [
+		'related-posts' => 'adb_render_related_posts_block_html', // あなたのブロック
+		// 他の動的ブロックがあればここに追加
+	];
+
+	foreach ($blocks as $block_dir) {
+		if (file_exists($block_dir . '/block.json')) {
+
+			$args = [];
+			$block_slug = basename($block_dir); // 例: 'related-posts'
+
+			// ブロックのスラッグが動的ブロックリストにあるかチェック
+			if (isset($dynamic_blocks_callbacks[$block_slug])) {
+				// コールバックを引数に追加
+				$args['render_callback'] = $dynamic_blocks_callbacks[$block_slug];
+			}
+
+			// カスタム引数（コールバックなど）を含めてブロックを登録
+			register_block_type($block_dir, $args);
 		}
 	}
 }
 add_action('init', 'AuroraDesignBlocks_register_custom_blocks');
+
 /********************************************************************/
 /*ブロックアイテムの読み込みe*/
 /********************************************************************/

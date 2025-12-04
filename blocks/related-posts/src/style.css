@@ -1,0 +1,33 @@
+/* src/style.css */
+
+.wp-block-aurora-design-blocks-related-posts-block {
+  padding: 20px;
+  border: 1px solid #eee;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  font-family: sans-serif;
+}
+
+/* リスト表示のスタイル */
+.wp-block-aurora-design-blocks-related-posts-block.adb-style-list ul {
+  list-style: disc;
+  margin-left: 20px;
+}
+
+.wp-block-aurora-design-blocks-related-posts-block.adb-style-list li {
+  margin-bottom: 5px;
+}
+
+/* グリッド表示のスタイル（例） */
+.wp-block-aurora-design-blocks-related-posts-block.adb-style-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.wp-block-aurora-design-blocks-related-posts-block .related-post-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+}

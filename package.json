@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:unit:js": "wp-scripts test-unit-js",
-    "dev": "concurrently \"cd css && npm run watch:css2\"     \"cd blocks/cta-block && npm run start\" \"cd blocks/custom-cover && npm run start\" \"cd blocks/frame-line && npm run start\" \"cd blocks/gfontawesome && npm run start\" \"cd blocks/speech-bubble && npm run start\" \"cd blocks/slider-block && npm run start\" \"cd blocks/tab-block && npm run start\" \"cd blocks/text-flow-animation && npm run start\""
+    "dev": "concurrently \"cd css && npm run watch:css2\"  \"cd blocks/related-posts && npm run start\"    \"cd blocks/cta-block && npm run start\" \"cd blocks/custom-cover && npm run start\" \"cd blocks/frame-line && npm run start\" \"cd blocks/gfontawesome && npm run start\" \"cd blocks/speech-bubble && npm run start\" \"cd blocks/slider-block && npm run start\" \"cd blocks/tab-block && npm run start\" \"cd blocks/text-flow-animation && npm run start\""
   },
   "keywords": [],
   "author": "",
