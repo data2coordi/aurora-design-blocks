@@ -25,6 +25,11 @@ function AuroraDesignBlocks_register_custom_blocks()
 			$args = [];
 			$block_slug = basename($block_dir); // 例: 'related-posts'
 
+			if ($block_slug == 'related-posts') {
+				continue; // related-postsブロックは手動で登録するためスキップ
+
+			}
+
 			// ブロックのスラッグが動的ブロックリストにあるかチェック
 			if (isset($dynamic_blocks_callbacks[$block_slug])) {
 				// コールバックを引数に追加
