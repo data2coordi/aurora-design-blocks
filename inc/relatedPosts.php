@@ -24,7 +24,7 @@ class AuroraDesignBlocks_RelatedPosts_DBManager
             source_post_id BIGINT(20) UNSIGNED NOT NULL,
             target_post_id BIGINT(20) UNSIGNED NOT NULL,
             updated_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-            PRIMARY KEY (source_post_id, target_post_id),
+            PRIMARY KEY (source_post_id,target_post_id),
             KEY idx_target_id (target_post_id)
         ) $charset_collate;";
 
@@ -87,7 +87,8 @@ class AuroraDesignBlocks_RelatedPosts_DBManager
         return $this->wpdb->get_results($this->wpdb->prepare(
             "SELECT
                 source_post_id AS related_id,
-                COUNT(source_post_id) AS score
+                COUNT(source_post_id) AS score,
+                max(updated_at) As updated_at_max
             FROM
                 {$this->adb_links_table}
             WHERE
@@ -95,7 +96,7 @@ class AuroraDesignBlocks_RelatedPosts_DBManager
             GROUP BY
                 source_post_id
             ORDER BY
-                score DESC, updated_at DESC
+                score DESC, updated_at_max DESC
             LIMIT %d",
             $target_post_id,
             $limit
