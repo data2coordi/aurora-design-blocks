@@ -228,6 +228,16 @@ class AuroraDesignBlocks_RelatedPosts_BlockFrontend
     /**
      * ブロックのサーバーサイドレンダリングコールバック
      */
+    // class-adbl-block-frontend.php の AuroraDesignBlocks_RelatedPosts_BlockFrontend クラス内
+
+    /**
+     * ブロックのサーバーサイドレンダリングコールバック
+     */
+    // class-adbl-block-frontend.php の AuroraDesignBlocks_RelatedPosts_BlockFrontend クラス内
+
+    /**
+     * ブロックのサーバーサイドレンダリングコールバック
+     */
     public function render_related_posts_block_html($attributes, $content)
     {
         $limit = isset($attributes['limit']) ? intval($attributes['limit']) : 5;
@@ -235,26 +245,27 @@ class AuroraDesignBlocks_RelatedPosts_BlockFrontend
         $show_excerpt = filter_var(isset($attributes['showExcerpt']) ? $attributes['showExcerpt'] : false, FILTER_VALIDATE_BOOLEAN);
 
         // SSRリクエストであるかを確認（エディターでのプレビュー時）
-        // is_rest_request()よりもREST_REQUEST定数チェックの方が確実な場合がある
         $is_ssr_request = defined('REST_REQUEST') && REST_REQUEST;
 
-        $current_post_id = get_the_ID();
+        // IDの取得:
+        // フロントエンドでは get_queried_object_id() を使用（ループ内外で信頼性が高い）
+        // エディターでは get_the_ID() を使用（エディター独自のコンテキストに対応）
+        $id_for_query = $is_ssr_request ? get_the_ID() : get_queried_object_id();
+        $current_post_id = intval($id_for_query);
+
 
         // 1. フロントエンドでの表示条件チェック（SSRではない場合のみ）
         if (!$is_ssr_request) {
-            // 投稿表示ページ以外、またはメインループ外ではレンダリングしない
-            // in_the_loop()チェックはフロントエンドでのみ適用する
-            if (!$current_post_id || !in_the_loop()) {
+            // 単一ページではない、または有効な投稿IDがない場合はレンダリングしない
+            // (get_queried_object_id()を使用しているため、サイドバーでもIDを取得可能)
+            if (!is_singular() || $current_post_id === 0) {
                 return '';
             }
         }
 
         // --- 2. エディタープレビュー時のガイドメッセージ (IDがない場合) ---
-        // IDがない = 未保存の新規投稿、または投稿編集画面以外の場所（サイトエディターなど）
+        // ここは $is_ssr_request=true の時、かつ $current_post_id=0 の場合に実行される
         if (!$current_post_id) {
-            // IDが取得できない場合、フロントエンド（$is_ssr_request=false）では既に上記で' 'を返しているため、
-            // ここに到達するのは $is_ssr_request=true の時のみです。
-
             $html = sprintf(
                 '<div class="wp-block-aurora-design-blocks-related-posts adb-style-%s adb-editor-guide" style="padding: 15px; border: 2px dashed #007cba; text-align: center;">',
                 $style
@@ -262,10 +273,10 @@ class AuroraDesignBlocks_RelatedPosts_BlockFrontend
             $html .= esc_html__('[相互参照型関連記事ブロック] プレビュー', 'aurora-design-blocks');
             $html .= '<p style="margin-top: 5px; font-size: 13px;">' . esc_html__('（現在の投稿IDが取得できないため、ライブデータは表示されません。記事を保存してください。）', 'aurora-design-blocks') . '</p>';
             $html .= '</div>';
-            return $html; // ★ プレースホルダーを回避するためにHTMLを返す
+            return $html;
         }
 
-        // --- 3. データ取得とHTML生成 (IDが取得できた場合) ---
+        // --- 3. データ取得とHTML生成 (有効なIDがある場合) ---
         $related_posts = $this->query_handler->get_reciprocal_related_posts($current_post_id, $limit);
 
         // 関連記事が見つからなかった場合
@@ -284,7 +295,7 @@ class AuroraDesignBlocks_RelatedPosts_BlockFrontend
             return ''; // フロントエンドでは空文字
         }
 
-        // HTML生成ロジック (データがある場合)
+        // HTML生成ロジック
         $html = sprintf(
             '<div class="wp-block-aurora-design-blocks-related-posts adb-style-%s">',
             $style
