@@ -332,15 +332,15 @@ class AuroraDesignBlocks_RelatedPosts_BatchRebuilder
     }
 }
 
-add_action('init', function () {
-    //if (isset($_GET['adb_rebuild'])) {
-    $db = new AuroraDesignBlocks_RelatedPosts_DBManager($GLOBALS['wpdb']);
-    $analyzer = new AuroraDesignBlocks_RelatedPosts_LinkAnalyzer($db);
-    $rebuilder = new AuroraDesignBlocks_RelatedPosts_BatchRebuilder($db, $analyzer);
+// add_action('init', function () {
+//     //if (isset($_GET['adb_rebuild'])) {
+//     $db = new AuroraDesignBlocks_RelatedPosts_DBManager($GLOBALS['wpdb']);
+//     $analyzer = new AuroraDesignBlocks_RelatedPosts_LinkAnalyzer($db);
+//     $rebuilder = new AuroraDesignBlocks_RelatedPosts_BatchRebuilder($db, $analyzer);
 
-    $rebuilder->rebuild_all();
-    //}
-});
+//     $rebuilder->rebuild_all();
+//     //}
+// });
 
 
 class AuroraDesignBlocks_RelatedPosts_Query
