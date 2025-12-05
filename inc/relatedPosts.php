@@ -422,6 +422,7 @@ class AuroraDesignBlocks_RelatedPosts_BlockFrontend
 
 
         // 1. フロントエンドでの表示条件チェック（SSRではない場合のみ）
+        //目的: 投稿一覧ページ、アーカイブページ、ホームページなど、単一の記事ではない場所でブロックが誤って表示されるのを防ぎます。
         if (!$is_ssr_request) {
             // 単一ページではない、または有効な投稿IDがない場合はレンダリングしない
             // (get_queried_object_id()を使用しているため、サイドバーでもIDを取得可能)
@@ -431,7 +432,8 @@ class AuroraDesignBlocks_RelatedPosts_BlockFrontend
         }
 
         // --- 2. エディタープレビュー時のガイドメッセージ (IDがない場合) ---
-        // ここは $is_ssr_request=true の時、かつ $current_post_id=0 の場合に実行される
+        // ここは $is_ssr_request=true(編集画面)かつcurrent_post_id=0 の場合に実行される。
+        // 目的：ポストばまだ保存されていない状態でのエディタープレビューに対応するため。
         if (!$current_post_id) {
             $html = sprintf(
                 '<div class="wp-block-aurora-design-blocks-related-posts adb-style-%s adb-editor-guide" style="padding: 15px; border: 2px dashed #007cba; text-align: center;">',
