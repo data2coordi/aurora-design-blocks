@@ -207,64 +207,6 @@ class AuroraDesignBlocks_RelatedPosts_Query
 
 // ファイル名: class-adbl-rest-api-endpoints.php
 
-class AuroraDesignBlocks_RelatedPosts_RestApiEndpoints
-{
-    private $query_handler;
-
-    public function __construct(AuroraDesignBlocks_RelatedPosts_Query $query_handler)
-    {
-        $this->query_handler = $query_handler;
-    }
-
-    /**
-     * REST API エンドポイントの登録
-     */
-    public function register_api_endpoint()
-    {
-        register_rest_route('aurora-design-blocks/v1', '/related-posts', array(
-            'methods' => 'GET',
-            'callback' => array($this, 'get_related_posts_callback'),
-            'permission_callback' => function () {
-                // 編集権限を持つユーザーのみアクセス可能
-                return current_user_can('edit_posts');
-            }
-        ));
-    }
-
-    /**
-     * REST APIコールバック関数 (JSのapiFetchに対応)
-     * @param WP_REST_Request $request
-     * @return WP_REST_Response
-     */
-    public function get_related_posts_callback($request)
-    {
-        $post_id = intval($request->get_param('post_id'));
-        $limit = intval($request->get_param('limit'));
-        // $show_excerptはフロントエンドでのみ必要だが、エディタでのプレビューにも利用可能
-        $show_excerpt = filter_var($request->get_param('excerpt'), FILTER_VALIDATE_BOOLEAN);
-
-        if (!$post_id || $limit <= 0) {
-            return new WP_REST_Response([], 200);
-        }
-
-        $related_posts = $this->query_handler->get_reciprocal_related_posts($post_id, $limit);
-
-        $formatted_posts = [];
-        foreach ($related_posts as $post) {
-            $excerpt = $show_excerpt ? get_the_excerpt($post) : '';
-
-            $formatted_posts[] = [
-                'id' => $post->ID,
-                'title' => get_the_title($post),
-                'link' => get_permalink($post),
-                'score' => isset($post->score) ? $post->score : null,
-                'excerpt' => $excerpt,
-            ];
-        }
-
-        return new WP_REST_Response($formatted_posts, 200);
-    }
-}
 
 
 // ファイル名: class-adbl-block-frontend.php
@@ -278,11 +220,13 @@ class AuroraDesignBlocks_RelatedPosts_BlockFrontend
         $this->query_handler = $query_handler;
     }
 
+
+
+
+// class-adbl-block-frontend.php の AuroraDesignBlocks_RelatedPosts_BlockFrontend クラス内
+
     /**
      * ブロックのサーバーサイドレンダリングコールバック
-     * @param array $attributes ブロックの属性
-     * @param string $content 子要素のHTML (このブロックでは通常空)
-     * @return string レンダリングされたHTML
      */
     public function render_related_posts_block_html($attributes, $content)
     {
@@ -290,19 +234,57 @@ class AuroraDesignBlocks_RelatedPosts_BlockFrontend
         $style = isset($attributes['styleType']) ? esc_attr($attributes['styleType']) : 'list';
         $show_excerpt = filter_var(isset($attributes['showExcerpt']) ? $attributes['showExcerpt'] : false, FILTER_VALIDATE_BOOLEAN);
 
+        // SSRリクエストであるかを確認（エディターでのプレビュー時）
+        // is_rest_request()よりもREST_REQUEST定数チェックの方が確実な場合がある
+        $is_ssr_request = defined('REST_REQUEST') && REST_REQUEST;
+
         $current_post_id = get_the_ID();
-        // 投稿表示ページ以外、またはメインループ外ではレンダリングしない
-        if (!$current_post_id || !in_the_loop()) {
-            return '';
+
+        // 1. フロントエンドでの表示条件チェック（SSRではない場合のみ）
+        if (!$is_ssr_request) {
+            // 投稿表示ページ以外、またはメインループ外ではレンダリングしない
+            // in_the_loop()チェックはフロントエンドでのみ適用する
+            if (!$current_post_id || !in_the_loop()) {
+                return '';
+            }
         }
 
+        // --- 2. エディタープレビュー時のガイドメッセージ (IDがない場合) ---
+        // IDがない = 未保存の新規投稿、または投稿編集画面以外の場所（サイトエディターなど）
+        if (!$current_post_id) {
+            // IDが取得できない場合、フロントエンド（$is_ssr_request=false）では既に上記で' 'を返しているため、
+            // ここに到達するのは $is_ssr_request=true の時のみです。
+
+            $html = sprintf(
+                '<div class="wp-block-aurora-design-blocks-related-posts adb-style-%s adb-editor-guide" style="padding: 15px; border: 2px dashed #007cba; text-align: center;">',
+                $style
+            );
+            $html .= esc_html__('[相互参照型関連記事ブロック] プレビュー', 'aurora-design-blocks');
+            $html .= '<p style="margin-top: 5px; font-size: 13px;">' . esc_html__('（現在の投稿IDが取得できないため、ライブデータは表示されません。記事を保存してください。）', 'aurora-design-blocks') . '</p>';
+            $html .= '</div>';
+            return $html; // ★ プレースホルダーを回避するためにHTMLを返す
+        }
+
+        // --- 3. データ取得とHTML生成 (IDが取得できた場合) ---
         $related_posts = $this->query_handler->get_reciprocal_related_posts($current_post_id, $limit);
 
+        // 関連記事が見つからなかった場合
         if (empty($related_posts)) {
-            return '';
+            // エディターの場合（$is_ssr_request=true）は「データなし」ガイドを返す
+            if ($is_ssr_request) {
+                $html = sprintf(
+                    '<div class="wp-block-aurora-design-blocks-related-posts adb-style-%s adb-editor-no-data" style="padding: 15px; border: 2px dashed #ffba00; text-align: center;">',
+                    $style
+                );
+                $html .= esc_html__('[相互参照型関連記事ブロック] データなし', 'aurora-design-blocks');
+                $html .= '<p style="margin-top: 5px; font-size: 13px;">' . esc_html__('データベースに被リンクデータが見つかりませんでした。', 'aurora-design-blocks') . '</p>';
+                $html .= '</div>';
+                return $html;
+            }
+            return ''; // フロントエンドでは空文字
         }
 
-        // HTML生成ロジック
+        // HTML生成ロジック (データがある場合)
         $html = sprintf(
             '<div class="wp-block-aurora-design-blocks-related-posts adb-style-%s">',
             $style
@@ -345,6 +327,10 @@ class AuroraDesignBlocks_RelatedPosts_BlockFrontend
 global $wpdb;
 // $adb_links_table = $wpdb->prefix . 'adb_links'; // テーブル名はクラス内で管理
 
+// プラグインファイルへの絶対パスの定数定義
+if (!defined('ADB_PLUGIN_FILE')) {
+    define('ADB_PLUGIN_FILE', __FILE__);
+}
 
 // 依存するクラスファイルを読み込む（実際にはオートロードが理想）
 // require_once 'class-adbl-links-db-manager.php';
@@ -359,7 +345,6 @@ class AuroraDesignBlocks_RelatedPosts_Plugin
     private $db_manager;
     private $link_analyzer;
     private $query_handler;
-    private $rest_api;
     private $frontend;
 
     public function __construct()
@@ -370,7 +355,6 @@ class AuroraDesignBlocks_RelatedPosts_Plugin
         $this->db_manager    = new AuroraDesignBlocks_RelatedPosts_DBManager($wpdb);
         $this->query_handler = new AuroraDesignBlocks_RelatedPosts_Query($this->db_manager);
         $this->link_analyzer = new AuroraDesignBlocks_RelatedPosts_LinkAnalyzer($this->db_manager);
-        $this->rest_api      = new AuroraDesignBlocks_RelatedPosts_RestApiEndpoints($this->query_handler);
         $this->frontend      = new AuroraDesignBlocks_RelatedPosts_BlockFrontend($this->query_handler);
 
         $this->setup_hooks();
@@ -387,8 +371,6 @@ class AuroraDesignBlocks_RelatedPosts_Plugin
         // 2. リンクテーブル更新（投稿保存時）
         add_action('save_post', array($this->link_analyzer, 'update_related_links_on_save'));
 
-        // 3. REST API エンドポイントの登録（GUIエディタ用データ取得）
-        add_action('rest_api_init', array($this->rest_api, 'register_api_endpoint'));
 
         // 4. Gutenbergブロックの登録とフロントエンドレンダリング
         // 実際のブロック登録コードが必要です。ここではレンダリング部分のみをフック。
