@@ -203,15 +203,16 @@ registerBlockType("aurora-design-blocks/related-posts", {
     );
   },
 
-  // save関数は変更なし （PHPのrender_callbackで動的コンテンツを挿入するため）
-  save: ({ attributes }) => {
-    const { limit, showExcerpt, styleType } = attributes;
-    const blockProps = useBlockProps.save({
-      className: `adb-related-posts-block adb-style-${styleType}`,
-      "data-limit": limit,
-      "data-show-excerpt": showExcerpt ? "true" : "false",
-    });
+  // save関数は不要 （PHPのrender_callbackで動的コンテンツを挿入するため）
 
-    return <div {...blockProps}></div>;
-  },
+  // save: ({ attributes }) => {
+  //   const { limit, showExcerpt, styleType } = attributes;
+  //   const blockProps = useBlockProps.save({
+  //     className: `adb-related-posts-block adb-style-${styleType}`,
+  //     "data-limit": limit,
+  //     "data-show-excerpt": showExcerpt ? "true" : "false",
+  //   });
+
+  //   return <div {...blockProps}></div>;
+  // },
 });

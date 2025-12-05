@@ -345,10 +345,6 @@ class AuroraDesignBlocks_RelatedPosts_BlockFrontend
 global $wpdb;
 // $adb_links_table = $wpdb->prefix . 'adb_links'; // テーブル名はクラス内で管理
 
-// プラグインファイルへの絶対パスの定数定義
-if (!defined('ADB_PLUGIN_FILE')) {
-    define('ADB_PLUGIN_FILE', __FILE__);
-}
 
 // 依存するクラスファイルを読み込む（実際にはオートロードが理想）
 // require_once 'class-adbl-links-db-manager.php';

@@ -221,25 +221,20 @@ __webpack_require__.r(__webpack_exports__);
         children: [renderRelatedList(), " "]
       })]
     });
-  },
-  // save関数は変更なし （PHPのrender_callbackで動的コンテンツを挿入するため）
-  save: ({
-    attributes
-  }) => {
-    const {
-      limit,
-      showExcerpt,
-      styleType
-    } = attributes;
-    const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
-      className: `adb-related-posts-block adb-style-${styleType}`,
-      "data-limit": limit,
-      "data-show-excerpt": showExcerpt ? "true" : "false"
-    });
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
-      ...blockProps
-    });
   }
+
+  // save関数は不要 （PHPのrender_callbackで動的コンテンツを挿入するため）
+
+  // save: ({ attributes }) => {
+  //   const { limit, showExcerpt, styleType } = attributes;
+  //   const blockProps = useBlockProps.save({
+  //     className: `adb-related-posts-block adb-style-${styleType}`,
+  //     "data-limit": limit,
+  //     "data-show-excerpt": showExcerpt ? "true" : "false",
+  //   });
+
+  //   return <div {...blockProps}></div>;
+  // },
 });
 
 /***/ }),
