@@ -22,7 +22,7 @@
 }
 
 /* グリッド表示のスタイル（例） */
-.wp-block-aurora-design-blocks-related-posts-block.adb-style-grid {
+.wp-block-aurora-design-blocks-related-posts.adb-style-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 15px;

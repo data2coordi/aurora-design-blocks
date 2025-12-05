@@ -101,6 +101,11 @@ class AuroraDesignBlocks_RelatedPosts_DBManager
             $limit
         ), OBJECT);
     }
+
+    public function get_table_name()
+    {
+        return $this->adb_links_table;
+    }
 }
 
 
@@ -166,6 +171,167 @@ class AuroraDesignBlocks_RelatedPosts_LinkAnalyzer
     }
 }
 // ファイル名: class-adbl-related-posts-query.php
+// 
+
+
+// ファイル名: class-adbl-batch-rebuilder.php
+
+
+class AuroraDesignBlocks_RelatedPosts_BatchRebuilder
+{
+    private $db_manager;
+    private $link_analyzer;
+
+    public function __construct(
+        AuroraDesignBlocks_RelatedPosts_DBManager $db_manager,
+        AuroraDesignBlocks_RelatedPosts_LinkAnalyzer $link_analyzer
+    ) {
+        $this->db_manager   = $db_manager;
+        $this->link_analyzer = $link_analyzer;
+    }
+
+    /**
+     * 全投稿の内部リンクを再解析してリンクテーブルを再構築する
+     *
+     * @return array 結果情報
+     */
+    public function rebuild_all()
+    {
+        global $wpdb;
+        // 処理件数カウンタ
+        $processed = 0;
+        $inserted  = 0;
+
+        // 全投稿（post + page）
+        $posts = $wpdb->get_results("
+            SELECT ID, post_content
+            FROM {$wpdb->posts}
+            WHERE post_type IN ('post', 'page')
+              AND post_status IN ('publish', 'draft', 'pending')
+        ");
+
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+
+        foreach ($posts as $p) {
+            $post_id = intval($p->ID);
+
+            // 1. 既存リンク削除
+            $this->db_manager->delete_links_by_source_id($post_id);
+
+            // 2. 内部リンク抽出（LinkAnalyzer の private メソッドを利用できないためラッパーを追加推奨）
+            $targets = $this->extract_internal_links_wrapper($p->post_content);
+
+            // 3. 挿入
+            if (!empty($targets)) {
+                $inserted += $this->db_manager->bulk_insert_links($post_id, $targets);
+            }
+
+            $processed++;
+        }
+        // デバッグ用にテーブル内容をログ出力
+        $this->debug_dump_links();
+        return [
+            'processed_posts' => $processed,
+            'inserted_links'  => $inserted,
+        ];
+    }
+
+    /**
+     * LinkAnalyzer::extract_internal_links() は private のため
+     * 同ロジックをラップして利用。
+     */
+    private function extract_internal_links_wrapper($content)
+    {
+        $results = [];
+
+        $home_url = get_home_url();
+
+        if (preg_match_all('/<a\s+(?:[^>]*?\s+)?href=["\']([^"\'#]+)["\']/i', $content, $matches)) {
+            foreach ($matches[1] as $url) {
+                if (strpos($url, $home_url) === 0) {
+                    $post_id = url_to_postid($url);
+                    if ($post_id) {
+                        $results[] = $post_id;
+                    }
+                }
+            }
+        }
+        return array_unique($results);
+    }
+
+    private function debug_dump_links()
+    {
+        global $wpdb;
+
+        $table = $this->db_manager->get_table_name();
+
+        error_log('[Aurora RelatedPosts] ===== adb_links テーブル内容 START =====');
+
+        $rows = $wpdb->get_results("SELECT * FROM {$table}", ARRAY_A);
+
+        if (empty($rows)) {
+            error_log('[Aurora RelatedPosts] テーブルは空です。');
+            return;
+        }
+
+        foreach ($rows as $row) {
+
+            $source_id = intval($row['source_post_id']);
+            $target_id = intval($row['target_post_id']);
+
+            $source_title = get_the_title($source_id) ?: '(不明)';
+            $target_title = get_the_title($target_id) ?: '(不明)';
+
+            $output = [
+                //'source_post_id' => $source_id,
+                'source_title'   => $source_title,
+                //'target_post_id' => $target_id,
+                'target_title'   => $target_title,
+                //'updated_at'     => $row['updated_at'],
+            ];
+            error_log($source_title . '<---->' . $target_title);
+            //error_log('[Aurora RelatedPosts] ' . wp_json_encode($output, JSON_UNESCAPED_UNICODE));
+        }
+
+        error_log('[Aurora RelatedPosts] ===== adb_links テーブル内容 END =====');
+
+
+        error_log('[Aurora RelatedPosts] --- 相互リンク（被リンク元）一覧 START ---');
+
+        // ▼ 相互リンク（target_post_id ごとの被リンク一覧）
+        $unique_targets = array_unique(array_column($rows, 'target_post_id'));
+
+        foreach ($unique_targets as $target_id) {
+            $target_title = get_the_title($target_id) ?: '(不明)';
+
+            $related = $this->db_manager->get_related_post_ids_and_scores($target_id, 9999);
+
+            if (empty($related)) {
+                continue;
+            }
+
+            foreach ($related as $r) {
+                $source_title = get_the_title($r->related_id) ?: '(不明)';
+                $score        = $r->score;
+
+                error_log("[Reciprocal] {$source_title}  ==>  {$target_title} (score: {$score})");
+            }
+        }
+
+        error_log('[Aurora RelatedPosts] --- 相互リンク（被リンク元）一覧 END ---');
+    }
+}
+
+add_action('init', function () {
+    //if (isset($_GET['adb_rebuild'])) {
+    $db = new AuroraDesignBlocks_RelatedPosts_DBManager($GLOBALS['wpdb']);
+    $analyzer = new AuroraDesignBlocks_RelatedPosts_LinkAnalyzer($db);
+    $rebuilder = new AuroraDesignBlocks_RelatedPosts_BatchRebuilder($db, $analyzer);
+
+    $rebuilder->rebuild_all();
+    //}
+});
+
 
 class AuroraDesignBlocks_RelatedPosts_Query
 {
@@ -309,8 +475,33 @@ class AuroraDesignBlocks_RelatedPosts_BlockFrontend
             $link = get_permalink($post);
 
             $html .= '<li class="related-post-item">';
-            $html .= sprintf('<a href="%s">%s</a>', esc_url($link), esc_html($title));
 
+            $thumb_url = AuroraDesignBlocksPostThumbnail::getUrl($post, 'thumbnail');
+
+            $thumb_html = sprintf(
+                '<img src="%s" loading="lazy" fetchpriority="low" alt="">',
+                esc_url($thumb_url)
+            );
+
+            // 画像は HTML を保持
+            $thumb = wp_kses(
+                $thumb_html,
+                array(
+                    'img' => array(
+                        'src'             => true,
+                        'loading'         => true,
+                        'fetchpriority'   => true,
+                        'alt'             => true,
+                    ),
+                )
+            );
+
+            $html .= sprintf(
+                '<a href="%s">%s%s</a>',
+                esc_url($link),
+                $thumb,
+                esc_html($title)
+            );
             if ($show_excerpt) {
                 $excerpt = get_the_excerpt($post);
                 $html .= sprintf('<p class="adb-excerpt">%s</p>', esc_html($excerpt));
