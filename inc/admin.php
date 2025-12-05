@@ -1,7 +1,7 @@
 <?php
 if (! defined('ABSPATH')) exit;
 
-class Aurora_Admin
+class AuroraDesignBlocks_Admin
 {
 
     private static $instance = null;
@@ -18,7 +18,7 @@ class Aurora_Admin
     private function __construct()
     {
         // タブマネージャーを初期化
-        $this->tabs = new Aurora_Admin_Tabs();
+        $this->tabs = new AuroraDesignBlocks_Admin_Tabs();
 
         // 管理画面メニューを追加
         add_action('admin_menu', [$this, 'add_menu']);
@@ -65,7 +65,7 @@ class Aurora_Admin
 
 if (! defined('ABSPATH')) exit;
 
-class Aurora_Admin_Tabs
+class AuroraDesignBlocks_Admin_Tabs
 {
 
     private $tabs = [];
@@ -74,9 +74,9 @@ class Aurora_Admin_Tabs
     {
         // タブ一覧を登録
         $this->tabs = [
-            'about'    => new Aurora_Admin_Page_About(),
-            'settings' => new Aurora_Admin_Page_Settings(),
-            'links_rebuild' => new Aurora_Admin_Page_Links_Rebuild(), // ★追加
+            'about'    => new AuroraDesignBlocks_Admin_About(),
+            'settings' => new AuroraDesignBlocks_Admin_Enable(),
+            'links_rebuild' => new AuroraDesignBlocks_Admin_RelatedPosts(), // ★追加
         ];
     }
 
@@ -117,7 +117,7 @@ class Aurora_Admin_Tabs
 
 if (! defined('ABSPATH')) exit;
 
-class Aurora_Admin_Page_Links_Rebuild
+class AuroraDesignBlocks_Admin_RelatedPosts
 {
     public function get_label()
     {
@@ -175,7 +175,7 @@ class Aurora_Admin_Page_Links_Rebuild
 
 if (! defined('ABSPATH')) exit;
 
-class Aurora_Admin_Page_About
+class AuroraDesignBlocks_Admin_About
 {
 
     public function get_label()
@@ -232,7 +232,7 @@ class Aurora_Admin_Page_About
 
 if (! defined('ABSPATH')) exit;
 
-class Aurora_Admin_Page_Settings
+class AuroraDesignBlocks_Admin_Enable
 {
 
     public function __construct()
@@ -329,4 +329,4 @@ class Aurora_Admin_Page_Settings
 }
 
 
-Aurora_Admin::get_instance();
+AuroraDesignBlocks_Admin::get_instance();
