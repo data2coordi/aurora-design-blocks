@@ -152,22 +152,46 @@ class AuroraDesignBlocks_RelatedPosts_LinkAnalyzer
      * @param string $content 投稿本文
      * @return array 内部リンク先の投稿IDの配列
      */
-    private function extract_internal_links($content)
+    public function extract_internal_links($content)
     {
         $links = [];
-        $home_url = get_home_url();
 
-        if (preg_match_all('/<a\s+(?:[^>]*?\s+)?href=["\']([^"\'#]+)["\']/i', $content, $matches)) {
+        $home_url  = rtrim(get_home_url(), '/');
+        $home_host = wp_parse_url($home_url, PHP_URL_HOST);
+
+        // aタグのhrefを安定して抽出
+        if (preg_match_all('/<a\b[^>]*?href=["\']([^"\'>]+)["\']/i', $content, $matches)) {
+
             foreach ($matches[1] as $url) {
-                // ホームURLで始まる内部リンクかチェック
-                if (strpos($url, $home_url) === 0) {
-                    $post_id = url_to_postid($url);
+                $parsed = wp_parse_url($url);
+
+                // CASE 1: 絶対URL
+                if (!empty($parsed['host'])) {
+                    if ($parsed['host'] === $home_host) {
+                        $post_id = url_to_postid($url);
+
+                        if ($post_id) {
+                            $links[] = $post_id;
+                        }
+                    }
+                    continue;
+                }
+
+                // CASE 2: 相対URL
+                if (strpos($url, '/') === 0) {
+                    $absolute = $home_url . $url;
+                    $post_id = url_to_postid($absolute);
+
                     if ($post_id) {
                         $links[] = $post_id;
                     }
+                    continue;
                 }
+
+                // CASE 3: その他は無視
             }
         }
+
         return array_unique($links);
     }
 }
@@ -220,7 +244,7 @@ class AuroraDesignBlocks_RelatedPosts_BatchRebuilder
             $this->db_manager->delete_links_by_source_id($post_id);
 
             // 2. 内部リンク抽出（LinkAnalyzer の private メソッドを利用できないためラッパーを追加推奨）
-            $targets = $this->extract_internal_links_wrapper($p->post_content);
+            $targets = $this->link_analyzer->extract_internal_links($p->post_content);
 
             // 3. 挿入
             if (!empty($targets)) {
@@ -237,28 +261,6 @@ class AuroraDesignBlocks_RelatedPosts_BatchRebuilder
         ];
     }
 
-    /**
-     * LinkAnalyzer::extract_internal_links() は private のため
-     * 同ロジックをラップして利用。
-     */
-    private function extract_internal_links_wrapper($content)
-    {
-        $results = [];
-
-        $home_url = get_home_url();
-
-        if (preg_match_all('/<a\s+(?:[^>]*?\s+)?href=["\']([^"\'#]+)["\']/i', $content, $matches)) {
-            foreach ($matches[1] as $url) {
-                if (strpos($url, $home_url) === 0) {
-                    $post_id = url_to_postid($url);
-                    if ($post_id) {
-                        $results[] = $post_id;
-                    }
-                }
-            }
-        }
-        return array_unique($results);
-    }
 
     private function debug_dump_links()
     {
@@ -284,14 +286,21 @@ class AuroraDesignBlocks_RelatedPosts_BatchRebuilder
             $target_title = get_the_title($target_id) ?: '(不明)';
 
             $output = [
-                //'source_post_id' => $source_id,
-                'source_title'   => $source_title,
-                //'target_post_id' => $target_id,
-                'target_title'   => $target_title,
-                //'updated_at'     => $row['updated_at'],
+                'sid' => $source_id,
+                'st'   => $source_title,
+                'tid' => $target_id,
+                'tt'   => $target_title,
+                'date'     => $row['updated_at'],
             ];
-            error_log($source_title . '<---->' . $target_title);
-            //error_log('[Aurora RelatedPosts] ' . wp_json_encode($output, JSON_UNESCAPED_UNICODE));
+            //error_log(wp_json_encode($output, JSON_UNESCAPED_UNICODE));
+            $output = [
+                'tid' => $target_id,
+                'tt'   => $target_title,
+                'sid' => $source_id,
+                'st'   => $source_title,
+                'date'     => $row['updated_at'],
+            ];
+            error_log(wp_json_encode($output, JSON_UNESCAPED_UNICODE));
         }
 
         error_log('[Aurora RelatedPosts] ===== adb_links テーブル内容 END =====');
