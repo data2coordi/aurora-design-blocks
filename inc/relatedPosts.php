@@ -639,11 +639,15 @@ class AuroraDesignBlocks_RelatedPosts_Plugin
 
         // ブロックとして表示済みの場合は二重表示を避けるため処理しない
         if (has_block('aurora-design-blocks/related-posts', $post)) {
-            return $content;
+            //return $content;
         }
 
         // フロント用のレンダリングを呼び出す（SSRフラグは不要）
-        $html = $this->frontend->render_related_posts_block_html([], '');
+        $limit = get_option('aurora_related_posts_count', 5); // 管理画面設定を取得
+        $html = $this->frontend->render_related_posts_block_html(
+            ['limit' => $limit], // SSRの attributes に件数を渡す
+            ''
+        );
 
         return $content . $html;
     }
