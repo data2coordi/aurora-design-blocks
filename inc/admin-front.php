@@ -1,8 +1,8 @@
 <?php
-class Aurora_Feature_Flags
+class AuroraDesignBlocks_Enable_Flags
 {
 
-    public static function get_options()
+    private static function get_options()
     {
         $saved = get_option('aurora_design_blocks_options');
 
@@ -19,7 +19,7 @@ class Aurora_Feature_Flags
         return array_merge($default, $saved);
     }
 
-    public static function is_enabled($key)
+    private static function is_enabled($key)
     {
         $options = self::get_options();
         return isset($options[$key]) && $options[$key] === '1';
