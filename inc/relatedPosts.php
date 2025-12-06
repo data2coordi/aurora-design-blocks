@@ -686,7 +686,7 @@ class AuroraDesignBlocks_RelatedPosts_Plugin
         }
 
         // 設定がONでない場合は何もしない
-        if (get_option('aurora_related_posts_enable') !== '1') {
+        if (AuroraDesignBlocks_RelatedPosts_Setting_Enable::is_enabled() === false) {
             return $content;
         }
 
@@ -702,13 +702,13 @@ class AuroraDesignBlocks_RelatedPosts_Plugin
         remove_filter('the_content', array($this, 'maybe_append_related_posts_to_content'), 10);
 
         // フロント用のレンダリングを呼び出す（SSRフラグは不要）
-        $limit = get_option('aurora_related_posts_count', 5); // 管理画面設定を取得
+        $limit = AuroraDesignBlocks_RelatedPosts_Setting_Count::get_count(); // 管理画面設定を取得
 
-        $show_thumb = get_option('aurora_related_posts_show_thumbnail', '1') === '1' ? true : false;
+        $show_thumb_flag = AuroraDesignBlocks_RelatedPosts_Setting_ShowThumbnail::is_enabled();
         $html = $this->frontend->render_related_posts_block_html(
             [
                 'limit' => $limit,
-                'show_thumb' => $show_thumb
+                'show_thumb' => $show_thumb_flag
             ], // SSRの attributes に件数を渡す
             ''
         );

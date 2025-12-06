@@ -280,9 +280,9 @@ class AuroraDesignBlocks_Admin_RelatedPosts
     {
         // 設定セクションをまとめて登録
         $this->sections = [
-            new Aurora_RelatedPosts_Setting_Enable(),
-            new Aurora_RelatedPosts_Setting_Count(),
-            new Aurora_RelatedPosts_Setting_ShowThumbnail(), // 追加
+            new AuroraDesignBlocks_RelatedPosts_Setting_Enable(),
+            new AuroraDesignBlocks_RelatedPosts_Setting_Count(),
+            new AuroraDesignBlocks_RelatedPosts_Setting_ShowThumbnail(), // 追加
             // 追加オプションが増えればここに追加するだけ
             // new Aurora_RelatedPosts_Setting_Xxx(),
         ];
@@ -405,7 +405,7 @@ class AuroraDesignBlocks_Admin_RelatedPosts
 
 
 
-class Aurora_RelatedPosts_Setting_Enable
+class AuroraDesignBlocks_RelatedPosts_Setting_Enable
 {
     public function render()
     {
@@ -425,12 +425,17 @@ class Aurora_RelatedPosts_Setting_Enable
         $value = isset($_POST['aurora_related_posts_enable']) ? '1' : '0';
         update_option('aurora_related_posts_enable', $value);
     }
+    // ★追加
+    public static function is_enabled(): bool
+    {
+        return get_option('aurora_related_posts_enable', '0') === '1';
+    }
 }
 
 
 
 
-class Aurora_RelatedPosts_Setting_Count
+class AuroraDesignBlocks_RelatedPosts_Setting_Count
 {
     public function render()
     {
@@ -456,11 +461,17 @@ class Aurora_RelatedPosts_Setting_Count
 
         update_option('aurora_related_posts_count', $val);
     }
+
+    // ★追加
+    public static function get_count(): int
+    {
+        return intval(get_option('aurora_related_posts_count', 5));
+    }
 }
 
 
 
-class Aurora_RelatedPosts_Setting_ShowThumbnail
+class AuroraDesignBlocks_RelatedPosts_Setting_ShowThumbnail
 {
     public function render()
     {
@@ -480,5 +491,11 @@ class Aurora_RelatedPosts_Setting_ShowThumbnail
     {
         $value = isset($_POST['aurora_related_posts_show_thumbnail']) ? '1' : '0';
         update_option('aurora_related_posts_show_thumbnail', $value);
+    }
+
+    // ★追加
+    public static function is_enabled(): bool
+    {
+        return get_option('aurora_related_posts_show_thumbnail', '0') === '1';
     }
 }
