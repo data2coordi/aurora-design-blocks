@@ -25,7 +25,7 @@ class AuroraDesignBlocks_RelatedPosts_DBManager
             target_post_id BIGINT(20) UNSIGNED NOT NULL,
             updated_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
             PRIMARY KEY (source_post_id,target_post_id),
-            KEY idx_target_id (target_post_id,source_post_id,updated_at)
+            KEY idx_target_id (target_post_id,source_post_id,updated_at),
             KEY idx_source_id (source_post_id,target_post_id,updated_at)
         ) $charset_collate;";
 
@@ -438,7 +438,6 @@ class AuroraDesignBlocks_RelatedPosts_BlockFrontend
         $limit = isset($attributes['limit']) ? intval($attributes['limit']) : 5;
         $style = isset($attributes['styleType']) ? esc_attr($attributes['styleType']) : 'list';
         $show_thumb = isset($attributes['show_thumb']) ? $attributes['show_thumb'] : true;
-
         $show_excerpt = filter_var(isset($attributes['showExcerpt']) ? $attributes['showExcerpt'] : false, FILTER_VALIDATE_BOOLEAN);
 
         // SSRリクエストであるかを確認（エディターでのプレビュー時）
@@ -667,7 +666,7 @@ class AuroraDesignBlocks_RelatedPosts_Plugin
                     'limit' => array('type' => 'number', 'default' => 5),
                     'styleType' => array('type' => 'string', 'default' => 'list'),
                     'showExcerpt' => array('type' => 'boolean', 'default' => false),
-                    'show_thumb' => array('type' => 'boolean', 'default' => false),
+                    'show_thumb' => array('type' => 'boolean', 'default' => true),
                 ),
                 'render_callback' => array($this->frontend, 'render_related_posts_block_html'),
             ));
