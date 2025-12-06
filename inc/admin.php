@@ -61,6 +61,7 @@ class AuroraDesignBlocks_Admin
 }
 
 
+AuroraDesignBlocks_Admin::get_instance();
 
 
 
@@ -169,9 +170,9 @@ class AuroraDesignBlocks_Admin_About
 }
 
 
-
-
-
+//****************************************************************
+//有効化／無効化設定タブ
+//****************************************************************
 class AuroraDesignBlocks_Admin_Enable
 {
 
@@ -268,7 +269,9 @@ class AuroraDesignBlocks_Admin_Enable
     }
 }
 
-
+//****************************************************************
+//関連記事設定タブ
+//****************************************************************
 class AuroraDesignBlocks_Admin_RelatedPosts
 {
     private $sections = [];
@@ -279,6 +282,7 @@ class AuroraDesignBlocks_Admin_RelatedPosts
         $this->sections = [
             new Aurora_RelatedPosts_Setting_Enable(),
             new Aurora_RelatedPosts_Setting_Count(),
+            new Aurora_RelatedPosts_Setting_ShowThumbnail(), // 追加
             // 追加オプションが増えればここに追加するだけ
             // new Aurora_RelatedPosts_Setting_Xxx(),
         ];
@@ -439,7 +443,7 @@ class Aurora_RelatedPosts_Setting_Count
                 value="<?php echo esc_attr($current); ?>"
                 min="1" max="100" style="width: 60px;">
         </label>
-<?php
+    <?php
     }
 
     public function save()
@@ -456,7 +460,25 @@ class Aurora_RelatedPosts_Setting_Count
 
 
 
+class Aurora_RelatedPosts_Setting_ShowThumbnail
+{
+    public function render()
+    {
+        $current = get_option('aurora_related_posts_show_thumbnail', '1');
+    ?>
+        <label>
+            <input type="checkbox"
+                name="aurora_related_posts_show_thumbnail"
+                value="1"
+                <?php checked($current, '1'); ?>>
+            <?php echo esc_html__('Display thumbnails in related posts', 'aurora-design-blocks'); ?>
+        </label>
+<?php
+    }
 
-
-
-AuroraDesignBlocks_Admin::get_instance();
+    public function save()
+    {
+        $value = isset($_POST['aurora_related_posts_show_thumbnail']) ? '1' : '0';
+        update_option('aurora_related_posts_show_thumbnail', $value);
+    }
+}

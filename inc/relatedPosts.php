@@ -418,6 +418,8 @@ class AuroraDesignBlocks_RelatedPosts_BlockFrontend
     {
         $limit = isset($attributes['limit']) ? intval($attributes['limit']) : 5;
         $style = isset($attributes['styleType']) ? esc_attr($attributes['styleType']) : 'list';
+        $show_thumb = isset($attributes['show_thumb']) ? $attributes['show_thumb'] : '1';
+
         $show_excerpt = filter_var(isset($attributes['showExcerpt']) ? $attributes['showExcerpt'] : false, FILTER_VALIDATE_BOOLEAN);
 
         // SSRリクエストであるかを確認（エディターでのプレビュー時）
@@ -481,32 +483,35 @@ class AuroraDesignBlocks_RelatedPosts_BlockFrontend
 
         $html .= '<h2>関連記事</h2>';
         $html .= '<ul>';
-
         foreach ($related_posts as $post) {
             $title = get_the_title($post);
             $link = get_permalink($post);
 
             $html .= '<li class="related-post-item">';
 
-            $thumb_url = AuroraDesignBlocksPostThumbnail::getUrl($post, 'thumbnail');
 
-            $thumb_html = sprintf(
-                '<img src="%s" loading="lazy" fetchpriority="low" alt="">',
-                esc_url($thumb_url)
-            );
+            $thumb = '';
+            if ($show_thumb === '1') {
+                $thumb_url = AuroraDesignBlocksPostThumbnail::getUrl($post, 'thumbnail');
 
-            // 画像は HTML を保持
-            $thumb = wp_kses(
-                $thumb_html,
-                array(
-                    'img' => array(
-                        'src'             => true,
-                        'loading'         => true,
-                        'fetchpriority'   => true,
-                        'alt'             => true,
-                    ),
-                )
-            );
+                $thumb_html = sprintf(
+                    '<img src="%s" loading="lazy" fetchpriority="low" alt="">',
+                    esc_url($thumb_url)
+                );
+
+                // 画像は HTML を保持
+                $thumb = wp_kses(
+                    $thumb_html,
+                    array(
+                        'img' => array(
+                            'src'             => true,
+                            'loading'         => true,
+                            'fetchpriority'   => true,
+                            'alt'             => true,
+                        ),
+                    )
+                );
+            }
 
             $html .= sprintf(
                 '<a href="%s">%s%s</a>',
@@ -644,8 +649,12 @@ class AuroraDesignBlocks_RelatedPosts_Plugin
 
         // フロント用のレンダリングを呼び出す（SSRフラグは不要）
         $limit = get_option('aurora_related_posts_count', 5); // 管理画面設定を取得
+        $show_thumb = get_option('aurora_related_posts_show_thumbnail', '1');
         $html = $this->frontend->render_related_posts_block_html(
-            ['limit' => $limit], // SSRの attributes に件数を渡す
+            [
+                'limit' => $limit,
+                'show_thumb' => $show_thumb
+            ], // SSRの attributes に件数を渡す
             ''
         );
 
