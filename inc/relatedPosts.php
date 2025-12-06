@@ -617,6 +617,7 @@ class AuroraDesignBlocks_RelatedPosts_Plugin
                     'limit' => array('type' => 'number', 'default' => 5),
                     'styleType' => array('type' => 'string', 'default' => 'list'),
                     'showExcerpt' => array('type' => 'boolean', 'default' => false),
+                    'show_thumb' => array('type' => 'boolean', 'default' => false),
                 ),
                 'render_callback' => array($this->frontend, 'render_related_posts_block_html'),
             ));

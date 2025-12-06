@@ -28,6 +28,10 @@
     "styleType": {
       "type": "string",
       "default": "list"
+    },
+    "show_thumb": {
+      "type": "boolean",
+      "default": true
     }
   },
   "editorScript": "file:./build/index.js",

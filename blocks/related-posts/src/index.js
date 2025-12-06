@@ -19,10 +19,13 @@ registerBlockType("aurora-design-blocks/related-posts", {
     limit: { type: "number", default: 5 },
     showExcerpt: { type: "boolean", default: false },
     styleType: { type: "string", default: "list" },
+
+    // ★ サムネイル表示 ON/OFF（ブロック側は boolean で保持）
+    show_thumb: { type: "boolean", default: true },
   },
 
   edit: ({ attributes, setAttributes }) => {
-    const { limit, showExcerpt, styleType } = attributes;
+    const { limit, showExcerpt, styleType, show_thumb } = attributes;
 
     const blockProps = useBlockProps({
       className: `adb-related-posts-block adb-style-${styleType}`,
@@ -42,6 +45,7 @@ registerBlockType("aurora-design-blocks/related-posts", {
               max={10}
               step={1}
             />
+
             <SelectControl
               label={__("Display Style", "aurora-design-blocks")}
               value={styleType}
@@ -57,10 +61,18 @@ registerBlockType("aurora-design-blocks/related-posts", {
               ]}
               onChange={(value) => setAttributes({ styleType: value })}
             />
+
             <ToggleControl
               label={__("Show Excerpt/Snippet", "aurora-design-blocks")}
               checked={showExcerpt}
               onChange={(value) => setAttributes({ showExcerpt: value })}
+            />
+
+            {/* ★ サムネイル表示 ON/OFF */}
+            <ToggleControl
+              label={__("Show Thumbnail", "aurora-design-blocks")}
+              checked={show_thumb}
+              onChange={(value) => setAttributes({ show_thumb: value })}
             />
           </PanelBody>
         </InspectorControls>
@@ -75,5 +87,5 @@ registerBlockType("aurora-design-blocks/related-posts", {
     );
   },
 
-  save: () => null, // ★静的HTMLは保存せず、PHPが必ず実行される
+  save: () => null, //   ★ SSR
 });

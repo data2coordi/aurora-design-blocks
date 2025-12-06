@@ -57,6 +57,11 @@ __webpack_require__.r(__webpack_exports__);
     styleType: {
       type: "string",
       default: "list"
+    },
+    // ★ サムネイル表示 ON/OFF（ブロック側は boolean で保持）
+    show_thumb: {
+      type: "boolean",
+      default: true
     }
   },
   edit: ({
@@ -66,7 +71,8 @@ __webpack_require__.r(__webpack_exports__);
     const {
       limit,
       showExcerpt,
-      styleType
+      styleType,
+      show_thumb
     } = attributes;
     const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
       className: `adb-related-posts-block adb-style-${styleType}`
@@ -103,6 +109,12 @@ __webpack_require__.r(__webpack_exports__);
             onChange: value => setAttributes({
               showExcerpt: value
             })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Show Thumbnail", "aurora-design-blocks"),
+            checked: show_thumb,
+            onChange: value => setAttributes({
+              show_thumb: value
+            })
           })]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -114,7 +126,7 @@ __webpack_require__.r(__webpack_exports__);
       })]
     });
   },
-  save: () => null // ★静的HTMLは保存せず、PHPが必ず実行される
+  save: () => null //   ★ SSR
 });
 
 /***/ }),
