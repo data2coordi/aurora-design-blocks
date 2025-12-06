@@ -268,8 +268,22 @@ class AuroraDesignBlocks_Admin_Enable
     }
 }
 
+
 class AuroraDesignBlocks_Admin_RelatedPosts
 {
+    private $sections = [];
+
+    public function __construct()
+    {
+        // 設定セクションをまとめて登録
+        $this->sections = [
+            new Aurora_RelatedPosts_Setting_Enable(),
+            new Aurora_RelatedPosts_Setting_Count(),
+            // 追加オプションが増えればここに追加するだけ
+            // new Aurora_RelatedPosts_Setting_Xxx(),
+        ];
+    }
+
     public function get_label()
     {
         return __('Links Rebuild', 'aurora-design-blocks');
@@ -277,10 +291,20 @@ class AuroraDesignBlocks_Admin_RelatedPosts
 
     public function render_page()
     {
+        // ▼ 先に POST 処理
+        $this->handle_actions();
 
-        /**
-         * ▼ リビルド処理
-         */
+        // ▼ 画面レンダリング
+        $this->render_rebuild_form();
+        $this->render_settings_form();
+    }
+
+    /**
+     * ▼ POST（リビルド＋設定保存）を一括処理
+     */
+    private function handle_actions()
+    {
+        // リビルド
         if (
             isset($_POST['aurora_rebuild_links']) &&
             check_admin_referer('aurora_rebuild_links_action')
@@ -288,35 +312,36 @@ class AuroraDesignBlocks_Admin_RelatedPosts
             $this->execute_rebuild();
         }
 
-
-        /**
-         * ▼ 設定保存処理
-         */
+        // 設定保存
         if (
             isset($_POST['aurora_related_posts_settings_save']) &&
             check_admin_referer('aurora_related_posts_settings_action')
         ) {
-            // ON/OFF
-            $enabled = isset($_POST['aurora_related_posts_enable']) ? '1' : '0';
-            update_option('aurora_related_posts_enable', $enabled);
+            $this->save_settings();
+        }
+    }
 
-            // 件数
-            $count = isset($_POST['aurora_related_posts_count']) ? intval($_POST['aurora_related_posts_count']) : 5;
-            $count = max(1, min(20, $count));
-            update_option('aurora_related_posts_count', $count);
-
-            echo '<div class="notice notice-success"><p>'
-                . esc_html__('Settings saved.', 'aurora-design-blocks')
-                . '</p></div>';
+    /**
+     * ▼ 設定保存
+     */
+    private function save_settings()
+    {
+        foreach ($this->sections as $section) {
+            $section->save();
         }
 
+        echo '<div class="notice notice-success"><p>'
+            . esc_html__('Settings saved.', 'aurora-design-blocks')
+            . '</p></div>';
+    }
 
+    /**
+     * ▼ リビルドフォーム
+     */
+    private function render_rebuild_form()
+    {
     ?>
-        <!------------------------------------------------------------------------------------------>
-        <!-- 関連記事リビルドセクション -->
-        <!------------------------------------------------------------------------------------------>
         <h2><?php echo esc_html__('Rebuild Internal Link Data', 'aurora-design-blocks'); ?></h2>
-
         <p>
             <?php echo esc_html__('This process scans all posts and regenerates the internal link relationship table.', 'aurora-design-blocks'); ?>
         </p>
@@ -325,34 +350,26 @@ class AuroraDesignBlocks_Admin_RelatedPosts
             <?php wp_nonce_field('aurora_rebuild_links_action'); ?>
             <?php submit_button(__('Run Rebuild', 'aurora-design-blocks'), 'primary', 'aurora_rebuild_links'); ?>
         </form>
+    <?php
+    }
 
-
-        <!------------------------------------------------------------------------------------------>
-        <!-- 全投稿に関連記事表示セクション -->
-        <!------------------------------------------------------------------------------------------>
+    /**
+     * ▼ 設定フォーム（セクションをループ）
+     */
+    private function render_settings_form()
+    {
+    ?>
         <h2><?php echo esc_html__('Related Posts Settings', 'aurora-design-blocks'); ?></h2>
 
         <form method="post">
             <?php wp_nonce_field('aurora_related_posts_settings_action'); ?>
 
-            <!-- 関連記事表示設定有無 -->
-            <label>
-                <input type="checkbox"
-                    name="aurora_related_posts_enable"
-                    value="1"
-                    <?php checked(get_option('aurora_related_posts_enable'), '1'); ?>>
-                <?php echo esc_html__('Display related posts at the bottom of all single posts', 'aurora-design-blocks'); ?>
-            </label>
-
-            <br><br>
-
-            <!-- 表示件数 -->
-            <label>
-                <?php echo esc_html__('Number of related posts to display', 'aurora-design-blocks'); ?>:
-                <input type="number" name="aurora_related_posts_count"
-                    value="<?php echo esc_attr(get_option('aurora_related_posts_count', 5)); ?>"
-                    min="1" max="20" style="width: 60px;">
-            </label>
+            <?php foreach ($this->sections as $section): ?>
+                <div class="aurora-settings-section">
+                    <?php $section->render(); ?>
+                </div>
+                <br>
+            <?php endforeach; ?>
 
             <?php submit_button(
                 __('Save Settings', 'aurora-design-blocks'),
@@ -360,22 +377,19 @@ class AuroraDesignBlocks_Admin_RelatedPosts
                 'aurora_related_posts_settings_save'
             ); ?>
         </form>
-
-
-
-
-
-
-<?php
+    <?php
     }
 
+    /**
+     * ▼ リビルド処理
+     */
     private function execute_rebuild()
     {
         global $wpdb;
 
-        $db         = new AuroraDesignBlocks_RelatedPosts_DBManager($wpdb);
-        $analyzer   = new AuroraDesignBlocks_RelatedPosts_LinkAnalyzer($db);
-        $rebuilder  = new AuroraDesignBlocks_RelatedPosts_BatchRebuilder($db, $analyzer);
+        $db        = new AuroraDesignBlocks_RelatedPosts_DBManager($wpdb);
+        $analyzer  = new AuroraDesignBlocks_RelatedPosts_LinkAnalyzer($db);
+        $rebuilder = new AuroraDesignBlocks_RelatedPosts_BatchRebuilder($db, $analyzer);
 
         $rebuilder->rebuild_all();
 
@@ -384,5 +398,65 @@ class AuroraDesignBlocks_Admin_RelatedPosts
             . '</p></div>';
     }
 }
+
+
+
+class Aurora_RelatedPosts_Setting_Enable
+{
+    public function render()
+    {
+    ?>
+        <label>
+            <input type="checkbox"
+                name="aurora_related_posts_enable"
+                value="1"
+                <?php checked(get_option('aurora_related_posts_enable'), '1'); ?>>
+            <?php echo esc_html__('Display related posts at the bottom of all single posts', 'aurora-design-blocks'); ?>
+        </label>
+    <?php
+    }
+
+    public function save()
+    {
+        $value = isset($_POST['aurora_related_posts_enable']) ? '1' : '0';
+        update_option('aurora_related_posts_enable', $value);
+    }
+}
+
+
+
+
+class Aurora_RelatedPosts_Setting_Count
+{
+    public function render()
+    {
+        $current = get_option('aurora_related_posts_count', 5);
+    ?>
+        <label>
+            <?php echo esc_html__('Number of related posts to display', 'aurora-design-blocks'); ?>:
+            <input type="number"
+                name="aurora_related_posts_count"
+                value="<?php echo esc_attr($current); ?>"
+                min="1" max="100" style="width: 60px;">
+        </label>
+<?php
+    }
+
+    public function save()
+    {
+        $val = isset($_POST['aurora_related_posts_count'])
+            ? intval($_POST['aurora_related_posts_count'])
+            : 5;
+
+        $val = max(1, min(100, $val));
+
+        update_option('aurora_related_posts_count', $val);
+    }
+}
+
+
+
+
+
 
 AuroraDesignBlocks_Admin::get_instance();
