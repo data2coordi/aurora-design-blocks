@@ -25,7 +25,8 @@ class AuroraDesignBlocks_RelatedPosts_DBManager
             target_post_id BIGINT(20) UNSIGNED NOT NULL,
             updated_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
             PRIMARY KEY (source_post_id,target_post_id),
-            KEY idx_target_id (target_post_id)
+            KEY idx_target_id (target_post_id,source_post_id,updated_at)
+            KEY idx_source_id (source_post_id,target_post_id,updated_at)
         ) $charset_collate;";
 
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
