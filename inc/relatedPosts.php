@@ -589,6 +589,8 @@ class AuroraDesignBlocks_RelatedPosts_Plugin
         // 4. Gutenbergブロックの登録とフロントエンドレンダリング
         // 実際のブロック登録コードが必要です。ここではレンダリング部分のみをフック。
         add_action('init', array($this, 'register_block'));
+        // ★ 追加: 投稿最下部に関連記事を自動挿入
+        add_filter('the_content', array($this, 'maybe_append_related_posts_to_content'));
     }
 
     /**
@@ -614,6 +616,36 @@ class AuroraDesignBlocks_RelatedPosts_Plugin
                 'render_callback' => array($this->frontend, 'render_related_posts_block_html'),
             ));
         }
+    }
+
+
+    /**
+     * 管理画面オプションがONなら投稿最下部に関連記事を追加
+     */
+    public function maybe_append_related_posts_to_content($content)
+    {
+        // 投稿ページでのみ適用
+        if (!is_singular('post')) {
+            return $content;
+        }
+
+        // 設定がONでない場合は何もしない
+        if (get_option('aurora_related_posts_enable') !== '1') {
+            return $content;
+        }
+
+        global $post;
+        if (!$post) return $content;
+
+        // ブロックとして表示済みの場合は二重表示を避けるため処理しない
+        if (has_block('aurora-design-blocks/related-posts', $post)) {
+            return $content;
+        }
+
+        // フロント用のレンダリングを呼び出す（SSRフラグは不要）
+        $html = $this->frontend->render_related_posts_block_html([], '');
+
+        return $content . $html;
     }
 }
 

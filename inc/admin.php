@@ -63,7 +63,6 @@ class AuroraDesignBlocks_Admin
 
 
 
-if (! defined('ABSPATH')) exit;
 
 class AuroraDesignBlocks_Admin_Tabs
 {
@@ -75,8 +74,8 @@ class AuroraDesignBlocks_Admin_Tabs
         // タブ一覧を登録
         $this->tabs = [
             'about'    => new AuroraDesignBlocks_Admin_About(),
-            'settings' => new AuroraDesignBlocks_Admin_Enable(),
-            'links_rebuild' => new AuroraDesignBlocks_Admin_RelatedPosts(), // ★追加
+            'enable' => new AuroraDesignBlocks_Admin_Enable(),
+            'related posts' => new AuroraDesignBlocks_Admin_RelatedPosts(), // ★追加
         ];
     }
 
@@ -115,65 +114,7 @@ class AuroraDesignBlocks_Admin_Tabs
 }
 
 
-if (! defined('ABSPATH')) exit;
 
-class AuroraDesignBlocks_Admin_RelatedPosts
-{
-    public function get_label()
-    {
-        return __('Links Rebuild', 'aurora-design-blocks');
-    }
-
-    public function render_page()
-    {
-        // ボタン押下判定
-        if (
-            isset($_POST['aurora_rebuild_links'])
-            && check_admin_referer('aurora_rebuild_links_action')
-        ) {
-            $this->execute_rebuild();
-        }
-
-    ?>
-        <h2><?php echo esc_html__('Rebuild Internal Link Data', 'aurora-design-blocks'); ?></h2>
-
-        <p>
-            <?php echo esc_html__('This process scans all posts and regenerates the internal link relationship table.', 'aurora-design-blocks'); ?>
-        </p>
-
-        <form method="post">
-            <?php wp_nonce_field('aurora_rebuild_links_action'); ?>
-
-            <?php submit_button(
-                __('Run Rebuild', 'aurora-design-blocks'),
-                'primary',
-                'aurora_rebuild_links'
-            ); ?>
-        </form>
-    <?php
-    }
-
-    /**
-     * バッチ処理を実行
-     */
-    private function execute_rebuild()
-    {
-        global $wpdb;
-
-
-        $db       = new AuroraDesignBlocks_RelatedPosts_DBManager($wpdb);
-        $analyzer = new AuroraDesignBlocks_RelatedPosts_LinkAnalyzer($db);
-        $rebuilder = new AuroraDesignBlocks_RelatedPosts_BatchRebuilder($db, $analyzer);
-
-        $rebuilder->rebuild_all();
-
-        echo '<div class="notice notice-success"><p>'
-            . esc_html__('Rebuild completed successfully.', 'aurora-design-blocks')
-            . '</p></div>';
-    }
-}
-
-if (! defined('ABSPATH')) exit;
 
 class AuroraDesignBlocks_Admin_About
 {
@@ -230,7 +171,6 @@ class AuroraDesignBlocks_Admin_About
 
 
 
-if (! defined('ABSPATH')) exit;
 
 class AuroraDesignBlocks_Admin_Enable
 {
@@ -324,9 +264,87 @@ class AuroraDesignBlocks_Admin_Enable
 
             <?php submit_button(); ?>
         </form>
-<?php
+    <?php
     }
 }
 
+class AuroraDesignBlocks_Admin_RelatedPosts
+{
+    public function get_label()
+    {
+        return __('Links Rebuild', 'aurora-design-blocks');
+    }
+
+    public function render_page()
+    {
+        /**
+         * ▼ 設定保存処理（最初に実行すべき）
+         */
+        if (
+            isset($_POST['aurora_related_posts_settings_save']) &&
+            check_admin_referer('aurora_related_posts_settings_action')
+        ) {
+            $enabled = isset($_POST['aurora_related_posts_enable']) ? '1' : '0';
+            update_option('aurora_related_posts_enable', $enabled);
+
+            echo '<div class="notice notice-success"><p>'
+                . esc_html__('Settings saved.', 'aurora-design-blocks')
+                . '</p></div>';
+        }
+
+        /**
+         * ▼ リビルド処理
+         */
+        if (
+            isset($_POST['aurora_rebuild_links']) &&
+            check_admin_referer('aurora_rebuild_links_action')
+        ) {
+            $this->execute_rebuild();
+        }
+    ?>
+        <h2><?php echo esc_html__('Rebuild Internal Link Data', 'aurora-design-blocks'); ?></h2>
+
+        <p>
+            <?php echo esc_html__('This process scans all posts and regenerates the internal link relationship table.', 'aurora-design-blocks'); ?>
+        </p>
+
+        <form method="post">
+            <?php wp_nonce_field('aurora_rebuild_links_action'); ?>
+            <?php submit_button(__('Run Rebuild', 'aurora-design-blocks'), 'primary', 'aurora_rebuild_links'); ?>
+        </form>
+
+        <h2><?php echo esc_html__('Related Posts Settings', 'aurora-design-blocks'); ?></h2>
+
+        <form method="post">
+            <?php wp_nonce_field('aurora_related_posts_settings_action'); ?>
+
+            <label>
+                <input type="checkbox"
+                    name="aurora_related_posts_enable"
+                    value="1"
+                    <?php checked(get_option('aurora_related_posts_enable'), '1'); ?>>
+                <?php echo esc_html__('Display related posts at the bottom of all single posts', 'aurora-design-blocks'); ?>
+            </label>
+
+            <?php submit_button(__('Save Settings', 'aurora-design-blocks'), 'secondary', 'aurora_related_posts_settings_save'); ?>
+        </form>
+<?php
+    }
+
+    private function execute_rebuild()
+    {
+        global $wpdb;
+
+        $db         = new AuroraDesignBlocks_RelatedPosts_DBManager($wpdb);
+        $analyzer   = new AuroraDesignBlocks_RelatedPosts_LinkAnalyzer($db);
+        $rebuilder  = new AuroraDesignBlocks_RelatedPosts_BatchRebuilder($db, $analyzer);
+
+        $rebuilder->rebuild_all();
+
+        echo '<div class="notice notice-success"><p>'
+            . esc_html__('Rebuild completed successfully.', 'aurora-design-blocks')
+            . '</p></div>';
+    }
+}
 
 AuroraDesignBlocks_Admin::get_instance();
