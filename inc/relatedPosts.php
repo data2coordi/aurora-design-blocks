@@ -418,7 +418,7 @@ class AuroraDesignBlocks_RelatedPosts_BlockFrontend
     {
         $limit = isset($attributes['limit']) ? intval($attributes['limit']) : 5;
         $style = isset($attributes['styleType']) ? esc_attr($attributes['styleType']) : 'list';
-        $show_thumb = isset($attributes['show_thumb']) ? $attributes['show_thumb'] : '1';
+        $show_thumb = isset($attributes['show_thumb']) ? $attributes['show_thumb'] : true;
 
         $show_excerpt = filter_var(isset($attributes['showExcerpt']) ? $attributes['showExcerpt'] : false, FILTER_VALIDATE_BOOLEAN);
 
@@ -491,7 +491,7 @@ class AuroraDesignBlocks_RelatedPosts_BlockFrontend
 
 
             $thumb = '';
-            if ($show_thumb === '1') {
+            if ($show_thumb) {
                 $thumb_url = AuroraDesignBlocksPostThumbnail::getUrl($post, 'thumbnail');
 
                 $thumb_html = sprintf(
@@ -649,7 +649,8 @@ class AuroraDesignBlocks_RelatedPosts_Plugin
 
         // フロント用のレンダリングを呼び出す（SSRフラグは不要）
         $limit = get_option('aurora_related_posts_count', 5); // 管理画面設定を取得
-        $show_thumb = get_option('aurora_related_posts_show_thumbnail', '1');
+
+        $show_thumb = get_option('aurora_related_posts_show_thumbnail', '1') === '1' ? true : false;
         $html = $this->frontend->render_related_posts_block_html(
             [
                 'limit' => $limit,
