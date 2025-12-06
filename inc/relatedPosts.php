@@ -32,6 +32,10 @@ class AuroraDesignBlocks_RelatedPosts_DBManager
         dbDelta($sql);
     }
 
+    public function truncate()
+    {
+        return $this->wpdb->query("TRUNCATE TABLE {$this->adb_links_table}");
+    }
     /**
      * 特定の投稿IDに関連する既存リンクを全て削除する（DB登録操作）
      * @param int $post_id 削除対象のリンク元ID
@@ -152,43 +156,57 @@ class AuroraDesignBlocks_RelatedPosts_LinkAnalyzer
      * @param string $content 投稿本文
      * @return array 内部リンク先の投稿IDの配列
      */
+
     public function extract_internal_links($content)
     {
         $links = [];
-
-        $home_url  = rtrim(get_home_url(), '/');
+        $home_url = home_url();
         $home_host = wp_parse_url($home_url, PHP_URL_HOST);
 
-        // aタグのhrefを安定して抽出
-        if (preg_match_all('/<a\b[^>]*?href=["\']([^"\'>]+)["\']/i', $content, $matches)) {
+        // HTML 読み込み（エラー抑制）
+        libxml_use_internal_errors(true);
+        $dom = new DOMDocument;
+        $dom->loadHTML('<?xml encoding="utf-8" ?>' . $content);
+        libxml_clear_errors();
 
-            foreach ($matches[1] as $url) {
-                $parsed = wp_parse_url($url);
+        $xpath = new DOMXPath($dom);
+        $nodes = $xpath->query('//a[@href]');
 
-                // CASE 1: 絶対URL
-                if (!empty($parsed['host'])) {
-                    if ($parsed['host'] === $home_host) {
-                        $post_id = url_to_postid($url);
+        foreach ($nodes as $node) {
+            $url = $node->getAttribute('href');
+            if (!$url) continue;
 
-                        if ($post_id) {
-                            $links[] = $post_id;
-                        }
-                    }
-                    continue;
-                }
+            // ▼ 絶対URL → ホストチェック
+            $parsed = wp_parse_url($url);
 
-                // CASE 2: 相対URL
+            if (!empty($parsed['host'])) {
+                if ($parsed['host'] !== $home_host) continue;
+            } else {
+                // ▼ 相対URL → 正規化
                 if (strpos($url, '/') === 0) {
-                    $absolute = $home_url . $url;
-                    $post_id = url_to_postid($absolute);
-
-                    if ($post_id) {
-                        $links[] = $post_id;
-                    }
+                    $url = rtrim($home_url, '/') . $url;
+                } else {
                     continue;
                 }
+            }
 
-                // CASE 3: その他は無視
+            // ▼ フラグメントやクエリを除去
+            $clean_url = preg_replace('/[#?].*/', '', $url);
+            $post_id = url_to_postid($clean_url);
+
+            if (!$post_id) {
+                // fallback: path → post_name 逆引き
+                $path = trim(wp_parse_url($clean_url, PHP_URL_PATH), '/');
+                if ($path) {
+                    $page = get_page_by_path($path, OBJECT, ['post', 'page']);
+                    if ($page) {
+                        $post_id = $page->ID;
+                    }
+                }
+            }
+
+            if ($post_id) {
+                $links[] = (int) $post_id;
             }
         }
 
@@ -237,11 +255,11 @@ class AuroraDesignBlocks_RelatedPosts_BatchRebuilder
 
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
+        // 1. 既存リンク削除
+        $this->db_manager->truncate();
         foreach ($posts as $p) {
             $post_id = intval($p->ID);
 
-            // 1. 既存リンク削除
-            $this->db_manager->delete_links_by_source_id($post_id);
 
             // 2. 内部リンク抽出（LinkAnalyzer の private メソッドを利用できないためラッパーを追加推奨）
             $targets = $this->link_analyzer->extract_internal_links($p->post_content);
@@ -584,18 +602,55 @@ class AuroraDesignBlocks_RelatedPosts_Plugin
      */
     private function setup_hooks()
     {
-        // 1. アクティベーションフック (DBテーブル作成)
-        register_activation_hook(ADB_PLUGIN_FILE, array($this->db_manager, 'create_links_table'));
-
         // 2. リンクテーブル更新（投稿保存時）
-        add_action('save_post', array($this->link_analyzer, 'update_related_links_on_save'));
+        // ※ save_postフックの防御的チェックは LinkAnalyzer クラス側で実装されるべきです。
+        add_action('save_post', array($this->link_analyzer, 'update_related_links_on_save'), 10, 2);
 
 
         // 4. Gutenbergブロックの登録とフロントエンドレンダリング
-        // 実際のブロック登録コードが必要です。ここではレンダリング部分のみをフック。
         add_action('init', array($this, 'register_block'));
-        // ★ 追加: 投稿最下部に関連記事を自動挿入
-        add_filter('the_content', array($this, 'maybe_append_related_posts_to_content'));
+
+        // ★ 修正: 投稿最下部に関連記事を自動挿入
+        // 無限ループ防止のため、優先度を非常に低く設定 (9999) することも可能だが、
+        // ロジック内でフィルターを一時解除するアプローチを優先。
+        add_filter('the_content', array($this, 'maybe_append_related_posts_to_content'), 10);
+
+
+        // 🚨 修正点 1: アクティベーションフック内でグローバル変数と新規インスタンスを使用し、$thisへの依存を排除 
+        register_activation_hook(ADB_PLUGIN_FILE, function () {
+            global $wpdb;
+
+            // 1. DBテーブル作成
+            // 独立したDBManagerインスタンスを作成
+            $db_manager_activation = new AuroraDesignBlocks_RelatedPosts_DBManager($wpdb);
+            $db_manager_activation->create_links_table();
+
+            // 2. スケジュール登録
+            if (! wp_next_scheduled('AuroraDesignBlocks_rebuild_all_event')) {
+                $timestamp = strtotime('03:00:00');
+                if ($timestamp < time()) {
+                    $timestamp = strtotime('tomorrow 03:00:00');
+                }
+                wp_schedule_event($timestamp, 'daily', 'AuroraDesignBlocks_rebuild_all_event');
+            }
+        });
+
+        add_action('AuroraDesignBlocks_rebuild_all_event', function () {
+            // この部分は既に独立したインスタンス生成を行っており問題ありません。
+            global $wpdb;
+            $db          = new AuroraDesignBlocks_RelatedPosts_DBManager($wpdb);
+            $analyzer    = new AuroraDesignBlocks_RelatedPosts_LinkAnalyzer($db);
+            $rebuilder   = new AuroraDesignBlocks_RelatedPosts_BatchRebuilder($db, $analyzer);
+            $rebuilder->rebuild_all();
+        });
+
+        // デアクティベーションフックのファイルパスをADB_PLUGIN_FILEで統一
+        register_deactivation_hook(ADB_PLUGIN_FILE, function () {
+            $timestamp = wp_next_scheduled('AuroraDesignBlocks_rebuild_all_event');
+            if ($timestamp) {
+                wp_unschedule_event($timestamp, 'AuroraDesignBlocks_rebuild_all_event');
+            }
+        });
     }
 
     /**
@@ -603,15 +658,9 @@ class AuroraDesignBlocks_RelatedPosts_Plugin
      */
     public function register_block()
     {
-        // 実際のブロック登録処理。ここでは、サーバーサイドレンダリングのコールバックを設定します。
-        // register_block_type('aurora-design-blocks/related-posts', array(
-        //     'render_callback' => array($this->frontend, 'render_related_posts_block_html'),
-        //     // ...その他の設定
-        // ));
-
+        // ... (省略: 変更なし)
         // 仮のブロック登録フック（実際のJS/JSONファイルが必要です）
-        // 簡略化のため、ここではレンダリングコールバックの設定を直接行います。
-        if (function_exists('register_block_type')) {
+        if (function_exists('register_block_type') && defined('AURORA_DESIGN_BLOCKS_PATH')) { // AURORA_DESIGN_BLOCKS_PATHの定義チェックを追加
             register_block_type(AURORA_DESIGN_BLOCKS_PATH . '/blocks/related-posts', array(
                 'attributes' => array(
                     'limit' => array('type' => 'number', 'default' => 5),
@@ -645,8 +694,11 @@ class AuroraDesignBlocks_RelatedPosts_Plugin
 
         // ブロックとして表示済みの場合は二重表示を避けるため処理しない
         if (has_block('aurora-design-blocks/related-posts', $post)) {
-            //return $content;
+            // return $content; // オリジナルの仕様維持のためコメントアウト状態を維持
         }
+
+        // 🚨 修正点 2: 無限再帰防止のため、レンダリング前に一時的にこのフィルターを削除
+        remove_filter('the_content', array($this, 'maybe_append_related_posts_to_content'), 10);
 
         // フロント用のレンダリングを呼び出す（SSRフラグは不要）
         $limit = get_option('aurora_related_posts_count', 5); // 管理画面設定を取得
@@ -659,6 +711,9 @@ class AuroraDesignBlocks_RelatedPosts_Plugin
             ], // SSRの attributes に件数を渡す
             ''
         );
+
+        // 🚨 修正点 2: レンダリング後にフィルターを元に戻す
+        add_filter('the_content', array($this, 'maybe_append_related_posts_to_content'), 10);
 
         return $content . $html;
     }
