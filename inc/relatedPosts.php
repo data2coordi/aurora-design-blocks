@@ -153,7 +153,7 @@ class AuroraDesignBlocks_RelatedPosts_DBManager
             )
             GROUP BY t.target_post_id
         ) AS combined
-        ORDER BY FIELD(type,'reciprocal','inbound','outbound') ASC, updated_at_max DESC
+        ORDER BY FIELD(type,'inbound','reciprocal','outbound') ASC, updated_at_max DESC
         LIMIT %d
         ",
             $post_id,
