@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    branches: [master]
+    branches: [master, 関連記事機能]
 
 jobs:
   upload-release-asset:
