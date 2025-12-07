@@ -87,12 +87,11 @@ class AuroraDesignBlocks_RelatedPosts_DBManager
      * @param int $limit 取得制限数
      * @return array 関連投稿のIDとスコアを含むオブジェクトの配列
      */
-    public function get_related_post_ids_and_scores($target_post_id, $limit)
+    public function get_related_post_ids($target_post_id, $limit)
     {
         return $this->wpdb->get_results($this->wpdb->prepare(
             "SELECT
                 source_post_id AS related_id,
-                COUNT(source_post_id) AS score,
                 max(updated_at) As updated_at_max
             FROM
                 {$this->adb_links_table}
@@ -101,12 +100,72 @@ class AuroraDesignBlocks_RelatedPosts_DBManager
             GROUP BY
                 source_post_id
             ORDER BY
-                score DESC, updated_at_max DESC
+                updated_at_max DESC
             LIMIT %d",
             $target_post_id,
             $limit
         ), OBJECT);
     }
+
+    /**
+     * 相互リンク＋被リンク＋自分のリンクを優先順で取得（scoreなし）
+     * @param int $post_id
+     * @param int $limit
+     * @return array related_id と type ('reciprocal','inbound','outbound') を含むオブジェクト配列
+     */
+    public function get_all_related_links($post_id, $limit = 10)
+    {
+        $table = $this->adb_links_table;
+
+        return $this->wpdb->get_results($this->wpdb->prepare(
+            "
+        SELECT related_id,  updated_at_max FROM (
+            -- 1. 相互リンク
+            SELECT t1.target_post_id AS related_id, 'reciprocal' AS type, MAX(t1.updated_at) AS updated_at_max
+            FROM {$table} t1
+            INNER JOIN {$table} t2
+            ON t1.target_post_id = t2.source_post_id
+            AND t1.source_post_id = t2.target_post_id
+            WHERE t1.source_post_id = %d
+            GROUP BY t1.target_post_id
+
+            UNION ALL
+
+            -- 2. 被リンク（相互リンク除外）
+            SELECT t.source_post_id AS related_id, 'inbound' AS type, MAX(t.updated_at) AS updated_at_max
+            FROM {$table} t
+            WHERE t.target_post_id = %d
+            AND NOT EXISTS (
+                SELECT 1 FROM {$table} t2
+                WHERE t2.source_post_id = %d AND t2.target_post_id = t.source_post_id
+            )
+            GROUP BY t.source_post_id
+
+            UNION ALL
+
+            -- 3. 自分のリンク（アウトバウンド、相互リンク除外）
+            SELECT t.target_post_id AS related_id, 'outbound' AS type, MAX(t.updated_at) AS updated_at_max
+            FROM {$table} t
+            WHERE t.source_post_id = %d
+            AND NOT EXISTS (
+                SELECT 1 FROM {$table} t2
+                WHERE t2.source_post_id = t.target_post_id AND t2.target_post_id = %d
+            )
+            GROUP BY t.target_post_id
+        ) AS combined
+        ORDER BY FIELD(type,'reciprocal','inbound','outbound') ASC, updated_at_max DESC
+        LIMIT %d
+        ",
+            $post_id,
+            $post_id,
+            $post_id,
+            $post_id,
+            $post_id,
+            $limit
+        ), OBJECT);
+    }
+
+
 
     public function get_table_name()
     {
@@ -333,7 +392,7 @@ class AuroraDesignBlocks_RelatedPosts_BatchRebuilder
         foreach ($unique_targets as $target_id) {
             $target_title = get_the_title($target_id) ?: '(不明)';
 
-            $related = $this->db_manager->get_related_post_ids_and_scores($target_id, 9999);
+            $related = $this->db_manager->get_all_related_links($target_id, 9999);
 
             if (empty($related)) {
                 continue;
@@ -341,9 +400,9 @@ class AuroraDesignBlocks_RelatedPosts_BatchRebuilder
 
             foreach ($related as $r) {
                 $source_title = get_the_title($r->related_id) ?: '(不明)';
-                $score        = $r->score;
+                //$score        = $r->score;
 
-                error_log("[Reciprocal] {$source_title}  ==>  {$target_title} (score: {$score})");
+                error_log("[Reciprocal] {$source_title}  ==>  {$target_title} ");
             }
         }
 
@@ -379,23 +438,23 @@ class AuroraDesignBlocks_RelatedPosts_Query
      */
     public function get_reciprocal_related_posts($current_post_id, $limit = 5)
     {
-        $results = $this->db_manager->get_related_post_ids_and_scores($current_post_id, $limit);
+        $results = $this->db_manager->get_all_related_links($current_post_id, $limit);
 
         if (empty($results)) {
             return array();
         }
 
-        $related_posts_with_score = [];
+        $related_posts = [];
         foreach ($results as $r) {
             $post = get_post($r->related_id);
             if ($post) {
                 // スコアを投稿オブジェクトに動的に付加
-                $post->score = $r->score;
-                $related_posts_with_score[] = $post;
+                //$post->score = $r->score;
+                $related_posts[] = $post;
             }
         }
 
-        return $related_posts_with_score;
+        return $related_posts;
     }
 }
 
