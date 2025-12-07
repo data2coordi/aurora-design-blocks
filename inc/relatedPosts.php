@@ -20,7 +20,7 @@ class AuroraDesignBlocks_RelatedPosts_DBManager
         $table_name = $this->adb_links_table;
         $charset_collate = $this->wpdb->get_charset_collate();
 
-        $sql = "CREATE TABLE $table_name (
+        $sql = "CREATE TABLE IF NOT EXISTS $table_name (
             source_post_id BIGINT(20) UNSIGNED NOT NULL,
             target_post_id BIGINT(20) UNSIGNED NOT NULL,
             updated_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -314,6 +314,11 @@ class AuroraDesignBlocks_RelatedPosts_BatchRebuilder
         ");
 
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+
+
+
+        $this->db_manager->create_links_table();
+
 
         // 1. 既存リンク削除
         $this->db_manager->truncate();
@@ -679,10 +684,10 @@ class AuroraDesignBlocks_RelatedPosts_Plugin
         register_activation_hook(ADB_PLUGIN_FILE, function () {
             global $wpdb;
 
-            // 1. DBテーブル作成
-            // 独立したDBManagerインスタンスを作成
-            $db_manager_activation = new AuroraDesignBlocks_RelatedPosts_DBManager($wpdb);
-            $db_manager_activation->create_links_table();
+            $db          = new AuroraDesignBlocks_RelatedPosts_DBManager($wpdb);
+            $analyzer    = new AuroraDesignBlocks_RelatedPosts_LinkAnalyzer($db);
+            $rebuilder   = new AuroraDesignBlocks_RelatedPosts_BatchRebuilder($db, $analyzer);
+            $rebuilder->rebuild_all();
 
             // 2. スケジュール登録
             if (! wp_next_scheduled('AuroraDesignBlocks_rebuild_all_event')) {
