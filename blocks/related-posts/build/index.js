@@ -126,7 +126,7 @@ __webpack_require__.r(__webpack_exports__);
       })]
     });
   },
-  save: () => null //   ★ SSR
+  save: () => null //    ★ SSR
 });
 
 /***/ }),

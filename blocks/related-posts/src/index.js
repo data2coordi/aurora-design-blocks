@@ -87,5 +87,5 @@ registerBlockType("aurora-design-blocks/related-posts", {
     );
   },
 
-  save: () => null, //   ★ SSR
+  save: () => null, //    ★ SSR
 });
