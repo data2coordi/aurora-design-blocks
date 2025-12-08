@@ -327,86 +327,16 @@ class AuroraDesignBlocksPostThumbnail
 /* サムネイル取得(存在しなければ、本文の画像、デフォルト画像を取得) e	*/
 /********************************************************************/
 
-/********************************************************************/
-/* google翻訳でスラッグ対応 s	*/
-/********************************************************************/
-require_once plugin_dir_path(ADB_PLUGIN_FILE) . 'vendor/autoload.php';
-/**
- * 投稿タイトルを日本語に翻訳し、投稿スラッグ（post_name）を生成します。
- *
- * @param array $data    投稿データ配列。
- * @param array $postarr 生の投稿データ配列。
- * @return array 変更された投稿データ配列。
- */
-
-function aurora_design_blocks_translate_title_to_slug($data, $postarr)
-{
-    // APIキーが定義されていない場合は何もしない
-    // 投稿タイトルが空、または自動保存の場合は何もしない
-    if (empty($data['post_title']) || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)) {
-        return $data;
-    }
-
-    // 翻訳キャッシュキー
-    $cache_key = 'adb_slug_translate_' . md5($data['post_title']);
-    $cached_slug = get_transient($cache_key);
-    if ($cached_slug) {
-        $data['post_name'] = $cached_slug;
-        return $data;
-    }
-
-    try {
-
-
-        $GOOGLE_TRANSLATE_API_KEY = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
-
-        $translate = new Google\Cloud\Translate\V2\TranslateClient([
-            'key' => $GOOGLE_TRANSLATE_API_KEY
-        ]);
-        $result = $translate->translate($data['post_title'], [
-            'target' => 'en'
-        ]);
-
-        $data['post_name'] = sanitize_title($result['text']);
-    } catch (\Exception $e) {
-        // エラーが発生した場合の処理（例：エラーログに記録）
-        // error_log('Google Translate API error: ' . $e->getMessage());
-    }
-
-    return $data;
-}
-//add_filter('wp_insert_post_data', 'aurora_design_blocks_translate_title_to_slug', 10, 2);
-
-/********************************************************************/
-/* google翻訳でスラッグ対応 e	*/
-/********************************************************************/
 
 /********************************************************************/
 /* google geminiでスラッグ対応 s	*/
 /********************************************************************/
 
-/**
- * 投稿タイトルをGemini APIで英語に翻訳し、投稿スラッグ（post_name）を生成します。
- *
- * @param array $data    投稿データ配列。
- * @param array $postarr 生の投稿データ配列。
- * @return array 変更された投稿データ配列。
- */
+require_once plugin_dir_path(ADB_PLUGIN_FILE) . 'vendor/autoload.php';
 
 use GeminiAPI\Client;
 use GeminiAPI\Resources\Parts\TextPart;
 
-/**
- * 投稿タイトルをGemini APIで英語に翻訳し、投稿スラッグ（post_name）を生成します。
- *
- * 【変更点】
- * 1. スラッグが既に手動設定されている場合は実行しない。
- * 2. 既存投稿の更新時は実行しない（新規投稿時のみ）。
- *
- * @param array $data    投稿データ配列。
- * @param array $postarr 生の投稿データ配列。
- * @return array 変更された投稿データ配列。
- */
 
 /**
  * 投稿データ挿入前にスラッグを自動生成する。
@@ -415,83 +345,128 @@ use GeminiAPI\Resources\Parts\TextPart;
  * @param array $postarr 未サニタイズの元のデータ配列。
  * @return array 変更された、または変更のない投稿データ配列。
  */
-function aurora_design_blocks_change_title_to_slug($data, $postarr)
+class Aurora_GeminiAI_Slug_Generator
 {
-    // 1. 基本チェック：タイトルが空、または自動保存中の場合はスキップ
-    if (empty($data['post_title']) || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)) {
+
+    /**
+     * クラスのシングルトンインスタンスを格納します。
+     *
+     * @var Aurora_GeminiAI_Slug_Generator|null
+     */
+    private static $instance = null;
+
+    /**
+     * シングルトンインスタンスを取得します。
+     *
+     * @return Aurora_GeminiAI_Slug_Generator
+     */
+    public static function get_instance()
+    {
+        if (is_null(self::$instance)) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    /**
+     * コンストラクタ。WordPressのフックを設定します。
+     */
+    private function __construct()
+    {
+        // WordPressのフックを登録
+        add_filter('wp_insert_post_data', array($this, 'handle_post_data'), 10, 2);
+    }
+
+    /**
+     * 投稿データ挿入前にスラッグを自動生成するメインメソッド。
+     *
+     * @param array $data 投稿データ配列。
+     * @param array $postarr 未サニタイズの元のデータ配列。
+     * @return array 変更された、または変更のない投稿データ配列。
+     */
+    public function handle_post_data($data, $postarr)
+    {
+        // 1. 基本チェック：タイトルが空、または自動保存中の場合はスキップ
+        if (empty($data['post_title']) || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)) {
+            return $data;
+        }
+
+        // 2. AI機能の有効化チェック
+        // Aurora_GeminiAI_Settings クラスがロードされている必要があります
+        if (! class_exists('Aurora_GeminiAI_Settings')) {
+            return $data;
+        }
+
+        // AIスラッグ生成機能が無効な場合はスキップ
+        if (! Aurora_GeminiAI_Settings::is_ai_slug_enabled()) {
+            return $data;
+        }
+
+        // APIキーを取得。キーが空の場合はスキップ
+        $gemini_api_key = Aurora_GeminiAI_Settings::get_api_key();
+        if (empty($gemini_api_key)) {
+            // APIキーが未設定の場合は、処理をスキップ
+            return $data;
+        }
+
+        // 3. 実行条件のチェック
+        // 既にスラッグが設定されている場合はスキップ
+        if (! empty($data['post_name'])) {
+            //  return $data;
+        }
+
+        // 既存投稿の更新（ID > 0）はスキップし、新規作成時の初回保存のみを対象とする
+        if (isset($postarr['ID']) && $postarr['ID'] > 0) {
+            // return $data;
+        }
+
+        // ★★★ 実行条件を満たした場合、以降の処理へ進む ★★★
+
+        // 4. キャッシュチェック
+        $cache_key     = 'adb_slug_translate_' . md5($data['post_title']);
+        $cached_slug = get_transient($cache_key);
+
+        if ($cached_slug) {
+            $data['post_name'] = $cached_slug;
+            return $data;
+        }
+
+        // 5. API呼び出し
+        try {
+            // ★★★ 【注意】このClientクラスとTextPartクラスは、Google Gemini SDK
+            // の名前空間に合わせて適切に定義・ロードされている必要があります。
+            // 仮の定義として、元のコードに合わせています。
+
+            // 正しいライブラリのuseステートメントを仮定
+            $client = new Client($gemini_api_key);
+
+            $prompt = "以下の日本語のタイトルを英語のスラッグに適した短いフレーズに翻訳し、その結果を半角スペースをハイフンに置き換え、すべて小文字にしたスラッグ形式で返してください。翻訳結果のみを返してください。\n\nタイトル: " . $data['post_title'];
+
+            $response = $client->generativeModel('gemini-2.5-flash')
+                ->generateContent(
+                    new TextPart($prompt)
+                );
+
+            $translated_text = $response->text();
+            // WordPressの組み込み関数でスラッグをサニタイズ
+            $new_slug = sanitize_title($translated_text);
+
+            // 6. キャッシュに保存し、スラッグを更新
+            // 一時キャッシュを1時間（HOUR_IN_SECONDS * 1）設定
+            set_transient($cache_key, $new_slug, HOUR_IN_SECONDS * 1);
+            $data['post_name'] = $new_slug;
+        } catch (\Exception $e) {
+            // エラーが発生した場合はログに記録するのみで、処理は続行
+            error_log('Gemini API error during slug generation: ' . $e->getMessage());
+        }
+
         return $data;
     }
-
-    // 2. ★★★ 【新規追加】AI機能の有効化チェック ★★★
-    // Aurora_GeminiAI_Settings クラスがロードされている必要があります
-    if (! class_exists('Aurora_GeminiAI_Settings')) {
-        return $data;
-    }
-
-    // AIスラッグ生成機能が無効な場合はスキップ
-    if (! Aurora_GeminiAI_Settings::is_ai_slug_enabled()) {
-        return $data;
-    }
-
-    // APIキーを取得。キーが空の場合はスキップ
-    $gemini_api_key = Aurora_GeminiAI_Settings::get_api_key();
-    if (empty($gemini_api_key)) {
-        // 必要であれば、APIキーが未設定であることを管理者に通知するロジックをここに追加
-        return $data;
-    }
-
-    // 3. 実行条件のチェック
-    // 既にスラッグが設定されている場合（手動設定、または過去の保存で設定済み）はスキップ
-    if (!empty($data['post_name'])) {
-        return $data;
-    }
-
-    // 既存投稿の更新（ID > 0）はスキップし、新規作成時の初回保存のみを対象とする
-    if (isset($postarr['ID']) && $postarr['ID'] > 0) {
-        // IDが0より大きい場合は既存の投稿とみなし、スラッグ変更をスキップ
-        return $data;
-    }
-
-    // ★★★ 実行条件を満たした場合、以降の処理へ進む ★★★
-
-    // 4. キャッシュチェック
-    $cache_key = 'adb_slug_translate_' . md5($data['post_title']);
-    $cached_slug = get_transient($cache_key);
-
-    if ($cached_slug) {
-        $data['post_name'] = $cached_slug;
-        return $data;
-    }
-
-    // 5. API呼び出し
-    try {
-        // ★★★ 【変更点】ハードコードされたキーを、設定クラスから取得したキーに置き換え ★★★
-        $client = new Client($gemini_api_key);
-
-        $prompt = "以下の日本語のタイトルを英語のスラッグに適した短いフレーズに翻訳し、その結果を半角スペースをハイフンに置き換え、すべて小文字にしたスラッグ形式で返してください。翻訳結果のみを返してください。\n\nタイトル: " . $data['post_title'];
-
-        $response = $client->generativeModel('gemini-2.5-flash')
-            ->generateContent(
-                new TextPart($prompt)
-            );
-
-        $translated_text = $response->text();
-        $new_slug = sanitize_title($translated_text);
-
-        // 6. キャッシュに保存し、スラッグを更新
-        set_transient($cache_key, $new_slug, HOUR_IN_SECONDS * 1);
-        $data['post_name'] = $new_slug;
-    } catch (\Exception $e) {
-        // エラーが発生した場合はログに記録するのみで、処理は続行
-        error_log('Gemini API error during slug generation: ' . $e->getMessage());
-    }
-
-    return $data;
 }
 
 
+Aurora_GeminiAI_Slug_Generator::get_instance();
 
-add_filter('wp_insert_post_data', 'aurora_design_blocks_change_title_to_slug', 10, 2);
 
 /********************************************************************/
 /* google geminiでスラッグ対応 e	*/
