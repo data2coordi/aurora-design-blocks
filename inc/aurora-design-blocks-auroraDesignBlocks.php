@@ -412,12 +412,12 @@ class Aurora_GeminiAI_Slug_Generator
         // 3. 実行条件のチェック
         // 既にスラッグが設定されている場合はスキップ
         if (! empty($data['post_name'])) {
-            //  return $data;
+            return $data;
         }
 
         // 既存投稿の更新（ID > 0）はスキップし、新規作成時の初回保存のみを対象とする
         if (isset($postarr['ID']) && $postarr['ID'] > 0) {
-            // return $data;
+            return $data;
         }
 
         // ★★★ 実行条件を満たした場合、以降の処理へ進む ★★★
