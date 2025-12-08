@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 if (! defined('ABSPATH')) exit;
 /************************************************************/
 /*cssのロード s*/
@@ -51,6 +47,14 @@ add_action('wp', ['AuroraDesignBlocksPreDetermineCssAssets', 'init']);
 /************************************************************/
 /*cssのロード e*/
 /************************************************************/
+
+
+
+
+
+
+
+
 
 
 
@@ -172,7 +176,6 @@ class AuroraDesignBlocksTableOfContents
                 } elseif ($heading_tag === 'h3') {
                     $indent = '&nbsp;&nbsp;&nbsp;&nbsp;'; // H3ならインデント2つ
                 }
-                $toc .= '<li class="toc-' . strtolower($heading_tag) . '"><a href="#' . $id . '">' . wp_strip_all_tags($heading_text) . '</a></li>';
 
                 // 目次を作成
                 $toc .= '<li class="toc-' . strtolower($heading_tag) . '">' . $indent . '<a href="#' . $id . '">' . wp_strip_all_tags($heading_text) . '</a></li>';
@@ -311,8 +314,6 @@ class AuroraDesignBlocksPostThumbnail
     public static function render($post_id = null, $size = 'medium', $default_url = '')
     {
         echo '<img src="' . esc_url(self::get_thumbnail_url($post_id, $size, $default_url)) . '" alt="">';
-        $alt_text = esc_attr(get_the_title($post_id));
-        echo '<img src="' . esc_url(self::get_thumbnail_url($post_id, $size, $default_url)) . '" alt="' . $alt_text . '">';
 
         return;
     }
@@ -324,58 +325,4 @@ class AuroraDesignBlocksPostThumbnail
 }
 /********************************************************************/
 /* サムネイル取得(存在しなければ、本文の画像、デフォルト画像を取得) e	*/
-/********************************************************************/
-
-/********************************************************************/
-/* google翻訳でスラッグ対応 s	*/
-/********************************************************************/
-require_once plugin_dir_path(ADB_PLUGIN_FILE) . 'vendor/autoload.php';
-/**
- * 投稿タイトルを日本語に翻訳し、投稿スラッグ（post_name）を生成します。
- *
- * @param array $data    投稿データ配列。
- * @param array $postarr 生の投稿データ配列。
- * @return array 変更された投稿データ配列。
- */
-
-function aurora_design_blocks_translate_title_to_slug($data, $postarr)
-{
-    // APIキーが定義されていない場合は何もしない
-    // 投稿タイトルが空、または自動保存の場合は何もしない
-    if (empty($data['post_title']) || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)) {
-        return $data;
-    }
-
-    // 翻訳キャッシュキー
-    $cache_key = 'adb_slug_translate_' . md5($data['post_title']);
-    $cached_slug = get_transient($cache_key);
-    if ($cached_slug) {
-        $data['post_name'] = $cached_slug;
-        return $data;
-    }
-
-    try {
-
-
-        $GOOGLE_TRANSLATE_API_KEY = 'AIzaSyBYqvGve4xP37Mu4dm2sVFfkFerCr8eue8';
-
-        $translate = new Google\Cloud\Translate\V2\TranslateClient([
-            'key' => $GOOGLE_TRANSLATE_API_KEY
-        ]);
-        $result = $translate->translate($data['post_title'], [
-            'target' => 'en'
-        ]);
-
-        $data['post_name'] = sanitize_title($result['text']);
-    } catch (\Exception $e) {
-        // エラーが発生した場合の処理（例：エラーログに記録）
-        // error_log('Google Translate API error: ' . $e->getMessage());
-    }
-
-    return $data;
-}
-add_filter('wp_insert_post_data', 'aurora_design_blocks_translate_title_to_slug', 10, 2);
-
-/********************************************************************/
-/* google翻訳でスラッグ対応 e	*/
 /********************************************************************/
