@@ -329,7 +329,7 @@ class AuroraDesignBlocksPostThumbnail
 
 
 /********************************************************************/
-/* google geminiでスラッグ対応 s	*/
+/* google geminiでスラッグ対応 s */
 /********************************************************************/
 
 require_once plugin_dir_path(ADB_PLUGIN_FILE) . 'vendor/autoload.php';
@@ -337,29 +337,13 @@ require_once plugin_dir_path(ADB_PLUGIN_FILE) . 'vendor/autoload.php';
 use GeminiAPI\Client;
 use GeminiAPI\Resources\Parts\TextPart;
 
-
-/**
- * 投稿データ挿入前にスラッグを自動生成する。
- * Gemini AI Settings の設定に従って実行される。
- * * @param array $data 投稿データ配列。
- * @param array $postarr 未サニタイズの元のデータ配列。
- * @return array 変更された、または変更のない投稿データ配列。
- */
 class Aurora_GeminiAI_Slug_Generator
 {
-
-    /**
-     * クラスのシングルトンインスタンスを格納します。
-     *
-     * @var Aurora_GeminiAI_Slug_Generator|null
-     */
     private static $instance = null;
 
-    /**
-     * シングルトンインスタンスを取得します。
-     *
-     * @return Aurora_GeminiAI_Slug_Generator
-     */
+    // 保存前の旧投稿データ保持用
+    private static $old_posts = [];
+
     public static function get_instance()
     {
         if (is_null(self::$instance)) {
@@ -368,106 +352,140 @@ class Aurora_GeminiAI_Slug_Generator
         return self::$instance;
     }
 
-    /**
-     * コンストラクタ。WordPressのフックを設定します。
-     */
     private function __construct()
     {
-        // WordPressのフックを登録
-        add_filter('wp_insert_post_data', array($this, 'handle_post_data'), 10, 2);
+        // 保存前に旧データを取得
+        add_filter('wp_insert_post_data', array($this, 'capture_old_post_data'), 10, 2);
+
+        // 保存後のメイン処理
+        add_action('wp_after_insert_post', array($this, 'handle_post_after_insert'), 20, 3);
     }
 
     /**
-     * 投稿データ挿入前にスラッグを自動生成するメインメソッド。
-     *
-     * @param array $data 投稿データ配列。
-     * @param array $postarr 未サニタイズの元のデータ配列。
-     * @return array 変更された、または変更のない投稿データ配列。
+     * ① 保存前の旧データをキャプチャ
      */
-    public function handle_post_data($data, $postarr)
+    public function capture_old_post_data($data, $postarr)
     {
-        // 1. 基本チェック：タイトルが空、または自動保存中の場合はスキップ
-        if (empty($data['post_title']) || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)) {
-            return $data;
+        if (!empty($postarr['ID'])) {
+            $old = get_post($postarr['ID']);
+            if ($old) {
+                self::$old_posts[$postarr['ID']] = clone $old; // 保存前のスナップショット
+            }
+        }
+        return $data;
+    }
+
+    /**
+     * ② 保存後の処理（slug の初回生成を検知）
+     */
+    public function handle_post_after_insert($post_id, $post, $update)
+    {
+        error_log('=== wp_after_insert_post DEBUG START =============================');
+        error_log('post_id: ' . $post_id);
+        error_log('post_title: ' . $post->post_title);
+        error_log('post_name: ' . $post->post_name);
+        error_log('post_status: ' . $post->post_status);
+        error_log('update: ' . ($update ? 'true' : 'false'));
+        error_log('============================================================');
+
+        // リビジョン除外
+        if (wp_is_post_revision($post_id)) {
+            error_log('!!!skip: revision');
+            return;
         }
 
-        // 2. AI機能の有効化チェック
-        // Aurora_GeminiAI_Settings クラスがロードされている必要があります
-        if (! class_exists('Aurora_GeminiAI_Settings')) {
-            return $data;
+        // タイトル空は対象外
+        if (empty($post->post_title)) {
+            error_log('!!!skip: title empty');
+            return;
         }
 
-        // AIスラッグ生成機能が無効な場合はスキップ
-        if (! Aurora_GeminiAI_Settings::is_ai_slug_enabled()) {
-            return $data;
+        // auto-draft は slug 空なので対象外
+        if ($post->post_status === 'auto-draft') {
+            error_log('!!!skip: auto-draft');
+            return;
         }
 
-        // APIキーを取得。キーが空の場合はスキップ
+        // 保存前の旧データを取得
+        $old = self::$old_posts[$post_id] ?? null;
+
+        if (!$old) {
+            error_log('!!!skip: old post not found (first insert?)');
+            return;
+        }
+
+        $old_slug = $old->post_name;
+        $new_slug = $post->post_name;
+
+        error_log('old_slug: ' . $old_slug);
+        error_log('new_slug: ' . $new_slug);
+
+        /**
+         * ★コアが slug を初めて生成した瞬間を厳密に検知
+         * 旧 slug = 空
+         * 新 slug = 非空
+         */
+        $is_core_slug_generated =
+            (empty($old_slug)) &&
+            (!empty($new_slug));
+
+        if (!$is_core_slug_generated) {
+            error_log('!!!skip: コア初回スラッグ生成のタイミングでない');
+            return;
+        }
+
+        error_log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@ OK: コアの初回スラッグ生成を検出 → AI処理へ');
+
+        ///return;
+
+        /**************************************************************
+         * ここから AI スラッグ処理
+         **************************************************************/
+        if (
+            !class_exists('Aurora_GeminiAI_Settings') ||
+            !Aurora_GeminiAI_Settings::is_ai_slug_enabled()
+        ) {
+            error_log('skip: AI disabled');
+            return;
+        }
+
         $gemini_api_key = Aurora_GeminiAI_Settings::get_api_key();
         if (empty($gemini_api_key)) {
-            // APIキーが未設定の場合は、処理をスキップ
-            return $data;
+            error_log('skip: API key empty');
+            return;
         }
 
-        // 3. 実行条件のチェック
-        // 既にスラッグが設定されている場合はスキップ
-        if (! empty($data['post_name'])) {
-            return $data;
-        }
-
-        // 既存投稿の更新（ID > 0）はスキップし、新規作成時の初回保存のみを対象とする
-        if (isset($postarr['ID']) && $postarr['ID'] > 0) {
-            return $data;
-        }
-
-        // ★★★ 実行条件を満たした場合、以降の処理へ進む ★★★
-
-        // 4. キャッシュチェック
-        $cache_key     = 'adb_slug_translate_' . md5($data['post_title']);
-        $cached_slug = get_transient($cache_key);
-
-        if ($cached_slug) {
-            $data['post_name'] = $cached_slug;
-            return $data;
-        }
-
-        // 5. API呼び出し
         try {
-            // ★★★ 【注意】このClientクラスとTextPartクラスは、Google Gemini SDK
-            // の名前空間に合わせて適切に定義・ロードされている必要があります。
-            // 仮の定義として、元のコードに合わせています。
-
-            // 正しいライブラリのuseステートメントを仮定
             $client = new Client($gemini_api_key);
 
-            $prompt = "以下の日本語のタイトルを英語のスラッグに適した短いフレーズに翻訳し、その結果を半角スペースをハイフンに置き換え、すべて小文字にしたスラッグ形式で返してください。翻訳結果のみを返してください。\n\nタイトル: " . $data['post_title'];
+            $prompt = "以下の日本語のタイトルを英語のスラッグに適した短いフレーズに翻訳し、"
+                . "半角スペースをハイフンに置き換え、小文字にして返してください。\n\n"
+                . "タイトル: " . $post->post_title;
 
             $response = $client->generativeModel('gemini-2.5-flash')
-                ->generateContent(
-                    new TextPart($prompt)
-                );
+                ->generateContent(new TextPart($prompt));
 
-            $translated_text = $response->text();
-            // WordPressの組み込み関数でスラッグをサニタイズ
-            $new_slug = sanitize_title($translated_text);
+            $translated = $response->text();
+            $ai_slug   = sanitize_title($translated);
 
-            // 6. キャッシュに保存し、スラッグを更新
-            // 一時キャッシュを1時間（HOUR_IN_SECONDS * 1）設定
-            set_transient($cache_key, $new_slug, HOUR_IN_SECONDS * 1);
-            $data['post_name'] = $new_slug;
+            error_log('AI result slug: ' . $ai_slug);
+
+            wp_update_post([
+                'ID'        => $post_id,
+                'post_name' => $ai_slug,
+            ]);
+
+            error_log('AI slug updated.');
         } catch (\Exception $e) {
-            // エラーが発生した場合はログに記録するのみで、処理は続行
-            error_log('Gemini API error during slug generation: ' . $e->getMessage());
+            error_log('Gemini API Error: ' . $e->getMessage());
         }
 
-        return $data;
+        error_log('=== wp_after_insert_post DEBUG END ===');
     }
 }
 
-
 Aurora_GeminiAI_Slug_Generator::get_instance();
 
-
 /********************************************************************/
-/* google geminiでスラッグ対応 e	*/
+/* google geminiでスラッグ対応 e */
 /********************************************************************/
