@@ -458,8 +458,8 @@ class Aurora_GeminiAI_Slug_Generator
         try {
             $client = new Client($gemini_api_key);
 
-            $prompt = "以下の日本語のタイトルを英語のスラッグに適した短いフレーズに翻訳し、"
-                . "半角スペースをハイフンに置き換え、小文字にして返してください。\n\n"
+            $prompt = "以下の日本語のタイトルを英語のWordPress用スラッグに適した短いフレーズに翻訳し、"
+                . "半角スペースをハイフンに置き換え、小文字にして返してください。すでに英語のスラッグの場合は変更せずにそのまま返してください\n\n"
                 . "タイトル: " . $post->post_title;
 
             $response = $client->generativeModel('gemini-2.5-flash')
