@@ -420,6 +420,13 @@ class Aurora_GeminiAI_Slug_Generator
         error_log('old_slug: ' . $old_slug);
         error_log('new_slug: ' . $new_slug);
 
+        // ★追加：すでに英語っぽい場合は処理しない
+        if (preg_match('/^[a-z0-9\-]+$/', $new_slug)) {
+            error_log('!!!skip: slug is already in English');
+            return;
+        }
+
+
         /**
          * ★コアが slug を初めて生成した瞬間を厳密に検知
          * 旧 slug = 空
@@ -436,7 +443,7 @@ class Aurora_GeminiAI_Slug_Generator
 
         error_log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@ OK: コアの初回スラッグ生成を検出 → AI処理へ');
 
-        ///return;
+        return;
 
         /**************************************************************
          * ここから AI スラッグ処理
