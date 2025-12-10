@@ -1,5 +1,5 @@
 <?php
-class Aurora_Feature_Flags
+class AuroraDesignBlocks_AdminFront_FeatureFlags
 {
 
     public static function get_options()
@@ -38,7 +38,7 @@ class Aurora_Feature_Flags
 
 
 
-class Aurora_GeminiAI_Settings
+class AuroraDesignBlocks_AdminFront_CreateSlug
 {
     // 設定ページで登録したオプション名
     const OPTION_NAME = 'aurora_gemini_ai_options';

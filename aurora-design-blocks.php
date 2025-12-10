@@ -29,6 +29,9 @@ define('ADB_PLUGIN_FILE', __FILE__);
 
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin-front.php';
+require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin-page-about.php';
+require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin-page-featureFlags.php';
+require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin-page-createSlug.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-outerAssets.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-customizer.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-auroraDesignBlocks.php';

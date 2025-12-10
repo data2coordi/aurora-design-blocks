@@ -84,7 +84,7 @@ add_action('wp', ['AuroraDesignBlocksPreDetermineCssAssets', 'init']);
 
 function AuroraDesignBlocks_add_ogp_meta_tags()
 {
-    if (!Aurora_Feature_Flags::ogp()) {
+    if (!AuroraDesignBlocks_AdminFront_FeatureFlags::ogp()) {
         return; // OGP 出力
     }
     if (is_singular() || is_front_page() || is_home()) { // トップページも対象
@@ -148,7 +148,7 @@ class AuroraDesignBlocksTableOfContents
 
         $hide_toc = get_post_meta(get_the_ID(), 'hide_toc', true);
 
-        if ((!Aurora_Feature_Flags::toc()) || ($hide_toc == '1')) {
+        if ((!AuroraDesignBlocks_AdminFront_FeatureFlags::toc()) || ($hide_toc == '1')) {
             return $content;
         }
 
@@ -443,20 +443,19 @@ class Aurora_GeminiAI_Slug_Generator
 
         error_log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@ OK: コアの初回スラッグ生成を検出 → AI処理へ');
 
-        return;
 
         /**************************************************************
          * ここから AI スラッグ処理
          **************************************************************/
         if (
-            !class_exists('Aurora_GeminiAI_Settings') ||
-            !Aurora_GeminiAI_Settings::is_ai_slug_enabled()
+            !class_exists('AuroraDesignBlocks_AdminFront_CreateSlug') ||
+            !AuroraDesignBlocks_AdminFront_CreateSlug::is_ai_slug_enabled()
         ) {
             error_log('skip: AI disabled');
             return;
         }
 
-        $gemini_api_key = Aurora_GeminiAI_Settings::get_api_key();
+        $gemini_api_key = AuroraDesignBlocks_AdminFront_CreateSlug::get_api_key();
         if (empty($gemini_api_key)) {
             error_log('skip: API key empty');
             return;
