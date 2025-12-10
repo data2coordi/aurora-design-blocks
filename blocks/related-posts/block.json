@@ -1,0 +1,40 @@
+{
+  "apiVersion": 2,
+  "name": "aurora-design-blocks/related-posts",
+  "title": "[ADB] Reciprocal Related Posts",
+  "category": "design",
+  "icon": "share",
+  "description": "本文中のリンク構造（相互参照）に基づき、最も関連性の高い記事を自動表示します。",
+  "supports": {
+    "html": false,
+    "color": {
+      "background": true,
+      "text": true
+    },
+    "spacing": {
+      "padding": true,
+      "margin": true
+    }
+  },
+  "attributes": {
+    "limit": {
+      "type": "number",
+      "default": 5
+    },
+    "showExcerpt": {
+      "type": "boolean",
+      "default": false
+    },
+    "styleType": {
+      "type": "string",
+      "default": "list"
+    },
+    "show_thumb": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "editorScript": "file:./build/index.js",
+  "editorStyle": "file:./build/index.css",
+  "style": "file:./build/style-index.css"
+}
