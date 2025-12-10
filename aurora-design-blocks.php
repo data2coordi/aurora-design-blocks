@@ -8,7 +8,7 @@ if (! defined('ABSPATH')) exit;
  * Author: Yurika Toshida at Aurora Lab
  * Text Domain: aurora-design-blocks
  * Domain Path: /languages
- * License: GPLv2 or later
+ * License: GPLv2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 

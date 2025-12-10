@@ -4,7 +4,7 @@ Tags: toc, analytics, ga4, gtm, ogp
 Requires at least: 6.0
 Tested up to: 6.9
 Stable tag: 2.0.7
-License: GPLv2 or later
+License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Short Description: Multi-functional plugin for GA4, GTM, AdSense, OGP, and automated Table of Contents (TOC), generally essential for blogs.
