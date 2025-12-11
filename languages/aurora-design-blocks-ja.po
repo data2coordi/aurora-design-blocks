@@ -956,8 +956,8 @@ msgstr "AIスラッグ生成を有効にする"
 msgid "Gemini API Key"
 msgstr "Gemini API キー"
 
-msgid "Enable automatic slug generation using Gemini AI (only on first save)"
-msgstr "Gemini AI を使用した自動スラッグ生成を有効にする（初回保存時のみ）"
+msgid "Enable automatic slug generation using Gemini AI (It is generated only the first time you save a new post)"
+msgstr "Gemini AI を使用した自動スラッグ生成を有効にする（投稿ページ作成の初回保存時のみ生成します）"
 
 msgid "Enter the API Key obtained from Google AI Studio. %sHow to get the key%s"
 msgstr "Google AI Studio から取得した API キーを入力してください。%sキーの取得方法%s"
