@@ -38,9 +38,20 @@ git commit -m "douki v$ver-release"
 
 # --- STEP 3: 検証環境のクリーンアップとデプロイ ---
 echo "--- 3. 検証環境のクリーンアップ ---"
-# 検証環境をリリース版と一致させる
-git clean -fd --work-tree=..
-# ... 最終検証（テスト）を実行 ...
+# 1. カレントディレクトリを保存
+CURRENT_DIR=$(pwd)
+
+# 2. プロジェクトルートへ移動 (カレントは ./util なので ../ がルート)
+cd ..
+
+# 3. クリーンアップ実行 (-fx で .gitignore 対象も含めて削除)
+# 前回、master で untracked files として残っていたため -fd ではなく -fx を使用
+git clean -fx
+
+# 4. 元のディレクトリに戻る
+cd "$CURRENT_DIR"
+
+
 echo "--- masterをリモートへプッシュ ---"
 git push origin master
 
