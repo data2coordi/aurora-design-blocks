@@ -32,12 +32,14 @@ require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin-front.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin-page-about.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin-page-featureFlags.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin-page-createSlug.php';
-require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-relatedPosts.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin-page-relatedPosts.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-outerAssets.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-customizer.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-auroraDesignBlocks.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks_helper.php';
+require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-createSlug.php';
+require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-relatedPosts.php';
+
 
 
 if (file_exists(AURORA_DESIGN_BLOCKS_PATH . "/aurora-design-blocks-pro.php")) {
