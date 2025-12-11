@@ -1,5 +1,5 @@
 <?php
-class Aurora_Feature_Flags
+class AuroraDesignBlocks_AdminFront_FeatureFlags
 {
 
     public static function get_options()
@@ -38,7 +38,7 @@ class Aurora_Feature_Flags
 
 
 
-class Aurora_GeminiAI_Settings
+class AuroraDesignBlocks_AdminFront_CreateSlug
 {
     // 設定ページで登録したオプション名
     const OPTION_NAME = 'aurora_gemini_ai_options';
@@ -99,7 +99,15 @@ class Aurora_GeminiAI_Settings
     public static function get_api_key()
     {
         $options = self::get_options();
-        // APIキーは文字列として取得し、安全のためにトリミング
-        return isset($options['api_key']) ? trim($options['api_key']) : '';
+        $encrypted_key = isset($options['api_key']) ? trim($options['api_key']) : '';
+
+        if (empty($encrypted_key)) {
+            return '';
+        }
+
+        // ★ 共通ヘルパーを使用
+        $decrypted_key = AuroraDesignBlocks_Security_Helper::decrypt_key($encrypted_key);
+
+        return trim($decrypted_key);
     }
 }

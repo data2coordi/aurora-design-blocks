@@ -29,14 +29,33 @@ define('ADB_PLUGIN_FILE', __FILE__);
 
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin-front.php';
+require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin-page-about.php';
+require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin-page-featureFlags.php';
+require AURORA_DESIGN_BLOCKS_PATH . '/inc/admin-page-createSlug.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-outerAssets.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-customizer.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-auroraDesignBlocks.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks_helper.php';
+require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-createSlug.php';
 
-if (file_exists(AURORA_DESIGN_BLOCKS_PATH . "/aurora-design-blocks-pro.php")) {
-    require AURORA_DESIGN_BLOCKS_PATH . '/aurora-design-blocks-pro.php';
+
+// 存在する場合のみファイルをロード s
+$files_to_load = [
+    '/aurora-design-blocks-pro.php',
+    '/inc/aurora-design-blocks-textDomain.php',
+    '/inc/admin-page-relatedPosts.php',
+    '/inc/aurora-design-blocks-relatedPosts.php'
+];
+
+// 配列をループして、存在チェックとロードを実行
+foreach ($files_to_load as $relative_path) {
+    // フルパスを構築
+    $full_path = AURORA_DESIGN_BLOCKS_PATH . $relative_path;
+
+    // ファイルの存在をチェック
+    if (file_exists($full_path)) {
+        // 存在すればロード（読み込み）
+        require $full_path;
+    }
 }
-if (file_exists(AURORA_DESIGN_BLOCKS_PATH . "/inc/aurora-design-blocks-textDomain.php")) {
-    require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-textDomain.php';
-}
+// 条件付きで他のファイルをロード e

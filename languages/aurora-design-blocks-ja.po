@@ -944,7 +944,44 @@ msgstr "目次 自動生成"
 msgid "Tab not found."
 msgstr "タブが見つかりません。"
 
+msgid "Auto Slug Create Settings"
+msgstr "自動スラッグ生成設定"
 
+msgid "Automatic Slug Generation Settings"
+msgstr "自動スラッグ生成設定"
+
+msgid "Enable AI Slug Generation"
+msgstr "AIスラッグ生成を有効にする"
+
+msgid "Gemini API Key"
+msgstr "Gemini API キー"
+
+msgid "Enable automatic slug generation using Gemini AI (It is generated only the first time you publish a new post)"
+msgstr "Gemini AI を使用した自動スラッグ生成を有効にする（投稿ページ作成の初回公開時のみ生成します）"
+
+msgid "Enter the API Key obtained from Google AI Studio. %sHow to get the key%s"
+msgstr "Google AI Studio から取得した API キーを入力してください。%sキーの取得方法%s"
+
+
+msgid "To enable automatic slug generation, the Gemini API Key is required. The function has been disabled."
+msgstr "自動的なスラッグ生成を有効にするには、Gemini APIキーが必要です。この機能は無効になっています。"
+
+# エラー通知のメッセージ
+#: path/to/plugin/class-aurora-design-blocks-admin-page-create-slug.php:130
+msgid "**Automatic Slug Generation Failed** (Gemini API Error): Your post title was not converted to an English slug due to an API issue."
+msgstr "**スラッグ自動生成に失敗しました** (Gemini APIエラー): APIの問題により、投稿タイトルを英語スラッグに変換できませんでした。"
+
+#: path/to/plugin/class-aurora-design-blocks-admin-page-create-slug.php:131
+msgid "Possible causes include: **incorrect API key**, or **exceeding the daily usage limit** of the Gemini API."
+msgstr "原因として、**APIキーの誤り**、または Gemini APIの**1日の利用制限超過**の可能性があります。"
+
+#: path/to/plugin/class-aurora-design-blocks-admin-page-create-slug.php:132
+msgid "Error details: %s"
+msgstr "エラー詳細: %s"
+
+#: path/to/plugin/class-aurora-design-blocks-admin-page-create-slug.php:133
+msgid "AI Slug Generation Status"
+msgstr "AIスラッグ生成ステータス"
 #########
 #管理画面 e
 #########

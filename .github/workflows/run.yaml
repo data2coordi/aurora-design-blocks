@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    branches: [master]
+    branches: [master, dev]
 
 jobs:
   upload-release-asset:
@@ -11,6 +11,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      # =======================================================
+      # 1. 依存ライブラリのインストール (新規追加)
+      # =======================================================
+      - name: Install PHP Dependencies (Production)
+        uses: ramsey/composer-install@v3 # Composerインストールを効率的に行うAction
+        with:
+          # --no-dev: 開発環境専用の依存関係 (require-dev) はインストールしない
+          # --optimize-autoloader: オートローダーを最適化 (本番環境向け)
+          # --no-interaction: 対話モードを無効化
+          no-dev: true
+          optimize-autoloader: true
+          no-interaction: true
 
       - name: build
         # ホワイトリスト方式：リリースに必要なファイルとディレクトリのみを指定してzip化します。
@@ -26,7 +38,8 @@ jobs:
             "webfonts/" \
             "aurora-design-blocks.php" \
             "aurora-design-blocks-pro.php" \
-            "readme.txt"
+            "readme.txt" \
+            "vendor/"
 
       - name: リリースを作成する
         uses: actions/create-release@v1
