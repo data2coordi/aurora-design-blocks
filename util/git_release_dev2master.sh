@@ -20,7 +20,7 @@ ver=$(grep -i "^[[:space:]]*\*[[:space:]]*Version:" ../aurora-design-blocks.php 
 sed -i "s/define('AURORA_DESIGN_BLOCKS_VERSION', '[0-9.]*');/define('AURORA_DESIGN_BLOCKS_VERSION', '$ver');/" ../aurora-design-blocks.php
 sed -i "s/^Stable tag: [0-9.]*/Stable tag: $ver/" ../readme.txt
 git add ../aurora-design-blocks.php ../readme.txt
-git commit -m "v$ver-release prep at dev"
+git commit --allow-empty -m "v$ver-release prep at dev"
 
 # --- STEP 2: masterへの安全な統合とコミット ---
 echo "--- 2. masterへのスカッシュマージ準備 ---"
