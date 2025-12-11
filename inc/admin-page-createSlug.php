@@ -207,7 +207,7 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
 
         echo '<label>';
         echo '<input type="checkbox" name="' . esc_attr($this->option_name) . '[ai_slug_enabled]" value="1"' . $checked . '/>';
-        echo esc_html__('Enable automatic slug generation using Gemini AI (It is generated only the first time you save a new post)', 'aurora-design-blocks');
+        echo esc_html__('Enable automatic slug generation using Gemini AI (It is generated only the first time you publish a new post)', 'aurora-design-blocks');
         echo '</label>';
     }
 
