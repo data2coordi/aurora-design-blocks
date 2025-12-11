@@ -38,7 +38,8 @@ git commit -m "douki v$ver-release"
 
 # --- STEP 3: 検証環境のクリーンアップとデプロイ ---
 echo "--- 3. 検証環境のクリーンアップ ---"
-git clean -fd # 検証環境をリリース版と一致させる
+# 検証環境をリリース版と一致させる
+git clean -fd --work-tree=..
 # ... 最終検証（テスト）を実行 ...
 echo "--- masterをリモートへプッシュ ---"
 git push origin master
