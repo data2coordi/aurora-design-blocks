@@ -16,10 +16,10 @@ echo "--- 1. devブランチでバージョン更新 ---"
 git checkout dev
 
 # ... (バージョン更新とコミットの処理) ...
-ver=$(grep -i "^Version:" ../style.css | awk '{print $2}')
-if [ -z "$ver" ]; then echo "エラー: バージョン取得不可"; exit 1; fi
-sed -i "s/define('_INTEGLIGHT_S_VERSION', '[0-9.]*');/define('_INTEGLIGHT_S_VERSION', '$ver');/" ../functions.php
-git add ../functions.php
+ver=$(grep -i "^[[:space:]]*\*[[:space:]]*Version:" ../aurora-design-blocks.php | awk '{print $NF}')
+sed -i "s/define('AURORA_DESIGN_BLOCKS_VERSION', '[0-9.]*');/define('AURORA_DESIGN_BLOCKS_VERSION', '$ver');/" ../aurora-design-blocks.php
+sed -i "s/^Stable tag: [0-9.]*/Stable tag: $ver/" ../readme.txt
+git add ../aurora-design-blocks.php ../readme.txt
 git commit -m "v$ver-release prep at dev"
 
 # --- STEP 2: masterへの安全な統合とコミット ---
@@ -61,7 +61,7 @@ done
 
 # 4-4. 復元されたファイルを再度コミット
 git add .
-git commit -m "Revert deletion of unreleased features after master merge and restore them on dev"
+git commit -m "リリース対象外ファイルを復元＆復元されたファイルを再度コミット"
 
 # 4-5. リモートのdevにプッシュ
 git push origin dev
