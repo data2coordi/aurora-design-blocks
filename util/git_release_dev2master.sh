@@ -24,7 +24,7 @@ echo "--- 2-2. リリース対象外ファイルの除外（ステージング�
 for file in $UNRELEASED_FILES; do
     git reset HEAD -- "$file" # masterの履歴を健全に保つ
 done
-git commit -m "douki v$ver-release"
+git commit --allow-empty -m "douki v$ver-release"
 
 # --- STEP 3: 検証環境のクリーンアップとデプロイ (簡素化) ---
 echo "--- 3. 検証環境のクリーンアップ (プッシュ前クリーンアップ省略) ---"
