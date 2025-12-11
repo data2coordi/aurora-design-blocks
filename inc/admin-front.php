@@ -99,7 +99,15 @@ class AuroraDesignBlocks_AdminFront_CreateSlug
     public static function get_api_key()
     {
         $options = self::get_options();
-        // APIキーは文字列として取得し、安全のためにトリミング
-        return isset($options['api_key']) ? trim($options['api_key']) : '';
+        $encrypted_key = isset($options['api_key']) ? trim($options['api_key']) : '';
+
+        if (empty($encrypted_key)) {
+            return '';
+        }
+
+        // ★ 共通ヘルパーを使用
+        $decrypted_key = AuroraDesignBlocks_Security_Helper::decrypt_key($encrypted_key);
+
+        return trim($decrypted_key);
     }
 }

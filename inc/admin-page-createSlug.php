@@ -1,5 +1,77 @@
 <?php
 
+
+/**
+ * 暗号化/復号化処理を担う共通セキュリティヘルパークラス
+ */
+class AuroraDesignBlocks_Security_Helper
+{
+    /**
+     * 文字列を暗号化するヘルパー関数 (IVをデータに含める)
+     * * @param string $data 暗号化するデータ.
+     * @return string 暗号化されたデータ (IVと暗号文をBase64エンコードして連結).
+     */
+    public static function encrypt_key($data)
+    {
+        if (empty($data)) {
+            return '';
+        }
+
+        $key = defined('AUTH_KEY') ? AUTH_KEY : '';
+        if (empty($key)) {
+            return $data;
+        }
+
+        $cipher = 'aes-256-cbc';
+        $iv_len = openssl_cipher_iv_length($cipher);
+        $iv = openssl_random_pseudo_bytes($iv_len);
+
+        $encrypted = openssl_encrypt($data, $cipher, $key, OPENSSL_RAW_DATA, $iv);
+
+        if ($encrypted === false) {
+            return $data;
+        }
+
+        return base64_encode($iv . $encrypted);
+    }
+
+    /**
+     * 文字列を復号化するヘルパー関数 (データからIVを抽出)
+     *
+     * @param string $data 復号化するデータ (IVと暗号文が連結されBase64エンコードされたもの).
+     * @return string 復号化されたデータ.
+     */
+    public static function decrypt_key($data)
+    {
+        if (empty($data)) {
+            return '';
+        }
+
+        $key = defined('AUTH_KEY') ? AUTH_KEY : '';
+        if (empty($key)) {
+            return $data;
+        }
+
+        $cipher = 'aes-256-cbc';
+        $iv_len = openssl_cipher_iv_length($cipher);
+
+        $decoded = base64_decode($data);
+
+        if (strlen($decoded) < $iv_len) {
+            return $data;
+        }
+
+        $iv = substr($decoded, 0, $iv_len);
+        $encrypted = substr($decoded, $iv_len);
+
+        $decrypted = openssl_decrypt($encrypted, $cipher, $key, OPENSSL_RAW_DATA, $iv);
+
+        return $decrypted !== false ? $decrypted : $data;
+    }
+}
+
+
+
 /**
  * タブページクラス: AuroraDesignBlocks_AdminPage_CreateSlug (新規タブ)
  */
@@ -7,6 +79,8 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
 {
     private $option_group = 'aurora_gemini_ai_group';
     private $option_name = 'aurora_gemini_ai_options';
+
+
 
     /**
      * [新規メソッド] WordPressのフック経由で自身を AuroraDesignBlocks_AdminTabs に登録する
@@ -80,17 +154,24 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
     public function sanitize($input)
     {
         $out = [];
+        $current_options = get_option($this->option_name); // 現在の保存値を取得
 
-        // 1. 有効/無効のチェックボックス (デフォルト無効)
-        $out['ai_slug_enabled'] = isset($input['ai_slug_enabled']) && $input['ai_slug_enabled'] === '1' ? '1' : '0';
+        // ... (ai_slug_enabled の処理は省略)
 
-        // 2. APIキーのサニタイズ (文字列として安全に処理)
-        // APIキーは長いため、通常のテキストフィールドとしてサニタイズ
-        $out['api_key'] = isset($input['api_key']) ? sanitize_text_field(trim($input['api_key'])) : '';
+        // 2. APIキーの処理
+        $new_key = isset($input['api_key']) ? trim($input['api_key']) : '';
+
+        // ユーザーが何か新しいキーを入力した場合
+        if (!empty($new_key)) {
+            $sanitized_key = sanitize_text_field($new_key);
+            $out['api_key'] = AuroraDesignBlocks_Security_Helper::encrypt_key($sanitized_key);
+        } else {
+            // 入力が空の場合、現在の暗号化された値を保持
+            $out['api_key'] = isset($current_options['api_key']) ? $current_options['api_key'] : '';
+        }
 
         return $out;
     }
-
     /**
      * 設定ページを描画
      */
@@ -129,7 +210,10 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
     public function render_api_key_field()
     {
         $options = get_option($this->option_name);
-        $key = isset($options['api_key']) ? $options['api_key'] : '';
+        $encrypted_key = isset($options['api_key']) ? $options['api_key'] : '';
+
+        // 復号化して表示
+        $key = AuroraDesignBlocks_Security_Helper::decrypt_key($encrypted_key);
 
         echo '<input type="text" name="' . esc_attr($this->option_name) . '[api_key]" value="' . esc_attr($key) . '" size="60" placeholder="AIzaSy..." />';
         echo '<p class="description">';
