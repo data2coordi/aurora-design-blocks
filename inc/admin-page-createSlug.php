@@ -151,34 +151,59 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
     /**
      * 設定値をサニタイズ
      */
+    // ... (中略)
+
+    /**
+     * 設定値をサニタイズ
+     */
     public function sanitize($input)
     {
         $out = [];
-        $current_options = get_option($this->option_name); // 現在の保存値を取得
+        // 現在の保存値を取得
+        $current_options = get_option($this->option_name);
 
-        // 1. 機能有効/無効の処理 (★ここを追加/修正します)
-        // チェックボックスは、チェックされている場合のみ $input['ai_slug_enabled'] が存在する
+        // 1. 機能有効/無効の処理
         if (isset($input['ai_slug_enabled']) && $input['ai_slug_enabled'] === '1') {
             $out['ai_slug_enabled'] = '1';
         } else {
-            // チェックされていない場合は '0' (無効) として保存する
             $out['ai_slug_enabled'] = '0';
         }
 
-        // 2. APIキーの処理
+        // 2. APIキーの処理 (前回修正したロジック)
         $new_key = isset($input['api_key']) ? trim($input['api_key']) : '';
 
-        // ユーザーが何か新しいキーを入力した場合
+        // 新しいキーの入力があれば暗号化
         if (!empty($new_key)) {
             $sanitized_key = sanitize_text_field($new_key);
             $out['api_key'] = AuroraDesignBlocks_Security_Helper::encrypt_key($sanitized_key);
+        } elseif (isset($input['api_key']) && $input['api_key'] === '') {
+            // 入力が空で送信された場合、キーを削除
+            $out['api_key'] = '';
         } else {
-            // 入力が空の場合、現在の暗号化された値を保持
+            // キーの入力がない場合、現在の暗号化されたキーを保持
             $out['api_key'] = isset($current_options['api_key']) ? $current_options['api_key'] : '';
+        }
+
+        // 3. ★【追加するロジック】キーがない場合の有効化を禁止
+        // 機能が有効化されており (ai_slug_enabled === '1')、かつ
+        // 最終的に保存されるAPIキーが空の場合 (empty($out['api_key']))
+        if ($out['ai_slug_enabled'] === '1' && empty($out['api_key'])) {
+
+            // 強制的に機能を無効化する
+            $out['ai_slug_enabled'] = '0';
+
+            // ユーザーにエラーメッセージを表示する
+            add_settings_error(
+                $this->option_name,
+                'api_key_required',
+                __('To enable automatic slug generation, the Gemini API Key is required. The function has been disabled.', 'aurora-design-blocks'),
+                'error'
+            );
         }
 
         return $out;
     }
+// ... (中略)
     /**
      * 設定ページを描画
      */
@@ -188,6 +213,7 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
 
         <form method="post" action="options.php">
             <?php
+            settings_errors();
             settings_fields($this->option_group);
             do_settings_sections($this->option_group);
             submit_button();

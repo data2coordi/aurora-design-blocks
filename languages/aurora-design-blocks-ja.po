@@ -962,6 +962,11 @@ msgstr "Gemini AI を使用した自動スラッグ生成を有効にする（�
 msgid "Enter the API Key obtained from Google AI Studio. %sHow to get the key%s"
 msgstr "Google AI Studio から取得した API キーを入力してください。%sキーの取得方法%s"
 
+
+msgid "To enable automatic slug generation, the Gemini API Key is required. The function has been disabled."
+msgstr "自動的なスラッグ生成を有効にするには、Gemini APIキーが必要です。この機能は無効になっています。"
+
+
 #########
 #管理画面 e
 #########
