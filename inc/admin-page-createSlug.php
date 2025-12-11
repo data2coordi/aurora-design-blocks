@@ -156,7 +156,14 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
         $out = [];
         $current_options = get_option($this->option_name); // 現在の保存値を取得
 
-        // ... (ai_slug_enabled の処理は省略)
+        // 1. 機能有効/無効の処理 (★ここを追加/修正します)
+        // チェックボックスは、チェックされている場合のみ $input['ai_slug_enabled'] が存在する
+        if (isset($input['ai_slug_enabled']) && $input['ai_slug_enabled'] === '1') {
+            $out['ai_slug_enabled'] = '1';
+        } else {
+            // チェックされていない場合は '0' (無効) として保存する
+            $out['ai_slug_enabled'] = '0';
+        }
 
         // 2. APIキーの処理
         $new_key = isset($input['api_key']) ? trim($input['api_key']) : '';

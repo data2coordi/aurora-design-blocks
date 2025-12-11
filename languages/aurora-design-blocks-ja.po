@@ -944,6 +944,23 @@ msgstr "目次 自動生成"
 msgid "Tab not found."
 msgstr "タブが見つかりません。"
 
+msgid "Gemini AI Settings"
+msgstr "Gemini AI 設定"
+
+msgid "Automatic Slug Generation Settings"
+msgstr "自動スラッグ生成設定"
+
+msgid "Enable AI Slug Generation"
+msgstr "AIスラッグ生成を有効にする"
+
+msgid "Gemini API Key"
+msgstr "Gemini API キー"
+
+msgid "Enable automatic slug generation using Gemini AI (only on first save)"
+msgstr "Gemini AI を使用した自動スラッグ生成を有効にする（初回保存時のみ）"
+
+msgid "Enter the API Key obtained from Google AI Studio. %sHow to get the key%s"
+msgstr "Google AI Studio から取得した API キーを入力してください。%sキーの取得方法%s"
 
 #########
 #管理画面 e
