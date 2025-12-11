@@ -48,7 +48,7 @@ cd "$CURRENT_DIR"
 git checkout dev
 
 # 4-3. masterをdevにマージ (masterの削除差分がdevに反映される)
-git merge master
+git merge master --no-edit --no-ff
 
 # 4-4. masterへのマージによって削除されたファイルを復元する (履歴保持の鍵)
 echo "--- 4-4. リリース対象外だった機能をdevに復元 ---"
