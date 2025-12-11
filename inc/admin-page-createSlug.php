@@ -101,7 +101,7 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
 
     public function get_label()
     {
-        return __('Gemini AI Settings', 'aurora-design-blocks'); // タブのラベル
+        return __('Auto Slug Create Settings', 'aurora-design-blocks'); // タブのラベル
     }
 
     // ... （中略：register_settings, sanitize, render_page, field_render メソッドは変更なし）
@@ -185,7 +185,6 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
     public function render_page()
     {
 ?>
-        <h2><?php echo esc_html__('Gemini AI Settings', 'aurora-design-blocks'); ?></h2>
 
         <form method="post" action="options.php">
             <?php

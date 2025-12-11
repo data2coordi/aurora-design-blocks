@@ -944,8 +944,8 @@ msgstr "目次 自動生成"
 msgid "Tab not found."
 msgstr "タブが見つかりません。"
 
-msgid "Gemini AI Settings"
-msgstr "Gemini AI 設定"
+msgid "Auto Slug Create Settings"
+msgstr "自動スラッグ生成設定"
 
 msgid "Automatic Slug Generation Settings"
 msgstr "自動スラッグ生成設定"
