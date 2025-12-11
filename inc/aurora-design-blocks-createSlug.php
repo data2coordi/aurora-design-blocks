@@ -138,16 +138,16 @@ class Aurora_GeminiAI_Slug_Generator
         try {
             $client = new Client($gemini_api_key);
 
-            $prompt = "以下の日本語のタイトルを英語のWordPress用スラッグに適した短いフレーズに翻訳し、"
-                . "半角スペースをハイフンに置き換え、小文字にして返してください。すでに英語のスラッグの場合は変更せずにそのまま返してください\n\n"
-                . "タイトル: " . $post->post_title;
+            $prompt = "Please translate the following title into a short phrase suitable for an English WordPress slug, replace half-width spaces with hyphens, and return the result in lowercase. If the title is already an English slug, return it without modification.\n\n"
+                . "title: " . $post->post_title;
 
             $response = $client->generativeModel('gemini-2.5-flash')
                 ->generateContent(new TextPart($prompt));
 
             $translated = $response->text();
             $ai_slug   = sanitize_title($translated);
-
+            // 成功した場合、既存のエラーログをクリア
+            delete_option('adb_gemini_last_error');
             error_log('AI result slug: ' . $ai_slug);
 
             wp_update_post([
@@ -158,6 +158,10 @@ class Aurora_GeminiAI_Slug_Generator
             error_log('AI slug updated.');
         } catch (\Exception $e) {
             error_log('Gemini API Error: ' . $e->getMessage());
+            // ★★★ 失敗した場合、エラーメッセージをDBに保存 ★★★
+            $error_message = 'Gemini API Error: ' . $e->getMessage();
+            error_log($error_message);
+            update_option('adb_gemini_last_error', $error_message);
         }
 
         error_log('=== wp_after_insert_post DEBUG END ===');

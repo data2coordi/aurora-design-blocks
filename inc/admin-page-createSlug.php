@@ -97,6 +97,8 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
     {
         // 設定を登録
         add_action('admin_init', [$this, 'register_settings']);
+        // ★★★ エラー表示フックを追加 ★★★
+        add_action('admin_notices', [$this, 'display_last_api_error']);
     }
 
     public function get_label()
@@ -104,6 +106,46 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
         return __('Auto Slug Create Settings', 'aurora-design-blocks'); // タブのラベル
     }
 
+    /**
+     * ★★★ 投稿処理で発生したAPIエラーを管理画面上部に表示 ★★★
+     */
+    /**
+     * ★★★ 投稿処理で発生したAPIエラーを管理画面上部に表示 ★★★
+     */
+    public function display_last_api_error()
+    {
+        // ユーザーが自分のプラグインの設定ページにいる場合に限定して表示
+        if (!isset($_GET['page']) || strpos($_GET['page'], 'aurora-design-blocks') === false) {
+            return;
+        }
+
+        $last_error = get_option('adb_gemini_last_error');
+
+        if (!empty($last_error)) {
+            // エラーを一度表示したら削除して、管理画面をリロードするたびに表示されないようにする
+            delete_option('adb_gemini_last_error');
+
+            // 基本となるエラーメッセージ
+            $base_message = __('**Automatic Slug Generation Failed** (Gemini API Error): Your post title was not converted to an English slug due to an API issue.', 'aurora-design-blocks');
+
+            // 補足メッセージ
+            $supplement_message = __('Possible causes include: **incorrect API key**, or **exceeding the daily usage limit** of the Gemini API.', 'aurora-design-blocks');
+
+            // 詳細なエラーメッセージ
+            $detail_message = sprintf(
+                __('Error details: %s', 'aurora-design-blocks'),
+                esc_html($last_error)
+            );
+
+            // WordPressのエラー通知として表示
+            echo '<div class="notice notice-error is-dismissible">';
+            echo '<p><strong>' . esc_html__('AI Slug Generation Status', 'aurora-design-blocks') . '</strong></p>';
+            echo '<p>' . $base_message . '</p>';
+            echo '<p><strong>' . $supplement_message . '</strong></p>'; // ★ここを太字で強調
+            echo '<p class="description">' . $detail_message . '</p>';
+            echo '</div>';
+        }
+    }
     // ... （中略：register_settings, sanitize, render_page, field_render メソッドは変更なし）
     public function register_settings()
     {
