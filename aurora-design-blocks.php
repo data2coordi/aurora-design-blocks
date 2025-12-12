@@ -40,7 +40,7 @@ require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-createSlug.php';
 
 
 // 存在する場合のみファイルをロード s
-$files_to_load = [
+$auroraDesignBlocks_files_to_load = [
     '/aurora-design-blocks-pro.php',
     '/inc/aurora-design-blocks-textDomain.php',
     '/inc/admin-page-relatedPosts.php',
@@ -48,14 +48,14 @@ $files_to_load = [
 ];
 
 // 配列をループして、存在チェックとロードを実行
-foreach ($files_to_load as $relative_path) {
+foreach ($auroraDesignBlocks_files_to_load as $relative_path) {
     // フルパスを構築
-    $full_path = AURORA_DESIGN_BLOCKS_PATH . $relative_path;
+    $auroraDesignBlocks_full_path = AURORA_DESIGN_BLOCKS_PATH . $relative_path;
 
     // ファイルの存在をチェック
-    if (file_exists($full_path)) {
+    if (file_exists($auroraDesignBlocks_full_path)) {
         // 存在すればロード（読み込み）
-        require $full_path;
+        require $auroraDesignBlocks_full_path;
     }
 }
 // 条件付きで他のファイルをロード e

@@ -159,10 +159,13 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
      */
     public function display_last_api_error()
     {
-        // ユーザーが自分のプラグインの設定ページにいる場合に限定して表示
-        if (!isset($_GET['page']) || strpos($_GET['page'], 'aurora-design-blocks') === false) {
+        $page = isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : '';
+
+        if ($page === '' || strpos($page, 'aurora-design-blocks') === false) {
             return;
         }
+
+
 
         $last_error = get_option('adb_gemini_last_error');
 
@@ -176,7 +179,7 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
             // 補足メッセージ
             $supplement_message = __('Possible causes include: **incorrect API key**, or **exceeding the daily usage limit** of the Gemini API.', 'aurora-design-blocks');
 
-            // 詳細なエラーメッセージ
+            // translators: %s is the raw error message from the Gemini API.
             $detail_message = sprintf(
                 __('Error details: %s', 'aurora-design-blocks'),
                 esc_html($last_error)
@@ -185,9 +188,9 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
             // WordPressのエラー通知として表示
             echo '<div class="notice notice-error is-dismissible">';
             echo '<p><strong>' . esc_html__('AI Slug Generation Status', 'aurora-design-blocks') . '</strong></p>';
-            echo '<p>' . $base_message . '</p>';
-            echo '<p><strong>' . $supplement_message . '</strong></p>'; // ★ここを太字で強調
-            echo '<p class="description">' . $detail_message . '</p>';
+            echo '<p>' . esc_html($base_message) . '</p>';
+            echo '<p><strong>' . esc_html($supplement_message) . '</strong></p>'; // ★ここを太字で強調
+            echo '<p class="description">' . esc_html($detail_message) . '</p>';
             echo '</div>';
         }
     }
@@ -315,10 +318,10 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
     public function render_ai_slug_enabled_field()
     {
         $options = get_option($this->option_name);
-        $checked = isset($options['ai_slug_enabled']) ? checked($options['ai_slug_enabled'], '1', false) : '';
+        $value   = isset($options['ai_slug_enabled']) ? $options['ai_slug_enabled'] : '0';
 
         echo '<label>';
-        echo '<input type="checkbox" name="' . esc_attr($this->option_name) . '[ai_slug_enabled]" value="1"' . $checked . '/>';
+        echo '<input type="checkbox" name="' . esc_attr($this->option_name) . '[ai_slug_enabled]" value="1" ' . checked($value, '1', false) . ' />';
         echo esc_html__('Enable automatic slug generation using Gemini AI (It is generated only the first time you publish a new post)', 'aurora-design-blocks');
         echo '</label>';
     }
