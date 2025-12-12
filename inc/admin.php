@@ -43,6 +43,8 @@ class AuroraDesignBlocks_AdminTop
      */
     public function render()
     {
+
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- $_GET['tab'] is only used for display purposes.
         $tab = isset($_GET['tab'])
             ? sanitize_text_field(wp_unslash($_GET['tab']))
             : $this->tabs->get_default();

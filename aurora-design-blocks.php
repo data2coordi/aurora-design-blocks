@@ -39,7 +39,24 @@ require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks_helper.php';
 require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-createSlug.php';
 
 
-// 存在する場合のみファイルをロード s
+
+/**
+ * 指定したファイル群を存在チェック後に読み込む
+ *
+ * @param string[] $files ファイルパスの配列（相対パス）
+ * @param string $base_path ベースディレクトリパス
+ */
+function load_files_if_exist(array $files, string $base_path)
+{
+    foreach ($files as $file) {
+        $full_path = $base_path . $file;
+        if (file_exists($full_path)) {
+            require $full_path;
+        }
+    }
+}
+
+// 使用例
 $auroraDesignBlocks_files_to_load = [
     '/aurora-design-blocks-pro.php',
     '/inc/aurora-design-blocks-textDomain.php',
@@ -47,15 +64,7 @@ $auroraDesignBlocks_files_to_load = [
     '/inc/aurora-design-blocks-relatedPosts.php'
 ];
 
-// 配列をループして、存在チェックとロードを実行
-foreach ($auroraDesignBlocks_files_to_load as $relative_path) {
-    // フルパスを構築
-    $auroraDesignBlocks_full_path = AURORA_DESIGN_BLOCKS_PATH . $relative_path;
+load_files_if_exist($auroraDesignBlocks_files_to_load, AURORA_DESIGN_BLOCKS_PATH);
 
-    // ファイルの存在をチェック
-    if (file_exists($auroraDesignBlocks_full_path)) {
-        // 存在すればロード（読み込み）
-        require $auroraDesignBlocks_full_path;
-    }
-}
+
 // 条件付きで他のファイルをロード e

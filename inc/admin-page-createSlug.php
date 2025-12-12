@@ -188,9 +188,9 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
             // WordPressのエラー通知として表示
             echo '<div class="notice notice-error is-dismissible">';
             echo '<p><strong>' . esc_html__('AI Slug Generation Status', 'aurora-design-blocks') . '</strong></p>';
-            echo '<p>' . esc_html($base_message) . '</p>';
-            echo '<p><strong>' . esc_html($supplement_message) . '</strong></p>'; // ★ここを太字で強調
-            echo '<p class="description">' . esc_html($detail_message) . '</p>';
+            echo '<p>' . wp_kses_post($base_message) . '</p>';
+            echo '<p><strong>' . wp_kses_post($supplement_message) . '</strong></p>'; // ★ここを太字で強調
+            echo '<p class="description">' . wp_kses_post($detail_message) . '</p>';
             echo '</div>';
         }
     }
