@@ -43,8 +43,9 @@ class AuroraDesignBlocks_AdminTop
      */
     public function render()
     {
-        $tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : $this->tabs->get_default();
-
+        $tab = isset($_GET['tab'])
+            ? sanitize_text_field(wp_unslash($_GET['tab']))
+            : $this->tabs->get_default();
 ?>
         <div class="wrap">
             <h1><?php echo esc_html__('Aurora Design Blocks', 'aurora-design-blocks'); ?></h1>
@@ -100,7 +101,7 @@ class AuroraDesignBlocks_AdminTabs
     {
         foreach ($this->tabs as $key => $obj) {
             $active = $current === $key ? 'nav-tab-active' : '';
-            echo '<a href="?page=aurora-design-blocks&tab=' . esc_attr($key) . '" class="nav-tab ' . $active . '">'
+            echo '<a href="?page=aurora-design-blocks&tab=' . esc_attr($key) . '" class="nav-tab ' . esc_attr($active)   . '">'
                 . esc_html($obj->get_label()) .
                 '</a>';
         }

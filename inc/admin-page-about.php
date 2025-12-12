@@ -42,8 +42,9 @@ class AuroraDesignBlocks_AdminPage_About
             <?php
             // カスタマイザーへのリンクを動的に取得・表示する場合（WordPressの場合）
             $customizer_link = admin_url('customize.php');
+            // translators: 1: opening <a> tag for customizer link, 2: closing </a> tag.
             printf(
-                esc_html__('Configure these settings in the %sCustomizer%s.', 'aurora-design-blocks'),
+                esc_html__('Configure these settings in the %1$sCustomizer%2$s.', 'aurora-design-blocks'),
                 '<a href="' . esc_url($customizer_link) . '">',
                 '</a>'
             );

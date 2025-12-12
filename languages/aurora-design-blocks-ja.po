@@ -914,8 +914,8 @@ msgstr "- Google Tag Manager"
 msgid "- Google AdSense"
 msgstr "- Google AdSense"
 
-msgid "Configure these settings in the %sCustomizer%s."
-msgstr "これらの設定は %sカスタマイザー%s で行えます。"
+msgid "Configure these settings in the %1$sCustomizer%2$s."
+msgstr "これらの設定は %1$sカスタマイザー%2$s で行えます。"
 
 msgid "Other features"
 msgstr "その他の機能"
