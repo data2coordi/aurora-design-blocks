@@ -336,8 +336,12 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
 
         echo '<input type="text" name="' . esc_attr($this->option_name) . '[api_key]" value="' . esc_attr($key) . '" size="60" placeholder="AIzaSy..." />';
         echo '<p class="description">';
+        // translators: 1: Opening link tag, 2: Closing link tag.
         printf(
-            esc_html__('Enter the API Key obtained from Google AI Studio. %sHow to get the key%s', 'aurora-design-blocks'),
+            esc_html__(
+                'Enter the API Key obtained from Google AI Studio. %1$sHow to get the key%2$s',
+                'aurora-design-blocks'
+            ),
             '<a href="" target="_blank">',
             '</a>'
         );
