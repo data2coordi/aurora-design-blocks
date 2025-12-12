@@ -5,4 +5,4 @@ npm init -y
 npm install --save-deva webpack webpack-cli webpack-dev-server babel-loader @babel/core @babel/preset-env @babel/preset-react @wordpress/scripts
 
 各ブロックアイテム配下でa
-npm run builda
+npm run buildaa
