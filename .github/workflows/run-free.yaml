@@ -27,6 +27,7 @@ jobs:
             "aurora-design-blocks.php" \
             "aurora-design-blocks-pro.php" \
             "readme.txt" \
+            "vendor/" \
             -x "inc/aurora-design-blocks-textDomain.php"
 
       - name: リリースを作成する
