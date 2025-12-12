@@ -35,8 +35,6 @@ jobs:
           rm -rf plugin-update-checker
           rm -rf tmp
           rm -f aurora-design-blocks-pro.php
-          rm -f *.json
-          rm -f *.lock
           rm -f *phpcs.xml*
           rm -f *phpunit*
           rm -f .phpcs.xml.dist
