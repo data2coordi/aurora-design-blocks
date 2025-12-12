@@ -1,5 +1,3 @@
-
-
 <?php
 
 class AuroraDesignBlocks_RelatedPosts_DBManager
