@@ -6,33 +6,59 @@
  */
 class AuroraDesignBlocks_Security_Helper
 {
+
     /**
      * 文字列を暗号化するヘルパー関数 (IVをデータに含める)
-     * * @param string $data 暗号化するデータ.
+     *
+     * @param string $data 暗号化するデータ.
      * @return string 暗号化されたデータ (IVと暗号文をBase64エンコードして連結).
      */
     public static function encrypt_key($data)
     {
+
+        // ログステップ 1: 入力データチェック
         if (empty($data)) {
             return '';
         }
 
+        // ※ base64_decode($data, true) を使用することで、デコード可能なデータかを厳密にチェックします。
+        if (base64_decode($data, true) !== false) {
+            return $data; // 既にBase64形式なので、そのまま返す
+        }
+
+        // ログステップ 2: 鍵の存在チェック
         $key = defined('AUTH_KEY') ? AUTH_KEY : '';
         if (empty($key)) {
             return $data;
         }
+        // 警告: デバッグのため鍵の内容を出力 (極めて危険)
 
         $cipher = 'aes-256-cbc';
         $iv_len = openssl_cipher_iv_length($cipher);
-        $iv = openssl_random_pseudo_bytes($iv_len);
 
-        $encrypted = openssl_encrypt($data, $cipher, $key, OPENSSL_RAW_DATA, $iv);
-
-        if ($encrypted === false) {
+        // ログステップ 3: IV生成
+        $iv = openssl_random_pseudo_bytes($iv_len, $crypto_strong);
+        if ($iv === false || !$crypto_strong) {
             return $data;
         }
 
-        return base64_encode($iv . $encrypted);
+        // ログステップ 4: 暗号化実行
+        $encrypted = openssl_encrypt($data, $cipher, $key, OPENSSL_RAW_DATA, $iv);
+
+        if ($encrypted === false) {
+            while ($msg = openssl_error_string()) {
+            }
+            return $data;
+        }
+        // 警告: デバッグのため暗号文の内容を出力
+
+        // ログステップ 5: IVと暗号文の結合とBase64エンコード
+        $combined_data = $iv . $encrypted;
+        $result_base64 = base64_encode($combined_data);
+
+        // 警告: デバッグのため最終的なBase64文字列の内容を出力
+
+        return $result_base64;
     }
 
     /**
@@ -43,33 +69,52 @@ class AuroraDesignBlocks_Security_Helper
      */
     public static function decrypt_key($data)
     {
+        // ログステップ 1: 入力データチェック
         if (empty($data)) {
             return '';
         }
 
+        // ログステップ 2: 鍵の存在チェック
         $key = defined('AUTH_KEY') ? AUTH_KEY : '';
         if (empty($key)) {
             return $data;
         }
+        // 警告: デバッグのため鍵の内容を出力 (極めて危険)
 
         $cipher = 'aes-256-cbc';
         $iv_len = openssl_cipher_iv_length($cipher);
 
-        $decoded = base64_decode($data);
+        // ログステップ 3: Base64デコード
+        $decoded = base64_decode($data, true);
 
-        if (strlen($decoded) < $iv_len) {
+        if ($decoded === false) {
+            return $data;
+        }
+        $decoded_len = strlen($decoded);
+        // 警告: デバッグのためデコード後のバイナリデータ（先頭部分）を出力
+
+        // ログステップ 4: データ長チェック
+        if ($decoded_len < $iv_len) {
             return $data;
         }
 
+        // ログステップ 5: IVと暗号文の分離
         $iv = substr($decoded, 0, $iv_len);
         $encrypted = substr($decoded, $iv_len);
 
+        // ログステップ 6: 復号化実行
         $decrypted = openssl_decrypt($encrypted, $cipher, $key, OPENSSL_RAW_DATA, $iv);
 
-        return $decrypted !== false ? $decrypted : $data;
+        if ($decrypted === false) {
+            while ($msg = openssl_error_string()) {
+            }
+            return $data;
+        }
+
+
+        return $decrypted;
     }
 }
-
 
 
 /**
