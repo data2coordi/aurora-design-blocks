@@ -148,6 +148,7 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
 
     public function get_label()
     {
+        // translators: The title for the "Automatic Slug Creation Settings" tab on the WordPress admin screen.
         return __('Auto Slug Create Settings', 'aurora-design-blocks'); // タブのラベル
     }
 
@@ -179,8 +180,8 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
             // 補足メッセージ
             $supplement_message = __('Possible causes include: **incorrect API key**, or **exceeding the daily usage limit** of the Gemini API.', 'aurora-design-blocks');
 
-            // translators: %s is the raw error message from the Gemini API.
             $detail_message = sprintf(
+                // translators: %s is the raw error message from the Gemini API.
                 __('Error details: %s', 'aurora-design-blocks'),
                 esc_html($last_error)
             );
@@ -248,6 +249,14 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
      */
     public function sanitize($input)
     {
+
+        // ★★★ 修正箇所: Nonce検証の追加 ★★★
+        if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), $this->option_group . '-options')) {
+            // nonceが不正な場合は、現在の設定をそのまま返して処理を中止
+            return get_option($this->option_name);
+        }
+        // ★★★ 修正箇所: ここまで ★★★
+
         $out = [];
         // 現在の保存値を取得
         $current_options = get_option($this->option_name);
@@ -339,8 +348,8 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
 
         echo '<input type="text" name="' . esc_attr($this->option_name) . '[api_key]" value="' . esc_attr($key) . '" size="60" placeholder="AIzaSy..." />';
         echo '<p class="description">';
-        // translators: 1: Opening link tag, 2: Closing link tag.
         printf(
+            // translators: 1: Opening link tag, 2: Closing link tag.
             esc_html__(
                 'Enter the API Key obtained from Google AI Studio. %1$sHow to get the key%2$s',
                 'aurora-design-blocks'

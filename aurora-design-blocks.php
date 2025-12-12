@@ -4,7 +4,7 @@ if (! defined('ABSPATH')) exit;
 /**
  * Plugin Name: Aurora Design Blocks
  * Description: Multi-functional plugin for GA4, GTM, AdSense, OGP, and automated Table of Contents (TOC), generally essential for blogs.
- * Version: 2.0.8
+ * Version: 1.0.8
  * Author: Yurika Toshida at Aurora Lab
  * Text Domain: aurora-design-blocks
  * Domain Path: /languages
@@ -14,7 +14,7 @@ if (! defined('ABSPATH')) exit;
 
 if (!defined('AURORA_DESIGN_BLOCKS_VERSION')) {
     // Replace the version number of the theme on each release.
-    define('AURORA_DESIGN_BLOCKS_VERSION', '2.0.7');
+    define('AURORA_DESIGN_BLOCKS_VERSION', '1.0.8');
 }
 
 
@@ -46,7 +46,7 @@ require AURORA_DESIGN_BLOCKS_PATH . '/inc/aurora-design-blocks-createSlug.php';
  * @param string[] $files ファイルパスの配列（相対パス）
  * @param string $base_path ベースディレクトリパス
  */
-function load_files_if_exist(array $files, string $base_path)
+function auroraDesignBlocks_load_files_if_exist(array $files, string $base_path)
 {
     foreach ($files as $file) {
         $full_path = $base_path . $file;
@@ -64,7 +64,7 @@ $auroraDesignBlocks_files_to_load = [
     '/inc/aurora-design-blocks-relatedPosts.php'
 ];
 
-load_files_if_exist($auroraDesignBlocks_files_to_load, AURORA_DESIGN_BLOCKS_PATH);
+auroraDesignBlocks_load_files_if_exist($auroraDesignBlocks_files_to_load, AURORA_DESIGN_BLOCKS_PATH);
 
 
 // 条件付きで他のファイルをロード e
