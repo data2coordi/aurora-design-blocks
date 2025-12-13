@@ -64,4 +64,5 @@ git commit -m "リリース対象外ファイルを復元＆復元されたフ�
 git push origin dev
 
 echo "--- リリース完了 (v$ver) とdevの準備完了 ---"
+#/usr/bin/php8.3 $(which composer) update 
 exit 0
