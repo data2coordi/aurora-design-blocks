@@ -355,7 +355,9 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
                 'Enter the API Key obtained from Google AI Studio. %1$sHow to get the key%2$s',
                 'aurora-design-blocks'
             ),
-            '<a href="" target="_blank">',
+            '<a href="https://integlight.auroralab-design.com/auto-generate-wordpress-slug/" target="_blank">',
+
+
             '</a>'
         );
         echo '</p>';
