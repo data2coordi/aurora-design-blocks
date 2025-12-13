@@ -79,7 +79,6 @@ class AuroraDesignBlocks_Security_Helper
         if (empty($key)) {
             return $data;
         }
-        // 警告: デバッグのため鍵の内容を出力 (極めて危険)
 
         $cipher = 'aes-256-cbc';
         $iv_len = openssl_cipher_iv_length($cipher);
@@ -91,7 +90,6 @@ class AuroraDesignBlocks_Security_Helper
             return $data;
         }
         $decoded_len = strlen($decoded);
-        // 警告: デバッグのためデコード後のバイナリデータ（先頭部分）を出力
 
         // ログステップ 4: データ長チェック
         if ($decoded_len < $iv_len) {
@@ -160,6 +158,9 @@ class AuroraDesignBlocks_AdminPage_CreateSlug
      */
     public function display_last_api_error()
     {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        // Note: $_GET['page'] is only used for read-only page identification and does not process data, 
+        // so nonce verification is intentionally omitted here.
         $page = isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : '';
 
         if ($page === '' || strpos($page, 'aurora-design-blocks') === false) {
