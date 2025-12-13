@@ -43,6 +43,11 @@ class AuroraDesignBlocks_AdminTop
      */
     public function render()
     {
+        // CSRF対策としてNonceを検証
+        if (isset($_GET['_wpnonce']) && !wp_verify_nonce(sanitize_key(wp_unslash($_GET['_wpnonce'])), 'aurora-design-blocks-tab')) {
+            // Nonce検証失敗時の処理 (通常はエラーメッセージ表示や処理中断)
+            wp_die(esc_html__('Nonce verification failed.', 'aurora-design-blocks'), '', ['response' => 403]);
+        }
 
         // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.NonceVerification.Recommended
         $tab = isset($_GET['tab'])
@@ -103,12 +108,22 @@ class AuroraDesignBlocks_AdminTabs
     {
         foreach ($this->tabs as $key => $obj) {
             $active = $current === $key ? 'nav-tab-active' : '';
-            echo '<a href="?page=aurora-design-blocks&tab=' . esc_attr($key) . '" class="nav-tab ' . esc_attr($active)   . '">'
+            // Nonceを追加したURLを生成
+            $tab_url = add_query_arg(
+                [
+                    'page' => 'aurora-design-blocks',
+                    'tab'  => $key,
+                    // Nonceを追加
+                    '_wpnonce' => wp_create_nonce('aurora-design-blocks-tab'),
+                ],
+                admin_url('admin.php')
+            );
+
+            echo '<a href="' . esc_url($tab_url) . '" class="nav-tab ' . esc_attr($active) . '">'
                 . esc_html($obj->get_label()) .
                 '</a>';
         }
     }
-
     /**
      * タブページを描画
      */
