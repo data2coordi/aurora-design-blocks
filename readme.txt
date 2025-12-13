@@ -3,7 +3,7 @@ Contributors: data2coordi
 Tags: toc, analytics, ga4, gtm, ogp
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 2.0.7
+Stable tag: 2.0.8
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
