@@ -6,9 +6,10 @@ on:
 
 jobs:
   upload-release-asset:
-    if: contains(github.event.head_commit.message, 'fdouki')
+    if: |
+      contains(github.event.head_commit.message, 'fdouki') &&
+      !contains(github.event.head_commit.message, 'build: add vendor')
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
 
@@ -62,3 +63,11 @@ jobs:
           asset_name: aurora-design-blocks.zip
           asset_path: ./aurora-design-blocks.zip
           asset_content_type: application/zip
+
+      - name: Commit vendor
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add -f vendor
+          git commit -m "build: add vendor for free release"
+          git push origin free
